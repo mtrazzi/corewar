@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 16:07:21 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/06/01 18:10:24 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/08/17 09:59:30 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {
-	if (new == NULL)
-		new = ft_lstnew(NULL, 0);
+	if (!(new))
+		new = ft_lstnew(NULL);
 	new->next = *alst;
 	*alst = new;
 }

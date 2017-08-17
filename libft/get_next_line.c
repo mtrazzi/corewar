@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 08:35:44 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/08/14 20:21:59 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/08/17 14:11:34 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ static void			ft_get_line(int fd, t_line_lst **line_lst, char **line)
 	{
 		*line = ft_strdup((*line_lst)->line);
 		*line_lst = (*line_lst)->next;
-		free(begin_lst->line);
-		free(begin_lst);
+		ft_strdel(&begin_lst->line);
+		ft_memdel((void **)&begin_lst);
 		return ;
 	}
 	*line = ft_strdup((*line_lst)->next->line);
 	tmp = (*line_lst)->next;
 	(*line_lst)->next = (*line_lst)->next->next;
-	free(tmp->line);
-	free(tmp);
+	ft_strdel(&tmp->line);
+	ft_memdel((void **)&tmp);
 	*line_lst = begin_lst;
 }
 
@@ -91,7 +91,7 @@ static int			ft_get_buffer(int fd, t_line_lst **line_lst)
 		buff[ret] = '\0';
 		tmp = result;
 		result = ft_strjoin(result, buff);
-		free(tmp);
+		ft_strdel(&tmp);
 	}
 	tmp = result;
 	if (ft_strchr(result, '\n'))
@@ -102,7 +102,7 @@ static int			ft_get_buffer(int fd, t_line_lst **line_lst)
 	}
 	else
 		ft_add_line(line_lst, fd, ft_strdup(result));
-	ft_free(tmp);
+	ft_strdel(&tmp);
 	return (ret);
 }
 

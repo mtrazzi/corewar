@@ -6,7 +6,7 @@
 #    By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/16 18:16:04 by mtrazzi           #+#    #+#              #
-#    Updated: 2017/08/16 19:25:47 by mtrazzi          ###   ########.fr        #
+#    Updated: 2017/08/17 13:06:45 by mtrazzi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,14 @@ LIB_PATH		=	./libft/
 # SRC
 #--------------------------------------------------------------------------------
 
-SRC_FILES		=	main.c				\
-					ft_lst_utils.c		\
-					ft_free_asm.c		\
-					ft_init_asm.c
+SRC_FILES		=	main.c					\
+					ft_free_asm.c			\
+					ft_init_asm.c			\
+					ft_list_utils.c			\
+					ft_print_lst_utils.c	\
+					ft_read_asm.c			\
+					ft_error_asm.c
+					
 
 SRC				=	$(addprefix $(SRC_PATH), $(SRC_FILES))
 
