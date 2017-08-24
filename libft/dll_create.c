@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 17:44:03 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/24 12:59:21 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/08/24 13:26:59 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_dll	*dll_new(void *content)
 	new = (t_dll *)malloc(sizeof(t_dll));
 	if (new == NULL)
 	{
-		//if (DEBUG_DLL == 1)
-		//	ft_fprintf(STD_ERROR, "malloc in dll_new failed\n");
-		return (0);
+	/*	if (DEBUG_DLL == 1)
+	**		ft_fprintf(STD_ERROR, "malloc in dll_new failed\n");
+	*/	return (0);	
 	}
 	new->content = content;
 	new->next = NULL;
