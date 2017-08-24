@@ -46,8 +46,9 @@ void				ft_print_hexa(u_int n);
 ** I/O
 */
 
-int		ft_update_fd_asm(t_asm *e, char *file_name);
-u_int	ft_convert_endian(u_int n);
-void	ft_write_be(int fd, u_int n);
+int					ft_update_fd_asm(t_asm *e, char *file_name);
+u_int				ft_convert_endian(u_int n);
+void				ft_write_be(int fd, u_int n);
+void				ft_write_header(int fd, header_t t);
 
 #endif

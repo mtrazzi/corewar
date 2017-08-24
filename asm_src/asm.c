@@ -10,7 +10,6 @@ int main(int ac, char **av)
 	ft_file_to_lst_asm(e, av[1]);
 	if (ft_update_fd_asm(e, av[1]) < 0)
 		return (ft_error_asm(e, "error opening file."));
-	ft_print_lst_str(e->lst);
 	ft_free_asm_env(e);
 	return (0);
 }
