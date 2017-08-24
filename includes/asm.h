@@ -27,8 +27,8 @@ void				ft_file_to_lst_asm(t_asm *e, char *file_name);
 ** ERROR
 */
 
-void				ft_error_asm(t_asm *e, char *error_message);
-void				ft_perror_asm(t_asm *e);
+int					ft_error_asm(t_asm *e, char *error_message);
+int					ft_perror_asm(t_asm *e);
 
 
 /*
