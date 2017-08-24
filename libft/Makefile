@@ -6,13 +6,19 @@
 #    By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/27 16:05:15 by mtrazzi           #+#    #+#              #
-#    Updated: 2017/08/17 10:54:42 by mtrazzi          ###   ########.fr        #
+#    Updated: 2017/08/24 12:58:32 by mtrazzi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-INC = libft.h get_next_line.h
+
+
+HEADER_FILES = libft.h			\
+			   get_next_line.h 	\
+			   dll.h
+
+INC = $(addprefix -I, $(HEADERS_FILES))
 
 MKF = Makefile
 
@@ -94,16 +100,23 @@ SRC =	ft_atoi.c				\
 		ft_lstiter.c			\
 		ft_lstmap.c				\
 		ft_lstnew.c				\
-		get_next_line.c
+		get_next_line.c			\
+		dll_create.c			\
+		dll_del.c				\
+		dll_get.c				\
+		dll_iter.c				\
+		dll_push_pop.c			\
+		dll_size.c				\
+		dll_transfer.c	
 
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(OBJ) $(INC) $(MKF)
+$(NAME): $(SRC) $(OBJ) $(MKF)
 	@echo "Building $(NAME)..."
-	@gcc -c -Wall -Wextra -I$(INC) $(SRC)
+	@gcc -c -Wall -Wextra $(INC) $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[3;94m!$(NAME) built!\033[0m"

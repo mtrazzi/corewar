@@ -6,21 +6,27 @@
 #    By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/16 18:16:04 by mtrazzi           #+#    #+#              #
-#    Updated: 2017/08/17 13:06:45 by mtrazzi          ###   ########.fr        #
+#    Updated: 2017/08/24 13:18:54 by mtrazzi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	asm	
+NAME_1			=	asm
+
+NAME_2			=	corewar
 
 CC				=	clang
 
 FLAGS			=	-Wall -Wextra -Werror
 
+MKF				=	Makefile
+
 #--------------------------------------------------------------------------------
 # PATHS
 #--------------------------------------------------------------------------------
 
-SRC_PATH		=	./asm_src/
+SRC_PATH_1		=	./asm_src/
+
+SRC_PATH_2		=	./vm/
 
 INC_PATH		=	./includes/
 
@@ -32,24 +38,31 @@ LIB_PATH		=	./libft/
 # SRC
 #--------------------------------------------------------------------------------
 
-SRC_FILES		=	main.c					\
+SRC_FILES_1		=	asm.c					\
 					ft_free_asm.c			\
 					ft_init_asm.c			\
 					ft_list_utils.c			\
 					ft_print_lst_utils.c	\
 					ft_read_asm.c			\
-					ft_error_asm.c
-					
+					ft_error_asm.c			
 
-SRC				=	$(addprefix $(SRC_PATH), $(SRC_FILES))
+SRC_FILES_2		=	vm.c
+
+SRC_1			=	$(addprefix $(SRC_PATH_1), $(SRC_FILES_1))
+
+SRC_2			=	$(addprefix $(SRC_PATH_2), $(SRC_FILES_2))
 
 #--------------------------------------------------------------------------------
 # OBJ
 #--------------------------------------------------------------------------------
 
-OBJ_FILES		=	$(SRC_FILES:.c=.o)
+OBJ_FILES_1		=	$(SRC_FILES_1:.c=.o)
 
-OBJ				=	$(addprefix $(OBJ_PATH), $(OBJ_FILES))
+OBJ_1			=	$(addprefix $(OBJ_PATH), $(OBJ_FILES_1))
+
+OBJ_FILES_2		=	$(SRC_FILES_2:.c=.o)
+
+OBJ_2			=	$(addprefix $(OBJ_PATH), $(OBJ_FILES_2))
 
 #--------------------------------------------------------------------------------
 # INC
@@ -59,7 +72,8 @@ INC				=	$(addprefix -I, $(INC_PATH))
 
 HEADER_FILES	=	libft.h				\
 					get_next_line.h		\
-					asm.h
+					asm.h				\
+					dll.h
 
 HEADERS			=	$(addprefix $(INC_PATH), $(HEADERS_FILES))
 
@@ -75,36 +89,50 @@ LIB				=	$(addprefix $(LIB_PATH), $(LIB_FILE))
 # RULES
 #--------------------------------------------------------------------------------
 
-all: $(NAME)
+all: $(NAME_1) $(NAME_2)
 
-$(NAME): $(LIB) $(OBJ)
-	@echo "Building $(NAME)..."
-	$(CC) $(CFLAGS) $(LIB) $(OBJ) -o $@
-	@echo "\033[3;94m!$(NAME) built!\033[0m"
+$(NAME_1): $(LIB) $(OBJ_1) $(MKF)
+	@echo "Building $(NAME_1)..."
+	$(CC) $(CFLAGS) $(LIB) $(OBJ_1) -o $@
+	@echo "\033[3;94m!$(NAME_1) built!\033[0m"
+
+$(NAME_2): $(LIB) $(OBJ_2) $(MKF)
+	@echo "Building $(NAME_2)..."
+	$(CC) $(CFLAGS) $(LIB) $(OBJ_2) -o $@
+	@echo "\033[3;94m!$(NAME_2) built!\033[0m"
 
 $(LIB):
 	@$(MAKE) -C $(LIB_PATH) $(LIB_FILE)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADERS) $(LIB)
+$(OBJ_PATH)%.o: $(SRC_PATH_1)%.c $(HEADERS) $(LIB)
+	@mkdir -p obj
+	$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+$(OBJ_PATH)%.o: $(SRC_PATH_2)%.c $(HEADERS) $(LIB)
 	@mkdir -p obj
 	$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean:
 	@make -C $(LIB_PATH) fclean
-	@/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ_1)
+	@/bin/rm -f $(OBJ_2)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME_1)
+	@/bin/rm -f $(NAME_2)
 
 re: fclean all
 
 linux: $(LIB)
-	@echo "Building $(NAME)..."
-	$(CC) $(CFLAGS) $(SRC) $(INC) $(LIB) -o $(NAME)
-	@echo "\033[3;94m!$(NAME) built!\033[0m"
+	@echo "Building $(NAME_1)..."
+	$(CC) $(CFLAGS) $(SRC) $(INC) $(LIB) -o $(NAME_1)
+	@echo "\033[3;94m!$(NAME_1) built!\033[0m"
+	@echo "Building $(NAME_2)..."
+	$(CC) $(CFLAGS) $(SRC) $(INC) $(LIB) -o $(NAME_2)
+	@echo "\033[3;94m!$(NAME_2) built!\033[0m"
 
 norme: fclean
-	norminette $(SRC)
+	norminette $(SRC_1)
 	norminette $(LIB_PATH)
 	norminette $(INC_PATH)	
 

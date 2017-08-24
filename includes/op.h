@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/17 14:29:52 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/08/23 11:50:00 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #define IND_SIZE				2
 #define REG_SIZE				4
-#define DIR_SIZE				REG_SIZE
+#define DIR_SIZE				REG_SIZE//==4
 
 
 # define REG_CODE				1
@@ -27,9 +27,9 @@
 
 #define MAX_ARGS_NUMBER			4
 #define MAX_PLAYERS				4
-#define MEM_SIZE				(4*1024)
-#define IDX_MOD					(MEM_SIZE / 8)
-#define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
+#define MEM_SIZE				(4*1024)       //== 4096
+#define IDX_MOD					(MEM_SIZE / 8) //== 512
+#define CHAMP_MAX_SIZE			(MEM_SIZE / 6) //== 682
 
 #define COMMENT_CHAR			'#'
 #define LABEL_CHAR				':'
@@ -63,7 +63,7 @@ typedef char	t_arg_type;
 **
 */
 
-# define PROG_NAME_LENGTH		(128)
+# define PROG_NAME_LENGTH		(128) //8 lignes de 16 octets
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
