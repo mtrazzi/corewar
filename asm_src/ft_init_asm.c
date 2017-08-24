@@ -6,5 +6,6 @@ t_asm	*ft_init_asm(void)
 
 	e = (t_asm *)ft_memalloc(sizeof(t_asm));
 	e->lst = NULL;
+	e->fd = 0;
 	return (e);
 }

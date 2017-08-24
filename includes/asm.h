@@ -3,12 +3,15 @@
 # define ASM_H
 # include "libft.h"
 # include "dll.h"
+# include "op.h"
+# include <sys/types.h>
 
 typedef struct		s_asm
 {
-	t_dll			*lst;
+	t_dll			*lst;		//liste de lignes du .s
+	header_t		header;		//header au debut du .cor
+	int				fd;			//file descriptor du .cor
 }					t_asm;
-
 
 /*
 ** ENVIRONMENT 
@@ -36,5 +39,15 @@ int					ft_perror_asm(t_asm *e);
 */
 
 void				ft_print_lst_str(t_dll *lst);
+void				ft_print_hexa(u_int n);
+
+
+/*
+** I/O
+*/
+
+int		ft_update_fd_asm(t_asm *e, char *file_name);
+u_int	ft_convert_endian(u_int n);
+void	ft_write_be(int fd, u_int n);
 
 #endif

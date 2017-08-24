@@ -6,7 +6,7 @@
 #    By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/16 18:16:04 by mtrazzi           #+#    #+#              #
-#    Updated: 2017/08/24 14:37:14 by mtrazzi          ###   ########.fr        #
+#    Updated: 2017/08/24 18:41:21 by mtrazzi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,10 @@ SRC_FILES_1		=	asm.c					\
 					ft_init_asm.c			\
 					ft_print_lst_utils.c	\
 					ft_read_asm.c			\
-					ft_error_asm.c			
+					ft_error_asm.c			\
+					ft_header_asm.c			\
+					ft_new_fd_asm.c			\
+					ft_endian_utils.c
 
 SRC_FILES_2		=	vm.c
 
@@ -72,7 +75,8 @@ INC				=	$(addprefix -I, $(INC_PATH))
 HEADER_FILES	=	libft.h				\
 					get_next_line.h		\
 					asm.h				\
-					dll.h
+					dll.h				\
+					op.h
 
 HEADERS			=	$(addprefix $(INC_PATH), $(HEADERS_FILES))
 
@@ -90,12 +94,12 @@ LIB				=	$(addprefix $(LIB_PATH), $(LIB_FILE))
 
 all: $(NAME_1) $(NAME_2)
 
-$(NAME_1): $(LIB) $(OBJ_1) $(MKF)
+$(NAME_1): $(LIB) $(OBJ_1) $(MKF) $(HEADERS)
 	@echo "Building $(NAME_1)..."
 	$(CC) $(CFLAGS) $(LIB) $(OBJ_1) -o $@
 	@echo "\033[3;94m!$(NAME_1) built!\033[0m"
 
-$(NAME_2): $(LIB) $(OBJ_2) $(MKF)
+$(NAME_2): $(LIB) $(OBJ_2) $(MKF) $(HEADERS)
 	@echo "Building $(NAME_2)..."
 	$(CC) $(CFLAGS) $(LIB) $(OBJ_2) -o $@
 	@echo "\033[3;94m!$(NAME_2) built!\033[0m"
