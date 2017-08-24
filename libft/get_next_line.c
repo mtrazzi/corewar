@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 08:35:44 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/08/17 14:11:34 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/08/24 14:57:09 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static int			ft_get_buffer(int fd, t_line_lst **line_lst)
 	char		*tmp;
 	int			ret;
 
+	ret = 1;
 	if (ft_is_there_fd(fd, *line_lst))
 		ft_get_line(fd, line_lst, &result);
 	while (!ft_strchr(result, '\n') && (ret = read(fd, buff, BUFF_SIZE)) > 0)

@@ -6,7 +6,7 @@
 #    By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/16 18:16:04 by mtrazzi           #+#    #+#              #
-#    Updated: 2017/08/24 13:18:54 by mtrazzi          ###   ########.fr        #
+#    Updated: 2017/08/24 14:37:14 by mtrazzi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ LIB_PATH		=	./libft/
 SRC_FILES_1		=	asm.c					\
 					ft_free_asm.c			\
 					ft_init_asm.c			\
-					ft_list_utils.c			\
 					ft_print_lst_utils.c	\
 					ft_read_asm.c			\
 					ft_error_asm.c			
