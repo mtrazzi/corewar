@@ -24,7 +24,7 @@ void				ft_free_asm_env(t_asm *e);
 ** PARSING
 */
 
-void				ft_file_to_lst_asm(t_asm *e, char *file_name);
+int					ft_file_to_lst_asm(t_asm *e, char *file_name);
 
 /*
 ** ERROR
