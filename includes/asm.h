@@ -9,15 +9,38 @@
 typedef struct		s_asm
 {
 	t_dll			*lst;		//liste de lignes du .s
-	header_t		header;		//header au debut du .cor
+	header_t		*header;	//header au debut du .cor
 	int				fd;			//file descriptor du .cor
 }					t_asm;
+
+typedef struct		s_param
+{
+	t_arg_type		type;
+	u_int			n;
+	u_int			sym;
+}					t_param;
+
+typedef	struct		s_op
+{
+	char			*label;
+	u_int			op_code;
+	u_int			nb_par;
+	t_param			p1;
+	t_param			p2;
+	t_param			p3;
+}					t_op;
+
+typedef	struct		s_sym
+{
+	char			*symbol;
+	u_int			nb;
+}					t_sym;
 
 /*
 ** ENVIRONMENT 
 */
 
-t_asm				*ft_init_asm(void);
+t_asm				ft_init_asm(void);
 void				ft_free_asm_env(t_asm *e);
 
 /*
@@ -25,6 +48,7 @@ void				ft_free_asm_env(t_asm *e);
 */
 
 int					ft_file_to_lst_asm(t_asm *e, char *file_name);
+char				*ft_process_line(char *line);
 
 /*
 ** ERROR
