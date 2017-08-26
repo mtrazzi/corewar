@@ -8,7 +8,8 @@
 
 typedef struct		s_asm
 {
-	t_dll			*lst;		//liste de lignes du .s
+	t_dll			*syms;
+	t_dll			*ops;		//liste de lignes du .s
 	header_t		*header;	//header au debut du .cor
 	int				fd;			//file descriptor du .cor
 }					t_asm;
@@ -20,7 +21,7 @@ typedef struct		s_param
 	u_int			sym;
 }					t_param;
 
-typedef	struct		s_op
+typedef	struct		s_ope
 {
 	char			*label;
 	u_int			op_code;
@@ -28,7 +29,8 @@ typedef	struct		s_op
 	t_param			p1;
 	t_param			p2;
 	t_param			p3;
-}					t_op;
+	u_int			size;
+}					t_ope;
 
 typedef	struct		s_sym
 {

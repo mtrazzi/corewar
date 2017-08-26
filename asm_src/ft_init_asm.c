@@ -1,11 +1,9 @@
 #include "asm.h"
 
-t_asm	ft_init_asm(void)
+int		ft_init_asm(t_asm *e)
 {
-	t_asm	e;
-
-	e.lst = NULL;
-	e.header = NULL;
-	e.fd = 0;
-	return (e);
+	e->lst = NULL;
+	e->header = NULL;
+	e->fd = 0;
+	return (1);
 }
