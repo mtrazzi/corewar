@@ -1,16 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/08/16 18:16:04 by mtrazzi           #+#    #+#              #
-#    Updated: 2017/08/26 13:22:18 by mtrazzi          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME_1			=	asm
+#    Updated: 2017/08/26 18:48:06 by mtrazzi          ###   ########.fr        #
 
 NAME_2			=	corewar
 
@@ -47,6 +36,7 @@ SRC_FILES_1		=	asm.c					\
 					ft_header_asm.c			\
 					ft_new_fd_asm.c			\
 					ft_endian_utils.c		\
+					ft_type.c
 					ft_process_line.c
 
 SRC_FILES_2		=	vm.c
