@@ -1,8 +1,5 @@
 #include "asm.h"
 
-# define PAR_SIZE_REG 1
-# define PAR_SIZE_IND 2
-
 u_int		convert_op_code(u_int op_code)
 {
 	u_int	result;
@@ -21,7 +18,8 @@ int			give_label(u_int op_code)
 	u_int	code;
 
 	code = convert_op_code(op_code);
-	return (((IS_LABEL_2 & code) > 0) * LABEL_2 + ((IS_LABEL_4 & code) > 0) * LABEL_4);
+	return (((IS_LABEL_2 & code) > 0) * LABEL_2 +\
+			((IS_LABEL_4 & code) > 0) * LABEL_4);
 }
 
 static	int	count_types(t_ope op, t_arg_type type)

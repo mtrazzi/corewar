@@ -32,10 +32,12 @@ void	ft_print_hexa(u_int n)
 ** Write in big endian
 */
 
-void	ft_write_be(int fd, u_int n)
+void	ft_write_be(int fd, u_int n, u_int size)
 {
-	u_int k;
+	u_int	k;
+	char	*s;
 
 	k = ft_convert_endian(n);
-	write(fd, &k, 4); 
+	s = (char *)&k;
+	write(fd, s + (4 - size), size); 
 }

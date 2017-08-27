@@ -37,7 +37,8 @@ SRC_FILES_1		=	asm.c					\
 					ft_endian_utils.c		\
 					ft_type.c				\
 					ft_process_line.c		\
-					ft_size_cmd.c			
+					ft_size_cmd.c			\
+					ft_write_cmd.c
 
 SRC_FILES_2		=	vm.c
 

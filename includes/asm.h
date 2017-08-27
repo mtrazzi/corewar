@@ -32,6 +32,9 @@
 #define	IS_LABEL_4	0b0001000011100011	
 #define IS_PCB		0b1011011011111110	
 
+# define PAR_SIZE_REG 1
+# define PAR_SIZE_IND 2
+
 typedef struct		s_asm
 {
 	t_dll			*syms;
@@ -101,8 +104,9 @@ void				ft_print_hexa(u_int n);
 
 int					ft_update_fd_asm(t_asm *e, char *file_name);
 u_int				ft_convert_endian(u_int n);
-void				ft_write_be(int fd, u_int n);
+void				ft_write_be(int fd, u_int n, u_int size);
 void				ft_write_header(int fd, header_t t);
+void				ft_write_op(int fd, t_ope op);
 
 /*
 ** PROCESSING
@@ -110,5 +114,6 @@ void				ft_write_header(int fd, header_t t);
 
 int					nb_bytes_op(t_ope op);
 t_arg_type			ft_give_pcb(t_ope op);
+int					give_label(u_int op_code);
 
 #endif
