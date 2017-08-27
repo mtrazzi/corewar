@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_create.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/27 17:44:03 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/24 13:26:59 by mtrazzi          ###   ########.fr       */
+/*   Created: 2017/04/16 16:51:34 by qdurot            #+#    #+#             */
+/*   Updated: 2017/08/27 17:00:15 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "ft_printf.h"
-
-#define STD_ERROR 2
-#define DEBUG_DLL 0
-
-t_dll	*dll_new(void *content)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_dll	*new;
-
-	new = (t_dll *)malloc(sizeof(t_dll));
-	if (new == NULL)
+	while ((*s1 && *s2) && *s1 == *s2 && --n)
 	{
-	/*	if (DEBUG_DLL == 1)
-	**		ft_fprintf(STD_ERROR, "malloc in dll_new failed\n");
-	*/	return (0);	
+		s1++;
+		s2++;
 	}
-	new->content = content;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

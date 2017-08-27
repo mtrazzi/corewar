@@ -3,25 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/14 06:39:41 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/08/14 20:23:05 by mtrazzi          ###   ########.fr       */
+/*   Created: 2017/05/13 16:44:17 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/08/24 11:19:51 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-
 # define GET_NEXT_LINE_H
-# include "libft.h"
-# define BUFF_SIZE 7
 
-typedef struct			s_line_lst
+# define BUFF_SIZE 1024
+# define END_FILE 0
+# define FAILURE -1
+# define FOUND_SOMETHING 1
+# define FOUND_LINE 1
+
+# define MAL_ERR_GNL -1221
+
+# include "util.h"
+
+typedef struct s_gnl	t_gnl;
+
+struct		s_gnl
 {
-	int					fd;
-	char				*line;
-	struct s_line_lst	*next;
-}						t_line_lst;
-int						get_next_line(int fd, char **line);
+	char	**line;
+	char	**rem;
+	int		fd;
+};
+
+int			get_next_line(int const fd, char **line, char **rem);
 
 #endif
