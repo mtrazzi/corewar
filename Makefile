@@ -1,11 +1,10 @@
 NAME_1			=	asm
-#    Updated: 2017/08/26 18:48:06 by mtrazzi          ###   ########.fr        #
 
 NAME_2			=	corewar
 
 CC				=	clang
 
-FLAGS			=	-Wall -Wextra -Werror
+FLAGS			=	-Wall -Wextra
 
 MKF				=	Makefile
 
@@ -36,8 +35,9 @@ SRC_FILES_1		=	asm.c					\
 					ft_header_asm.c			\
 					ft_new_fd_asm.c			\
 					ft_endian_utils.c		\
-					ft_type.c
-					ft_process_line.c
+					ft_type.c				\
+					ft_process_line.c		\
+					ft_size_cmd.c			
 
 SRC_FILES_2		=	vm.c
 

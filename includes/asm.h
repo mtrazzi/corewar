@@ -10,15 +10,27 @@
 # define LABEL_2	2
 # define LABEL_4	4
 
-#define BYTE_1_REG 0b01000000
-#define BYTE_1_DIR 0b10000000
-#define BYTE_1_IND 0b11000000
-#define BYTE_2_REG 0b00010000
-#define BYTE_2_DIR 0b00100000
-#define BYTE_2_IND 0b00110000
-#define BYTE_3_REG 0b00000100
-#define BYTE_3_DIR 0b00001000
-#define BYTE_3_IND 0b00001100
+#define LIVE		0x0001
+#define LD			0x0002
+#define ST	 		0x0004
+#define	ADD 		0x0008
+#define SUB 		0x0010
+#define AND 		0x0020
+#define OR			0x0040
+#define XOR			0x0080
+#define ZJMP 		0x0100
+#define LDI			0x0200
+#define STI			0x0400
+#define FORK		0x0800
+#define LLD			0x1000
+#define LLDI		0x2000
+#define LFORK		0x4000
+#define AFF			0x8000
+
+#define IS_LABEL_NO 0b1000000000011100	
+#define	IS_LABEL_2	0b0110111100000000	
+#define	IS_LABEL_4	0b0001000011100011	
+#define IS_PCB		0b1011011011111110	
 
 typedef struct		s_asm
 {
@@ -56,7 +68,7 @@ typedef	struct		s_sym
 ** ENVIRONMENT 
 */
 
-t_asm				ft_init_asm(void);
+int					ft_init_asm(t_asm *e);
 void				ft_free_asm_env(t_asm *e);
 
 /*
@@ -91,5 +103,12 @@ int					ft_update_fd_asm(t_asm *e, char *file_name);
 u_int				ft_convert_endian(u_int n);
 void				ft_write_be(int fd, u_int n);
 void				ft_write_header(int fd, header_t t);
+
+/*
+** PROCESSING
+*/
+
+int					nb_bytes_op(t_ope op);
+t_arg_type			ft_give_pcb(t_ope op);
 
 #endif
