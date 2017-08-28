@@ -24,15 +24,51 @@ int		compare_op_names(char *str, int len, char *op_name)
 	return (-1);
 }
 
+int	ft_is_withespace(char c)
+{
+	return (c ==  ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r');
+}
+
+void	skip_whitespaces(char **str)
+{
+	if (!str || !*str)
+		return ;
+	while (**str && ft_is_withespace(**str))
+		(*str)++;
+}
+
+void	skip_to_whitespaces(char **str)//or end
+{
+	if (!str || !*str)
+		return ;
+	while (**str && !ft_is_withespace(**str))
+		(*str)++;
+}
+
+char	*get_next_whitespace(char *str)//or end
+{
+	if (!str)
+		return (NULL);
+	while (*str && !ft_is_withespace(*str))
+		str++;
+	return (str);
+}
+
 int main(int argc, char const *argv[])
 {
-	char *a = "balei";
-	char *x = "balei\t";
+	char *a = "\t\f\n  \r\tasdjhfgksdajfgh\n.\n.\t.\nasdfsidhsf\f\t\n";
+	char *tmp = NULL;
 
-	char *tmp = x;
-	while (*tmp != '\t')
-		tmp++;
-	printf("RESULT: %s, %s, %d\n", a, x, ft_strncmp(a, x, tmp - x));
-	printf("RESULT: %s, %s, %d\n", a, x, compare_op_names(x, tmp - x, a));
+	printf("{%s}\n", a);
+	skip_whitespaces(&a);
+	printf("[%s]\n", a);
+	skip_whitespaces(&a);
+	printf("(%s)\n", a);
+
+	tmp = get_next_whitespace(a);
+	printf("_%s_\n", tmp);
+	printf("_%s_\n", a);
+	skip_to_whitespaces(&a);
+	printf("+%s+\n", a);
 	return 0;
 }

@@ -1,6 +1,8 @@
 #ifndef ASM_H
 
 # define ASM_H
+
+# include "get_next_line.h"
 # include "libft.h"
 # include "dll.h"
 # include "op.h"
@@ -34,6 +36,8 @@
 
 # define PAR_SIZE_REG 1
 # define PAR_SIZE_IND 2
+
+# define MAL_ERR -40
 
 typedef struct s_op		t_op;
 typedef struct s_asm	t_asm;
@@ -75,12 +79,11 @@ struct			s_sym
 	char		true_sym;
 };
 
-
 struct			s_op
 {
 	char	*name;
 	u_int	nb_param;
-	//type param
+	u_int	type_param[MAX_ARGS_NUMBER + 1];
 	u_int	op_code;
 	u_int	nb_cycles;
 	char	*full_name;
@@ -93,31 +96,15 @@ struct			s_typparam
 	
 };
 
-#define MAX_OP
+#define MAX_OP 17
 
-t_op    g_op_tab[17] =
-{
-/*
-**  {"nom", 	nb_param,	{type des param}, 										opcode, nb_cycles,	"nom_complet", 		OCP 
-*/
-    {"live", 	1,			{T_DIR}, 												1, 		10, 		"alive", 			0, 0},
-    {"ld", 		2, 			{T_DIR | T_IND, T_REG}, 								2, 		5,	 		"load", 			1, 0},
-    {"st", 		2, 			{T_REG, T_IND | T_REG}, 								3, 		5, 			"store", 			1, 0},
-    {"add", 	3, 			{T_REG, T_REG, T_REG}, 									4, 		10, 		"addition", 		1, 0},
-    {"sub", 	3, 			{T_REG, T_REG, T_REG}, 									5, 		10, 		"soustraction", 	1, 0},
-    {"and", 	3, 			{T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 	6, 		6,			"et",				1, 0},
-    {"or", 		3, 			{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 	7, 		6,			"ou", 				1, 0},
-    {"xor", 	3, 			{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 	8, 		6,			"ou", 				1, 0},
-    {"zjmp", 	1, 			{T_DIR}, 												9, 		20, 		"jump if zero", 	0, 1},
-    {"ldi", 	3, 			{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 			10,		25,			"load index", 		1, 1},
-    {"sti", 	3, 			{T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 			11,		25,			"store index", 		1, 1},
-    {"fork", 	1, 			{T_DIR}, 												12,		800, 		"fork", 			0, 1},
-    {"lld", 	2, 			{T_DIR | T_IND, T_REG}, 								13, 	10, 		"long load", 		1, 0},
-    {"lldi", 	3, 			{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},			14,		50,			"long load index",	1, 1},
-    {"lfork", 	1, 			{T_DIR}, 												15,		1000, 		"long fork", 		0, 1},
-    {"aff", 	1, 			{T_REG}, 												16,		2, 			"aff", 				1, 0},
-    {0, 		0, 			{0}, 													0, 		0, 			0, 					0, 0}
-};
+int	ft_is_withespace(char c);
 
+t_sym	*create_sym(char *label, u_int symbol);
+
+t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms);
+int		create_add_label(char *str, int len, t_dll **syms, u_int symbol);
+
+t_op	*does_op_exist_in_op_tab(char *str, int len);
 
 #endif

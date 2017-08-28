@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/27 17:32:36 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/08/28 19:41:39 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,7 @@ typedef struct					header_s
     unsigned int				prog_size;
     char						comment[COMMENT_LENGTH + 1];
 }								header_t;
+
+
+//add
+#define REG_CHAR 'r'

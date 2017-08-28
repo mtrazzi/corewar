@@ -8,7 +8,8 @@ NAME = asm
 SRC = asm.c \
 		creates.c \
 		syms.c \
-		asm_parsing.c
+		asm_parsing.c \
+		ops.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
@@ -26,16 +27,22 @@ LIBFT_PATH = ../libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 IFLAGS += -I $(LIBFT_PATH)/include
 
-LIBS = DLLST LIBFT
+LIBS = $(DLLST) $(LIBFT)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
+	$(CC) -o $(NAME) $(OBJ) $(LIBS)
+	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
+#$(CFLAGS)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS)
+	$(CC) -c $< -o $@ $(IFLAGS)
+#$(CFLAGS)
 
 $(LIBS):
 	@$(MAKE) -C ../libs all

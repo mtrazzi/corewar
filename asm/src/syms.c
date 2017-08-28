@@ -34,8 +34,8 @@ t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 {
 	while (syms)
 	{
-		if (compare_labels(str, len, ((t_dll)(syms->content))->label) == LABEL_EQUAL)
-			return ((t_dll)(syms->content));
+		if (compare_labels(str, len, ((t_sym *)(syms->content))->label) == LABEL_EQUAL)
+			return ((t_sym *)(syms->content));
 		syms = syms->next;
 	}
 	return (NULL);
@@ -49,9 +49,9 @@ int		create_add_label(char *str, int len, t_dll **syms, u_int symbol)
 
 	if ((label = ft_strsub(str, 0, len)) == NULL)
 		return (MAL_ERR);
-	if ((new_sym == create_sym(label, symbol)) == NULL)
+	if ((new_sym = create_sym(label, symbol)) == NULL)
 		return (MAL_ERR * ft_free((void *)&label));
-	if ((new_dll == dll_new((void*)new_sym)) == NULL)
+	if ((new_dll = dll_new((void*)new_sym)) == NULL)
 		return (MAL_ERR * ft_free((void *)&label) * ft_free((void *)&new_sym));
 	dll_append(syms, new_dll);
 	return (1);

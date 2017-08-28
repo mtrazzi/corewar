@@ -14,5 +14,5 @@ t_sym	*create_sym(char *label, u_int symbol)
 
 t_ope	*create_op()
 {
-	
+	return (NULL);
 }
