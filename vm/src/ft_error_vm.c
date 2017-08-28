@@ -3,8 +3,7 @@
 int		ft_error_vm(t_env *e, char *error_message)
 {
 	ft_free_vm_env(e);
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(error_message, 2);
+	ft_fprintf(2, "Error: %s\n", error_message);
 	return (-1);
 }
 

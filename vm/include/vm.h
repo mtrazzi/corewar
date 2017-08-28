@@ -3,10 +3,11 @@
 # define VM_H
 
 # include "libft.h"
+# include "ft_printf.h"
 # include "dll.h"
 # include "op.h"
 # include <sys/types.h>
-
+# include <stdio.h>
 # define ERR_PARSING -10
 
 typedef struct		s_prc t_prc;
@@ -35,7 +36,7 @@ struct				s_env
 	u_char			map[MEM_SIZE];
 	t_dll			*prc_lst;
 	int				cyc;			//cycles to die
-	int				nb_live;		//nb of live since last check	
+	int				nb_live;		//nb of live since last check
 	t_par			par;
 };
 
