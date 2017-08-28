@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int		ft_free(void **to_free);
 
 void	ft_bzero(void *s, size_t n);
 
