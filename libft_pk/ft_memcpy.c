@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:18:45 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/04/10 15:57:50 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/06/04 20:13:58 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "util.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	while (*s)
+	unsigned char		*c_dst;
+	const unsigned char	*c_src;
+
+	c_dst = dst;
+	c_src = src;
+	while (n--)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
+		*c_dst = *c_src;
+		++c_dst;
+		++c_src;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return (dst);
 }

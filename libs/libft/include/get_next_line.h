@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/13 16:44:17 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/24 11:19:51 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/08/28 16:33:34 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 # define MAL_ERR_GNL -1221
 
-# include "util.h"
+#include <fcntl.h>
+#include "libft.h"
 
 typedef struct s_gnl	t_gnl;
 

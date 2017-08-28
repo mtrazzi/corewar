@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:18:45 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/04/10 17:46:02 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/08/28 16:55:08 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	while (*s)
+	char	*tmp;
+
+	tmp = dst;
+	while (*src)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
+		*dst = *src;
+		++dst;
+		++src;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	*dst = *src;
+	return (tmp);
 }

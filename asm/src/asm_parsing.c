@@ -64,14 +64,21 @@ int	parse_label_only(char *line, t_dll **syms)
 	return (IS_MORE_THAN_LABEL);
 }
 
+#define BAD_OP_NAME -20//BAD_OP_CODE
+
+
 int parse_op(char *line, t_dll **ops)
 {
+	t_op	*op;
 	char	*tmp;
 
 	tmp = line;
 	while (line && !ft_is_withespace(*line))
 		line++;
-	
+	op = does_op_exist_in_op_tab(str, line - tmp);
+	if (op == NULL)
+		return (BAD_OP_NAME);
+	else if ()//checkparams!
 }
 
 int	process_line(char *line, t_asm *a)

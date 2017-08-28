@@ -2,12 +2,12 @@
 
 int		ft_strncmp_modified(char *s1, char *s2, size_t n)
 {
-	while ((*s1 && *s2) && *s1 == *s2 && --n)
+	while (--n && (*s1 && *s2) && *s1 == *s2)
 	{
 		s1++;
 		s2++;
 	}
-	if (n == 1 && *s1 == '\0')//n= 0?
+	if (n == 0 && *s1 == '\0')
 		return (0);
 	return (1);
 }
@@ -17,12 +17,24 @@ int		ft_strncmp_modified(char *s1, char *s2, size_t n)
 // 	while ((ft_is_whitespace(*input) == 0 && *input != LABEL_CHAR))
 // }
 
+#define LABEL_DIFFERENT 0
+#define LABEL_EQUAL 1
+
+int		compare_labels(char *str, int len, char *label)
+{
+	if (ft_strlen(label) != len)
+		return (LABEL_DIFFERENT);
+	if (ft_strncmp(label, str, len) == 0)//--n
+		return (LABEL_EQUAL);
+	return (LABEL_DIFFERENT);
+}
+
 
 t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 {
 	while (syms)
 	{
-		if (ft_strncmp_modified(((t_dll)(syms->content))->label, str, len) == 0)
+		if (compare_labels(str, len, ((t_dll)(syms->content))->label) == LABEL_EQUAL)
 			return ((t_dll)(syms->content));
 		syms = syms->next;
 	}

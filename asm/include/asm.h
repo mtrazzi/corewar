@@ -35,87 +35,89 @@
 # define PAR_SIZE_REG 1
 # define PAR_SIZE_IND 2
 
+typedef struct s_op		t_op;
+typedef struct s_asm	t_asm;
+typedef struct s_param	t_param;
+typedef struct s_ope	t_ope;
+typedef struct s_sym	t_sym;
 
-typedef struct		s_asm
+struct			s_asm
 {
-	t_dll			*syms;
-	t_dll			*ops;		//liste de lignes du .s
-	header_t		*header;	//header au debut du .cor
-	int				fd;			//file descriptor du .cor
-}					t_asm;
+	t_dll		*syms;
+	t_dll		*ops;		//liste de lignes du .s
+	header_t	*header;	//header au debut du .cor
+	int			fd;			//file descriptor du .cor
+};
 
-typedef struct		s_param
+struct			s_param
 {
-	t_arg_type		type;
-	u_int			n;
-	u_int			sym;
-}					t_param;
+	t_arg_type	type;
+	u_int		n;
+	u_int		sym;
+};
 
-typedef	struct		s_ope
+struct			s_ope
 {
-	u_int			sym;//char *label
-	u_int			op_code;
-	u_int			nb_par;
-	t_param			p1;
-	t_param			p2;
-	t_param			p3;
-	u_int			size;
-}					t_ope;
+	u_int		sym;//char *label
+	u_int		op_code;
+	u_int		nb_par;
+	t_param		p1;
+	t_param		p2;
+	t_param		p3;
+	u_int		size;
+	//t_op			*op_tab_x;
+};
 
-typedef	struct		s_sym
+struct			s_sym
 {
-	char			*label;
-	u_int			sym;
-	char			true_sym;
-}					t_sym;
+	char		*label;
+	u_int		sym;
+	char		true_sym;
+};
 
+
+struct			s_op
+{
+	char	*name;
+	u_int	nb_param;
+	//type param
+	u_int	op_code;
+	u_int	nb_cycles;
+	char	*full_name;
+	u_int	ocp;
+	u_int	last_arg;
+};
+
+struct			s_typparam
+{
+	
+};
+
+#define MAX_OP
+
+t_op    g_op_tab[17] =
+{
 /*
-** ENVIRONMENT 
+**  {"nom", 	nb_param,	{type des param}, 										opcode, nb_cycles,	"nom_complet", 		OCP 
 */
+    {"live", 	1,			{T_DIR}, 												1, 		10, 		"alive", 			0, 0},
+    {"ld", 		2, 			{T_DIR | T_IND, T_REG}, 								2, 		5,	 		"load", 			1, 0},
+    {"st", 		2, 			{T_REG, T_IND | T_REG}, 								3, 		5, 			"store", 			1, 0},
+    {"add", 	3, 			{T_REG, T_REG, T_REG}, 									4, 		10, 		"addition", 		1, 0},
+    {"sub", 	3, 			{T_REG, T_REG, T_REG}, 									5, 		10, 		"soustraction", 	1, 0},
+    {"and", 	3, 			{T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 	6, 		6,			"et",				1, 0},
+    {"or", 		3, 			{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 	7, 		6,			"ou", 				1, 0},
+    {"xor", 	3, 			{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 	8, 		6,			"ou", 				1, 0},
+    {"zjmp", 	1, 			{T_DIR}, 												9, 		20, 		"jump if zero", 	0, 1},
+    {"ldi", 	3, 			{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 			10,		25,			"load index", 		1, 1},
+    {"sti", 	3, 			{T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 			11,		25,			"store index", 		1, 1},
+    {"fork", 	1, 			{T_DIR}, 												12,		800, 		"fork", 			0, 1},
+    {"lld", 	2, 			{T_DIR | T_IND, T_REG}, 								13, 	10, 		"long load", 		1, 0},
+    {"lldi", 	3, 			{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},			14,		50,			"long load index",	1, 1},
+    {"lfork", 	1, 			{T_DIR}, 												15,		1000, 		"long fork", 		0, 1},
+    {"aff", 	1, 			{T_REG}, 												16,		2, 			"aff", 				1, 0},
+    {0, 		0, 			{0}, 													0, 		0, 			0, 					0, 0}
+};
 
-int					ft_init_asm(t_asm *e);
-void				ft_free_asm_env(t_asm *e);
-
-/*
-** PARSING FILE
-*/
-
-int					ft_file_to_lst_asm(t_asm *e, char *file_name);
-char				*ft_process_line(char *line);
-t_arg_type			ft_give_type(char *param);
-
-/*
-** ERROR
-*/
-
-int					ft_error_asm(t_asm *e, char *error_message);
-int					ft_perror_asm(t_asm *e);
-
-
-/*
-** PRINTING
-*/
-
-void				ft_print_lst_str(t_dll *lst);
-void				ft_print_hexa(u_int n);
-
-
-/*
-** I/O
-*/
-
-int					ft_update_fd_asm(t_asm *e, char *file_name);
-u_int				ft_convert_endian(u_int n);
-void				ft_write_be(int fd, u_int n, u_int size);
-void				ft_write_header(int fd, header_t t);
-void				ft_write_op(int fd, t_ope op);
-
-/*
-** PROCESSING
-*/
-
-int					nb_bytes_op(t_ope op);
-t_arg_type			ft_give_pcb(t_ope op);
-int					give_label(u_int op_code);
 
 #endif

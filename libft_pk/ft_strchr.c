@@ -6,11 +6,11 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:18:45 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/06/04 19:55:11 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "util.h"
 
 char	*ft_strchr(const char *s, int c)
 {

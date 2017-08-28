@@ -7,7 +7,17 @@ RAN = ranlib
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = 
+SRC = ft_bzero.c \
+		ft_strcat.c \
+		ft_strchr.c \
+		ft_strcpy.c \
+		ft_strdup.c \
+		ft_strjoin.c \
+		ft_strlen.c \
+		ft_strncmp.c \
+		ft_strsub.c 
+
+SRC += get_next_line.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
@@ -16,7 +26,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 VPATH = src:include
 
 IFLAGS = -I include
-HEADERS = libft.h
+HEADERS = libft.h get_next_line.h
 
 all: $(NAME)
 
@@ -24,7 +34,7 @@ $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
 	$(RAN) $(NAME)
 
-./obj/%.o: %.c $(HEADERS)
+$(OBJ_PATH)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJ_PATH)
 	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS)
 

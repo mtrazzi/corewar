@@ -11,3 +11,8 @@ t_sym	*create_sym(char *label, u_int symbol)
 	new->sym = symbol;
 	return (new);
 }
+
+t_ope	*create_op()
+{
+	
+}

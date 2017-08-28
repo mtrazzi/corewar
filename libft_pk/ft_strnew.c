@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:18:45 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/04/11 15:21:57 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/06/04 20:13:08 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include "util.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strnew(size_t size)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	char	*strnew;
+
+	strnew = (char *)malloc(sizeof(char) * (size + 1));
+	if (!strnew)
+		return (NULL);
+	strnew[size] = '\0';
+	while (size)
+		strnew[--size] = '\0';
+	strnew[size] = '\0';
+	return (strnew);
 }

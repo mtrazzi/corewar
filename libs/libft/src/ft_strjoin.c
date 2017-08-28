@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/27 16:59:10 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/04/11 16:50:36 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/08/28 16:30:43 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
+#include "libft.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	char	*dst;
+
+	dst = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dst)
+		return (NULL);
+	dst = ft_strcpy(dst, s1);
+	dst = ft_strcat(dst, s2);
+	return (dst);
 }

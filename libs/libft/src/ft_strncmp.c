@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/16 16:51:34 by qdurot            #+#    #+#             */
-/*   Updated: 2017/08/27 17:00:15 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/08/28 11:48:52 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/08/28 16:24:07 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {

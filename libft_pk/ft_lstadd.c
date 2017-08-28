@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:18:45 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/04/12 11:13:17 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/06/04 20:12:52 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "util.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	t_list *tmp;
+
+	tmp = *alst;
+	*alst = new;
+	new->next = tmp;
 }

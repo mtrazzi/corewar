@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:18:45 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/04/10 18:12:31 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/08/28 17:00:00 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	while (*s)
+	char	*tmp;
+
+	tmp = s1;
+	while (*s1)
+		++s1;
+	while (*s2)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
+		*s1 = *s2;
+		++s1;
+		++s2;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	*s1 = '\0';
+	return (tmp);
 }
