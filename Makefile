@@ -40,7 +40,12 @@ SRC_FILES_1		=	asm.c					\
 					ft_size_cmd.c			\
 					ft_write_cmd.c
 
-SRC_FILES_2		=	vm.c
+SRC_FILES_2		=	vm.c					\
+					ft_free_vm.c			\
+					ft_init_vm.c			\
+					ft_error_vm.c			\
+					parse_arg.c				\
+					parse_file_vm.c
 
 SRC_1			=	$(addprefix $(SRC_PATH_1), $(SRC_FILES_1))
 
@@ -68,7 +73,8 @@ HEADER_FILES	=	libft.h				\
 					get_next_line.h		\
 					asm.h				\
 					dll.h				\
-					op.h
+					op.h				\
+					vm.h
 
 HEADERS			=	$(addprefix $(INC_PATH), $(HEADERS_FILES))
 
