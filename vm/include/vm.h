@@ -8,11 +8,13 @@
 # include "op.h"
 # include <sys/types.h>
 # include <stdio.h>
+# include <limits.h>
 # define ERR_PARSING -10
 
 typedef struct		s_prc t_prc;
 typedef struct		s_par t_par;
 typedef struct		s_env t_env;
+typedef struct		s_chp	t_chp;
 
 struct				s_prc
 {
@@ -23,12 +25,20 @@ struct				s_prc
 	int				id;
 };
 
+struct				s_chp
+{
+	int				nb;
+	char			*name;
+	char			*comment;
+	char			*file_name;
+};
+
 struct				s_par
 {
 	int				dump;
 	int				nb_cyc;
-	int				nb_files;
-	char			*file_names[4];
+	int				nb_chp;
+	t_chp			champions[MAX_PLAYERS];
 };
 
 struct				s_env
@@ -54,12 +64,13 @@ int		ft_perror_vm(t_env *e);
 */
 
 int		parse_arg_vm(int ac, char **av, t_env *e);
-
+int		ft_is_number(char *str);
+int		ft_is_int(char *str);
 /*
 ** PARSING OF .COR FILES
 */
 
-int		ft_parse_file(t_env *e, char *file_name);
+int		ft_parse_file(t_env *e, char *file_name, int chp_nb); //checks if too many players
 
 /*
 ** PREPARATION / CHAMPION PARSING

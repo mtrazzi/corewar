@@ -10,7 +10,8 @@ SRC = ft_error_vm.c			\
 			ft_init_vm.c			\
 			parse_arg.c				\
 			parse_file_vm.c		\
-			vm.c
+			vm.c							\
+			str_utils.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
