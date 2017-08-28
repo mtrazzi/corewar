@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_size.c                                         :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/18 18:07:50 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/07/28 00:25:26 by Philippe         ###   ########.fr       */
+/*   Created: 2017/04/10 18:53:40 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/08/27 16:59:10 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-
-u_int	dll_size(t_dll *lst)
+char	*ft_strchr(const char *s, int c)
 {
-	u_int	count;
-
-	if (!lst)
-		return (0);
-	count = 0;
-	while (lst)
+	while (*s)
 	{
-		count++;
-		lst = lst->next;
+		if (*s == (char)c)
+			return ((char *)s);
+		++s;
 	}
-	return (count);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
