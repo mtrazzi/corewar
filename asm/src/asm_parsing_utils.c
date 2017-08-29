@@ -34,7 +34,7 @@ char	*get_next_whitespace(char *str)//or end
 	return (str);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi_mod(const char *str)
 {
 	int		i;
 	long	number;

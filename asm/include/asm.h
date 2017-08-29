@@ -53,6 +53,14 @@ struct			s_asm
 	int			fd;			//file descriptor du .cor
 };
 
+//lire plusieurs fois le fichier to get les label et ainsi reperer les erreurs de %:label
+//dans les ops des le parsing!
+struct s_sym
+{
+	u_int	sym;
+	char	*label;
+};
+
 // struct			s_param
 // {
 // 	t_arg_type	type;
@@ -79,7 +87,8 @@ struct			s_ope
 	u_int	params[MAX_ARGS_NUMBER];
 	u_int	op_code;
 	u_int	size;
-	//t_op	*op_tab_x;
+	//u_int ocp;
+	t_op	*op_tab_x;
 };
 
 struct			s_sym
@@ -101,10 +110,10 @@ struct			s_op
 	u_int	last_arg;
 };
 
-struct			s_typparam
-{
+// struct			s_typparam
+// {
 	
-};
+// };
 
 #define MAX_OP 17
 

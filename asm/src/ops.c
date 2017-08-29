@@ -77,24 +77,30 @@ u_int		get_type(char *str)
 
 # define BAD_OP_PARAM -21
 //check_type
-int		check_type(char *str, int param_nb, t_op *ref)
+u_int		check_type(char *str, int param_nb, t_op *ref)
 {
 	u_int type;
 
 	type = get_type(str);
 	if (type == NOT_A_PARAM_CODE)
-		return (NOT_A_PARAM_CODE);//16
+		return (16);//NOT_A_PARAM_CODE);//16
 	if ((ref->type_param[param_nb] & type) == 0)
-		return (BAD_OP_PARAM);//32
-	//if (type == T_REG)
-
-	return (1);//return (type);
+		return (32);//BAD_OP_PARAM);//32
+	return (type);
 }
 
-// int		check_param()
-// {
+int		check_param(char *str, int param_nb, t_op *ref, t_ope *ope)
+{
+	u_int ret;
+	u_int res;
 
-// }
+	if (!*str)
+		return (-1);//
+	if ((ret = check_type(str, param_nb, ref)) & (32 | 16))
+		return (ret);
+	//get le reste du param
+	return (1);
+}
 
 
 //example: st r1, 564545465456456546454564454354354435435435453735425452442725727 is ok! (tested asm 'zaz' and 'jino')

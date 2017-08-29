@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -54,6 +55,41 @@ char	*get_next_whitespace(char *str)//or end
 	return (str);
 }
 
+u_int	convert(u_int to_rev)
+{
+	u_int tmp;
+
+	tmp = 0;
+	tmp = (0x000000ff & to_rev) << 24;
+	tmp |= (0x0000ff00 & to_rev) << 8;
+	tmp |= (0x00ff0000 & to_rev) >> 8;
+	tmp |= (0xff000000 & to_rev) >> 24;
+	return (tmp);
+}
+
+int	ft_atoi_mod(const char *str)
+{
+	int		i;
+	long	number;
+	int		is_negative;
+
+	i = 0;
+	number = 0;
+	is_negative = 1;
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' ||
+		str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+		++i;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		is_negative = (str[i] == '-') ? -1 : 1;
+		++i;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+		number = number * 10 + (str[i++] - 48);
+	number *= is_negative;
+	return ((int)number);
+}
+
 int main(int argc, char const *argv[])
 {
 	char *a = "\t\f\n  \r\tasdjhfgksdajfgh\n.\n.\t.\nasdfsidhsf\f\t\n";
@@ -70,5 +106,9 @@ int main(int argc, char const *argv[])
 	printf("_%s_\n", a);
 	skip_to_whitespaces(&a);
 	printf("+%s+\n", a);
+
+	printf("%08x\n", convert(0x0083f3ff));
+	printf("atoi %ld\n", (long)(u_int)ft_atoi_mod("-4294967"));
+	printf("atoi %ld\n", (long)(u_int)atoi("-4294967"));
 	return 0;
 }
