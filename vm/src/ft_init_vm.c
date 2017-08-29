@@ -6,5 +6,8 @@ int		ft_init_vm(t_env *e)
 	e->prc_lst = NULL;
 	e->cyc = 0;
 	e->nb_live = 0;
+	e->par.dump = 0;
+	e->par.nb_cyc = 0;
+	e->par.nb_chp = 0;
 	return (1);
 }

@@ -56,8 +56,8 @@ struct				s_env
 
 int		ft_init_vm(t_env *e);
 void	ft_free_vm_env(t_env *e);
-int		ft_error_vm(t_env *e, char *err_msg);
-int		ft_perror_vm(t_env *e);
+int		ft_error_vm(char *err_msg);
+int		ft_perror_vm(void);
 
 /*
 ** PARSING OF THE ARGUMENTS //VM must deal with -n and -dump options
