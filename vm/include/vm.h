@@ -1,5 +1,4 @@
 #ifndef VM_H
-
 # define VM_H
 
 # include "libft.h"
@@ -9,7 +8,17 @@
 # include <sys/types.h>
 # include <stdio.h>
 # include <limits.h>
-# define ERR_PARSING -10
+# include <fcntl.h>
+
+# define ERR_PARSING_ARG -10
+# define ERR_PARSING_OPT -11
+# define ERR_PARSING_CHP -12
+# define ERR_NB_CHP			 -13
+
+# define ERR_OPEN_FILE   -20
+# define ERR_CLOSE_FILE  -21
+# define ERR_FORMAT_FILE -22
+# define ERR_MAGIC			 -23
 
 typedef struct		s_prc t_prc;
 typedef struct		s_par t_par;
@@ -28,8 +37,10 @@ struct				s_prc
 struct				s_chp
 {
 	int				nb;
-	char			*name;
-	char			*comment;
+	u_int			magic;
+	u_int			prog_size;
+	char			name[PROG_NAME_LENGTH + 1];
+	char			comment[COMMENT_LENGTH + 1];
 	char			*file_name;
 };
 
@@ -55,22 +66,35 @@ struct				s_env
 */
 
 int		ft_init_vm(t_env *e);
-void	ft_free_vm_env(t_env *e);
-int		ft_error_vm(char *err_msg);
-int		ft_perror_vm(void);
+int		ft_free_vm_env(t_env *e);
+int		ft_error_vm(int err_nb, char *err_msg);
+int		ft_perror_vm(int err_nb);
 
 /*
 ** PARSING OF THE ARGUMENTS //VM must deal with -n and -dump options
 */
 
 int		parse_arg_vm(int ac, char **av, t_env *e);
+
+/*
+** STRING UTILS
+*/
+
 int		ft_is_number(char *str);
 int		ft_is_int(char *str);
+u_int	convert_uint(u_int n);
+
 /*
 ** PARSING OF .COR FILES
 */
 
-int		ft_parse_file(t_env *e, char *file_name, int chp_nb); //checks if too many players
+int		parse_all_files(t_env *e);
+
+/*
+** PRINTING
+*/
+
+void	print_env(t_env e);
 
 /*
 ** PREPARATION / CHAMPION PARSING
