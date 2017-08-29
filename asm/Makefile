@@ -9,7 +9,10 @@ SRC = asm.c \
 		creates.c \
 		syms.c \
 		asm_parsing.c \
-		ops.c
+		ops.c \
+		asm_parsing_utils.c \
+
+#op.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
@@ -47,6 +50,7 @@ $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 $(LIBS):
 	@$(MAKE) -C ../libs all
 
+#ifeq ($TARGET, NAME)
 clean:
 	@$(MAKE) -C ../libs clean
 	rm -rf $(OBJ_PATH)

@@ -4,7 +4,7 @@
 #define NAME_EQUAL 1
 
 //build a fonction to type_param[nb_param:] = 0
-t_op    g_op_tab[17] =
+t_op    g_op_tab[MAX_OP] =
 {
 /*
 **  {"nom", 	nb_param,	{type des param}, 										opcode, nb_cycles,	"nom_complet", 		OCP 
@@ -28,6 +28,8 @@ t_op    g_op_tab[17] =
     {0, 		0, 			{0}, 													0, 		0, 			0, 					0, 0}
 };
 
+
+
 int		compare_op_names(char *str, int len, char *op_name)
 {
 	if (ft_strlen(op_name) != len)
@@ -50,46 +52,11 @@ t_op	*does_op_exist_in_op_tab(char *str, int len)
 	return (NULL);
 }
 
-void	skip_whitespaces(char **str)
-{
-	if (!str || !*str)
-		return ;
-	while (**str && ft_is_withespace(**str))
-		(*str)++;
-}
-
-void	skip_to_whitespaces(char **str)//or end
-{
-	if (!str || !*str)
-		return ;
-	while (**str && !ft_is_withespace(**str))
-		(*str)++;
-}
-
-char	*get_next_separator(char *str)//or end
-{
-	if (!str)
-		return (NULL);
-	while (*str && *str != SEPARATOR_CHAR)
-		str++;
-	return (str);
-}
-
-char	*get_next_whitespace(char *str)//or end
-{
-	if (!str)
-		return (NULL);
-	while (*str && !ft_is_withespace(*str))
-		str++;
-	return (str);
-}
-
 //check_type
 int		check_type(char *str, int param_nb, t_op *ref)
 {
 	return (1);
 }
-
 
 //example: st r1, 564545465456456546454564454354354435435435453735425452442725727 is ok! (tested asm 'zaz' and 'jino')
 int	check_params(char *str, t_op *ref)

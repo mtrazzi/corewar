@@ -98,7 +98,11 @@ struct			s_typparam
 
 #define MAX_OP 17
 
-int	ft_is_withespace(char c);
+int		ft_is_withespace(char c);
+char	*get_next_whitespace(char *str);
+char	*get_next_separator(char *str);
+void	skip_to_whitespaces(char **str);
+void	skip_whitespaces(char **str);
 
 t_sym	*create_sym(char *label, u_int symbol);
 
