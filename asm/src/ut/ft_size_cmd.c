@@ -45,6 +45,6 @@ int			nb_bytes_op(t_ope op)
 	sum += count_types(op, DIR_CODE) * label;
 	sum += count_types(op, IND_CODE) * PAR_SIZE_IND;
 	sum += count_types(op, REG_CODE) * PAR_SIZE_REG;
-	sum += ((IS_PCB & convert_op_code(op.op_code)) > 0);
+	sum += ((IS_PCB & convert_op_code(op.op_code)) > 0); // sum += g_op_tab[op].OCP
 	return (sum + 1);
 }

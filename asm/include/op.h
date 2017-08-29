@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/29 10:29:47 by Philippe         ###   ########.fr       */
+/*   Updated: 2017/08/29 15:21:19 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define REG_CODE				1
 # define DIR_CODE				2
 # define IND_CODE				3
+# define NOT_A_PARAM_CODE		0
 
 
 #define MAX_ARGS_NUMBER			4
@@ -35,6 +36,8 @@
 #define LABEL_CHAR				':'
 #define DIRECT_CHAR				'%'
 #define SEPARATOR_CHAR			','
+//added
+#define REG_CHAR				'r'
 
 #define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
 
@@ -57,7 +60,8 @@ typedef char	t_arg_type;
 #define T_REG					1
 #define T_DIR					2
 #define T_IND					4
-#define T_LAB					8
+#define T_LAB					10//?10  8 + 2
+#define T_NOTHING				0//not used
 
 /*
 **
@@ -76,5 +80,3 @@ typedef struct					header_s
 }								header_t;
 
 
-//add
-#define REG_CHAR 'r'

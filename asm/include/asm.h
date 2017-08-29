@@ -32,7 +32,7 @@
 #define IS_LABEL_NO 0b1000000000011100	
 #define	IS_LABEL_2	0b0110111100000000	
 #define	IS_LABEL_4	0b0001000011100011	
-#define IS_PCB		0b1011011011111110	
+#define IS_PCB		0b1011011011111110
 
 # define PAR_SIZE_REG 1
 # define PAR_SIZE_IND 2
@@ -53,23 +53,33 @@ struct			s_asm
 	int			fd;			//file descriptor du .cor
 };
 
-struct			s_param
-{
-	t_arg_type	type;
-	u_int		n;
-	u_int		sym;
-};
+// struct			s_param
+// {
+// 	t_arg_type	type;
+// 	u_int		n;
+// 	u_int		sym;
+// };
+
+// struct			s_ope
+// {
+// 	u_int		sym;//char *label
+// 	u_int		op_code;
+// 	u_int		nb_par;
+// 	t_param		p1;
+// 	t_param		p2;
+// 	t_param		p3;
+// 	u_int		size;
+// 	//t_op			*op_tab_x;
+// };
 
 struct			s_ope
 {
-	u_int		sym;//char *label
-	u_int		op_code;
-	u_int		nb_par;
-	t_param		p1;
-	t_param		p2;
-	t_param		p3;
-	u_int		size;
-	//t_op			*op_tab_x;
+	u_int	nb_param;
+	u_int	type_param[MAX_ARGS_NUMBER];
+	u_int	params[MAX_ARGS_NUMBER];
+	u_int	op_code;
+	u_int	size;
+	//t_op	*op_tab_x;
 };
 
 struct			s_sym
@@ -83,7 +93,7 @@ struct			s_op
 {
 	char	*name;
 	u_int	nb_param;
-	u_int	type_param[MAX_ARGS_NUMBER + 1];
+	u_int	type_param[MAX_ARGS_NUMBER];//+1
 	u_int	op_code;
 	u_int	nb_cycles;
 	char	*full_name;
@@ -103,6 +113,8 @@ char	*get_next_whitespace(char *str);
 char	*get_next_separator(char *str);
 void	skip_to_whitespaces(char **str);
 void	skip_whitespaces(char **str);
+int		ft_atoi(const char *str);
+
 
 t_sym	*create_sym(char *label, u_int symbol);
 

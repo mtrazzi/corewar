@@ -52,11 +52,50 @@ t_op	*does_op_exist_in_op_tab(char *str, int len)
 	return (NULL);
 }
 
+int	ft_isdigit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+
+u_int		get_type(char *str)
+{
+	if (*str == '\0')
+		return (NOT_A_PARAM_CODE);
+	if (*str == DIRECT_CHAR && *(str + 1) == LABEL_CHAR)
+		return (T_LAB);
+	if (*str == DIRECT_CHAR)
+		return (T_DIR);//return (DIR_CODE);
+	if (*str == REG_CHAR)
+		return (T_REG);//return (REG_CODE);
+	if (*str == '-' || ft_isdigit(*str))
+		return (T_IND);//return (IND_CODE);
+	return (NOT_A_PARAM_CODE);
+}
+
+# define BAD_OP_PARAM -21
 //check_type
 int		check_type(char *str, int param_nb, t_op *ref)
 {
-	return (1);
+	u_int type;
+
+	type = get_type(str);
+	if (type == NOT_A_PARAM_CODE)
+		return (NOT_A_PARAM_CODE);//16
+	if ((ref->type_param[param_nb] & type) == 0)
+		return (BAD_OP_PARAM);//32
+	//if (type == T_REG)
+
+	return (1);//return (type);
 }
+
+// int		check_param()
+// {
+
+// }
+
 
 //example: st r1, 564545465456456546454564454354354435435435453735425452442725727 is ok! (tested asm 'zaz' and 'jino')
 int	check_params(char *str, t_op *ref)
