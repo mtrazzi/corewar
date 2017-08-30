@@ -10,15 +10,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define ERR_PARSING_ARG -10
-# define ERR_PARSING_OPT -11
-# define ERR_PARSING_CHP -12
-# define ERR_NB_CHP			 -13
-
-# define ERR_OPEN_FILE   -20
-# define ERR_CLOSE_FILE  -21
-# define ERR_FORMAT_FILE -22
-# define ERR_MAGIC			 -23
+# define MAX_COLOR 4
 
 typedef struct		s_prc t_prc;
 typedef struct		s_par t_par;
@@ -46,17 +38,20 @@ struct				s_chp
 
 struct				s_par
 {
-	int				dump;
-	int				nb_cyc;
-	int				nb_chp;
+	int				dump;			//is ther a dump ?
+	u_int			nb_cyc;			//nb_cyc befor dump
+	u_int			nb_chp;			//how many .cor files
 	t_chp			champions[MAX_PLAYERS];
 };
 
 struct				s_env
 {
 	u_char			map[MEM_SIZE];
+	u_char			map_color[MEM_SIZE];
 	t_dll			*prc_lst;
 	int				cyc;			//cycles to die
+	int				cyc_counter;	//counter of cycles (btw 0 and e->cyc)
+	int				nb_checks;
 	int				nb_live;		//nb of live since last check
 	t_par			par;
 };
@@ -67,11 +62,11 @@ struct				s_env
 
 int		ft_init_vm(t_env *e);
 int		ft_free_vm_env(t_env *e);
-int		ft_error_vm(int err_nb, char *err_msg);
-int		ft_perror_vm(int err_nb);
+int		ft_error_vm(char *err_msg);
+int		ft_perror_vm(void);
 
 /*
-** PARSING OF THE ARGUMENTS //VM must deal with -n and -dump options
+** PARSING OF THE ARGUMENTS
 */
 
 int		parse_arg_vm(int ac, char **av, t_env *e);
@@ -85,23 +80,27 @@ int		ft_is_int(char *str);
 u_int	convert_uint(u_int n);
 
 /*
-** PARSING OF .COR FILES
-*/
-
-int		parse_all_files(t_env *e);
-
-/*
 ** PRINTING
 */
 
 void	print_env(t_env e);
+void	print_map(t_env e);
+void	color_tab(void);
+char	*g_color_tab[MAX_COLOR * 2 + 2];
 
 /*
 ** PREPARATION / CHAMPION PARSING
 */
 
-//.cor files must be written in the vm memory with correct spacing
-//at the beginning and all processes must be initialized
+int		parse_all_files(t_env *e);
+int     init_all_processes(t_env *e);
+
+/*
+** FUNCTIONS FOR CYCLE HANDLING / CALLING PROCESSES
+*/
+
+int		do_one_cycle(t_env *e);
+int		do_process(t_env *e, t_prc *prc);
 
 /*
 ** IMPLEMENTATION OF OPERATIONS

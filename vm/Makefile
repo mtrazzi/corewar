@@ -5,14 +5,18 @@ CFLAGS = -Wall -Wextra
 
 NAME = corewar
 
-SRC = 	ft_error_vm.c				\
+SRC = 	ft_error_vm.c		\
 		ft_free_vm.c		\
 		ft_init_vm.c		\
 		parse_arg.c			\
 		parse_file_vm.c		\
 		vm.c				\
 		str_utils.c			\
-		ft_print_utils.c
+		ft_print_utils.c	\
+		init_process.c		\
+		one_cycle.c			\
+		do_process.c		\
+		run_vm.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/

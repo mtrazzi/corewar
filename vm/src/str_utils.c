@@ -39,3 +39,17 @@ u_int   convert_ushort(u_short n)
 {
     return ((n & B0) << 8 | (n & B1) >> 8);
 }
+
+void    color_tab(void)
+{
+ g_color_tab[0] = "";
+ g_color_tab[1] = "\033[0;32m";          //green
+ g_color_tab[2] = "\033[0;30m\033[42m";  //black on green
+ g_color_tab[3] = "\033[0;34m";          //blue
+ g_color_tab[4] = "\033[0;30m\033[44m";  //black on blue
+ g_color_tab[5] = "\033[0;31m";          //red
+ g_color_tab[6] = "\033[0;30m\033[41m";  //black on red
+ g_color_tab[7] = "\033[0;36m";          //cyan
+ g_color_tab[8] = "\033[0;30m\033[46m";  //black on cyan
+ g_color_tab[9] = NULL;
+}
