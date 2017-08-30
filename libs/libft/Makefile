@@ -17,7 +17,9 @@ SRC = ft_bzero.c \
 		ft_strncmp.c \
 		ft_strsub.c \
 		ft_free.c \
-		ft_strncpy.c
+		ft_strncpy.c \
+		ft_atol.c \
+		ft_atoi.c
 
 SRC += get_next_line.c
 

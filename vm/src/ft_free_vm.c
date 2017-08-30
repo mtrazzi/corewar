@@ -1,5 +1,8 @@
 #include "vm.h"
 
-void	ft_free_vm_env(t_env *e)
+int ft_free_vm_env(t_env *e)
 {
+  (void)e;
+
+  return (1);
 }
