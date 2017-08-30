@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/29 15:21:19 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/08/30 17:19:54 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 #define CHAMP_MAX_SIZE			(MEM_SIZE / 6) //== 682
 
 #define COMMENT_CHAR			'#'
+#define COMMENT_CHAR2			';'
 #define LABEL_CHAR				':'
 #define DIRECT_CHAR				'%'
 #define SEPARATOR_CHAR			','

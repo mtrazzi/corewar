@@ -16,7 +16,8 @@ SRC = ft_bzero.c \
 		ft_strlen.c \
 		ft_strncmp.c \
 		ft_strsub.c \
-		ft_free.c
+		ft_free.c \
+		ft_strncpy.c
 
 SRC += get_next_line.c
 

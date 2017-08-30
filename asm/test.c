@@ -90,6 +90,7 @@ int	ft_atoi_mod(const char *str)
 	return ((int)number);
 }
 
+#define NAME_CMD_STRING			".name"
 int main(int argc, char const *argv[])
 {
 	char *a = "\t\f\n  \r\tasdjhfgksdajfgh\n.\n.\t.\nasdfsidhsf\f\t\n";
@@ -110,5 +111,8 @@ int main(int argc, char const *argv[])
 	printf("%08x\n", convert(0x0083f3ff));
 	printf("atoi %ld\n", (long)(u_int)ft_atoi_mod("-4294967"));
 	printf("atoi %ld\n", (long)(u_int)atoi("-4294967"));
+
+	printf("%d\n", ft_strncmp(".namfasdasdas", NAME_CMD_STRING, strlen(NAME_CMD_STRING)));
+	printf("{%c}\n", NAME_CMD_STRING[strlen(NAME_CMD_STRING)]);
 	return 0;
 }

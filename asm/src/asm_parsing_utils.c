@@ -34,6 +34,23 @@ char	*get_next_whitespace(char *str)//or end
 	return (str);
 }
 
+void	skip_to(char **str, char c)//or end //return -1 if not encountered before end?
+{
+	if (!str || !*str)
+		return ;
+	while (**str && **str != c)
+		(*str)++;
+}
+
+char	*get_next(char *str, char c)//or end
+{
+	if (!str)
+		return (NULL);
+	while (*str && *str != c)
+		str++;
+	return (str);
+}
+
 int	ft_atoi_mod(const char *str)
 {
 	int		i;

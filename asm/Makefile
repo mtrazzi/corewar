@@ -11,6 +11,9 @@ SRC = asm.c \
 		asm_parsing.c \
 		ops.c \
 		asm_parsing_utils.c \
+		get_labels.c \
+		visu.c \
+		get_header.c
 
 #op.c
 
@@ -30,7 +33,11 @@ LIBFT_PATH = ../libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 IFLAGS += -I $(LIBFT_PATH)/include
 
-LIBS = $(DLLST) $(LIBFT)
+PRINTF_PATH = ../libs/ft_printf
+PRINTF = $(PRINTF_PATH)/libftprintf.a
+IFLAGS += -I $(PRINTF_PATH)/include
+
+LIBS = $(DLLST) $(LIBFT) $(PRINTF)
 
 all: $(NAME)
 
@@ -51,6 +58,7 @@ $(LIBS):
 	@$(MAKE) -C ../libs all
 
 #ifeq ($TARGET, NAME)
+#clean libs ? necessary only in project Makefile?
 clean:
 	@$(MAKE) -C ../libs clean
 	rm -rf $(OBJ_PATH)
