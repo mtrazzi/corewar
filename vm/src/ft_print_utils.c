@@ -3,6 +3,20 @@
 # define BYTES_PER_LINE 64
 # define END_OF_COLOR "\e[0m"
 
+static void change_color_prc(t_env *e, int incr)
+{
+    t_dll *prc_lst;
+    t_prc *prc;
+
+    prc_lst = e->prc_lst;
+    while (prc_lst)
+    {
+        prc = (t_prc *)(prc_lst->content);
+        e->map_color[prc->pc] += incr;
+        prc_lst = prc_lst->next;
+    }
+}
+
 void print_map(t_env e)
 {
   int nb_bytes;
@@ -10,6 +24,7 @@ void print_map(t_env e)
   char *color;
 
   nb_bytes = 0;
+  change_color_prc(&e, 1);
   while (nb_bytes < MEM_SIZE)
   {
     j = 0;
@@ -22,14 +37,15 @@ void print_map(t_env e)
 	ft_printf("\n");
     nb_bytes += BYTES_PER_LINE;
   }
+  change_color_prc(&e, -1);
 }
 
 void print_env(t_env e)
 {
 	u_int   i;
-  t_chp chp;
+    t_chp chp;
 
-  print_map(e);
+    print_map(e);
 	ft_printf("\nNb of cycles to die        : %d\n", e.cyc);
 	ft_printf("Nb of lives since last check : %d\n", e.nb_live);
 	ft_printf("Is there dump ?              : %s\n", (e.par.dump ? "yes" : "no"));
@@ -48,4 +64,23 @@ void print_env(t_env e)
     ft_printf("         comment   : |%s|\n", chp.comment);
     i++;
 	}
+}
+
+int print_prc(t_prc *prc)
+{
+    int i;
+
+    ft_printf("pc is : %u\n", prc->pc);
+    i = 0;
+    while (i < REG_NUMBER)
+    {
+        ft_printf("     r%d is : %d\n", i, prc->r[i]);
+        i++;
+    }
+    ft_printf("carry is     : %d\n", prc->carry);
+    ft_printf("live is      : %d\n", prc->live);
+    ft_printf("live_nb is   : %d\n", prc->live_nb);
+    ft_printf("id is        : %d\n", prc->id);
+    ft_printf("cyc_left is  : %d\n", prc->cyc_left);
+    return (0);
 }

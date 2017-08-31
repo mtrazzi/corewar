@@ -2,11 +2,15 @@
 
 # define STR_ERROR_PROCESS "error in handling a process"
 
+# define DEBUG_ONE_CYCLE 0
+
 int     do_one_cycle(t_env *e)
 {
     t_dll *elt;
 
     elt = e->prc_lst;
+    if (DEBUG_ONE_CYCLE)
+        dll_foreach(e->prc_lst, print_prc);
     while (elt)
     {
         if (do_process(e, elt->content) < 0)

@@ -18,11 +18,28 @@ SRC = 	ft_error_vm.c		\
 		do_process.c		\
 		run_vm.c
 
+SRC +=	live.c				\
+		ld.c				\
+		st.c				\
+		add.c				\
+		sub.c				\
+		and.c				\
+		or.c				\
+		xor.c				\
+		zjmp.c				\
+		ldi.c				\
+		sti.c				\
+		fork.c				\
+		lld.c				\
+		lldi.c				\
+		lfork.c				\
+		aff.c				
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
-VPATH = src:include
+VPATH = src:include:src/op
 IFLAGS = -I include
 HEADERS = vm.h op.h
 

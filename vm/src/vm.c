@@ -1,6 +1,6 @@
 #include "vm.h"
 
-# define DEBUG_MAIN 1
+# define DEBUG_MAIN 0
 
 int main(int ac, char **av)
 {
@@ -15,6 +15,8 @@ int main(int ac, char **av)
 		return (ft_free_vm_env(&e));
 	if (DEBUG_MAIN)
 		print_map(e);
+	if (run_vm(&e) < 0)
+		return (ft_free_vm_env(&e));
 	ft_free_vm_env(&e);
 	return (0);
 }

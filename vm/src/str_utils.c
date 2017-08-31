@@ -80,3 +80,39 @@ void    op_tab_init(void)
 	g_op_tab[15] = (t_op){"aff", 1, {T_REG}, 16, 2, "aff", 1, 0};
 	g_op_tab[16] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0};
 }
+
+u_int   convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3)
+{
+    return (((u_int)b0) << 24 | ((u_int)b1) << 16 | ((u_int)b2) << 8 | \
+            ((u_int)b3));
+}
+
+u_int   convert_2_bytes(u_char b0, u_char b1)
+{
+    return (((u_int)b0) << 8 || ((u_int)b1));
+}
+
+void    op_fun_tab_init(void)
+{
+    g_op_fun_tab[0] = &live;
+    g_op_fun_tab[1] = &ld;
+    g_op_fun_tab[2] = &st;
+    g_op_fun_tab[3] = &add;
+    g_op_fun_tab[4] = &sub;
+    g_op_fun_tab[5] = &and;
+    g_op_fun_tab[6] = &or;
+    g_op_fun_tab[7] = &xor;
+    g_op_fun_tab[8] = &zjmp;
+    g_op_fun_tab[9] = &ldi;
+    g_op_fun_tab[10] = &sti;
+    g_op_fun_tab[11] = &ft_fork;
+    g_op_fun_tab[12] = &lld;
+    g_op_fun_tab[13] = &lldi;
+    g_op_fun_tab[14] = &lfork;
+    g_op_fun_tab[15] = &aff;
+}
+
+void    clear_screen(void)
+{
+    ft_printf("\033[2J");
+}

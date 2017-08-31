@@ -3,6 +3,7 @@
 
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 # include "dll.h"
 # include "op.h"
 # include <sys/types.h>
@@ -26,6 +27,7 @@ struct				s_prc
 	int				r[REG_NUMBER];	//registers
 	int				carry;
 	int				live;
+	int				live_nb;
 	int				id;
 	int				cyc_left;
 };
@@ -82,6 +84,8 @@ int		parse_arg_vm(int ac, char **av, t_env *e);
 int		ft_is_number(char *str);
 int		ft_is_int(char *str);
 u_int	convert_uint(u_int n);
+u_int   convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3);
+u_int   convert_2_bytes(u_char b0, u_char b1);
 
 /*
 ** PRINTING
@@ -91,6 +95,8 @@ void	print_env(t_env e);
 void	print_map(t_env e);
 void	color_tab(void);
 char	*g_color_tab[MAX_COLOR * 2 + 2];
+int		print_prc(t_prc *prc);
+void	clear_screen(void);
 
 /*
 ** PREPARATION / CHAMPION PARSING
@@ -103,6 +109,7 @@ int     init_all_processes(t_env *e);
 ** FUNCTIONS FOR CYCLE HANDLING / CALLING PROCESSES
 */
 
+int     run_vm(t_env *e);
 int		do_one_cycle(t_env *e);
 int		do_process(t_env *e, t_prc *prc); //must also change color of processes
 
@@ -111,6 +118,24 @@ int		do_process(t_env *e, t_prc *prc); //must also change color of processes
 */
 
 t_do_op *g_op_fun_tab[NB_OP + 1];
+void	op_fun_tab_init(void)	;
+int     live(t_env *e, t_prc *prc);
+int     ld(t_env *e, t_prc *prc);
+int     st(t_env *e, t_prc *prc);
+int     add(t_env *e, t_prc *prc);
+int     sub(t_env *e, t_prc *prc);
+int     and(t_env *e, t_prc *prc);
+int     or(t_env *e, t_prc *prc);
+int     xor(t_env *e, t_prc *prc);
+int     zjmp(t_env *e, t_prc *prc);
+int     ldi(t_env *e, t_prc *prc);
+int     sti(t_env *e, t_prc *prc);
+int     ft_fork(t_env *e, t_prc *prc);
+int     lld(t_env *e, t_prc *prc);
+int     lldi(t_env *e, t_prc *prc);
+int     lfork(t_env *e, t_prc *prc);
+int     aff(t_env *e, t_prc *prc);
+
 
 /*
 ** RESOURCES
@@ -131,5 +156,12 @@ struct			s_op
 t_op	g_op_tab[NB_OP + 1];
 void	op_tab_init(void);
 
+/*
+** TO DO
+*/
+
+//function to check if all number or players are different
+//verbose mode
+//write ("un processus dit que le joueur 3(rainbowdash) est en vie")
 
 #endif

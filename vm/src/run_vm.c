@@ -2,6 +2,14 @@
 
 # define STR_ERROR_CYCLE "could not complete cycle"
 
+static void    ft_wait(void) //just to print step by step
+{
+    char *line = NULL;
+    char *rem = NULL;
+    while (!line || ft_strcmp(line, "s"))
+        get_next_line(0, &line, &rem);
+}
+
 static void    check_lives(t_env *e)
 {
     e->cyc_counter = 0;
@@ -28,6 +36,7 @@ int     run_vm(t_env *e)
 {
     while (e->cyc > 0)
     {
+        print_map(*e);
         if (do_one_cycle(e) < 0)
             return (ft_error_vm(STR_ERROR_CYCLE));
         e->cyc_counter += 1;
@@ -36,6 +45,8 @@ int     run_vm(t_env *e)
             check_lives(e);
             dll_del_f(&e->prc_lst, &del_not_live);
         }
+        ft_wait();
+        clear_screen();
     }
     return (0);
 }

@@ -22,6 +22,7 @@ t_prc   *new_prc(u_int pc, int nb, int id)
     prc->pc = pc;
     prc->carry = 0;
     prc->live = 0;
+    prc->live_nb = 0;
     prc->id = id;
     prc->cyc_left = 0;
     return (prc);
@@ -39,7 +40,6 @@ int     init_all_processes(t_env *e)
                             e->par.champions[i].nb, i)))
             return (ft_error_vm(STR_ERR_MALLOC_PRC));
         dll_push_front(&e->prc_lst, dll_new(prc));
-        e->map_color[(MEM_SIZE / e->par.nb_chp) * i] += 1;
         i++;
     }
     return (0);
