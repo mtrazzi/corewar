@@ -24,7 +24,8 @@ int			ft_init_vm(t_env *e)
 {
 	ft_bzero(e->map, MEM_SIZE);
 	ft_bzero(e->map_color, MEM_SIZE);
-	color_tab();
+	color_tab();						//init color tab for printf
+	op_tab_init();						//init the operation table
 	e->prc_lst = NULL;
 	e->cyc = CYCLE_TO_DIE;
 	e->cyc_counter = 0;

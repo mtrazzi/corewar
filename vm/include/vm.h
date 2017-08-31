@@ -11,11 +11,14 @@
 # include <fcntl.h>
 
 # define MAX_COLOR 4
+# define NB_OP	   16
 
 typedef struct		s_prc t_prc;
 typedef struct		s_par t_par;
 typedef struct		s_env t_env;
-typedef struct		s_chp	t_chp;
+typedef struct		s_chp t_chp;
+typedef struct		s_op  t_op;
+typedef	int			t_do_op(t_env *e, t_prc *prc);
 
 struct				s_prc
 {
@@ -24,6 +27,7 @@ struct				s_prc
 	int				carry;
 	int				live;
 	int				id;
+	int				cyc_left;
 };
 
 struct				s_chp
@@ -100,11 +104,32 @@ int     init_all_processes(t_env *e);
 */
 
 int		do_one_cycle(t_env *e);
-int		do_process(t_env *e, t_prc *prc);
+int		do_process(t_env *e, t_prc *prc); //must also change color of processes
 
 /*
 ** IMPLEMENTATION OF OPERATIONS
 */
+
+t_do_op *g_op_fun_tab[NB_OP + 1];
+
+/*
+** RESOURCES
+*/
+
+struct			s_op
+{
+	char	*name;
+	u_int	nb_param;
+	u_int	type_param[MAX_ARGS_NUMBER];//+1
+	u_int	op_code;
+	u_int	nb_cycles;
+	char	*full_name;
+	u_int	ocp;
+	u_int	last_arg;
+};
+
+t_op	g_op_tab[NB_OP + 1];
+void	op_tab_init(void);
 
 
 #endif

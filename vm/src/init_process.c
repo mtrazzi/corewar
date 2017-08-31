@@ -23,6 +23,7 @@ t_prc   *new_prc(u_int pc, int nb, int id)
     prc->carry = 0;
     prc->live = 0;
     prc->id = id;
+    prc->cyc_left = 0;
     return (prc);
 }
 
