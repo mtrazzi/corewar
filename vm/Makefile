@@ -18,6 +18,7 @@ SRC = 	ft_error_vm.c		\
 		do_process.c		\
 		run_vm.c
 
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))

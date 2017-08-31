@@ -12,7 +12,12 @@ t_sym	*create_sym(char *label, u_int symbol)
 	return (new);
 }
 
-t_ope	*create_op()
+t_ope	*create_ope(void)
 {
-	return (NULL);
+	t_ope	*new;
+
+	new = (t_ope *)malloc(sizeof(t_ope));
+	if (new == NULL)
+		return (NULL);
+	return (new);
 }

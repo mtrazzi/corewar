@@ -13,7 +13,8 @@ SRC = asm.c \
 		asm_parsing_utils.c \
 		get_labels.c \
 		visu.c \
-		get_header.c
+		get_header.c \
+		prep.c
 
 #op.c
 

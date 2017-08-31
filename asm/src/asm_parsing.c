@@ -41,18 +41,41 @@ int	is_com(char *str)
 #define BAD_OP_NAME -20//BAD_OP_CODE
 
 
-int parse_op(char *line, t_dll **ops)
+int		init_ope(t_ope *ope)
 {
+	ope->nb_param = 0;
+	ft_bzero(ope->type_param, sizeof(u_int) * MAX_ARGS_NUMBER);
+	ft_bzero(ope->params, sizeof(u_int) * MAX_ARGS_NUMBER);
+	ope->op_code = MAX_OP;
+	ope->size = 0;
+	ope->address_in_size = 0;
+	ope->op_tab_x = NULL;
+	ope->line_nb = 0;
+	return (1);
+}
+
+int parse_op(char **line, t_dll **ops, int line_count, t_asm *a)
+{
+	t_dll	*new_ope_dll;
+	t_ope	ope;//init?
 	t_op	*op;
 	char	*tmp;
 
-	tmp = line;
-	while (line && *line && !ft_is_withespace(*line))
-		line++;
-	op = does_op_exist_in_op_tab(tmp, line - tmp);
+	op = NULL;//useless
+	init_ope(&ope);
+	ope.line_nb = line_count;
+	tmp = *line;
+	*line = get_next_whitespace(*line);
+	op = does_op_exist_in_op_tab(tmp, *line - tmp);
+	ft_printf("{green}op %p{eoc} {%s} [%d]\n", op, *line, *line-tmp);
 	if (op == NULL)
 		return (BAD_OP_NAME);
-	// else if ()//checkparams!
+	ope.op_tab_x = op;
+	if (check_params(line, op, &ope, a) != 1)
+		return (-1);
+	if ((new_ope_dll = create_ope_dll(&ope, op)) == NULL)
+		return (-1);//MAL_ERR
+	dll_append(ops, new_ope_dll);
 	return (1);
 }
 
@@ -70,7 +93,6 @@ int	process_line(char *line, t_asm *a, u_int line_count, t_dll **sym_current, t_
 		(*sym_current) = (*sym_current)->next;
 		skip_to(&line, LABEL_CHAR);
 		line++;
-		skip_whitespaces(&line);
 	}
 	else if ((*to_skip_curr) != NULL && line_count == ((t_sym *)(*to_skip_curr)->content)->line_number_parsing_help)
 	{
@@ -78,13 +100,17 @@ int	process_line(char *line, t_asm *a, u_int line_count, t_dll **sym_current, t_
 		(*to_skip_curr) = (*to_skip_curr)->next;
 		skip_to(&line, LABEL_CHAR);
 		line++;
-		skip_whitespaces(&line);
 	}
-	ft_printf("{red}process: {%s}{eoc}\n", line);
-	if (is_com(line) || *line == '\0')//ou empty line
+	skip_whitespaces(&line);
+	if (is_com(line) || *line == '\0')
 		return (1);
-	// 	return (1);
-	//skip whitespacesonly lines
+	ft_printf("{red}process: {%s}{eoc}\n", line);
+	if (parse_op(&line, &a->ops, line_count, a) != 1)
+		return (-1);
+	ft_printf("{red}!!!processed GOOD {%s}{eoc}\n", line);
+	skip_whitespaces(&line);
+	if (*line && !is_com(line))
+		return (-1);
 	return (1);
 }
 

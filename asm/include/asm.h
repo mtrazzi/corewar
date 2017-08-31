@@ -68,7 +68,7 @@ struct			s_asm
 struct s_sym
 {
 	u_int	line_number_parsing_help;//0-indexed!
-	t_ope	*first_ope;
+	t_ope	*corresponding_ope;
 	u_int	sym;
 	char	*label;
 };
@@ -99,9 +99,10 @@ struct			s_ope
 	u_int	params[MAX_ARGS_NUMBER];
 	u_int	op_code;
 	u_int	size;
-	u_int	address_in_size;//
+	u_int	address_in_size;//sum of precedent sizes
 	//u_int ocp;
 	t_op	*op_tab_x;
+	u_int	line_nb;
 };
 
 // struct			s_sym
@@ -137,12 +138,14 @@ void	skip_to_whitespaces(char **str);
 void	skip_whitespaces(char **str);
 void	skip_to(char **str, char c);
 int		ft_atoi(const char *str);
+int		ft_atoi_mod(const char *str);
 
 char	*get_next(char *str, char c);
 
 int	is_com(char *str);
 
 t_sym	*create_sym(char *label, u_int symbol);
+t_ope	*create_ope(void);
 
 t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms);
 int		create_add_label(char *str, int len, t_dll **syms, u_int symbol);
@@ -156,5 +159,15 @@ int		get_header(t_asm *a, u_int *line_count, char **rem);
 
 void	sym_dll_print(char *msg, t_dll *lst);
 void	sym_str_(t_sym *sym);
+
+int	check_params(char **str, t_op *ref, t_ope *ope, t_asm *a);
+t_dll	*create_ope_dll(t_ope *ope, t_op *ref);
+
+//move in DLLST
+void	dll_print_f(char *msg, t_dll *lst, void f());
+
+void	ope_str_(t_ope *ope);
+
+int		prep(t_asm *a);
 
 #endif

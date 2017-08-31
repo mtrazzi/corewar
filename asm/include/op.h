@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/30 17:19:54 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/08/31 20:07:58 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef char	t_arg_type;
 #define T_IND					4
 #define T_LAB					10//?10  8 + 2
 #define T_NOTHING				0//not used
+
+// #define T_LAB 8
+
+// #define T_DLAB T_LAB | T_DIR
+// #define	T_ILAB T_LAB | T_IND
 
 /*
 **

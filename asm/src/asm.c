@@ -35,9 +35,18 @@ int main(int ac, char **av)
 
 	close(a.fd);
 	a.fd = open(av[1], O_RDONLY);
-	parsing(&a);
+	if (parsing(&a) != 1)//if error, free lists
+		return (-1);
+
+	sym_dll_print("{On_blue}parsed labels{eoc}\n", a.syms);
+	sym_dll_print("{On_blue}to_skip labels{eoc}\n", a.to_skip_syms);
+	dll_print_f("{On_blue}ops{eoc}\n", a.ops, ope_str_);
+	prep(&a);
+	sym_dll_print("{On_red}parsed labels{eoc}\n", a.syms);
 	return (0);
 }
+
+//what if programme size > MAX allowed?
 
 
 	//t_asm e;
