@@ -34,6 +34,7 @@ int			ft_init_vm(t_env *e)
 	e->par.dump = 0;
 	e->par.nb_cyc = 0;
 	e->par.nb_chp = 0;
+	e->cyc_since_beg = 0;
 	init_champions(e);
 	return (1);
 }

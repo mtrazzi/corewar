@@ -60,6 +60,7 @@ struct				s_env
 	int				nb_checks;
 	int				nb_live;		//nb of live since last check
 	t_par			par;
+	int				cyc_since_beg;  //nb of cycles since beginning
 };
 
 /*

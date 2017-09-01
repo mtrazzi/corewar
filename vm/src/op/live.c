@@ -10,5 +10,6 @@ int     live(t_env *e, t_prc *prc)
                          e->map[(prc->pc + 3) % MEM_SIZE]);
     prc->live += 1;
     prc->live_nb = nb;
+    prc->pc = (prc->pc + 5) % MEM_SIZE;
     return (0);
 }

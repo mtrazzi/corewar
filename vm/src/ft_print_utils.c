@@ -2,6 +2,7 @@
 
 # define BYTES_PER_LINE 64
 # define END_OF_COLOR "\e[0m"
+# define PRINT_NB_CYC 1
 
 static void change_color_prc(t_env *e, int incr)
 {
@@ -25,6 +26,8 @@ void print_map(t_env e)
 
   nb_bytes = 0;
   change_color_prc(&e, 1);
+  if (PRINT_NB_CYC)
+    ft_printf("NB OF CYCLES SINCE BEGINNING : %d\n", e.cyc_since_beg);
   while (nb_bytes < MEM_SIZE)
   {
     j = 0;

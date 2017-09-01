@@ -45,6 +45,7 @@ int     run_vm(t_env *e)
             check_lives(e);
             dll_del_f(&e->prc_lst, &del_not_live);
         }
+        e->cyc_since_beg += 1;
         ft_wait();
         clear_screen();
     }
