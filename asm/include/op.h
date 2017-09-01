@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/31 20:07:58 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/01 15:37:58 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define NOT_A_PARAM_CODE		0
 
 
-#define MAX_ARGS_NUMBER			4
+#define MAX_ARGS_NUMBER			4//block to 4 max
 #define MAX_PLAYERS				4
 #define MEM_SIZE				(4*1024)       //== 4096
 #define IDX_MOD					(MEM_SIZE / 8) //== 512
@@ -61,7 +61,7 @@ typedef char	t_arg_type;
 #define T_REG					1
 #define T_DIR					2
 #define T_IND					4
-#define T_LAB					10//?10  8 + 2
+#define T_LAB					8//?10  8 + 2
 #define T_NOTHING				0//not used
 
 // #define T_LAB 8

@@ -11,8 +11,6 @@ int	init_header(header_t *h)
 
 int	init_asm(t_asm *a)
 {
-	a->parsed_name = 0;
-	a->parsed_com = 0;
 	a->syms = NULL;
 	a->ops = NULL;
 	a->to_skip_syms = NULL;
@@ -28,6 +26,7 @@ int main(int ac, char **av)
 	a.fd = open(av[1], O_RDONLY);
 	if (a.fd < 0)
 		return (ft_printf("COULD NOT OPEN %s\n", av[1]));
+	init_g_op();
 	get_labels(&a);
 	ft_printf("DONE\n");
 	sym_dll_print("parsed labels\n", a.syms);
@@ -43,6 +42,7 @@ int main(int ac, char **av)
 	dll_print_f("{On_blue}ops{eoc}\n", a.ops, ope_str_);
 	prep(&a);
 	sym_dll_print("{On_red}parsed labels{eoc}\n", a.syms);
+	// ft_printf("name {%s}\ncomment {%s}\n", a.header.prog_name, a.header.comment);
 	return (0);
 }
 

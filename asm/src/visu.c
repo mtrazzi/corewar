@@ -77,7 +77,7 @@ void	op_str_(t_op *op)
 	if (op)
 	{
 		ft_printf("{%s} _%u_ op_code[%u] cycles{%u} {%s} ocp:%u +%u+\n", op->name, op->nb_param, op->op_code,
-					op->nb_cycles, op->full_name, op->ocp, op->last_arg);
+					op->nb_cycles, op->full_name, op->ocp, op->label_size);
 		op_tab_str_(op);
 	}
 	else

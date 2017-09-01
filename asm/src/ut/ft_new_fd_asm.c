@@ -5,7 +5,7 @@ static int	ft_new_cor_file(char *file_name)
 	char	*new_name;
 
 	*ft_strchr(file_name, '.') = '\0';
-	new_name = ft_strjoin(file_name, ".cor");
+	new_name = ft_strjoin(file_name, ".cor");//NON!
 	return (open(new_name, O_WRONLY | O_CREAT | O_TRUNC , 0644));
 }
 

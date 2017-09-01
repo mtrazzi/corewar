@@ -1,30 +1,21 @@
 #include "asm.h"
 
-int		ft_strncmp_modified(char *s1, char *s2, size_t n)
-{
-	while (--n && (*s1 && *s2) && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	if (n == 0 && *s1 == '\0')
-		return (0);
-	return (1);
-}
-
-// int		cmp_input_label(char *input, char *label)
-// {
-// 	while ((ft_is_whitespace(*input) == 0 && *input != LABEL_CHAR))
-// }
-
 #define LABEL_DIFFERENT 0
 #define LABEL_EQUAL 1
+
+u_int	get_next_symbol(t_dll *syms)
+{
+	t_dll *last;
+
+	last = get_last(syms);
+	return (last == NULL ? 0 : ((t_sym *)last->content)->sym + 1);
+}
 
 int		compare_labels(char *str, int len, char *label)
 {
 	if (ft_strlen(label) != len)
 		return (LABEL_DIFFERENT);
-	if (ft_strncmp(label, str, len) == 0)//--n
+	if (ft_strncmp(label, str, len) == 0)
 		return (LABEL_EQUAL);
 	return (LABEL_DIFFERENT);
 }
@@ -34,7 +25,8 @@ t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 {
 	while (syms)
 	{
-		if (compare_labels(str, len, ((t_sym *)(syms->content))->label) == LABEL_EQUAL)
+		if (compare_labels(str, len, ((t_sym *)(syms->content))->label)
+				== LABEL_EQUAL)
 			return ((t_sym *)(syms->content));
 		syms = syms->next;
 	}
@@ -56,5 +48,3 @@ int		create_add_label(char *str, int len, t_dll **syms, u_int symbol)
 	dll_append(syms, new_dll);
 	return (1);
 }
-
-
