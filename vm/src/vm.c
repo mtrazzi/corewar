@@ -11,12 +11,16 @@ int main(int ac, char **av)
 		return (ft_free_vm_env(&e));
 	if (parse_all_files(&e) < 0)
 		return (ft_free_vm_env(&e));
+	if (DEBUG_MAIN)
+		print_env(e);
+	if (!e.par.print)
+		print_introduction(&e);
 	if (init_all_processes(&e) < 0)
 		return (ft_free_vm_env(&e));
-	if (DEBUG_MAIN)
-		print_map(e);
 	if (run_vm(&e) < 0)
 		return (ft_free_vm_env(&e));
+	if (!e.par.print)
+		print_conclusion(&e);
 	ft_free_vm_env(&e);
 	return (0);
 }

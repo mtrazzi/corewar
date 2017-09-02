@@ -31,10 +31,14 @@ int			ft_init_vm(t_env *e)
 	e->cyc = CYCLE_TO_DIE;
 	e->cyc_counter = 0;
 	e->nb_live = 0;
+	e->nb_checks = 0;
 	e->par.dump = 0;
 	e->par.nb_cyc = 0;
 	e->par.nb_chp = 0;
+	e->par.verb = 0;
+	e->par.print = 0;
 	e->cyc_since_beg = 0;
+	e->last_alive = 0;
 	init_champions(e);
 	return (1);
 }

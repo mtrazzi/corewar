@@ -21,10 +21,10 @@ static int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
 	return (0);
 }
 
-int		ft_check_option(t_env *e, int i, int ac, char **av)
+int		ft_check_option(t_env *e, int i, int ac, char **av) //returns nb of param to skip
 {
-	if ((ft_strcmp(av[i] + 1, "dump") && ft_strcmp(av[i] + 1, "n")) || \
-		i + 1 >= ac)
+	if ((ft_strcmp(av[i] + 1, "dump") && ft_strcmp(av[i] + 1, "n") &&
+		 ft_strcmp(av[i] + 1, "m") && ft_strcmp(av[i] + 1, "v")) || i + 1 >= ac)
 		return (-1);
 	if (!ft_strcmp(av[i] + 1, "dump"))
 	{
@@ -32,7 +32,12 @@ int		ft_check_option(t_env *e, int i, int ac, char **av)
 		if (!ft_is_int(av[i + 1]) || e->par.dump > 1)
 			return(-1);
 		e->par.nb_cyc = ft_atoi(av[i + 1]);
+		return (1);
 	}
+	else if (!ft_strcmp(av[i] + 1, "m"))
+		e->par.print = 1;
+	else if (!ft_strcmp(av[i] + 1, "v"))
+		e->par.verb = 1;
 	else if (!ft_strcmp(av[i] + 1, "n"))
 	{
 		if (!ft_is_int(av[i + 1]) || i + 2 >= ac || !ft_is_valid_ext(av[i + 2]))
@@ -41,7 +46,7 @@ int		ft_check_option(t_env *e, int i, int ac, char **av)
 				return (-1);
 		return (2);
 	}
-	return (1);
+	return (0);
 }
 
 int		parse_arg_vm(int ac, char **av, t_env *e)
@@ -65,5 +70,6 @@ int		parse_arg_vm(int ac, char **av, t_env *e)
 			return (ft_error_vm(STR_ERR_USAGE));
 		i++;
 	}
+	e->last_alive = e->par.champions[e->par.nb_chp - 1].nb;
 	return (0);
 }

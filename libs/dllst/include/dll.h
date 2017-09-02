@@ -61,6 +61,7 @@ t_dll			*get_n(t_dll *lst, u_int n);
 int				dll_iter_int(t_dll *dll, t_cmp cmp, void *compare_against);
 t_dll			*dll_iter_dll(t_dll *dll, t_cmp cmp, void *compare_against);
 int				dll_foreach(t_dll *dll, t_do f);
+int				dll_foreach_content(t_dll *dll, t_do f);
 
 /*
 **	SIZE

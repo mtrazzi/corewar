@@ -46,13 +46,26 @@ t_dll	*dll_iter_dll(t_dll *dll, t_cmp cmp, void *compare_against)
 	return (NULL);
 }
 
-int		dll_foreach(t_dll *dll, t_do f)
+int		dll_foreach_content(t_dll *dll, t_do f)
 {
 	if (!dll)
 		return (0);
 	while (dll)
 	{
 		if (f(dll->content) == 0)
+			return (1);
+		dll = dll->next;
+	}
+	return (0);
+}
+
+int		dll_foreach(t_dll *dll, t_do f)
+{
+	if (!dll)
+		return (0);
+	while (dll)
+	{
+		if (f(dll) == 0)
 			return (1);
 		dll = dll->next;
 	}

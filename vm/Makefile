@@ -16,7 +16,8 @@ SRC = 	ft_error_vm.c		\
 		init_process.c		\
 		one_cycle.c			\
 		do_process.c		\
-		run_vm.c
+		run_vm.c			\
+		op_utils.c
 
 SRC +=	live.c				\
 		ld.c				\
@@ -33,7 +34,7 @@ SRC +=	live.c				\
 		lld.c				\
 		lldi.c				\
 		lfork.c				\
-		aff.c				
+		aff.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
@@ -79,6 +80,6 @@ fclean: clean
 	@$(MAKE) -C ../libs fclean
 	rm -f $(NAME)
 
-re: fclean all
+re: clean all
 
 .PHONY: all clean fclean re

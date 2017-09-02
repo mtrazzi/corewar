@@ -4,7 +4,7 @@
 # define END_OF_COLOR "\e[0m"
 # define PRINT_NB_CYC 1
 
-static void change_color_prc(t_env *e, int incr)
+static    void change_color_prc(t_env *e, int incr)
 {
     t_dll *prc_lst;
     t_prc *prc;
@@ -18,7 +18,7 @@ static void change_color_prc(t_env *e, int incr)
     }
 }
 
-void print_map(t_env e)
+void    print_map(t_env e)
 {
   int nb_bytes;
   int j;
@@ -43,7 +43,7 @@ void print_map(t_env e)
   change_color_prc(&e, -1);
 }
 
-void print_env(t_env e)
+void    print_env(t_env e)
 {
 	u_int   i;
     t_chp chp;
@@ -69,7 +69,7 @@ void print_env(t_env e)
 	}
 }
 
-int print_prc(t_prc *prc)
+int     print_prc(t_prc *prc)
 {
     int i;
 
@@ -86,4 +86,35 @@ int print_prc(t_prc *prc)
     ft_printf("id is        : %d\n", prc->id);
     ft_printf("cyc_left is  : %d\n", prc->cyc_left);
     return (0);
+}
+
+void    print_introduction(t_env *e)
+{
+    u_int i;
+    t_chp chp;
+
+    ft_printf("%s\n", "Introducing contestants...");
+    i = 0;
+    while (i < e->par.nb_chp)
+    {
+        chp = e->par.champions[i];
+        ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n", \
+        i + 1 , chp.prog_size, chp.name, chp.comment);
+        i++;
+    }
+}
+
+void    print_conclusion(t_env *e)
+{
+    u_int i;
+    t_chp chp;
+
+    i = 0;
+    while (i < e->par.nb_chp)
+    {
+        chp = e->par.champions[i];
+        if (chp.nb == e->last_alive)
+            ft_printf("Contestant %d, \"%s\", has won !\n", i + 1, chp.name);
+        i++;
+    }
 }

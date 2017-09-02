@@ -2,14 +2,11 @@
 
 int     live(t_env *e, t_prc *prc)
 {
-    u_int nb;
-
-    nb = convert_4_bytes(e->map[(prc->pc + 0) % MEM_SIZE], \
-                         e->map[(prc->pc + 1) % MEM_SIZE], \
-                         e->map[(prc->pc + 2) % MEM_SIZE], \
-                         e->map[(prc->pc + 3) % MEM_SIZE]);
     prc->live += 1;
-    prc->live_nb = nb;
-    prc->pc = (prc->pc + 5) % MEM_SIZE;
+    prc->live_nb = get_value(e, DIR_CODE, prc, prc->pc + 1);
+    if (is_real_number(e, prc->live_nb))
+        e->last_alive = 1;
+    if (e->par.verb)
+        ft_printf("P    | %d live %d\n", prc->id, prc->live_nb);
     return (0);
 }

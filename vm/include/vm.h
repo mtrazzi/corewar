@@ -21,18 +21,18 @@ typedef struct		s_chp t_chp;
 typedef struct		s_op  t_op;
 typedef	int			t_do_op(t_env *e, t_prc *prc);
 
-struct				s_prc
+struct				s_prc			//process
 {
 	u_int			pc;
 	int				r[REG_NUMBER];	//registers
 	int				carry;
 	int				live;
-	int				live_nb;
-	int				id;
-	int				cyc_left;
+	int				live_nb;		//nb of the champion from live
+	int				id;				//nb of the pc
+	int				cyc_left;		//cycles left before operation
 };
 
-struct				s_chp
+struct				s_chp			//champion
 {
 	int				nb;
 	u_int			magic;
@@ -42,9 +42,11 @@ struct				s_chp
 	char			*file_name;
 };
 
-struct				s_par
+struct				s_par			//parameters (from parsing)
 {
-	int				dump;			//is ther a dump ?
+	int				verb;			//verbose option : show operations
+	int				print;			//print the map every 5 cycles
+	int				dump;			//is there a dump ?
 	u_int			nb_cyc;			//nb_cyc befor dump
 	u_int			nb_chp;			//how many .cor files
 	t_chp			champions[MAX_PLAYERS];
@@ -59,8 +61,9 @@ struct				s_env
 	int				cyc_counter;	//counter of cycles (btw 0 and e->cyc)
 	int				nb_checks;
 	int				nb_live;		//nb of live since last check
-	t_par			par;
+	t_par			par;			//parameters given after parsing of args
 	int				cyc_since_beg;  //nb of cycles since beginning
+	int				last_alive;		//nb of last live done
 };
 
 /*
@@ -85,8 +88,8 @@ int		parse_arg_vm(int ac, char **av, t_env *e);
 int		ft_is_number(char *str);
 int		ft_is_int(char *str);
 u_int	convert_uint(u_int n);
-u_int   convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3);
-u_int   convert_2_bytes(u_char b0, u_char b1);
+int   convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3);
+int   convert_2_bytes(u_char b0, u_char b1);
 
 /*
 ** PRINTING
@@ -98,6 +101,8 @@ void	color_tab(void);
 char	*g_color_tab[MAX_COLOR * 2 + 2];
 int		print_prc(t_prc *prc);
 void	clear_screen(void);
+void	print_introduction(t_env *e);
+void	print_conclusion(t_env *e);
 
 /*
 ** PREPARATION / CHAMPION PARSING
@@ -113,6 +118,14 @@ int     init_all_processes(t_env *e);
 int     run_vm(t_env *e);
 int		do_one_cycle(t_env *e);
 int		do_process(t_env *e, t_prc *prc); //must also change color of processes
+
+/*
+** PARSING FOR OPERATIONS
+*/
+
+int     nb_bytes_to_skip(u_char op_code, u_char ocp);
+int     sizeof_param(u_char op_code, u_char type_of_param);
+int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
 
 /*
 ** IMPLEMENTATION OF OPERATIONS
@@ -137,6 +150,11 @@ int     lldi(t_env *e, t_prc *prc);
 int     lfork(t_env *e, t_prc *prc);
 int     aff(t_env *e, t_prc *prc);
 
+/*
+** OP UTILS
+*/
+
+int     is_real_number(t_env *e, int nb);
 
 /*
 ** RESOURCES
@@ -161,8 +179,16 @@ void	op_tab_init(void);
 ** TO DO
 */
 
+//introduce contestants
+//dump memory with option -d
 //function to check if all number or players are different
 //verbose mode
-//write ("un processus dit que le joueur 3(rainbowdash) est en vie")
+//write ("un processus dit que le joueur 3(rainbowdash) est en vie") for each live
+
+/*
+** BONUS
+*/
+
+//use realloc and lseek
 
 #endif

@@ -10,7 +10,7 @@ int     do_one_cycle(t_env *e)
 
     elt = e->prc_lst;
     if (DEBUG_ONE_CYCLE)
-        dll_foreach(e->prc_lst, print_prc);
+        dll_foreach_content(e->prc_lst, print_prc);
     while (elt)
     {
         if (do_process(e, elt->content) < 0)
