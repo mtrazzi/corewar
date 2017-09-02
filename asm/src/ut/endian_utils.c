@@ -1,6 +1,6 @@
 #include "asm.h"
 
-u_int	ft_convert_endian(u_int n)
+u_int	convert_to_be(u_int n)
 {
 	u_int b0;
 	u_int b1;
@@ -32,12 +32,12 @@ void	ft_print_hexa(u_int n)
 ** Write in big endian
 */
 
-void	ft_write_be(int fd, u_int n, u_int size)
+void	write_be(int fd, u_int n, u_int size)
 {
 	u_int	k;
 	char	*s;
 
-	k = ft_convert_endian(n);
+	k = convert_to_be(n);
 	s = (char *)&k;
 	write(fd, s + (4 - size), size); 
 }

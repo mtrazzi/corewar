@@ -59,7 +59,7 @@ int		rsbv(t_dll *dll, void *data)
 			if (dlltmp != NULL && ((t_sym *)dlltmp->content)->corresponding_ope)//should not append
 				ope->params[i] = ((t_sym *)dlltmp->content)->corresponding_ope->address_in_size - ope->address_in_size;
 			else if (dlltmp != NULL)
-				ope->params[i] = ((t_ope *)get_last(dll)->content)->address_in_size + ((t_ope *)get_last(dll)->content)->size + 1;//not quite
+				ope->params[i] = ((t_ope *)get_last(dll)->content)->address_in_size + ((t_ope *)get_last(dll)->content)->size + 1 - ope->address_in_size;//not
 			// ft_printf("{red}TEST2.2{eoc}\n");
 			dlltmp = NULL;
 		}
@@ -81,5 +81,6 @@ int		prep(t_asm *a)
 	associate_ope_to_label(a->syms, a->ops);
 	calc_sizes(a->ops);
 	replace_sym_by_value(a->ops, a->syms);//replace by iter
+	a->header.prog_size = ((t_ope *)get_last(a->ops)->content)->address_in_size + ((t_ope *)get_last(a->ops)->content)->size;
 	return (1);
 }

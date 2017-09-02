@@ -58,7 +58,7 @@ int	ope_tabs_str_(t_ope *ope)
 
 	i = -1;
 	while (++i < MAX_ARGS_NUMBER)
-		ft_printf("\t%u %u\n", ope->type_param[i], ope->params[i]);
+		ft_printf("\t%u %d\n", ope->type_param[i], ope->params[i]);
 	return (1);
 }
 

@@ -20,7 +20,11 @@ SRC = asm.c \
 		parse_op2.c \
 		error_output.c \
 		size.c \
-		pcb.c
+		pcb.c \
+		update_fd_to_output_file.c \
+		print_header.c \
+		endian_utils.c \
+		write_cmd.c
 
 #op.c
 

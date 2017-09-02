@@ -192,6 +192,10 @@ int		nb_bytes_op(t_ope *ope);
 int		calc_add_size(t_dll *dll);
 int		get_sym_by_sym(t_dll *dll, void *data);
 
+int		update_fd_asm(t_asm *a, char *file_name);
+void	print_header(t_asm *a);
+void	write_be(int fd, int n, u_int size);//CHANGE INT?
+void	print_cmds(t_asm *a);
 
 #endif
 

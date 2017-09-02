@@ -23,6 +23,7 @@ int main(int ac, char **av)
 {
 	t_asm a;
 
+	init_asm(&a);
 	a.fd = open(av[1], O_RDONLY);
 	if (a.fd < 0)
 		return (ft_printf("COULD NOT OPEN %s\n", av[1]));
@@ -43,7 +44,12 @@ int main(int ac, char **av)
 	prep(&a);
 	sym_dll_print("{On_red}parsed labels{eoc}\n", a.syms);
 	dll_print_f("{On_blue}ops OCP{eoc}\n", a.ops, ope_str_);
-	// ft_printf("name {%s}\ncomment {%s}\n", a.header.prog_name, a.header.comment);
+	//ft_printf("magic {%u}\nname {%s}\ncomment {%s}\n", a.header.magic, a.header.prog_name, a.header.comment);
+	update_fd_asm(&a, av[1]);
+	//SAUT DE LIGNE A LA FIN DU FICHIER->PQ????
+	//4294967291->-5
+	print_header(&a);
+	print_cmds(&a);
 	return (0);
 }
 

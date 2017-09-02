@@ -138,5 +138,15 @@ int main(int argc, char const *argv[])
 
 	printf("get_reg: %d\n", get_reg("r16a5a"));
 
+	printf("%lu [%lu]\n", sizeof(u_int) + 127,
+							 (sizeof(u_int) + 127) % 8);
+	printf("%lu [%lu]\n", sizeof(u_int) + 126,
+							8 - (sizeof(u_int) + 126) % 8);
 	return 0;
 }
+
+
+
+
+
+
