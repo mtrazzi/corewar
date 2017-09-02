@@ -23,7 +23,7 @@ int		compare_labels(char *str, int len, char *label)
 
 t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 {
-	while (syms)
+	while (syms)//iter?
 	{
 		if (compare_labels(str, len, ((t_sym *)(syms->content))->label)
 				== LABEL_EQUAL)
@@ -46,5 +46,16 @@ int		create_add_label(char *str, int len, t_dll **syms, u_int symbol)
 	if ((new_dll = dll_new((void*)new_sym)) == NULL)
 		return (MAL_ERR * ft_free((void *)&label) * ft_free((void *)&new_sym));
 	dll_append(syms, new_dll);
+	return (1);
+}
+
+int		get_sym_by_sym(t_dll *dll, void *data)
+{
+	// ft_printf("TEST3\n");
+	if (((t_sym *)dll->content)->sym == (u_int)data)//verify
+	{
+		// ft_printf("found %u\n", ((t_sym *)dll->content)->sym);
+		return (0);
+	}
 	return (1);
 }

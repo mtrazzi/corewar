@@ -1,6 +1,6 @@
 #include "asm.h"
 
-static int	ft_new_cor_file(char *file_name)
+static int	new_cor_file(char *file_name)
 {
 	char	*new_name;
 
@@ -9,8 +9,8 @@ static int	ft_new_cor_file(char *file_name)
 	return (open(new_name, O_WRONLY | O_CREAT | O_TRUNC , 0644));
 }
 
-int			ft_update_fd_asm(t_asm *e, char *file_name)
+int			update_fd_asm(t_asm *e, char *file_name)
 {
-	e->fd = ft_new_cor_file(file_name);
+	e->fd = new_cor_file(file_name);//errors
 	return (e->fd);
 }

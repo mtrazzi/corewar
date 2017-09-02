@@ -36,12 +36,13 @@ int main(int ac, char **av)
 	a.fd = open(av[1], O_RDONLY);
 	if (parsing(&a) != 1)//if error, free lists
 		return (-1);
-
+	//close
 	sym_dll_print("{On_blue}parsed labels{eoc}\n", a.syms);
 	sym_dll_print("{On_blue}to_skip labels{eoc}\n", a.to_skip_syms);
 	dll_print_f("{On_blue}ops{eoc}\n", a.ops, ope_str_);
 	prep(&a);
 	sym_dll_print("{On_red}parsed labels{eoc}\n", a.syms);
+	dll_print_f("{On_blue}ops OCP{eoc}\n", a.ops, ope_str_);
 	// ft_printf("name {%s}\ncomment {%s}\n", a.header.prog_name, a.header.comment);
 	return (0);
 }

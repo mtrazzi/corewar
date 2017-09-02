@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_utils.c                                        :+:      :+:    :+:   */
+/*   dll_iter.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 18:47:37 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/23 18:08:26 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/02 16:58:59 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,26 @@ t_dll	*dll_iter_dll(t_dll *dll, t_cmp cmp, void *compare_against)
 	return (NULL);
 }
 
-int		dll_foreach(t_dll *dll, t_do f)
+int		dll_foreach_content(t_dll *dll, t_do f)
 {
 	if (!dll)
 		return (0);
 	while (dll)
 	{
 		if (f(dll->content) == 0)
+			return (1);
+		dll = dll->next;
+	}
+	return (0);
+}
+
+int		dll_foreach(t_dll *dll, t_do f)
+{
+	if (!dll)
+		return (0);
+	while (dll)
+	{
+		if (f(dll) == 0)
 			return (1);
 		dll = dll->next;
 	}

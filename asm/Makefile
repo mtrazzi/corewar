@@ -18,7 +18,9 @@ SRC = asm.c \
 		op.c \
 		parse_op.c \
 		parse_op2.c \
-		error_output.c
+		error_output.c \
+		size.c \
+		pcb.c
 
 #op.c
 

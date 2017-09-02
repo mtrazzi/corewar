@@ -89,12 +89,12 @@ void	ope_str_(t_ope *ope)
 {
 	if (ope)
 	{
-		ft_printf("_%u_ [%u] {%u} {%u} _%p_ line%u\n", ope->nb_param, ope->op_code,
-					ope->size, ope->address_in_size, ope->op_tab_x, ope->line_nb);
-		ope_tabs_str_(ope);
 		ft_printf("{red}");
-		op_str_(ope->op_tab_x);
+		ft_printf("nb_param:%u op_code[%u] size{%u} add{%u} _%p_ line:%u ocp[%#hhx %hhb]\n", ope->nb_param, ope->op_code,
+					ope->size, ope->address_in_size, ope->op_tab_x, ope->line_nb, ope->ocp, ope->ocp);
+		ope_tabs_str_(ope);
 		ft_printf("{eoc}");
+		op_str_(ope->op_tab_x);
 	}
 	else
 		ft_printf("null\n");
@@ -102,13 +102,13 @@ void	ope_str_(t_ope *ope)
 
 //void	dll_print_f(msg, lst, f)-> IN DLLST
 //type def la fonction?
-void	dll_print_f(char *msg, t_dll *lst, void f())
+void	dll_print_f(char *msg, t_dll *lst, void f())//color?
 {
 	ft_printf("%8c\n", '-');
 	msg ? ft_printf(msg) : 0;
 	if (!lst)
 		ft_printf("%11c\t%s\n", ' ', "empty");
-	while (lst)
+	while (lst)//foreach?
 	{
 		ft_printf("dll: %14p\tnext: %14p\tprev:%14p\tcontent:%14p\t\t\n", lst,//remove \n!
  						lst->next, lst->prev, lst->content);

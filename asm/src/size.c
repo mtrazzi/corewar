@@ -6,7 +6,7 @@ u_int		convert_op_code(u_int op_code)
 
 	result = 1;
 	while (op_code-- > 1)
-		result =<< 1;// result *= 2;
+		result <<= 1;// result *= 2;
 	return (result);
 
 	//result <<= op_code - 1;
@@ -19,7 +19,7 @@ static	int	count_types(t_ope *ope, u_char type)
 
 	sum = 0;
 	i = -1;
-	while (++i < MAX_ARGS_NUMBER)
+	while (++i < MAX_ARGS_NUMBER)//ope->nb_param
 	{
 		if (ope->type_param[i] & type)
 			sum++;
@@ -33,15 +33,17 @@ int			nb_bytes_op(t_ope *ope)
 	u_char	pcb;
 
 	sum = 0;
-	sum += count_types(ope, T_DIR) * (4 - 2 * ope->op_tab_x.label_size);//macros ?
+	sum += count_types(ope, T_DIR) * (4 - 2 * ope->op_tab_x->label_size);//macros ?
 	sum += count_types(ope, T_IND) * PAR_SIZE_IND;
 	sum += count_types(ope, T_REG) * PAR_SIZE_REG;
-	if (ope->op_tab_x.ocp)
+	if (ope->op_tab_x->ocp)
 	{
-		sum += ope->op_tab_x.ocp > 0;
+		sum += ope->op_tab_x->ocp > 0;
 		pcb = calculate_pcb(ope);//ailleurs
+		ope->ocp = pcb;
 	}
-	return (sum + 1);
+	ope->size = sum + 1;
+	return (1);
 }
 
 // int			give_label(u_int *op_code)
@@ -52,3 +54,15 @@ int			nb_bytes_op(t_ope *ope)
 // 	return (((IS_LABEL_2 & code) > 0) * LABEL_2 +\
 // 			((IS_LABEL_4 & code) > 0) * LABEL_4);
 // }
+
+
+int		calc_add_size(t_dll *dll)
+{
+	if (dll->prev == NULL)
+		((t_ope *)dll->content)->address_in_size = 0;
+	else
+		((t_ope *)dll->content)->address_in_size =
+			 ((t_ope *)dll->prev->content)->address_in_size
+			 	+ ((t_ope *)dll->prev->content)->size;
+	return (1);
+}

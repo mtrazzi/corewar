@@ -36,6 +36,7 @@ t_ope	*create_ope_from_ope_and_ref(t_ope *ope, t_op *ref)
 	new->address_in_size = 0;
 	new->op_tab_x = ope->op_tab_x;
 	new->line_nb = ope->line_nb;
+	new->ocp = 0;
 	return (new);
 }
 

@@ -137,5 +137,6 @@ int main(int argc, char const *argv[])
 	printf("{%c}\n", NAME_CMD_STRING[strlen(NAME_CMD_STRING)]);
 
 	printf("get_reg: %d\n", get_reg("r16a5a"));
+
 	return 0;
 }

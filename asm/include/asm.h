@@ -66,6 +66,7 @@ struct			s_asm
 	t_dll		*ops;		//liste de lignes du .s
 	header_t	header;	//header au debut du .cor || convert not a pointeur !
 	int			fd;			//file descriptor du .cor
+	//program size
 };
 
 //lire plusieurs fois le fichier to get les label et ainsi reperer les erreurs de %:label
@@ -105,7 +106,7 @@ struct			s_ope
 	u_int	op_code;
 	u_int	size;
 	u_int	address_in_size;//sum of precedent sizes
-	//u_int ocp;
+	u_char	ocp;
 	t_op	*op_tab_x;
 	u_int	line_nb;
 };
@@ -186,4 +187,18 @@ void	ope_str_(t_ope *ope);
 void	sym_dll_print(char *msg, t_dll *lst);
 void	sym_str_(t_sym *sym);
 
+u_char	calculate_pcb(t_ope *ope);
+int		nb_bytes_op(t_ope *ope);
+int		calc_add_size(t_dll *dll);
+int		get_sym_by_sym(t_dll *dll, void *data);
+
+
 #endif
+
+
+
+
+
+
+
+
