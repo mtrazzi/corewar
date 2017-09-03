@@ -30,6 +30,8 @@ struct				s_prc			//process
 	int				live_nb;		//nb of the champion from live
 	int				id;				//nb of the pc
 	int				cyc_left;		//cycles left before operation
+	int				op_code;
+	// int				op_done;
 };
 
 struct				s_chp			//champion
@@ -118,6 +120,9 @@ int     init_all_processes(t_env *e);
 int     run_vm(t_env *e);
 int		do_one_cycle(t_env *e);
 int		do_process(t_env *e, t_prc *prc); //must also change color of processes
+
+int		process_load_op(t_env *e, t_prc *prc);
+int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc);
 
 /*
 ** PARSING FOR OPERATIONS
