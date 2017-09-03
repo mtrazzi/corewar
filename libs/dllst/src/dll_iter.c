@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 18:47:37 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/02 16:58:59 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/03 20:14:56 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,20 @@ int		dll_foreach(t_dll *dll, t_do f)
 	}
 	return (0);
 }
+
+int		dll_foreach_tmp(t_dll *dll, t_do f)
+{
+	t_dll *tmp;
+
+	if (!dll)
+		return (0);
+	while (dll)
+	{
+		tmp = dll->next;
+		if (f(dll) == 0)
+			return (1);
+		dll = tmp;
+	}
+	return (0);
+}
+

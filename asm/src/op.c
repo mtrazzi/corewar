@@ -8,7 +8,7 @@ int		init_g_op(void)
 	//g_op_tab =
 	//{
 	/*
-	**  {"nom", 	nb_param,	{type des param}, 										opcode, nb_cycles,	"nom_complet", 		OCP 
+	**  {"nom", 	nb_param,	{type des param}, 														opcode, nb_cycles,	"nom_complet", 		OCP 
 	*/
 	g_op_tab[0] = (t_op){"live", 	1,			{T_DIR}, 												1, 		10, 		"alive", 			0, 0};
 	g_op_tab[1] = (t_op){"ld", 		2, 			{T_DIR | T_IND, T_REG}, 								2, 		5,	 		"load", 			1, 0};
