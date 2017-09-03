@@ -59,7 +59,7 @@ int		rsbv(t_dll *dll, void *data)
 			if (dlltmp != NULL && ((t_sym *)dlltmp->content)->corresponding_ope)//should not append
 				ope->params[i] = ((t_sym *)dlltmp->content)->corresponding_ope->address_in_size - ope->address_in_size;
 			else if (dlltmp != NULL)
-				ope->params[i] = ((t_ope *)get_last(dll)->content)->address_in_size + ((t_ope *)get_last(dll)->content)->size + 1 - ope->address_in_size;//not
+				ope->params[i] = ((t_ope *)get_last(dll)->content)->address_in_size + ((t_ope *)get_last(dll)->content)->size - ope->address_in_size;//not
 			// ft_printf("{red}TEST2.2{eoc}\n");
 			dlltmp = NULL;
 		}

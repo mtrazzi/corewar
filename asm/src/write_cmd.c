@@ -15,11 +15,11 @@ int		write_op(t_dll *dll, void *data)
 	while (++i < MAX_ARGS_NUMBER)
 	{
 		if (ope->type_param[i] & T_REG)
-			write_be(fd, (int)ope->params[i], PAR_SIZE_REG);//(int)?
+			write_be(fd, ope->params[i], PAR_SIZE_REG);//(int)?
 		else if (ope->type_param[i] & T_IND)
-			write_be(fd, (int)ope->params[i], PAR_SIZE_IND);
+			write_be(fd, ope->params[i], PAR_SIZE_IND);
 		else if (ope->type_param[i] & T_DIR)
-			write_be(fd, (int)ope->params[i], 4 - 2 * ope->op_tab_x->label_size);
+			write_be(fd, ope->params[i], 4 - 2 * ope->op_tab_x->label_size);
 	}
 	return (1);
 }
