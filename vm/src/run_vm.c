@@ -15,11 +15,12 @@ static void    ft_wait(void) //just to print step by step
 static void    check_lives(t_env *e)
 {
     if (DEBUG_CHECK_LIVE)
-        ft_printf("nb_checks : %d\nnb_live : %d\n", \
-        e->nb_checks, e->nb_live);
+        ft_printf("nb_checks : %d\nnb_live : %d\ne->cyc : %d\n", \
+        e->nb_checks, e->nb_live, e->cyc);
     e->cyc_counter = 0;
     if (e->nb_live >= NBR_LIVE)
     {
+		e->nb_live = 0;
         e->nb_checks = 0;
         e->cyc -= CYCLE_DELTA;
     }
@@ -32,7 +33,7 @@ static void    check_lives(t_env *e)
         e->nb_checks += 1;
 }
 
-static void     del_not_live(t_prc **prc)
+static int		del_not_live(t_prc **prc)
 {
     if (!((*prc)->live))
     {
@@ -44,6 +45,7 @@ static void     del_not_live(t_prc **prc)
     }
     else
        (*prc)->live = 0;
+	return (1);
 }
 
 int     run_vm(t_env *e)
@@ -61,7 +63,7 @@ int     run_vm(t_env *e)
         if (e->cyc_counter == e->cyc)
         {
             check_lives(e);//if check_lives < 0 break ;
-            dll_del_f(&e->prc_lst, &del_not_live);
+            dll_foreach_tmp(e->prc_lst, &del_not_live);
         }
         e->cyc_since_beg += 1;
         if (e->par.print && (e->cyc_since_beg % 5) == 1)

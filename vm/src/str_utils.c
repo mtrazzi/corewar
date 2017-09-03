@@ -81,15 +81,15 @@ void    op_tab_init(void)
 	g_op_tab[16] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0};
 }
 
-int     convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3)
+int		convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3)
 {
     return (((int)b0) << 24 | ((int)b1) << 16 | ((int)b2) << 8 | \
             ((int)b3));
 }
 
-int     convert_2_bytes(u_char b0, u_char b1)
+short	convert_2_bytes(u_char b0, u_char b1)
 {
-    return (((int)b0) << 8 | ((int)b1));
+    return ((short)(((int)b0) << 8 | ((int)b1)));
 }
 
 void    op_fun_tab_init(void)

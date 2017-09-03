@@ -14,8 +14,7 @@ int     do_process(t_env *e, t_prc *prc)
     }
     if (prc->cyc_left == 0)                             //cursor just moved on byte
         prc->cyc_left = g_op_tab[op_code - 1].nb_cycles;
-    else
-        prc->cyc_left -= 1;
+    prc->cyc_left -= 1;
     if (prc->cyc_left == 0)                             //all cycles have passed
     {
         g_op_fun_tab[op_code - 1](e, prc);

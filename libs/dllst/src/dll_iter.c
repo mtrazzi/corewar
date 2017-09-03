@@ -71,3 +71,19 @@ int		dll_foreach(t_dll *dll, t_do f)
 	}
 	return (0);
 }
+
+int		dll_foreach_tmp(t_dll *dll, t_do f)
+{
+	t_dll *tmp;
+
+	if (!dll)
+		return (0);
+	while (dll)
+	{
+		tmp = dll->next;
+		if (f(dll) == 0)
+			return (1);
+		dll = tmp;
+	}
+	return (0);
+}

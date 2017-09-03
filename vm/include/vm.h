@@ -88,8 +88,8 @@ int		parse_arg_vm(int ac, char **av, t_env *e);
 int		ft_is_number(char *str);
 int		ft_is_int(char *str);
 u_int	convert_uint(u_int n);
-int   convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3);
-int   convert_2_bytes(u_char b0, u_char b1);
+int		convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3);
+short	convert_2_bytes(u_char b0, u_char b1);
 
 /*
 ** PRINTING
@@ -126,7 +126,7 @@ int		do_process(t_env *e, t_prc *prc); //must also change color of processes
 int     nb_bytes_to_skip(u_char op_code, u_char ocp);
 int     sizeof_param(u_char op_code, u_char type_of_param);
 int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
-int     get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
+short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
 
 /*
 ** IMPLEMENTATION OF OPERATIONS

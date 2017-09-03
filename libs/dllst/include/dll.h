@@ -62,6 +62,7 @@ int				dll_iter_int(t_dll *dll, t_cmp cmp, void *compare_against);
 t_dll			*dll_iter_dll(t_dll *dll, t_cmp cmp, void *compare_against);
 int				dll_foreach_content(t_dll *dll, t_do f);
 int				dll_foreach(t_dll *dll, t_do f);
+int				dll_foreach_tmp(t_dll *dll, t_do f);
 int				dll_foreach_content(t_dll *dll, t_do f);
 
 /*
