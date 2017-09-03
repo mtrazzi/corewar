@@ -73,3 +73,32 @@ int	ft_atoi_mod(const char *str)
 	number *= is_negative;
 	return ((int)number);
 }
+
+int	is_com(char *str)
+{
+	if (str && (*str == COMMENT_CHAR || *str == COMMENT_CHAR2))
+		return (1);
+	return (0);
+}
+
+int		free_lr(char **l, char **r)
+{
+	if (l && *l)
+	{
+		free(*l);
+		*l = NULL;
+	}
+	if (r && *r)
+	{
+		free(*r);
+		*r = NULL;
+	}
+	return (1);
+}
+
+int		ft_isdigit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}

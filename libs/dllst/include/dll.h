@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 17:33:56 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/28 16:17:54 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/02 16:58:26 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_dll			*get_n(t_dll *lst, u_int n);
 
 int				dll_iter_int(t_dll *dll, t_cmp cmp, void *compare_against);
 t_dll			*dll_iter_dll(t_dll *dll, t_cmp cmp, void *compare_against);
+int				dll_foreach_content(t_dll *dll, t_do f);
 int				dll_foreach(t_dll *dll, t_do f);
 int				dll_foreach_content(t_dll *dll, t_do f);
 

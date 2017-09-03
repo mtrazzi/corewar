@@ -36,6 +36,7 @@ SRC +=	live.c				\
 		lfork.c				\
 		aff.c
 
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))

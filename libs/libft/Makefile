@@ -19,7 +19,9 @@ SRC = ft_bzero.c \
 		ft_free.c \
 		ft_strncpy.c \
 		ft_atol.c \
-		ft_atoi.c
+		ft_atoi.c \
+		ft_memcpy.c \
+		ft_strnew.c
 
 SRC += get_next_line.c
 

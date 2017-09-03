@@ -9,11 +9,22 @@ SRC = asm.c \
 		creates.c \
 		syms.c \
 		asm_parsing.c \
-		ops.c \
 		asm_parsing_utils.c \
 		get_labels.c \
 		visu.c \
-		get_header.c
+		get_header.c \
+		prep.c \
+		ft_iswhitespace.c \
+		op.c \
+		parse_op.c \
+		parse_op2.c \
+		error_output.c \
+		size.c \
+		pcb.c \
+		update_fd_to_output_file.c \
+		print_header.c \
+		endian_utils.c \
+		write_cmd.c
 
 #op.c
 
@@ -60,11 +71,11 @@ $(LIBS):
 #ifeq ($TARGET, NAME)
 #clean libs ? necessary only in project Makefile?
 clean:
-	@$(MAKE) -C ../libs clean
+	#@$(MAKE) -C ../libs clean
 	rm -rf $(OBJ_PATH)
 
 fclean: clean
-	@$(MAKE) -C ../libs fclean
+	#@$(MAKE) -C ../libs fclean
 	rm -f $(NAME)
 
 re: fclean all

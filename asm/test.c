@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <ctype.h>
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -90,6 +91,26 @@ int	ft_atoi_mod(const char *str)
 	return ((int)number);
 }
 
+#define REG_NUMBER				16
+
+int		get_reg(char *str)
+{
+	u_int	res;
+	char	*tmp;
+
+	str++;
+	tmp = str;
+	while (*str && isdigit(*str))
+		str++;
+	if (tmp - str == 0)
+		return (-1);
+	res = ft_atoi_mod(tmp);
+	if (res == 0 || res > REG_NUMBER)
+		return (-1);
+	printf("res _%u_\n", res);
+	return (1);
+}
+
 #define NAME_CMD_STRING			".name"
 int main(int argc, char const *argv[])
 {
@@ -114,5 +135,18 @@ int main(int argc, char const *argv[])
 
 	printf("%d\n", ft_strncmp(".namfasdasdas", NAME_CMD_STRING, strlen(NAME_CMD_STRING)));
 	printf("{%c}\n", NAME_CMD_STRING[strlen(NAME_CMD_STRING)]);
+
+	printf("get_reg: %d\n", get_reg("r16a5a"));
+
+	printf("%lu [%lu]\n", sizeof(u_int) + 127,
+							 (sizeof(u_int) + 127) % 8);
+	printf("%lu [%lu]\n", sizeof(u_int) + 126,
+							8 - (sizeof(u_int) + 126) % 8);
 	return 0;
 }
+
+
+
+
+
+

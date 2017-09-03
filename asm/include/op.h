@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/08/30 17:19:54 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/03 12:20:00 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define NOT_A_PARAM_CODE		0
 
 
-#define MAX_ARGS_NUMBER			4
+#define MAX_ARGS_NUMBER			4//block to 4 max
 #define MAX_PLAYERS				4
 #define MEM_SIZE				(4*1024)       //== 4096
 #define IDX_MOD					(MEM_SIZE / 8) //== 512
@@ -61,15 +61,20 @@ typedef char	t_arg_type;
 #define T_REG					1
 #define T_DIR					2
 #define T_IND					4
-#define T_LAB					10//?10  8 + 2
+#define T_LAB					8//?10  8 + 2
 #define T_NOTHING				0//not used
+
+// #define T_LAB 8
+
+// #define T_DLAB T_LAB | T_DIR
+// #define	T_ILAB T_LAB | T_IND
 
 /*
 **
 */
 
-# define PROG_NAME_LENGTH		(128) //8 lignes de 16 octets
-# define COMMENT_LENGTH			(2048)
+# define PROG_NAME_LENGTH		(128 + 4) //8 lignes de 16 octets
+# define COMMENT_LENGTH			(2048 + 5)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
 typedef struct					header_s

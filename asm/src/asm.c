@@ -11,8 +11,6 @@ int	init_header(header_t *h)
 
 int	init_asm(t_asm *a)
 {
-	a->parsed_name = 0;
-	a->parsed_com = 0;
 	a->syms = NULL;
 	a->ops = NULL;
 	a->to_skip_syms = NULL;
@@ -25,9 +23,11 @@ int main(int ac, char **av)
 {
 	t_asm a;
 
+	init_asm(&a);
 	a.fd = open(av[1], O_RDONLY);
 	if (a.fd < 0)
 		return (ft_printf("COULD NOT OPEN %s\n", av[1]));
+	init_g_op();
 	get_labels(&a);
 	ft_printf("DONE\n");
 	sym_dll_print("parsed labels\n", a.syms);
@@ -35,9 +35,25 @@ int main(int ac, char **av)
 
 	close(a.fd);
 	a.fd = open(av[1], O_RDONLY);
-	parsing(&a);
+	if (parsing(&a) != 1)//if error, free lists
+		return (-1);
+	//close
+	sym_dll_print("{On_blue}parsed labels{eoc}\n", a.syms);
+	sym_dll_print("{On_blue}to_skip labels{eoc}\n", a.to_skip_syms);
+	dll_print_f("{On_blue}ops{eoc}\n", a.ops, ope_str_);
+	prep(&a);
+	sym_dll_print("{On_red}parsed labels{eoc}\n", a.syms);
+	dll_print_f("{On_blue}ops OCP{eoc}\n", a.ops, ope_str_);
+	//ft_printf("magic {%u}\nname {%s}\ncomment {%s}\n", a.header.magic, a.header.prog_name, a.header.comment);
+	update_fd_asm(&a, av[1]);
+	//SAUT DE LIGNE A LA FIN DU FICHIER->PQ????
+	//4294967291->-5
+	print_header(&a);
+	print_cmds(&a);
 	return (0);
 }
+
+//what if programme size > MAX allowed?
 
 
 	//t_asm e;

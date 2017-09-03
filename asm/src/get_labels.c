@@ -27,14 +27,14 @@ int	parse_label_only2(char *line, t_dll **syms, u_int line_number, t_dll **to_sk
 			return (MAL_ERR);
 		last = get_last(*to_skip);//not opti at all
 		((t_sym *)last->content)->line_number_parsing_help = line_number;//no protect needed ?
-		((t_sym *)last->content)->first_ope = NULL;
+		((t_sym *)last->content)->corresponding_ope = NULL;
 		return (1);
 	}
 	if (create_add_label(tmp, line - tmp, syms, get_next_symbol2(*syms)) == MAL_ERR)
 		return (MAL_ERR);
 	last = get_last(*syms);//not opti at all
 	((t_sym *)last->content)->line_number_parsing_help = line_number;//no protect needed ?
-	((t_sym *)last->content)->first_ope = NULL;
+	((t_sym *)last->content)->corresponding_ope = NULL;
 	return (1);
 }
 
@@ -60,27 +60,3 @@ int		get_labels(t_asm *a)
 		return (GNL_ERR);
 	return (1);
 }
-
-
-/*
-int	parse_label_only(char *line, t_dll **syms)//redo
-{
-	char	*tmp;
-	t_sym	*sym_tmp;
-
-	tmp = line;
-	while (line && *line && ft_strchr(LABEL_CHARS, *line))
-		line++;
-	if (*line != LABEL_CHAR)
-		return (IS_NOT_LABEL);
-	sym_tmp = does_label_exist_in_sym_dll(tmp, line - tmp, *syms);
-	if (sym_tmp == NULL && create_add_label(tmp, line - tmp, syms, get_next_symbol(*syms)))
-		return (MAL_ERR);
-	// sym_tmp->true_sym = 1;
-	while (line && *line && ft_is_withespace(*line))
-		line++;
-	if (*line == '\0')
-		return (IS_LABEL_ONLY);
-	return (IS_MORE_THAN_LABEL);
-}
-*/
