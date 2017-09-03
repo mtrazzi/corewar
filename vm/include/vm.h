@@ -24,7 +24,7 @@ typedef	int			t_do_op(t_env *e, t_prc *prc);
 struct				s_prc			//process
 {
 	u_int			pc;
-	int				r[REG_NUMBER];	//registers
+	int				r[REG_NUMBER + 1];	//registers r1, ..., r16 == r[1], ..., r[16]
 	int				carry;
 	int				live;
 	int				live_nb;		//nb of the champion from live
@@ -126,6 +126,7 @@ int		do_process(t_env *e, t_prc *prc); //must also change color of processes
 int     nb_bytes_to_skip(u_char op_code, u_char ocp);
 int     sizeof_param(u_char op_code, u_char type_of_param);
 int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
+int     get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
 
 /*
 ** IMPLEMENTATION OF OPERATIONS
@@ -155,6 +156,7 @@ int     aff(t_env *e, t_prc *prc);
 */
 
 int     is_real_number(t_env *e, int nb);
+void	copy_value(int value, t_env *e, u_int pos);
 
 /*
 ** RESOURCES
@@ -179,11 +181,11 @@ void	op_tab_init(void);
 ** TO DO
 */
 
-//introduce contestants
 //dump memory with option -d
 //function to check if all number or players are different
-//verbose mode
-//write ("un processus dit que le joueur 3(rainbowdash) est en vie") for each live
+//change usage
+//uncompability of certain options (-d and -m for example)
+//color significant bytes while performing operations
 
 /*
 ** BONUS

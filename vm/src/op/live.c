@@ -7,6 +7,6 @@ int     live(t_env *e, t_prc *prc)
     if (is_real_number(e, prc->live_nb))
         e->last_alive = 1;
     if (e->par.verb)
-        ft_printf("P    | %d live %d\n", prc->id, prc->live_nb);
+        ft_printf("P    %d | live %d\n", prc->id, prc->live_nb);
     return (0);
 }

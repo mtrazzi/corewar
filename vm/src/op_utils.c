@@ -2,6 +2,7 @@
 
 # define PAR_SIZE_REG 1
 # define PAR_SIZE_IND 2
+# define DEBUG_GET_INDEX 0
 
 int     sizeof_param(u_char op_code, u_char type_of_param)
 {
@@ -31,8 +32,8 @@ int     nb_bytes_to_skip(u_char op_code, u_char ocp)
 
 int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
-    u_int index;
-    u_int addr;
+    int index;
+    int addr;
 
     if (type_of_param == REG_CODE)
         return (prc->r[e->map[pos]]);
@@ -59,4 +60,24 @@ int     is_real_number(t_env *e, int nb)
         i++;
     }
     return (0);
+}
+
+int     get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
+{
+    if (type_of_param == REG_CODE)
+        return (prc->r[e->map[pos]]);
+    if (DEBUG_GET_INDEX)
+        ft_printf("get_index : %2x %2x\n", e->map[pos], e->map[pos + 1]);
+    else if (type_of_param == DIR_CODE)
+        return ((int)convert_2_bytes(e->map[(pos + 0) % MEM_SIZE], \
+                                e->map[(pos + 1) % MEM_SIZE]));
+    return (convert_2_bytes(e->map[pos], e->map[(pos + 1) % MEM_SIZE]));
+}
+
+void copy_value(int value, t_env *e, u_int pos)
+{
+    e->map[(pos + 0 % MEM_SIZE)] = value >> 24;
+    e->map[(pos + 1 % MEM_SIZE)] = ((value << 8) >> 24);
+    e->map[(pos + 2 % MEM_SIZE)] = ((value << 16) >> 24);
+    e->map[(pos + 3 % MEM_SIZE)] = ((value << 24) >> 24);
 }

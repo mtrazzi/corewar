@@ -54,3 +54,4 @@ dkms.conf
 # Corewar files
 *.s
 *.cor
+*.log

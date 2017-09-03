@@ -89,7 +89,7 @@ int     convert_4_bytes(u_char b0, u_char b1, u_char b2, u_char b3)
 
 int     convert_2_bytes(u_char b0, u_char b1)
 {
-    return (((int)b0) << 8 || ((int)b1));
+    return (((int)b0) << 8 | ((int)b1));
 }
 
 void    op_fun_tab_init(void)

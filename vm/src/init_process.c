@@ -18,7 +18,7 @@ t_prc   *new_prc(u_int pc, int nb, int id)
     if (!(prc = (t_prc *)malloc(sizeof(t_prc))))
         return (NULL);
     init_reg(prc);
-    prc->r[0] = nb;
+    prc->r[1] = nb;
     prc->pc = pc;
     prc->carry = 0;
     prc->live = 0;
@@ -37,7 +37,7 @@ int     init_all_processes(t_env *e)
     while (i < e->par.nb_chp)
     {
         if (!(prc = new_prc((MEM_SIZE / e->par.nb_chp) * i, \
-                            e->par.champions[i].nb, i)))
+                            e->par.champions[i].nb, i + 1)))
             return (ft_error_vm(STR_ERR_MALLOC_PRC));
         dll_push_front(&e->prc_lst, dll_new(prc));
         i++;
