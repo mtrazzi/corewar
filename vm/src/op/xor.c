@@ -2,7 +2,7 @@
 
 # define OP_XOR 8
 
-int     xor(t_env *e, t_prc *prc) //p1 | p2 -> p3 with p3 register
+int     xor(t_env *e, t_prc *prc) //p1 ^ p2 -> p3 with p3 register
 {
 	u_char	ocp;
 	int		params[4]; //first parameter is params[1], nothing in params[0]

@@ -5,6 +5,8 @@ int     zjmp(t_env *e, t_prc *prc)
 	short index;
 
 	index = (short)get_index(e, T_IND, prc, (prc->pc + 1) % MEM_SIZE);
+	while (index < 0)			//problem when modulo with negative n	b
+		index += IDX_MOD;
 	ft_printf("P    %d | zjmp %d ", prc->id, index);
 	if (prc->carry)
 	{
