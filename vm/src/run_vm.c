@@ -60,7 +60,7 @@ int     run_vm(t_env *e)
         e->cyc_counter += 1;
         if (e->cyc_counter == e->cyc)
         {
-            check_lives(e);
+            check_lives(e);//if check_lives < 0 break ;
             dll_del_f(&e->prc_lst, &del_not_live);
         }
         e->cyc_since_beg += 1;

@@ -187,10 +187,18 @@ void	op_tab_init(void);
 //uncompability of certain options (-d and -m for example)
 //color significant bytes while performing operations
 
+//with pkirsch
+
+//flags in t_par instead of multiple int
+//change usage
+//make options incompatible (-v and -m)
+//condition to go out of loop run_vm
+
 /*
 ** BONUS
 */
 
 //use realloc and lseek
+//pointer to t_chp in prc to visualize in ncurse
 
 #endif
