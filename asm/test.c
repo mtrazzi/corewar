@@ -114,34 +114,35 @@ int		get_reg(char *str)
 #define NAME_CMD_STRING			".name"
 int main(int argc, char const *argv[])
 {
-	char *a = "\t\f\n  \r\tasdjhfgksdajfgh\n.\n.\t.\nasdfsidhsf\f\t\n";
-	char *tmp = NULL;
+	// char *a = "\t\f\n  \r\tasdjhfgksdajfgh\n.\n.\t.\nasdfsidhsf\f\t\n";
+	// char *tmp = NULL;
 
-	printf("{%s}\n", a);
-	skip_whitespaces(&a);
-	printf("[%s]\n", a);
-	skip_whitespaces(&a);
-	printf("(%s)\n", a);
+	// printf("{%s}\n", a);
+	// skip_whitespaces(&a);
+	// printf("[%s]\n", a);
+	// skip_whitespaces(&a);
+	// printf("(%s)\n", a);
 
-	tmp = get_next_whitespace(a);
-	printf("_%s_\n", tmp);
-	printf("_%s_\n", a);
-	skip_to_whitespaces(&a);
-	printf("+%s+\n", a);
+	// tmp = get_next_whitespace(a);
+	// printf("_%s_\n", tmp);
+	// printf("_%s_\n", a);
+	// skip_to_whitespaces(&a);
+	// printf("+%s+\n", a);
 
-	printf("%08x\n", convert(0x0083f3ff));
-	printf("atoi %ld\n", (long)(u_int)ft_atoi_mod("-4294967"));
-	printf("atoi %ld\n", (long)(u_int)atoi("-4294967"));
+	// printf("%08x\n", convert(0x0083f3ff));
+	// printf("atoi %ld\n", (long)(u_int)ft_atoi_mod("-4294967"));
+	// printf("atoi %ld\n", (long)(u_int)atoi("-4294967"));
 
-	printf("%d\n", ft_strncmp(".namfasdasdas", NAME_CMD_STRING, strlen(NAME_CMD_STRING)));
-	printf("{%c}\n", NAME_CMD_STRING[strlen(NAME_CMD_STRING)]);
+	// printf("%d\n", ft_strncmp(".namfasdasdas", NAME_CMD_STRING, strlen(NAME_CMD_STRING)));
+	// printf("{%c}\n", NAME_CMD_STRING[strlen(NAME_CMD_STRING)]);
 
-	printf("get_reg: %d\n", get_reg("r16a5a"));
+	// printf("get_reg: %d\n", get_reg("r16a5a"));
 
-	printf("%lu [%lu]\n", sizeof(u_int) + 127,
-							 (sizeof(u_int) + 127) % 8);
-	printf("%lu [%lu]\n", sizeof(u_int) + 126,
-							8 - (sizeof(u_int) + 126) % 8);
+	// printf("%lu [%lu]\n", sizeof(u_int) + 127,
+	// 						 (sizeof(u_int) + 127) % 8);
+	// printf("%lu [%lu]\n", sizeof(u_int) + 126,
+	// 						8 - (sizeof(u_int) + 126) % 8);
+	printf("{%s}\n", argv[1]);
 	return 0;
 }
 

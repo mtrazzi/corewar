@@ -21,6 +21,15 @@ static int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
 	return (0);
 }
 
+tab[] = {
+	{"dump", int},
+	{"m", NULL},//nb cycle par seconde par default
+	{"v", int},
+	{"n", int + champion},
+	{0,0}
+};
+
+
 int		ft_check_option(t_env *e, int i, int ac, char **av) //returns nb of param to skip
 {
 	if ((ft_strcmp(av[i] + 1, "dump") && ft_strcmp(av[i] + 1, "n") &&
@@ -73,3 +82,4 @@ int		parse_arg_vm(int ac, char **av, t_env *e)
 	e->last_alive = e->par.champions[e->par.nb_chp - 1].nb;
 	return (0);
 }
+
