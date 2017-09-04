@@ -27,7 +27,8 @@ void    print_map(t_env e)
   nb_bytes = 0;
   change_color_prc(&e, 1);
   if (PRINT_NB_CYC)
-    ft_printf("NB OF CYCLES SINCE BEGINNING : %d\n", e.cyc_since_beg);
+    ft_printf("NB OF CYCLES SINCE BEGINNING : %d\nCYCLES PER STEP : %d\n",
+	e.cyc_since_beg, e.speed);
   while (nb_bytes < MEM_SIZE)
   {
     j = 0;
@@ -117,4 +118,15 @@ void    print_conclusion(t_env *e)
             ft_printf("Contestant %d, \"%s\", has won !\n", i + 1, chp.name);
         i++;
     }
+}
+
+void	print_ADV(t_env *e, int pos, int skip)
+{
+	int i;
+
+	ft_printf("ADV %d (%#4x->%#4x)", skip, pos, (pos + skip) % MEM_SIZE);
+	i = -1;
+	while (++i < skip)
+		ft_printf(" %02x", e->map[(pos + i) % MEM_SIZE]);
+	ft_printf("\n");
 }

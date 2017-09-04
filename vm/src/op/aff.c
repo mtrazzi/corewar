@@ -2,7 +2,9 @@
 
 int     aff(t_env *e, t_prc *prc)
 {
-	(void)e;
-	(void)prc;
+	unsigned char c;
+
+	c = (unsigned char)get_value(e, REG_CODE, prc, prc->pc + 2);
+	ft_printf("%c", c);
     return (0);
 }

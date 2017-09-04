@@ -26,6 +26,7 @@ t_prc   *new_prc(u_int pc, int nb, int id)
     prc->id = id;
     prc->cyc_left = 0;
     prc->op_code = NB_OP + 1;
+	prc->newly_created = 1;
     // prc->op_done = 0;
     return (prc);
 }
@@ -44,5 +45,6 @@ int     init_all_processes(t_env *e)
         dll_push_front(&e->prc_lst, dll_new(prc));
         i++;
     }
+	e->last_id = e->par.nb_chp;
     return (0);
 }

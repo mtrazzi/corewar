@@ -4,12 +4,19 @@
 # define DEBUG_RUN_VM   0
 # define DEBUG_CHECK_LIVE 0
 
-static void    ft_wait(void) //just to print step by step
+static void    ft_wait(t_env *e) //just to print step by step
 {
     char *line = NULL;
     char *rem = NULL;
     while (!line || ft_strcmp(line, "s"))
+	{
         get_next_line(0, &line, &rem);
+		if (!ft_strcmp(line, "r"))
+			e->speed += 5;
+		else if (!ft_strcmp(line, "l"))
+			e->speed -= 5;
+		print_map(*e);
+	}
 }
 
 static void    check_lives(t_env *e)
@@ -76,7 +83,7 @@ int     run_vm(t_env *e)
         if (DEBUG_RUN_VM)
             ft_printf("e->cyc_since_beg : %d\ne->cyc : %d\ncounter : %d\n", \
             e->cyc_since_beg, e->cyc, e->cyc_counter);
-        if (e->par.print)
+        if (e->par.print && (e->cyc_since_beg % e->speed == 0))
             print_map(*e);
         if (do_one_cycle(e) < 0)
             return (ft_error_vm(STR_ERROR_CYCLE));
@@ -88,8 +95,8 @@ int     run_vm(t_env *e)
 			del_and_update(&(e->prc_lst));
         }
         e->cyc_since_beg += 1;
-        if (e->par.print && (e->cyc_since_beg % 5) == 1)
-            ft_wait();
+        if (e->par.print && (e->cyc_since_beg % e->speed) == 1)
+            ft_wait(e);
         if (e->par.print)
             clear_screen();
     }

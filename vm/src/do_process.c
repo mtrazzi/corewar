@@ -9,13 +9,18 @@ u_char	read_op_code(u_char *map, u_int	index)
 
 int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 {
+	int skip;
 	prc->cyc_left -= 1;
 	if (prc->cyc_left == 0 && prc->op_code != NB_OP + 1)
 	{
 		g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
-			prc->pc = (prc->pc + nb_bytes_to_skip(prc->op_code,
-						e->map[(prc->pc + 1) % MEM_SIZE])) % MEM_SIZE;
+		{
+			skip = nb_bytes_to_skip(prc->op_code, e->map[(prc->pc + 1) % MEM_SIZE]);
+			if (e->par.verb)
+				print_ADV(e, prc->pc, skip);
+			prc->pc = (prc->pc + nb_bytes_to_skip(prc->op_code, skip)) % MEM_SIZE;
+		}
 	}
 	else if (prc->cyc_left == 0)
 		prc->pc = (prc->pc + 1) % MEM_SIZE;
@@ -30,6 +35,7 @@ int		process_load_op(t_env *e, t_prc *prc)
 	if (prc->op_code == 0 || prc->op_code > 16)//
 		prc->op_code = NB_OP + 1;
 	prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
+	prc->newly_created = 0;
 	return (0);
 }
 

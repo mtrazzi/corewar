@@ -31,6 +31,7 @@ struct				s_prc			//process
 	int				id;				//nb of the pc
 	int				cyc_left;		//cycles left before operation
 	int				op_code;
+	int				newly_created;
 	// int				op_done;
 };
 
@@ -66,6 +67,8 @@ struct				s_env
 	t_par			par;			//parameters given after parsing of args
 	int				cyc_since_beg;  //nb of cycles since beginning
 	int				last_alive;		//nb of last live done
+	int				last_id;
+	int				speed;
 };
 
 /*
@@ -105,6 +108,7 @@ int		print_prc(t_prc *prc);
 void	clear_screen(void);
 void	print_introduction(t_env *e);
 void	print_conclusion(t_env *e);
+void	print_ADV(t_env *e, int pos, int skip);
 
 /*
 ** PREPARATION / CHAMPION PARSING
@@ -162,6 +166,7 @@ int     aff(t_env *e, t_prc *prc);
 
 int     is_real_number(t_env *e, int nb);
 void	copy_value(int value, t_env *e, u_int pos);
+t_prc	*new_prc(u_int pc, int nb, int id);
 
 /*
 ** RESOURCES
