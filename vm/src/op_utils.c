@@ -5,6 +5,14 @@
 # define DEBUG_GET_INDEX 0
 # define DEBUG_GET_VALUE 1
 
+u_int   mod(int nbr, u_int mod)
+{
+    while (nbr < 0)
+        nbr += mod;
+    return (nbr % mod);
+}
+
+
 int     sizeof_param(u_char op_code, u_char type_of_param)
 {
     if (type_of_param == REG_CODE)
@@ -59,7 +67,7 @@ int     is_real_number(t_env *e, int nb)
     while (i < e->par.nb_chp)
     {
         if (e->par.champions[i].nb == nb)
-            return (1);
+            return (i + 1);
         i++;
     }
     return (0);

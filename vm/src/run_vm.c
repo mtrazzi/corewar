@@ -56,21 +56,30 @@ static void    check_lives(t_env *e)
 //	return (1);
 //}
 
-static void		del_and_update(t_dll **begin_lst)
+static void		del_and_update(t_env *e, t_dll **begin_lst)
 {
 	t_dll *prc_lst;
 	t_dll *next;
 	t_dll *last_alive;
+    t_prc *prc;
 
 	prc_lst = *begin_lst;
 	last_alive = NULL;
 	while (prc_lst)
 	{
 		next = prc_lst->next;
-		if (((t_prc *)(prc_lst->content))->live == 0)
+        prc = (t_prc *)prc_lst->content;
+		if (prc->live == 0)
+        {
+            if (e->par.verb & V_8)
+                ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+                            prc->id, e->cyc_since_beg - prc->cyc_last_live, e->cyc);
 			dll_delone(&prc_lst);
+        }
 		else if (!last_alive)
-			last_alive = prc_lst;
+            last_alive = prc_lst;
+        if (prc_lst)
+            prc->live = 0;
 		prc_lst = next;
 	}
 	*begin_lst = last_alive;
@@ -88,13 +97,15 @@ int     run_vm(t_env *e)
         if (do_one_cycle(e) < 0)
             return (ft_error_vm(STR_ERROR_CYCLE));
         e->cyc_counter += 1;
+        e->cyc_since_beg += 1;
+        if (e->par.verb & V_2)
+            ft_printf("It is now cycle %d\n", e->cyc_since_beg);
         if (e->cyc_counter == e->cyc)
         {
             check_lives(e);//if check_lives < 0 break ;
             //dll_foreach_tmp(e->prc_lst, &del_not_live);
-			del_and_update(&(e->prc_lst));
+            del_and_update(e, &(e->prc_lst));
         }
-        e->cyc_since_beg += 1;
         if (e->par.print && (e->cyc_since_beg % e->speed) == 1)
             ft_wait(e);
         if (e->par.print)

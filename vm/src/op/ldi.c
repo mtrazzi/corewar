@@ -25,7 +25,7 @@ int     ldi(t_env *e, t_prc *prc)
 	offset += sizeof_param(OP_LDI, (ocp >> 4) % 4);
 	addr = (prc->pc + (params[1] + params[2]) % IDX_MOD) % MEM_SIZE;
 	prc->r[e->map[(prc->pc + offset) % MEM_SIZE]] = get_value(e, IND_CODE, prc, addr);
-	if (e->par.verb)
+	if (e->par.verb & V_4)
 	{
 		ft_printf("P    %d | ldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[(prc->pc + offset) % MEM_SIZE]);

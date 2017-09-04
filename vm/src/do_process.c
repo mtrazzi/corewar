@@ -17,9 +17,11 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
 			skip = nb_bytes_to_skip(prc->op_code, e->map[(prc->pc + 1) % MEM_SIZE]);
-			if (e->par.verb)
+			if (e->par.verb & V_16)
 				print_ADV(e, prc->pc, skip);
-			prc->pc = (prc->pc + nb_bytes_to_skip(prc->op_code, skip)) % MEM_SIZE;
+			// ft_printf("\t\t{red}%d %d %d{eoc}", prc->pc, skip, (prc->pc + skip) % MEM_SIZE);
+			prc->pc = (prc->pc + skip) % MEM_SIZE;
+			// ft_printf(" %d\n", prc->pc);
 		}
 	}
 	else if (prc->cyc_left == 0)

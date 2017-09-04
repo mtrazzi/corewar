@@ -25,7 +25,7 @@ int     sti(t_env *e, t_prc *prc)
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	addr = (prc->pc + (params[2] + params[3]) % IDX_MOD) % MEM_SIZE;
 	copy_value(params[1], e, addr);
-	if (e->par.verb)
+	if (e->par.verb & V_4)
 	{
 		ft_printf("P    %d | sti r%d %d %d\n", prc->id, e->map[(prc->pc + 2) % MEM_SIZE], \
 		params[2], params[3]);

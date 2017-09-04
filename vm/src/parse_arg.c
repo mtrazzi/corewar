@@ -21,13 +21,13 @@ static int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
 	return (0);
 }
 
-tab[] = {
-	{"dump", int},
-	{"m", NULL},//nb cycle par seconde par default
-	{"v", int},
-	{"n", int + champion},
-	{0,0}
-};
+// tab[] = {
+// 	{"dump", int},
+// 	{"m", NULL},//nb cycle par seconde par default
+// 	{"v", int},
+// 	{"n", int + champion},
+// 	{0,0}
+// };
 
 
 int		ft_check_option(t_env *e, int i, int ac, char **av) //returns nb of param to skip
@@ -46,7 +46,10 @@ int		ft_check_option(t_env *e, int i, int ac, char **av) //returns nb of param t
 	else if (!ft_strcmp(av[i] + 1, "m"))
 		e->par.print = 1;
 	else if (!ft_strcmp(av[i] + 1, "v"))
-		e->par.verb = 1;
+	{
+		e->par.verb = ft_atoi(av[i + 1]);
+		return (1);
+	}
 	else if (!ft_strcmp(av[i] + 1, "n"))
 	{
 		if (!ft_is_int(av[i + 1]) || i + 2 >= ac || !ft_is_valid_ext(av[i + 2]))

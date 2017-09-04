@@ -14,6 +14,13 @@
 # define MAX_COLOR 4
 # define NB_OP	   16
 
+# define V_0 0
+# define V_1 1
+# define V_2 2
+# define V_4 4
+# define V_8 8
+# define V_16 16
+
 typedef struct		s_prc t_prc;
 typedef struct		s_par t_par;
 typedef struct		s_env t_env;
@@ -33,6 +40,7 @@ struct				s_prc			//process
 	int				op_code;
 	int				newly_created;
 	// int				op_done;
+	int				cyc_last_live;
 };
 
 struct				s_chp			//champion

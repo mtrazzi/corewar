@@ -26,7 +26,7 @@ int     st(t_env *e, t_prc *prc)
 		prc->r[params[2]] = params[1];
 	}
 	prc->carry = (params[1] == 0); //carry is 1 if result of op is 0
-	if (e->par.verb)
+	if (e->par.verb & V_4)
 		ft_printf("P    %d | st r%d %d\n", prc->id,
 		e->map[(prc->pc + 2) % MEM_SIZE], params[2]);
     return (0);

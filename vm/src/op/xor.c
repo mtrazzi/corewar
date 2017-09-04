@@ -19,7 +19,7 @@ int     xor(t_env *e, t_prc *prc) //p1 ^ p2 -> p3 with p3 register
 	reg_nb = e->map[(prc->pc + offset) % MEM_SIZE];	//third param is a register
 	prc->r[reg_nb] = params[1] ^ params[2];
 	prc->carry = prc->r[reg_nb] == 0; //carry is 1 if result of op is 0
-	if (e->par.verb)
+	if (e->par.verb & V_4)
 		ft_printf("P    %d | xor %d %d r%d\n", prc->id, params[1], params[2], reg_nb);
     return (0);
 }
