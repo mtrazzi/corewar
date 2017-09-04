@@ -41,6 +41,7 @@ int		process_load_op(t_env *e, t_prc *prc)
 		prc->op_code = NB_OP + 1;
 	// ft_printf("%#04x | %u\n", prc->op_code, prc->op_code);
 	prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
+	prc->newly_created = 0;
 	// prc->cyc_left -= 1;
 	return (0);
 }

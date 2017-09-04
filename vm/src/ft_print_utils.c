@@ -27,7 +27,8 @@ void    print_map(t_env e)
   nb_bytes = 0;
   change_color_prc(&e, 1);
   if (PRINT_NB_CYC)
-    ft_printf("NB OF CYCLES SINCE BEGINNING : %d\n", e.cyc_since_beg);
+    ft_printf("NB OF CYCLES SINCE BEGINNING : %d\nCYCLES PER STEP : %d\n",
+	e.cyc_since_beg, e.speed);
   while (nb_bytes < MEM_SIZE)
   {
     j = 0;

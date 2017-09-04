@@ -39,6 +39,7 @@ int			ft_init_vm(t_env *e)
 	e->par.print = 0;
 	e->cyc_since_beg = 0;
 	e->last_alive = 0;
+	e->speed = 5;
 	init_champions(e);
 	return (1);
 }

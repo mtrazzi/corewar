@@ -11,7 +11,7 @@ int     do_one_cycle(t_env *e)
     elt = e->prc_lst;
     if (DEBUG_ONE_CYCLE)
         dll_foreach_content(e->prc_lst, print_prc);
-    while (elt && e->cyc_since_beg != 0)
+    while (elt && !(((t_prc *)(elt->content))->newly_created))
     {
         if (process_exec_op_update_cyc_left(e, elt->content) < 0)
             return (ft_error_vm(STR_ERROR_PROCESS));
