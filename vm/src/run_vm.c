@@ -33,24 +33,45 @@ static void    check_lives(t_env *e)
         e->nb_checks += 1;
 }
 
-static int		del_not_live(t_prc **prc)
+//static int		del_not_live(t_prc **prc)
+//{
+//    if (!((*prc)->live))
+//    {
+//        if (*prc)
+//        {
+//			ft_printf("KILLED IT !!!\n");
+//            free(*prc);
+//            *prc = NULL;
+//        }
+//    }
+//    else
+//       (*prc)->live = 0;
+//	return (1);
+//}
+
+static void		del_and_update(t_dll **begin_lst)
 {
-    if (!((*prc)->live))
-    {
-        if (*prc)
-        {
-            free(*prc);
-            *prc = NULL;
-        }
-    }
-    else
-       (*prc)->live = 0;
-	return (1);
+	t_dll *prc_lst;
+	t_dll *next;
+	t_dll *last_alive;
+
+	prc_lst = *begin_lst;
+	last_alive = NULL;
+	while (prc_lst)
+	{
+		next = prc_lst->next;
+		if (((t_prc *)(prc_lst->content))->live == 0)
+			dll_delone(&prc_lst);
+		else if (!last_alive)
+			last_alive = prc_lst;
+		prc_lst = next;
+	}
+	*begin_lst = last_alive;
 }
 
 int     run_vm(t_env *e)
 {
-    while (e->cyc > 0)
+    while (e->cyc > 0 && e->prc_lst)
     {
         if (DEBUG_RUN_VM)
             ft_printf("e->cyc_since_beg : %d\ne->cyc : %d\ncounter : %d\n", \
@@ -63,7 +84,8 @@ int     run_vm(t_env *e)
         if (e->cyc_counter == e->cyc)
         {
             check_lives(e);//if check_lives < 0 break ;
-            dll_foreach_tmp(e->prc_lst, &del_not_live);
+            //dll_foreach_tmp(e->prc_lst, &del_not_live);
+			del_and_update(&(e->prc_lst));
         }
         e->cyc_since_beg += 1;
         if (e->par.print && (e->cyc_since_beg % 5) == 1)
