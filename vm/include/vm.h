@@ -108,6 +108,7 @@ int		print_prc(t_prc *prc);
 void	clear_screen(void);
 void	print_introduction(t_env *e);
 void	print_conclusion(t_env *e);
+void	print_ADV(t_env *e, int pos, int skip);
 
 /*
 ** PREPARATION / CHAMPION PARSING

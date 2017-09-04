@@ -9,6 +9,7 @@ u_char	read_op_code(u_char *map, u_int	index)
 
 int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 {
+	int skip;
 	// if (prc->cyc_left != 0)
 	// {
 	// 	// ft_printf("decrment\n");
@@ -20,8 +21,12 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 		// ft_printf("exec good op\n");
 		g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
-			prc->pc = (prc->pc + nb_bytes_to_skip(prc->op_code,
-						e->map[(prc->pc + 1) % MEM_SIZE])) % MEM_SIZE;
+		{
+			skip = nb_bytes_to_skip(prc->op_code, e->map[(prc->pc + 1) % MEM_SIZE]);
+			if (e->par.verb)
+				print_ADV(e, prc->pc, skip);
+			prc->pc = (prc->pc + nb_bytes_to_skip(prc->op_code, skip)) % MEM_SIZE;
+		}
 	}
 	else if (prc->cyc_left == 0)
 	{

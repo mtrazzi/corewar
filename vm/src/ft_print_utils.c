@@ -119,3 +119,14 @@ void    print_conclusion(t_env *e)
         i++;
     }
 }
+
+void	print_ADV(t_env *e, int pos, int skip)
+{
+	int i;
+
+	ft_printf("ADV %d (%#4x->%#4x)", skip, pos, (pos + skip) % MEM_SIZE);
+	i = -1;
+	while (++i < skip)
+		ft_printf(" %02x", e->map[(pos + i) % MEM_SIZE]);
+	ft_printf("\n");
+}

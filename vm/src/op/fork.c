@@ -26,13 +26,17 @@ static t_prc *new_prc_fork(t_env *e, t_prc *prc, int new_pc)
 int     ft_fork(t_env *e, t_prc *prc)
 {
 	int	addr_to_fork;
+	int addr_after_mod;
 	t_prc *new_prc;
 
 	addr_to_fork = get_index(e, DIR_CODE, prc, prc->pc + 2);
-	while (addr_to_fork < 0)
-		addr_to_fork += IDX_MOD;
-	if (!(new_prc = new_prc_fork(e, prc, (prc->pc + (addr_to_fork % IDX_MOD)) % MEM_SIZE)))
+	addr_after_mod = addr_to_fork;
+	while (addr_after_mod < 0)
+		addr_after_mod += IDX_MOD;
+	if (!(new_prc = new_prc_fork(e, prc, (prc->pc + (addr_after_mod % IDX_MOD)) % MEM_SIZE)))
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
+	if (e->par.verb)
+		ft_printf("P    %d | fork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);
     return (0);
 }
