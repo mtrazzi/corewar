@@ -1,7 +1,5 @@
 #include "vm.h"
 
-# define STR_ERR_MALLOC_PRC "cannot malloc new process"
-
 static t_prc *new_prc_fork(t_env *e, t_prc *prc, int new_pc)
 {
 	t_prc	*new_prc;

@@ -63,6 +63,27 @@ int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 							e->map[mod_map(addr + 3)]));
 }
 
+int     lget_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
+{
+    int index;
+    int addr;
+
+    if (type_of_param == REG_CODE)
+        return (prc->r[e->map[mod_map(pos)]]);
+    else if (type_of_param == DIR_CODE)
+        return ((int)convert_4_bytes(e->map[mod_map(pos + 0)], \
+                                e->map[mod_map(pos + 1)], \
+                                e->map[mod_map(pos + 2)], \
+                                e->map[mod_map(pos + 3)]));
+    index = convert_2_bytes(e->map[pos], e->map[(pos + 1)]);
+    addr = prc->pc + index;
+    return (convert_4_bytes(e->map[mod_map(addr + 0)],
+							e->map[mod_map(addr + 1)],
+							e->map[mod_map(addr + 2)],
+							e->map[mod_map(addr + 3)]));
+}
+
+
 int     is_real_number(t_env *e, int nb)
 {
     u_int i;

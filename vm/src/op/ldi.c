@@ -2,7 +2,7 @@
 
 # define OP_LDI 10
 
-int     ldi(t_env *e, t_prc *prc)
+int     lldi(t_env *e, t_prc *prc)
 {
 	u_char	ocp;
 	int		params[4]; //first parameter is params[1], nothing in params[0]

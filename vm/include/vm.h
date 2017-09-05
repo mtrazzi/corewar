@@ -21,6 +21,8 @@
 # define V_8 8
 # define V_16 16
 
+# define STR_ERR_MALLOC_PRC "cannot malloc process"
+
 typedef struct		s_prc t_prc;
 typedef struct		s_par t_par;
 typedef struct		s_env t_env;
@@ -143,6 +145,7 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc);
 int     nb_bytes_to_skip(u_char op_code, u_char ocp);
 int     sizeof_param(u_char op_code, u_char type_of_param);
 int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
+int     lget_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
 short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos);
 
 /*

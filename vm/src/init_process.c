@@ -1,7 +1,5 @@
 #include "vm.h"
 
-# define STR_ERR_MALLOC_PRC "could not malloc process"
-
 static void    init_reg(t_prc *prc)
 {
     int i;

@@ -16,12 +16,8 @@ int     sti(t_env *e, t_prc *prc)
 	params[1] = prc->r[e->map[mod_map(prc->pc + offset)]]; //first param is a register
 	offset += 1;
 	params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
-	while (params[2] < 0)	//problem with negative in modulo
-		params[2] += IDX_MOD;
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	params[3] = get_index(e, (ocp >> 2) % 4, prc, prc->pc + offset);
-	while (params[3] < 0)	//problem with negative in modulo
-		params[3] += IDX_MOD;
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	addr = mod_map(prc->pc + (params[2] + params[3]) % IDX_MOD);
 	copy_value(params[1], e, addr);

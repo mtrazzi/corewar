@@ -16,8 +16,6 @@ int     st(t_env *e, t_prc *prc)
 	if (((ocp >> 4) % 4) == IND_CODE)
 	{
 		params[2] = get_index(e, (ocp >> 4) % 4, prc, mod_map(prc->pc + offset));
-		while (params[2] < 0)
-			params[2] += IDX_MOD; //problem with negative with modulo
 		copy_value(params[1], e, mod_map(params[2]));
 	}
 	else if (((ocp >> 4) % 4) == REG_CODE)
