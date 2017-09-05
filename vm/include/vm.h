@@ -175,6 +175,7 @@ int     aff(t_env *e, t_prc *prc);
 int     is_real_number(t_env *e, int nb);
 void	copy_value(int value, t_env *e, u_int pos);
 t_prc	*new_prc(u_int pc, int nb, int id);
+u_int	mod_map(int nbr);
 
 /*
 ** RESOURCES

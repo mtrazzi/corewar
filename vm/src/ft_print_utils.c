@@ -124,9 +124,9 @@ void	print_ADV(t_env *e, int pos, int skip)
 {
 	int i;
 
-	ft_printf("ADV %d (0x%04x -> 0x%04x) ", skip, pos, (pos + skip) % MEM_SIZE);//04 depends on map size
+	ft_printf("ADV %d (0x%04x -> 0x%04x) ", skip, pos, mod_map(pos + skip));//04 depends on map size
 	i = -1;
 	while (++i < skip)
-		ft_printf("%02x ", e->map[(pos + i) % MEM_SIZE]);
+		ft_printf("%02x ", e->map[mod_map(pos + i)]);
 	ft_printf("\n");
 }

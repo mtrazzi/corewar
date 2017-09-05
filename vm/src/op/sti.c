@@ -11,9 +11,9 @@ int     sti(t_env *e, t_prc *prc)
 	int		addr;
 
 	offset = 1;	//at first offset is one byte after op_code
-	ocp = e->map[(prc->pc + offset) % MEM_SIZE];
+	ocp = e->map[mod_map(prc->pc + offset)];
 	offset += 1;
-	params[1] = prc->r[e->map[(prc->pc + offset) % MEM_SIZE]]; //first param is a register
+	params[1] = prc->r[e->map[mod_map(prc->pc + offset)]]; //first param is a register
 	offset += 1;
 	params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
 	while (params[2] < 0)	//problem with negative in modulo
@@ -23,11 +23,11 @@ int     sti(t_env *e, t_prc *prc)
 	while (params[3] < 0)	//problem with negative in modulo
 		params[3] += IDX_MOD;
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
-	addr = (prc->pc + (params[2] + params[3]) % IDX_MOD) % MEM_SIZE;
+	addr = mod_map(prc->pc + (params[2] + params[3]) % IDX_MOD);
 	copy_value(params[1], e, addr);
 	if (e->par.verb & V_4)
 	{
-		ft_printf("P    %d | sti r%d %d %d\n", prc->id, e->map[(prc->pc + 2) % MEM_SIZE], \
+		ft_printf("P    %d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)], \
 		params[2], params[3]);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", \
 		params[2], params[3], params[2] + params[3], addr);

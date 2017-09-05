@@ -1,6 +1,6 @@
 #include "vm.h"
 
-# define STR_ERR_USAGE	"usage: corewar [-dump nbr_cycles] \
+# define STR_ERR_USAGE	"usage: corewar [-v N | -m][-dump nbr_cycles] \
 [[-n number] champion1.cor] ..."
 # define STR_ERR_NB_CHP "too many champions"
 
@@ -85,4 +85,3 @@ int		parse_arg_vm(int ac, char **av, t_env *e)
 	e->last_alive = e->par.champions[e->par.nb_chp - 1].nb;
 	return (0);
 }
-

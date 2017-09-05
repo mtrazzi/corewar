@@ -12,6 +12,10 @@ u_int   mod(int nbr, u_int mod)
     return (nbr % mod);
 }
 
+u_int	mod_map(int nbr)
+{
+	return (mod(nbr, MEM_SIZE));
+}
 
 int     sizeof_param(u_char op_code, u_char type_of_param)
 {
@@ -45,18 +49,18 @@ int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
     int addr;
 
     if (type_of_param == REG_CODE)
-        return (prc->r[e->map[pos]]);
+        return (prc->r[e->map[mod_map(pos)]]);
     else if (type_of_param == DIR_CODE)
-        return ((int)convert_4_bytes(e->map[(pos + 0) % MEM_SIZE], \
-                                e->map[(pos + 1) % MEM_SIZE], \
-                                e->map[(pos + 2) % MEM_SIZE], \
-                                e->map[(pos + 3) % MEM_SIZE]));
-    index = convert_2_bytes(e->map[pos], e->map[(pos + 1) % MEM_SIZE]);
+        return ((int)convert_4_bytes(e->map[mod_map(pos + 0)], \
+                                e->map[mod_map(pos + 1)], \
+                                e->map[mod_map(pos + 2)], \
+                                e->map[mod_map(pos + 3)]));
+    index = convert_2_bytes(e->map[pos], e->map[(pos + 1)]);
     addr = prc->pc + (index % IDX_MOD);
-    return (convert_4_bytes(e->map[(addr + 0) % MEM_SIZE],
-							e->map[(addr + 1) % MEM_SIZE],
-							e->map[(addr + 2) % MEM_SIZE],
-							e->map[(addr + 3) % MEM_SIZE]));
+    return (convert_4_bytes(e->map[mod_map(addr + 0)],
+							e->map[mod_map(addr + 1)],
+							e->map[mod_map(addr + 2)],
+							e->map[mod_map(addr + 3)]));
 }
 
 int     is_real_number(t_env *e, int nb)
@@ -76,19 +80,19 @@ int     is_real_number(t_env *e, int nb)
 short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
     if (type_of_param == REG_CODE)
-        return (prc->r[e->map[pos]]);
+        return (prc->r[e->map[mod_map(pos)]]);
     if (DEBUG_GET_INDEX)
-        ft_printf("get_index : %2x %2x\n", e->map[pos], e->map[pos + 1]);
+        ft_printf("get_index : %2x %2x\n", e->map[mod_map(pos)], e->map[mod_map(pos + 1)]);
     else if (type_of_param == DIR_CODE)
-        return ((short)convert_2_bytes(e->map[(pos + 0) % MEM_SIZE], \
-                                e->map[(pos + 1) % MEM_SIZE]));
-    return ((short)convert_2_bytes(e->map[pos], e->map[(pos + 1) % MEM_SIZE]));
+        return ((short)convert_2_bytes(e->map[mod_map(pos + 0)], \
+                                e->map[mod_map(pos + 1)]));
+    return ((short)convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]));
 }
 
 void copy_value(int value, t_env *e, u_int pos)
 {
-    e->map[(pos + 0 % MEM_SIZE)] = value >> 24;
-    e->map[(pos + 1 % MEM_SIZE)] = ((value << 8) >> 24);
-    e->map[(pos + 2 % MEM_SIZE)] = ((value << 16) >> 24);
-    e->map[(pos + 3 % MEM_SIZE)] = ((value << 24) >> 24);
+    e->map[mod_map(pos + 0)] = value >> 24;
+    e->map[mod_map(pos + 1)] = ((value << 8) >> 24);
+    e->map[mod_map(pos + 2)] = ((value << 16) >> 24);
+    e->map[mod_map(pos + 3)] = ((value << 24) >> 24);
 }
