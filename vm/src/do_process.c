@@ -11,11 +11,14 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 {
 	int skip;
 	prc->cyc_left -= 1;
-	if (prc->cyc_left == 0 && prc->op_code != NB_OP + 1)
+	// ft_printf("COUCOU {%d}", prc->cyc_left);	
+	if ((prc->cyc_left == 0 && prc->op_code != NB_OP + 1))// || e->cyc <=0 )
 	{
+		// ft_printf(" tu ");
 		g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
+			// ft_printf(" vas bien ?\n");
 			skip = nb_bytes_to_skip(prc->op_code, mod_map(e->map[(prc->pc + 1)]));
 			if (e->par.verb & V_16)
 				print_ADV(e, prc->pc, skip);
@@ -41,27 +44,34 @@ int		process_load_op(t_env *e, t_prc *prc)
 	return (0);
 }
 
-int		do_process(t_env *e, t_prc *prc)
-{
-	if (prc->cyc_left == 0)
-	{
-		if (prc->op_code != NB_OP + 1)
-			g_op_fun_tab[prc->op_code - 1](e, prc);
-		if (prc->op_code != NB_OP + 1 &&
-				(prc->op_code != OP_ZJMP || !(prc->carry)))
-			prc->pc = mod_map(prc->pc + nb_bytes_to_skip(prc->op_code,
-						e->map[mod_map(prc->pc + 1)]));
-		prc->op_code = read_op_code(e->map, prc->pc);
-		if (prc->op_code == 0 || prc->op_code > 16)//NB_VALID_OP
-		{
-			prc->op_code = NB_OP + 1;
-			prc->pc = mod_map(prc->pc + 1);
-		}
-		prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
-	}
-	prc->cyc_left -= 1;
-	return (0);
-}
+
+// int		do_process(t_env *e, t_prc *prc)
+// {
+
+// }
+
+
+// int		do_process(t_env *e, t_prc *prc)
+// {
+// 	if (prc->cyc_left == 0)
+// 	{
+// 		if (prc->op_code != NB_OP + 1)
+// 			g_op_fun_tab[prc->op_code - 1](e, prc);
+// 		if (prc->op_code != NB_OP + 1 &&
+// 				(prc->op_code != OP_ZJMP || !(prc->carry)))
+// 			prc->pc = mod_map(prc->pc + nb_bytes_to_skip(prc->op_code,
+// 						e->map[mod_map(prc->pc + 1)]));
+// 		prc->op_code = read_op_code(e->map, prc->pc);
+// 		if (prc->op_code == 0 || prc->op_code > 16)//NB_VALID_OP
+// 		{
+// 			prc->op_code = NB_OP + 1;
+// 			prc->pc = mod_map(prc->pc + 1);
+// 		}
+// 		prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
+// 	}
+// 	prc->cyc_left -= 1;
+// 	return (0);
+// }
 
 /*
 int		do_process(t_env *e, t_prc *prc)

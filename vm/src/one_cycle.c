@@ -11,7 +11,7 @@ int     do_one_cycle(t_env *e)
     elt = e->prc_lst;
     if (DEBUG_ONE_CYCLE)
         dll_foreach_content(e->prc_lst, print_prc);
-    while (elt && !(((t_prc *)(elt->content))->newly_created))
+    while (elt && (((t_prc *)(elt->content))->newly_created) == 0)
     {
         // ft_printf("{yellow}%d {green}%p %d{eoc} ", e->cyc_since_beg, ((t_prc *)elt->content), ((t_prc *)elt->content)->pc);
         if (process_exec_op_update_cyc_left(e, elt->content) < 0)

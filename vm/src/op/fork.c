@@ -28,8 +28,8 @@ int     ft_fork(t_env *e, t_prc *prc)
 	t_prc *new_prc;
 
 	addr_to_fork = get_index(e, DIR_CODE, prc, prc->pc + 2);
-	addr_after_mod = addr_to_fork;
-	if (!(new_prc = new_prc_fork(e, prc, mod_map(prc->pc + (addr_after_mod % IDX_MOD)))))
+	addr_after_mod = prc->pc + (addr_to_fork % IDX_MOD);
+	if (!(new_prc = new_prc_fork(e, prc, addr_after_mod)))
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
 	if (e->par.verb & V_4)
