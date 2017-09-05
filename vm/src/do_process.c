@@ -11,14 +11,11 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 {
 	int skip;
 	prc->cyc_left -= 1;
-	// ft_printf("COUCOU {%d}", prc->cyc_left);	
-	if ((prc->cyc_left == 0 && prc->op_code != NB_OP + 1))// || e->cyc <=0 )
+	if ((prc->cyc_left == 0 && prc->op_code != NB_OP + 1))
 	{
-		// ft_printf(" tu ");
 		g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
-			// ft_printf(" vas bien ?\n");
 			skip = nb_bytes_to_skip(prc->op_code, mod_map(e->map[(prc->pc + 1)]));
 			if (e->par.verb & V_16)
 				print_ADV(e, prc->pc, skip);
@@ -40,15 +37,16 @@ int		process_load_op(t_env *e, t_prc *prc)
 	if (prc->op_code == 0 || prc->op_code > 16)//
 		prc->op_code = NB_OP + 1;
 	prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
-	prc->newly_created = 0;
 	return (0);
 }
 
 
-// int		do_process(t_env *e, t_prc *prc)
-// {
-
-// }
+int		do_process(t_env *e, t_prc *prc)
+{
+	process_load_op(e, prc);
+	process_exec_op_update_cyc_left(e, prc);
+	return (1);
+}
 
 
 // int		do_process(t_env *e, t_prc *prc)
