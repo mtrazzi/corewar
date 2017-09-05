@@ -57,15 +57,7 @@ static void    check_lives(t_env *e)
 	}
 }
 
-void	kill_prc()
-{
-	
-}
-
-
-
-
-static void		del_and_update(t_env *e, t_dll **begin_lst)
+static void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 {
 	t_dll *prc_lst;
 	t_dll *next;
@@ -78,7 +70,7 @@ static void		del_and_update(t_env *e, t_dll **begin_lst)
 	{
 		next = prc_lst->next;
 		prc = (t_prc *)prc_lst->content;
-		if (prc->live == 0)
+		if (prc->live == 0 || all)
 		{
 			if (e->par.verb & V_8)
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
@@ -96,14 +88,14 @@ static void		del_and_update(t_env *e, t_dll **begin_lst)
 
 int     run_vm(t_env *e)
 {
-	while (e->cyc >= -CYCLE_DELTA && e->prc_lst)
+	while (e->prc_lst)
 	{
 		if (e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))//=?
 		{
 			check_lives(e);//if check_lives < 0 break ;
-			del_and_update(e, &(e->prc_lst));
+			del_and_update(e, &(e->prc_lst), 0);
 		}
-		if (e->par.print && (e->cyc_since_beg % e->speed == 0))
+		if (e->par.print && (e->cyc_since_beg % e->speed == 1))
 			print_map(*e);
 		if (e->par.verb & V_2)
 			ft_printf("It is now cycle %d\n", e->cyc_since_beg);
@@ -113,6 +105,11 @@ int     run_vm(t_env *e)
 			ft_wait(e);
 		if (e->par.print)
 			clear_screen();
+		if (e->cyc < 0)
+		{
+			del_and_update(e, &(e->prc_lst), 1);
+			return (0);
+		}
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
 	}
