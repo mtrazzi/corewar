@@ -37,7 +37,7 @@ int			ft_init_vm(t_env *e)
 	e->par.nb_chp = 0;
 	e->par.verb = V_0;
 	e->par.print = 0;
-	e->cyc_since_beg = 1;
+	e->cyc_since_beg = 0;
 	e->last_alive = 0;
 	e->speed = 5;
 	init_champions(e);

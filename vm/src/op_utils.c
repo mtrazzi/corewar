@@ -104,10 +104,7 @@ short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
     if (type_of_param == REG_CODE)
         return (prc->r[e->map[mod_map(pos)]]);
-    // if (DEBUG_GET_INDEX)
-    //     ft_printf("get_index : %2x %2x\n", e->map[mod_map(pos)], e->map[mod_map(pos + 1)]);
     return (convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]));
-    // return ((short)convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]));
 }
 
 void copy_value(int value, t_env *e, u_int pos)

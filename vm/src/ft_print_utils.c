@@ -35,6 +35,8 @@ void    print_map(t_env e)
     while (j < BYTES_PER_LINE)
     {
       color = g_color_tab[e.map_color[nb_bytes + j]];
+	  if (nb_bytes + j >= 0x0347 && nb_bytes + j < 0x0347 + 7)
+	  	color = g_color_tab[5];
       ft_printf("%s%02x%s ", color, e.map[nb_bytes + j], END_OF_COLOR);
       j++;
     }

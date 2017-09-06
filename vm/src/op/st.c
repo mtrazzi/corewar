@@ -23,9 +23,8 @@ int     st(t_env *e, t_prc *prc)
 		params[2] = e->map[mod_map(prc->pc + offset)];
 		prc->r[params[2]] = params[1];
 	}
-	prc->carry = (params[1] == 0); //carry is 1 if result of op is 0
 	if (e->par.verb & V_4)
-		ft_printf("P    %d | st r%d %d\n", prc->id,
+		ft_printf("P%5d | st r%d %d\n", prc->id,
 		e->map[mod_map(prc->pc + 2)], params[2]);
     return (0);
 }

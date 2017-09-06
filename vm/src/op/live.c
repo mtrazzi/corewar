@@ -9,7 +9,7 @@ int		live(t_env *e, t_prc *prc)
 	prc->cyc_last_live = e->cyc_since_beg;
 	e->nb_live += 1;
 	if (e->par.verb & V_4)
-		ft_printf("P    %d | live %d\n", prc->id, prc->live_nb);
+		ft_printf("P%5d | live %d\n", prc->id, prc->live_nb);
 	if ((ret = is_real_number(e, prc->live_nb)) > 0)
 	{
 		e->last_alive = prc->live_nb;

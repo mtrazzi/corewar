@@ -18,6 +18,6 @@ int     lld(t_env *e, t_prc *prc)
 	prc->r[reg_nb] = params[1];
 	prc->carry = prc->r[reg_nb] == 0; //carry is 1 if result of op is 0
 	if (e->par.verb & V_4)
-		ft_printf("P    %d | lld %d r%d\n", prc->id, params[1], reg_nb);
+		ft_printf("P%5d | lld %d r%d\n", prc->id, params[1], reg_nb);
     return (0);
 }

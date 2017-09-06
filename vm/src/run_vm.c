@@ -95,6 +95,8 @@ int     run_vm(t_env *e)
 			check_lives(e);//if check_lives < 0 break ;
 			del_and_update(e, &(e->prc_lst), 0);
 		}
+		e->cyc_counter += 1;
+		e->cyc_since_beg += 1;
 		if (e->par.print && (e->cyc_since_beg % e->speed == 1))
 			print_map(*e);
 		if (e->par.verb & V_2)
@@ -110,8 +112,6 @@ int     run_vm(t_env *e)
 			del_and_update(e, &(e->prc_lst), 1);
 			return (0);
 		}
-		e->cyc_counter += 1;
-		e->cyc_since_beg += 1;
 	}
 	return (0);
 }
