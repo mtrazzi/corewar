@@ -40,7 +40,7 @@ struct				s_prc			//process
 	int				id;				//nb of the pc
 	int				cyc_left;		//cycles left before operation
 	int				op_code;
-	int				newly_created;
+	// int				newly_created;
 	// int				op_done;
 	int				cyc_last_live;
 };

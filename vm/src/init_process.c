@@ -24,7 +24,7 @@ t_prc   *new_prc(u_int pc, int nb, int id)
     prc->id = id;
     prc->cyc_left = 0;
     prc->op_code = NB_OP + 1;
-	prc->newly_created = 1;
+	// prc->newly_created = 1;
     prc->cyc_last_live = 0;
     // prc->op_done = 0;
     return (prc);
