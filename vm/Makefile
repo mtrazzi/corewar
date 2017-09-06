@@ -1,7 +1,8 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -g -fsanitize=address
+#-Werror
 
 NAME = corewar
 

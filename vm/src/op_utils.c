@@ -37,6 +37,8 @@ int     nb_bytes_to_skip(u_char op_code, u_char ocp)
     if (!(g_op_tab[op_code - 1].ocp))           //for live, zjmp, etc.
         return (1 + (op_code == 1 ? 4 : 2));
     sum = 2;                                    //op_code + ocp
+    //ocp & 0x000000ff
+    //ocp >>= 2
     while (ocp > 0)
     {
         sum += sizeof_param(op_code, ocp % 4);  //two last bits
@@ -49,15 +51,21 @@ int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
     int index;
     int addr;
+    u_char tmp;
 
     if (type_of_param == REG_CODE)
+    {
+        tmp = e->map[mod_map(pos)];
+        if (tmp <= 0 || tmp > REG_NUMBER)
+            return (0);
         return (prc->r[e->map[mod_map(pos)]]);
+    }
     else if (type_of_param == DIR_CODE)
         return (convert_4_bytes(e->map[mod_map(pos + 0)],
                                 e->map[mod_map(pos + 1)],
                                 e->map[mod_map(pos + 2)],
                                 e->map[mod_map(pos + 3)]));
-    index = convert_2_bytes(e->map[pos], e->map[(pos + 1)]);
+    index = convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]);//?
     addr = prc->pc + (index % IDX_MOD);
     return (convert_4_bytes(e->map[mod_map(addr + 0)],
 							e->map[mod_map(addr + 1)],
@@ -69,15 +77,21 @@ int     lget_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
     int index;
     int addr;
+    u_char  tmp;
 
     if (type_of_param == REG_CODE)
-        return (prc->r[e->map[mod_map(pos)]]);
+    {
+        tmp = e->map[mod_map(pos)];
+        if (tmp <= 0 || tmp > REG_NUMBER)
+            return (0);
+        return (prc->r[tmp]);
+    }
     else if (type_of_param == DIR_CODE)
         return (convert_4_bytes(e->map[mod_map(pos + 0)],
                                 e->map[mod_map(pos + 1)],
                                 e->map[mod_map(pos + 2)],
                                 e->map[mod_map(pos + 3)]));
-    index = convert_2_bytes(e->map[pos], e->map[(pos + 1)]);
+    index = convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]);
     addr = prc->pc + index;
     return (convert_4_bytes(e->map[mod_map(addr + 0)],
 							e->map[mod_map(addr + 1)],
@@ -102,8 +116,15 @@ int     is_real_number(t_env *e, int nb)
 
 short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
+    u_char tmp;
+
     if (type_of_param == REG_CODE)
-        return (prc->r[e->map[mod_map(pos)]]);
+    {
+        tmp = e->map[mod_map(pos)];
+        if (tmp <= 0 || tmp > REG_NUMBER)
+            return (0);
+        return (prc->r[tmp]);
+    }
     return (convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]));
 }
 

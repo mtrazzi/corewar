@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 18:14:17 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/08/23 18:20:16 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/06 19:11:19 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	dll_del_f(t_dll **lst, t_del *f)
 	*lst = NULL;
 }
 
+#include <stdio.h>
 void	dll_delone(t_dll **to_del)
 {
+	printf("SUPPR\nSUPPR\nSUPPR\nSUPPR\n");
 	if (!to_del || !(*to_del))
 		return ;
 	if ((*to_del)->prev)

@@ -18,22 +18,22 @@
 # endwhile:
 # 		#zjmp %:live
 
-.name "TBE"
-.comment "Say hi to dady!"
+# .name "TBE"
+# .comment "Say hi to dady!"
 
-ld %-151005696, r2
-ld %150994944, r1
+# ld %-151005696, r2
+# ld %150994944, r1
 
-beginning:
-	or	r3, r4, r8
-	sti r1, %:lfork, %0
-	add r1, r2, r1
-	fork %:beginning
+# beginning:
+# 	or	r3, r4, r8
+# 	sti r1, %:lfork, %0
+# 	add r1, r2, r1
+# 	fork %:beginning
 
-	and r3, %0, r3
-	ld %0, r12
-lfork:
-	zjmp %42
+# 	and r3, %0, r3
+# 	ld %0, r12
+# lfork:
+# 	zjmp %42
 
 # .name "TBE"
 # .comment "Say hi to dady!"
@@ -49,3 +49,9 @@ lfork:
 # 	and r3, %0, r3
 # lfork:
 # 	zjmp %42
+
+
+.name "TBE"
+.comment "Say hi to dady!"
+
+ld %1, r99

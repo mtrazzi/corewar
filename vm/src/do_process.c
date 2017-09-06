@@ -16,7 +16,7 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 		g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
-			skip = nb_bytes_to_skip(prc->op_code, mod_map(e->map[(prc->pc + 1)]));
+			skip = nb_bytes_to_skip(prc->op_code, e->map[mod_map(prc->pc + 1)]);
 			if (e->par.verb & V_16)
 				print_ADV(e, prc->pc, skip);
 			// ft_printf("\t\t{red}%d %d %d{eoc}", prc->pc, skip, (prc->pc + skip) % MEM_SIZE);
@@ -33,10 +33,12 @@ int		process_load_op(t_env *e, t_prc *prc)
 {
 	if (prc->cyc_left != 0)
 		return (0);
+	ft_printf("{red}env:%p prc:%p{eoc}\n", e, prc);
 	prc->op_code = read_op_code(e->map, prc->pc);
 	if (prc->op_code == 0 || prc->op_code > 16)//
 		prc->op_code = NB_OP + 1;
 	prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
+	ft_printf("{green}done{eoc}\n");
 	return (0);
 }
 
