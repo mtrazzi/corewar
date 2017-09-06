@@ -137,6 +137,8 @@ int		do_process(t_env *e, t_prc *prc); //must also change color of processes
 
 int		process_load_op(t_env *e, t_prc *prc);
 int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc);
+int		check_params(t_env *e, t_prc *prc, int op_code);
+
 
 /*
 ** PARSING FOR OPERATIONS

@@ -13,7 +13,8 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 	prc->cyc_left -= 1;
 	if ((prc->cyc_left == 0 && prc->op_code != NB_OP + 1))
 	{
-		g_op_fun_tab[prc->op_code - 1](e, prc);
+		if (check_params(e, prc, prc->op_code))
+			g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
 			skip = nb_bytes_to_skip(prc->op_code, mod_map(e->map[(prc->pc + 1)]));
