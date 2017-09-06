@@ -92,8 +92,10 @@ int     run_vm(t_env *e)
 	{
 		if (e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))//=?
 		{
-			check_lives(e);//if check_lives < 0 break ;
 			del_and_update(e, &(e->prc_lst), 0);
+			if (e->prc_lst == 0)
+				return (0);
+			check_lives(e);//if check_lives < 0 break ;
 		}
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
