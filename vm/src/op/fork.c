@@ -17,7 +17,7 @@ static t_prc *new_prc_fork(t_env *e, t_prc *prc, int new_pc)
 	new_prc->id = ++(e->last_id);
 	new_prc->cyc_left = 0;
 	new_prc->op_code = NB_OP + 1;
-	new_prc->newly_created = 1;
+	// new_prc->newly_created = 1;
 	return (new_prc);
 }
 

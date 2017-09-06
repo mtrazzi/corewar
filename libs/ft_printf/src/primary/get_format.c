@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 17:04:31 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/05/23 21:26:27 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/06 17:25:21 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,11 @@ static int	launch_convert(int *error, va_list *ap,
 	return (1);
 }
 
-static int	clean_exit(t_options **op)
-{
-	free(*op);
-	*op = NULL;
-	return (-1);
-}
-
 int			get_format(int put(int c), const char *fmt, va_list ap, int *error)
 {
-	t_options *options;
+	t_options	options;
 
-	if ((options = init_options()) == NULL)
-		return (-1);
+	init_options(&options);
 	while (*fmt)
 	{
 		if ((*fmt != '%' || *++fmt == '%') && *fmt != '{')
@@ -99,15 +91,14 @@ int			get_format(int put(int c), const char *fmt, va_list ap, int *error)
 			do_color(&fmt, put);
 		else if (*fmt)
 		{
-			get_optional_flags(&fmt, options->flags);
-			get_optional_width_and_precision(&fmt, options, (va_list*)ap);
-			get_optional_length_flags(&fmt, options->flags);
-			fmt += get_code(options, fmt, put);
-			if (launch_convert(error, (va_list*)ap, options, put) == -1)
-				return (clean_exit(&options));
-			reset_options(options);
+			get_optional_flags(&fmt, options.flags);
+			get_optional_width_and_precision(&fmt, &options, (va_list*)ap);
+			get_optional_length_flags(&fmt, options.flags);
+			fmt += get_code(&options, fmt, put);
+			if (launch_convert(error, (va_list*)ap, &options, put) == -1)
+				return (-1);
+			reset_options(&options);
 		}
 	}
-	free(options);
 	return (1);
 }

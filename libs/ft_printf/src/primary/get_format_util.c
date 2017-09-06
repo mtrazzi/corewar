@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:50:37 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/05/23 20:05:14 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/06 17:27:53 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,14 @@
 #include <limits.h>
 #include <stdlib.h>
 
-t_options	*init_options(void)
+void		init_options(t_options *options)
 {
-	t_options *options;
-
-	if (!(options = (t_options *)malloc(sizeof(t_options))))
-		return (NULL);
 	ft_memset(options->flags, '\0', sizeof(options->flags));
 	options->width = INT_MIN;
 	options->precision = INT_MIN;
 	options->no_precision = 0;
 	options->code = 0;
 	options->zero = 0;
-	return (options);
 }
 
 void		reset_options(t_options *options)
