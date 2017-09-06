@@ -27,8 +27,8 @@ int     lfork(t_env *e, t_prc *prc)
 	int addr_after_mod;
 	t_prc *new_prc;
 
-	addr_to_fork = get_index(e, DIR_CODE, prc, prc->pc + 2);
-	addr_after_mod = addr_to_fork;
+	addr_to_fork = get_index(e, DIR_CODE, prc, prc->pc + 1);
+	addr_after_mod = prc->pc + addr_to_fork;
 	if (!(new_prc = new_prc_lfork(e, prc, mod_map(prc->pc + addr_after_mod))))
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
