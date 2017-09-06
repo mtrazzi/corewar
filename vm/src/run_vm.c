@@ -15,6 +15,8 @@ static void    ft_wait(t_env *e) //just to print step by step
 			e->speed += 5;
 		else if (!ft_strcmp(line, "l"))
 			e->speed -= 5;
+		else if (ft_is_int(line))
+			e->speed = ft_atoi(line);
 		print_map(*e);
 	}
 }
@@ -99,13 +101,13 @@ int     run_vm(t_env *e)
 		}
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
-		if (e->par.print && (e->cyc_since_beg % e->speed == 1))
+		if ((e->speed == 1) || (e->par.print && (e->cyc_since_beg % e->speed == 1)))
 			print_map(*e);
 		if (e->par.verb & V_2)
 			ft_printf("It is now cycle %d\n", e->cyc_since_beg);
 		if (do_one_cycle(e) < 0)
 			return (ft_error_vm(STR_ERROR_CYCLE));
-		if (e->par.print && (e->cyc_since_beg % e->speed) == 1)
+		if ((e->speed == 1) || (e->par.print && (e->cyc_since_beg % e->speed) == 1))
 			ft_wait(e);
 		if (e->par.print)
 			clear_screen();

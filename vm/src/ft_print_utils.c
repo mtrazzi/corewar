@@ -28,15 +28,13 @@ void    print_map(t_env e)
   change_color_prc(&e, 1);
   if (PRINT_NB_CYC)
     ft_printf("NB OF CYCLES SINCE BEGINNING : %d\nCYCLES PER STEP : %d\n",
-	e.cyc_since_beg, e.speed);
+	e.cyc_since_beg - 1, e.speed);
   while (nb_bytes < MEM_SIZE)
   {
     j = 0;
     while (j < BYTES_PER_LINE)
     {
       color = g_color_tab[e.map_color[nb_bytes + j]];
-	  if (nb_bytes + j >= 0x0347 && nb_bytes + j < 0x0347 + 7)
-	  	color = g_color_tab[5];
       ft_printf("%s%02x%s ", color, e.map[nb_bytes + j], END_OF_COLOR);
       j++;
     }
