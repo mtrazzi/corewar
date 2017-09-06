@@ -71,9 +71,9 @@ int     lget_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
     if (type_of_param == REG_CODE)
         return (prc->r[e->map[mod_map(pos)]]);
     else if (type_of_param == DIR_CODE)
-        return ((int)convert_4_bytes(e->map[mod_map(pos + 0)], \
-                                e->map[mod_map(pos + 1)], \
-                                e->map[mod_map(pos + 2)], \
+        return ((int)convert_4_bytes(e->map[mod_map(pos + 0)],
+                                e->map[mod_map(pos + 1)],
+                                e->map[mod_map(pos + 2)],
                                 e->map[mod_map(pos + 3)]));
     index = convert_2_bytes(e->map[pos], e->map[(pos + 1)]);
     addr = prc->pc + index;
@@ -105,7 +105,7 @@ short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
     if (DEBUG_GET_INDEX)
         ft_printf("get_index : %2x %2x\n", e->map[mod_map(pos)], e->map[mod_map(pos + 1)]);
     else if (type_of_param == DIR_CODE)
-        return ((short)convert_2_bytes(e->map[mod_map(pos + 0)], \
+        return ((short)convert_2_bytes(e->map[mod_map(pos + 0)],
                                 e->map[mod_map(pos + 1)]));
     return ((short)convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]));
 }

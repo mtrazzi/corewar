@@ -2,7 +2,7 @@
 
 # define OP_LDI 10
 
-int     lldi(t_env *e, t_prc *prc)
+int     ldi(t_env *e, t_prc *prc)
 {
 	u_char	ocp;
 	int		params[4]; //first parameter is params[1], nothing in params[0]
@@ -23,7 +23,7 @@ int     lldi(t_env *e, t_prc *prc)
 	prc->r[e->map[mod_map(prc->pc + offset)]] = get_value(e, IND_CODE, prc, addr);
 	if (e->par.verb & V_4)
 	{
-		ft_printf("P    %d | ldi %d %d r%d\n", prc->id, params[1], params[2],
+		ft_printf("P%5d | ldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 		params[1], params[2], params[1] + params[2], addr);

@@ -24,7 +24,7 @@ int     st(t_env *e, t_prc *prc)
 		prc->r[params[2]] = params[1];
 	}
 	if (e->par.verb & V_4)
-		ft_printf("P    %d | st r%d %d\n", prc->id,
+		ft_printf("P%5d | st r%d %d\n", prc->id,
 		e->map[mod_map(prc->pc + 2)], params[2]);
     return (0);
 }

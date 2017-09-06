@@ -19,14 +19,14 @@ int     sti(t_env *e, t_prc *prc)
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	params[3] = get_index(e, (ocp >> 2) % 4, prc, prc->pc + offset);
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
-	addr = mod_map(prc->pc + (params[2] + params[3]) % IDX_MOD);
-	copy_value(params[1], e, addr);
+	addr = prc->pc + (params[2] + params[3]) % IDX_MOD;
 	if (e->par.verb & V_4)
 	{
-		ft_printf("P    %d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)], \
+		ft_printf("P%5d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)], \
 		params[2], params[3]);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", \
 		params[2], params[3], params[2] + params[3], addr);
 	}
+	copy_value(params[1], e, mod_map(addr));
     return (0);
 }
