@@ -17,7 +17,7 @@ int     st(t_env *e, t_prc *prc)
 	{
 		params[2] = get_index(e, (ocp >> 4) % 4, prc, mod_map(prc->pc + offset));
 		if (e->par.verb & V_4)
-			ft_printf("P%5d | st r%d %d\n", prc->id,
+			printf("P %4d | st r%d %d\n", prc->id,
 			e->map[mod_map(prc->pc + 2)], params[2]);
 		copy_value(params[1], e, mod_map(prc->pc + params[2]));
     return (0);
@@ -28,7 +28,7 @@ int     st(t_env *e, t_prc *prc)
 		prc->r[params[2]] = params[1];
 	}
 	if (e->par.verb & V_4)
-		ft_printf("P%5d | st r%d %d\n", prc->id,
+		printf("P %4d | st r%d %d\n", prc->id,
 		e->map[mod_map(prc->pc + 2)], params[2]);
     return (0);
 }

@@ -23,9 +23,9 @@ int     ldi(t_env *e, t_prc *prc)
 	prc->r[e->map[mod_map(prc->pc + offset)]] = get_value(e, IND_CODE, prc, addr);
 	if (e->par.verb & V_4)
 	{
-		ft_printf("P%5d | ldi %d %d r%d\n", prc->id, params[1], params[2],
+		printf("P %4d | ldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);
-		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
+		printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 		params[1], params[2], params[1] + params[2], addr);
 	}
     return (0);

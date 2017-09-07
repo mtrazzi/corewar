@@ -12,6 +12,6 @@ int     sub(t_env *e, t_prc *prc)
 	prc->r[nb_3] = prc->r[nb_1] - prc->r[nb_2];
 	prc->carry = (prc->r[nb_3] == 0);
 	if (e->par.verb & V_4)
-		ft_printf("P%5d | sub r%d r%d r%d\n", prc->id, nb_1, nb_2, nb_3);
+		printf("P %4d | sub r%d r%d r%d\n", prc->id, nb_1, nb_2, nb_3);
     return (0);
 }

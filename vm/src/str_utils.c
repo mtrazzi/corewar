@@ -116,5 +116,5 @@ void    op_fun_tab_init(void)
 
 void    clear_screen(void)
 {
-    ft_printf("\033[2J");
+    printf("\033[2J");
 }
