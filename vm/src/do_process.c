@@ -20,9 +20,9 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 		{
 			if (e->par.verb & V_16)
 				print_ADV(e, prc->pc, skip);
-			// ft_printf("\t\t{red}%d %d %d{eoc}", prc->pc, skip, (prc->pc + skip) % MEM_SIZE);
+			// printf("\t\t{red}%d %d %d{eoc}", prc->pc, skip, (prc->pc + skip) % MEM_SIZE);
 			prc->pc = mod_map(prc->pc + skip);
-			// ft_printf(" %d\n", prc->pc);
+			// printf(" %d\n", prc->pc);
 		}
 	}
 	else if (prc->cyc_left == 0)

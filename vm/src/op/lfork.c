@@ -34,6 +34,6 @@ int     lfork(t_env *e, t_prc *prc)
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
 	if (e->par.verb & V_4)
-		ft_printf("P%5d | lfork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);
+		printf("P %4d | lfork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);
     return (0);
 }

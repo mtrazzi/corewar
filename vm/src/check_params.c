@@ -8,7 +8,7 @@ static 	int	is_reg(t_env *e, int pos)
 
 	reg_nb = e->map[mod_map(pos)];
 	if (!(reg_nb > 0 && reg_nb <= REG_NUMBER) && DEBUG_CHECK_PARAMS)
-		ft_printf("reg_nb is %d\npos is %d\n", reg_nb, pos);
+		printf("reg_nb is %d\npos is %d\n", reg_nb, pos);
 	return (reg_nb > 0 && reg_nb <= REG_NUMBER);
 }
 
@@ -35,7 +35,7 @@ static int is_nb_par_correct(u_char ocp, u_int op_code)
 	}
 	if (g_op_tab[op_code - 1].nb_param != sum && DEBUG_CHECK_PARAMS)
 	{
-		ft_printf("nb parameters incorrect : %d but expected %d\n",
+		printf("nb parameters incorrect : %d but expected %d\n",
 		sum, g_op_tab[op_code - 1].nb_param);
 	}
 	return (g_op_tab[op_code - 1].nb_param <= sum);

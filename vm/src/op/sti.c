@@ -22,9 +22,9 @@ int     sti(t_env *e, t_prc *prc)
 	addr = prc->pc + (params[2] + params[3]) % IDX_MOD;
 	if (e->par.verb & V_4)
 	{
-		ft_printf("P%5d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)], \
+		printf("P %4d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)], \
 		params[2], params[3]);
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", \
+		printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", \
 		params[2], params[3], params[2] + params[3], addr);
 	}
 	copy_value(params[1], e, mod_map(addr));

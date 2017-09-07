@@ -25,35 +25,35 @@ static void    check_lives(t_env *e)
 {
 	static u_int last_cyc_number = 0;
 
-	// ft_printf("{cyan}SHAKE IT BABE (last check cycle #%d) (now%d) %d [%d]\n", last_cyc_number, e->cyc_since_beg, e->cyc_since_beg - last_cyc_number, CYCLE_DELTA);
+	// printf("{cyan}SHAKE IT BABE (last check cycle #%d) (now%d) %d [%d]\n", last_cyc_number, e->cyc_since_beg, e->cyc_since_beg - last_cyc_number, CYCLE_DELTA);
 	last_cyc_number = e->cyc_since_beg;
 	// if (DEBUG_CHECK_LIVE)
-	// 	ft_printf("nb_checks : %d\nnb_live : %d\ne->cyc : %d\n", \
+	// 	printf("nb_checks : %d\nnb_live : %d\ne->cyc : %d\n", \
 	// 	e->nb_checks, e->nb_live, e->cyc);
 	e->cyc_counter = 0;
 	if (e->nb_live >= NBR_LIVE)
 	{
-		// ft_printf("{blue}BEFORE nb_live %d   nb_checks %d (ctd %d) %d{eoc}\n", e->nb_live, e->nb_checks, e->cyc, e->cyc_since_beg);
+		// printf("{blue}BEFORE nb_live %d   nb_checks %d (ctd %d) %d{eoc}\n", e->nb_live, e->nb_checks, e->cyc, e->cyc_since_beg);
 		e->nb_live = 0;
 		e->nb_checks = 0;
 		e->cyc -= CYCLE_DELTA;
 		if (e->par.verb & V_2)
-			ft_printf("Cycle to die is now %d\n", e->cyc);//u?
-			// ft_printf("{blue}Cycle to die is now %d{eoc}\n", e->cyc);//u?
+			printf("Cycle to die is now %d\n", e->cyc);//u?
+			// printf("{blue}Cycle to die is now %d{eoc}\n", e->cyc);//u?
 	}
 	else if (e->nb_checks == MAX_CHECKS - 1)
 	{
-		// ft_printf("{green}CHECK TO zero from %d{eoc}\n", e->nb_checks);
+		// printf("{green}CHECK TO zero from %d{eoc}\n", e->nb_checks);
 		e->nb_checks = 0;
 		e->nb_live = 0;
 		e->cyc -= CYCLE_DELTA;
 		if (e->par.verb & V_2)
-			ft_printf("Cycle to die is now %d\n", e->cyc);//u?
-			// ft_printf("{blue}Cycle to die is now %d{eoc}\n", e->cyc);//u?
+			printf("Cycle to die is now %d\n", e->cyc);//u?
+			// printf("{blue}Cycle to die is now %d{eoc}\n", e->cyc);//u?
 	}
 	else
 	{
-		// ft_printf("{red}INC CHECK from %d to %d{eoc}\n", e->nb_checks, e->nb_checks + 1);
+		// printf("{red}INC CHECK from %d to %d{eoc}\n", e->nb_checks, e->nb_checks + 1);
 		e->nb_checks += 1;
 		e->nb_live = 0;
 	}
@@ -75,7 +75,7 @@ static void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 		if (prc->live == 0 || all)
 		{
 			if (e->par.verb & V_8)
-				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+				printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 							prc->id, e->cyc_since_beg - prc->cyc_last_live, e->cyc);
 			dll_delone(&prc_lst);
 		}
@@ -107,7 +107,7 @@ int     run_vm(t_env *e)
 		if ((e->speed == 1) || (e->par.print && (e->cyc_since_beg % e->speed == 1)))
 			print_map(*e);
 		if (e->par.verb & V_2)
-			ft_printf("It is now cycle %d\n", e->cyc_since_beg);
+			printf("It is now cycle %d\n", e->cyc_since_beg);
 		if (do_one_cycle(e) < 0)
 			return (ft_error_vm(STR_ERROR_CYCLE));
 		if ((e->speed == 1) || (e->par.print && (e->cyc_since_beg % e->speed) == 1))
@@ -134,7 +134,7 @@ int     run_vm(t_env *e)
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
 		if (e->par.verb & V_2)
-			ft_printf("It is now cycle %d\n", e->cyc_since_beg);
+			printf("It is now cycle %d\n", e->cyc_since_beg);
 		if (e->cyc_counter == e->cyc || e->cyc <= 0)//=?
 		{
 			if (e->cyc > 0)
