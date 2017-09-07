@@ -62,7 +62,7 @@ struct				s_par			//parameters (from parsing)
 	int				verb;			//verbose option : show operations
 	int				print;			//print the map every 5 cycles
 	int				dump;			//is there a dump ?
-	u_int			nb_cyc;			//nb_cyc befor dump
+	int				nb_cyc;			//nb_cyc befor dump
 	u_int			nb_chp;			//how many .cor files
 	t_chp			champions[MAX_PLAYERS];
 };
@@ -121,6 +121,7 @@ void	clear_screen(void);
 void	print_introduction(t_env *e);
 void	print_conclusion(t_env *e);
 void	print_ADV(t_env *e, int pos, int skip);
+void	dump(t_env *e);
 
 /*
 ** PREPARATION / CHAMPION PARSING

@@ -19,7 +19,7 @@ int main(int ac, char **av)
 		return (ft_free_vm_env(&e));
 	if (run_vm(&e) < 0)
 		return (ft_free_vm_env(&e));
-	if (!e.par.print)
+	if (!(e.par.print || e.par.dump))
 		print_conclusion(&e);
 	ft_free_vm_env(&e);
 	return (0);

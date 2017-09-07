@@ -119,6 +119,8 @@ int     run_vm(t_env *e)
 			del_and_update(e, &(e->prc_lst), 1);
 			return (0);
 		}
+		if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
+			dump(e);
 	}
 	return (0);
 }

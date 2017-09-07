@@ -130,3 +130,20 @@ void	print_ADV(t_env *e, int pos, int skip)
 		printf("%02x ", e->map[mod_map(pos + i)]);
 	printf("\n");
 }
+
+void    dump(t_env *e)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < MEM_SIZE)
+    {
+        printf("0x%04x : ", i);
+        j = -1;
+        while (++j < 64)
+            printf("%02x ", e->map[i + j]);
+        printf("\n");
+        i += 64;
+    }
+}
