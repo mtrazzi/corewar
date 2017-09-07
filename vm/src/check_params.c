@@ -38,7 +38,7 @@ static int is_nb_par_correct(u_char ocp, u_int op_code)
 		ft_printf("nb parameters incorrect : %d but expected %d\n",
 		sum, g_op_tab[op_code - 1].nb_param);
 	}
-	return (g_op_tab[op_code - 1].nb_param == sum);
+	return (g_op_tab[op_code - 1].nb_param <= sum);
 }
 
 static int		are_param_correct(t_env *e, t_prc *prc, u_char ocp, int op_code)

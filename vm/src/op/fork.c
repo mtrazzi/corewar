@@ -12,11 +12,12 @@ static t_prc *new_prc_fork(t_env *e, t_prc *prc, int new_pc)
 		new_prc->r[i] = prc->r[i];
 	new_prc->pc = new_pc;
 	new_prc->carry = prc->carry;
-	new_prc->live = 0;//prc->live;
-	new_prc->live_nb = 0;// = prc->live_nb;
+	new_prc->live = prc->live;
+	new_prc->live_nb = prc->live_nb;
 	new_prc->id = ++(e->last_id);
 	new_prc->cyc_left = 0;
 	new_prc->op_code = NB_OP + 1;
+	new_prc->cyc_last_live = prc->cyc_last_live;
 	// new_prc->newly_created = 1;
 	return (new_prc);
 }
