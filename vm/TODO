@@ -1,0 +1,2 @@
+./corewar -v 31 ../resources/champions_staff/mychamp.cor | less (ld %1, rX)
+compile sanitize!
