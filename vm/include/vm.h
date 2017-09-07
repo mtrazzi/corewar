@@ -21,6 +21,8 @@
 # define V_8 8
 # define V_16 16
 
+# define LAST_TWO_BITS 0b00000011
+
 # define STR_ERR_MALLOC_PRC "cannot malloc process"
 
 typedef struct		s_prc t_prc;
@@ -35,7 +37,7 @@ struct				s_prc			//process
 	u_int			pc;
 	int				r[REG_NUMBER + 1];	//registers r1, ..., r16 == r[1], ..., r[16]
 	int				carry;
-	int				live;
+	int				live;			//nb of lives since last check
 	int				live_nb;		//nb of the champion from live
 	int				id;				//nb of the pc
 	int				cyc_left;		//cycles left before operation

@@ -82,7 +82,11 @@ static void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 		else if (!last_alive)
 			last_alive = prc_lst;
 		if (prc_lst)
+		{
 			prc->live = 0;
+			prc->live_nb = 0;
+			prc->cyc_last_live = e->cyc_since_beg;
+		}
 		prc_lst = next;
 	}
 	*begin_lst = last_alive;

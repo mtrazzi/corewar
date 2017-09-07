@@ -16,7 +16,11 @@ int     st(t_env *e, t_prc *prc)
 	if (((ocp >> 4) % 4) == IND_CODE)
 	{
 		params[2] = get_index(e, (ocp >> 4) % 4, prc, mod_map(prc->pc + offset));
+		if (e->par.verb & V_4)
+			ft_printf("P%5d | st r%d %d\n", prc->id,
+			e->map[mod_map(prc->pc + 2)], params[2]);
 		copy_value(params[1], e, mod_map(prc->pc + params[2]));
+    return (0);
 	}
 	else if (((ocp >> 4) % 4) == REG_CODE)
 	{

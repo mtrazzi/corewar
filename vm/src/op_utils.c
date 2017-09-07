@@ -39,8 +39,8 @@ int     nb_bytes_to_skip(u_char op_code, u_char ocp)
     sum = 2;                                    //op_code + ocp
     while (ocp > 0)
     {
-        sum += sizeof_param(op_code, ocp % 4);  //two last bits
-        ocp /= 4;
+        sum += sizeof_param(op_code, ocp & LAST_TWO_BITS);  //two last bits
+        ocp >>= 2;
     }
     return (sum);
 }
