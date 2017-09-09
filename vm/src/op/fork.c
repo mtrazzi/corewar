@@ -30,10 +30,10 @@ int     ft_fork(t_env *e, t_prc *prc)
 
 	addr_to_fork = get_index(e, DIR_CODE, prc, prc->pc + 1);
 	addr_after_mod = prc->pc + (addr_to_fork % IDX_MOD);
-	if (!(new_prc = new_prc_fork(e, prc, addr_after_mod)))
+	if (!(new_prc = new_prc_fork(e, prc, mod_map(addr_after_mod))))
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
 	if (e->par.verb & V_4)
-		printf("P %4d | fork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);
+		printf("P %4d | fork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);//see lfork
     return (0);
 }
