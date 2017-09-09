@@ -12,6 +12,7 @@ echo "executing ./corewar -dump $2 $CHAMP.cor > log/zaz$1dump$2.log"
 ./corewar -dump $2 $CHAMP.cor > $MY_FILE
 echo "doing the normal diff"
 diff -c -s --speed-large-files $MY_FILE $ZAZ_FILE > $DIFF_LOG
-less $DIFF_LOG
+#less $DIFF_LOG
 echo "doing the column diff"
 diff -y --speed-large-files $MY_FILE $ZAZ_FILE > $COL_DIFF_LOG
+cat $DIFF_LOG

@@ -124,7 +124,7 @@ void	print_ADV(t_env *e, int pos, int skip)
 {
 	int i;
 
-	printf("ADV %d (0x%04x -> 0x%04x) ", skip, pos, mod_map(pos + skip));//04 depends on map size
+	printf("ADV %d (0x%04x -> 0x%04x) ", skip, pos, pos + skip);//04 depends on map size
 	i = -1;
 	while (++i < skip)
 		printf("%02x ", e->map[mod_map(pos + i)]);
