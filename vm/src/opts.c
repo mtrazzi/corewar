@@ -38,7 +38,7 @@ t_opts g_opts[] =
 {
 	//(t_opt_param[MAX_PARAMS])
 	// {'d', "dump", 1, {{1, NULL, INT_VALUE, 1}}, OPTS_D, OPTS_M | OPTS_V},
-	{'d', "dump", 1, {{0, NULL}}, 1, 0},
+	{'d', "dump", 1, {{0, NULL}}, 1, 0},//init all null ?
 	{'d', "debris", 3, {{0, NULL}, {0, NULL}, {0, NULL}}, 2, 0},
 	{'a', NULL, 0, {}, 4, 0},
 	{'b', NULL, 0, {}, 8, 0},
@@ -46,23 +46,20 @@ t_opts g_opts[] =
 	{0, 0, 0, {0}, 0, 0}
 };
 
-int		ft_getparams(int ac, char **av, int ac_index, int *used_args, t_opts *opt)
+static int	ft_getparams(int ac, char **av, int ac_index, int *used_args,
+							t_opts *opt)
 {
 	int		i;
 
-	// if (ac - ac_index - *used_args < opt->nb_param)
-	// 	return (-1);
-	printf("ft_getparams %d\n", ac - ac_index - *used_args);
 	i = -1;
-	while (++i < opt->nb_param && i < ac - ac_index - *used_args + 2)
+	while (++i < opt->nb_param && i < ac - ac_index - *used_args + 1)
 	{
-			if (av[ac_index + *used_args][0] == '-')
+			if (av[ac_index + *used_args + 1][0] == '-')
 				return (-1);
-			opt->params[i].arg = av[ac_index + *used_args];
-			printf("_%s_ %d\n", av[ac_index + *used_args], i);
+			opt->params[i].arg = av[ac_index + *used_args + 1];
+			printf("_%s_ %d\n", av[ac_index + *used_args + 1], i);
 			*used_args += 1;
 	}
-	printf("ft_getparams DONE\n");
 	return (opt->nb_param);
 }
 
@@ -70,45 +67,31 @@ int		ft_getopts(int ac, char **av, int *ac_index, u_int *opts)
 {
 	int		i;
 	int		j;
-	int		is_op;
+	int		is_opt;
 	int		used_args;
 
-	int		ret = 1;
-	used_args = 1;//0
-
-	printf("[%s] %u %#010x\n", av[*ac_index], *opts, *opts);
+	used_args = 0;
 	i = 1;
 	while (av[*ac_index][i])
 	{
-		printf("+%c+ %u %#010x\n", av[*ac_index][i], *opts, *opts);
-		is_op = 0;
+		is_opt = 0;
 		j = -1;
 		while (g_opts[++j].id)
-		{
 			if (g_opts[j].id == av[*ac_index][i])
 			{
-				printf("[%c] %d %d\n", av[*ac_index][i], i, j);
 				if (g_opts[j].str != NULL && strncmp(g_opts[j].str, av[*ac_index] + i, strlen(g_opts[j].str)) != 0)
 					continue ;
-				if (g_opts[j].str != NULL)
-					i += strlen(g_opts[j].str);
-				else
-					i++;
-				printf("TEST %#010x %#010x\n", g_opts[j].off, g_opts[j].on);
+				i += g_opts[j].str != NULL ? strlen(g_opts[j].str) : 1;
 				*opts &= ~g_opts[j].off;
 				*opts |= g_opts[j].on;
-				is_op = 1;
+				is_opt = 1;
 				break ;
 			}
-		}
-		printf("TEST2\n");
-		if (!is_op)
+		if (!is_opt)
 			return (-1);
 		ft_getparams(ac, av, *ac_index, &used_args, &g_opts[j]);
-		// if (ft_getparams(ac, av, *ac_index, &used_args, &g_opts[j]) < 0)
-		// 	return (-1);
 	}
-	*ac_index += used_args - 1;
+	*ac_index += used_args;
 	return (1);
 }
 
@@ -116,11 +99,11 @@ int		ft_getopts(int ac, char **av, int *ac_index, u_int *opts)
 int		parse_params(int ac, char **av, u_int *opts)
 {
 	int	i;
+	int j;
+	int k;
 
 	i = 0;
-	while (++i < ac)
-	{
-		printf("(%s) %u %#010x\n", av[i], *opts, *opts);
+	while (++i < ac)// printf("(%s) %u %#010x\n", av[i], *opts, *opts);
 		if (av[i][0] == '-')
 		{
 			if (!av[i][1])
@@ -130,8 +113,14 @@ int		parse_params(int ac, char **av, u_int *opts)
 		}
 		else
 			break ;
+	j = -1;
+	while (g_opts[++j].id)
+	{
+		k = -1;
+		while (++k < g_opts[j].nb_param)
+			if (g_opts[j].params[k].arg == NULL)
+				return (-1);
 	}
-	//check que les opts ont full nb_param
 	return (++i);//
 }
 
@@ -148,7 +137,7 @@ int main(int ac, char **av)
 	{
 		printf("\t{%c}, {%s}, {%d}, {%#010x}, {%#010x}\n", g_opts[k].id, g_opts[k].str, g_opts[k].nb_param, g_opts[k].on, g_opts[k].off);
 		int t = -1;
-		while (++t < g_opts[k].nb_param)
+		while (++t < g_opts[k].nb_param)//MAX_PARAMS)//g_opts[k].nb_param)
 			printf("\t\tt%d [%ld] [%s]\n", t, g_opts[k].params[t].value, g_opts[k].params[t].arg);
 	}
 	if (i < 0)
@@ -156,6 +145,13 @@ int main(int ac, char **av)
 	printf("%d %#010x\n", opts, opts);
 	return 0;
 }
+
+
+/*
+printf("[%s] %u %#010x\n", av[*ac_index], *opts, *opts);
+printf("+%c+ %u %#010x\n", av[*ac_index][i], *opts, *opts);
+printf("[%c] %d %d\n", av[*ac_index][i], i, j);
+*/
 
 /*
 if (g_opts[j].id == str[i] && g_opts[j].str != NULL)
