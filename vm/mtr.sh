@@ -9,3 +9,4 @@ diff -c -s --speed-large-files log/my$1.log log/zaz$1.log > log/diff$1.log
 echo "\033[0;32m\c"
 cat log/diff$1.log
 echo "\033[0m\c"
+#/bin/rm log/my$1.log log/zaz$1.log log/diff$1.log

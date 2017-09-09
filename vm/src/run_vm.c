@@ -93,15 +93,10 @@ static void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 
 int     run_vm(t_env *e)
 {
-	while (e->prc_lst)
+	// while (e->prc_lst)
+	while (1)
 	{
-		if (e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))//=?
-		{
-			del_and_update(e, &(e->prc_lst), 0);
-			if (e->prc_lst == 0)
-				return (0);
-			check_lives(e);//if check_lives < 0 break ;
-		}
+		
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
 		if ((e->speed == 1) || (e->par.print && (e->cyc_since_beg % e->speed == 1)))
@@ -114,10 +109,15 @@ int     run_vm(t_env *e)
 			ft_wait(e);
 		if (e->par.print)
 			clear_screen();
-		if (e->cyc < 0)
+		if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))//=?
 		{
-			del_and_update(e, &(e->prc_lst), 1);
-			return (0);
+			if (e->cyc < 0)
+				del_and_update(e, &(e->prc_lst), 1);
+			else
+				del_and_update(e, &(e->prc_lst), 0);
+			check_lives(e);//if check_lives < 0 break ;
+			if (e->prc_lst == 0)
+				return (0);
 		}
 		if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
 			dump(e);
