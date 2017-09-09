@@ -33,7 +33,7 @@ int     st(t_env *e, t_prc *prc)
 		//	print_ADV(e, mod_map(prc->pc + params[2]), nb_bytes_to_skip(OP_ST, prc->pc));
 		//}
 		copy_value(params[1], e, mod_map(prc->pc + (params[2] % IDX_MOD)));
-    return (0);
+    	return (0);
 	}
 	else if (((ocp >> 4) % 4) == REG_CODE)
 	{

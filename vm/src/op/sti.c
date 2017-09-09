@@ -15,16 +15,20 @@ int     sti(t_env *e, t_prc *prc)
 	offset += 1;
 	params[1] = prc->r[e->map[mod_map(prc->pc + offset)]]; //first param is a register
 	offset += 1;
-	params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
+	if (((ocp >> 4) % 4) == DIR_CODE)
+		params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
+	else
+		params[2] = get_value(e, (ocp >> 4) % 4, prc, prc->pc + offset);
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
+	//params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
+	//offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	params[3] = get_index(e, (ocp >> 2) % 4, prc, prc->pc + offset);
-	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	addr = prc->pc + (params[2] + params[3]) % IDX_MOD;
 	if (e->par.verb & V_4)
 	{
-		printf("P %4d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)], \
+		printf("P %4d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)],
 		params[2], params[3]);
-		printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", \
+		printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
 		params[2], params[3], params[2] + params[3], addr);
 	}
 	copy_value(params[1], e, mod_map(addr));

@@ -115,7 +115,7 @@ int     is_real_number(t_env *e, int nb)
     return (0);
 }
 
-short	get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
+int		get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
     if (type_of_param == REG_CODE)
         return (prc->r[e->map[mod_map(pos)]]);

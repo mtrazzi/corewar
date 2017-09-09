@@ -19,7 +19,7 @@ int     ldi(t_env *e, t_prc *prc)
 	offset += sizeof_param(OP_LDI, (ocp >> 6) % 4);
 	params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
 	offset += sizeof_param(OP_LDI, (ocp >> 4) % 4);
-	addr = mod_map(prc->pc + (params[1] + params[2]) % IDX_MOD);
+	addr = prc->pc + (params[1] + params[2]) % IDX_MOD;
 	prc->r[e->map[mod_map(prc->pc + offset)]] = get_value(e, DIR_CODE, prc, addr);
 	if (e->par.verb & V_4)
 	{
