@@ -30,22 +30,35 @@ int     sizeof_param(u_char op_code, u_char type_of_param)
     return (0);
 }
 
+//int     nb_bytes_to_skip(u_char op_code, u_char ocp)
+//{
+//    int sum;
+//
+//    if (!(g_op_tab[op_code - 1].ocp))           //for live, zjmp, etc.
+//        return (1 + (op_code == 1 ? 4 : 2));
+//    sum = 2;                                    //op_code + ocp
+//    while (ocp > 0)
+//    {
+//        sum += sizeof_param(op_code, ocp & LAST_TWO_BITS);  //two last bits
+//        ocp >>= 2;
+//    }
+//    return (sum);
+//}
+//
 int     nb_bytes_to_skip(u_char op_code, u_char ocp)
 {
-    int sum;
-	u_int i;
+    int		sum;
+	u_int	i;
 
     if (!(g_op_tab[op_code - 1].ocp))           //for live, zjmp, etc.
         return (1 + (op_code == 1 ? 4 : 2));
     sum = 2;                                    //op_code + ocp
 	i = 0;
-    while (i < g_op_tab[op_code - 1].nb_param)
-    {
-        sum += sizeof_param(op_code, (ocp >> (6 - 2 * i)) & LAST_TWO_BITS);  //two last bits
-		i++;
-    }
+    while (++i <= g_op_tab[op_code - 1].nb_param)
+        sum += sizeof_param(op_code, (ocp >> (4 - i) * 2) & LAST_TWO_BITS);  //two last bits
     return (sum);
 }
+
 
 int     get_value(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 {
