@@ -39,7 +39,7 @@ int		nb_bytes_to_skip(u_char op_code, u_char ocp)
 	u_int	i;
 
 	if (!(g_op_tab[op_code - 1].ocp))
-		return (1 + (op_code == 1 ? 4 : 2));
+		return (1 + ((op_code == 1 || op_code == 18) ? 4 : 2));
 	sum = 2;
 	i = 0;
 	while (++i <= g_op_tab[op_code - 1].nb_param)

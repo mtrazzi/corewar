@@ -51,7 +51,7 @@ void	op_tab_init(void)
 		T_REG}, 14, 50, "long load index", 1, 1};
 	g_op_tab[14] = (t_op){"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1};
 	g_op_tab[15] = (t_op){"aff", 1, {T_REG}, 16, 2, "aff", 1, 0};
-	g_op_tab[16] = (t_op){0, 0, {0}, 17, 1, 0, 0, 0};
+	g_op_tab[NB_OP] = (t_op){0, 0, {0}, NB_OP + 1, 1, 0, 0, 0};
 }
 
 void	op_fun_tab_init(void)
@@ -72,5 +72,41 @@ void	op_fun_tab_init(void)
 	g_op_fun_tab[13] = &lldi;
 	g_op_fun_tab[14] = &lfork;
 	g_op_fun_tab[15] = &aff;
-	g_op_fun_tab[16] = NULL;
+	g_op_fun_tab[NB_OP] = NULL;
+}
+
+void	op_tab_bonus(void)
+{
+	if (NB_OP > 16)
+		g_op_tab[16] = (t_op){"mul", 3, {T_REG, T_REG, T_REG}, 17, 10, "mul",
+		1, 0};
+	if (NB_OP > 17)
+		g_op_tab[17] = (t_op){"death", 1, {T_DIR}, 18, 10, "death", 0, 0};
+	if (NB_OP > 18)
+		g_op_tab[18] = (t_op){"nand", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND |
+		T_DIR, T_REG}, 19, 6, "nand r1, r2, r3   not(r1&r2) -> r3", 1, 0};
+	if (NB_OP > 19)
+		g_op_tab[19] = (t_op){"jmp", 1, {T_DIR}, 20, 100, "jump anyway", 0, 1};
+	if (NB_OP > 20)
+		g_op_tab[20] = (t_op){"bomb", 1, {T_DIR}, 21, 400, "throws bomb and \
+		jump anyway", 0, 1};
+	if (NB_OP > 21)
+		g_op_tab[21] = (t_op){"copy", 3, {T_REG, T_REG, T_REG}, 22, 100, "\
+		r1 -> r2 and r1 -> r3", 1, 0};
+}
+
+void	op_fun_tab_bonus(void)
+{
+	if (NB_OP > 16)
+		g_op_fun_tab[16] = &mul;
+	if (NB_OP > 17)
+		g_op_fun_tab[17] = &death;
+	if (NB_OP > 18)
+		g_op_fun_tab[18] = &nand;
+	if (NB_OP > 19)
+		g_op_fun_tab[19] = &jump;
+	if (NB_OP > 20)
+		g_op_fun_tab[20] = &bomb;
+	if (NB_OP > 21)
+		g_op_fun_tab[21] = &copy;
 }

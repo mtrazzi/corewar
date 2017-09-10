@@ -13,5 +13,6 @@ int		are_macro_correct(void)
 	NBR_LIVE > 10 && NBR_LIVE <= 100 &&
 	MAX_CHECKS >= 10 && MAX_CHECKS <= 100 &&
 	T_REG == 1 && T_DIR == 2 && T_IND == 4 && T_LAB == 8 &&
-	PROG_NAME_LENGTH == 128 && COMMENT_LENGTH == 2048);
+	PROG_NAME_LENGTH == 128 && COMMENT_LENGTH == 2048 && NB_OP >= 16 &&
+	NB_OP <= 22);
 }

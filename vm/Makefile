@@ -41,6 +41,12 @@ SRC +=	live.c				\
 		lfork.c				\
 		aff.c
 
+SRC +=	mul.c				\
+		death.c				\
+		nand.c				\
+		jump.c				\
+		bomb.c				\
+		copy.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/

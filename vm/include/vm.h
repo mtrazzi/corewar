@@ -200,6 +200,12 @@ int					lld(t_env *e, t_prc *prc);
 int					lldi(t_env *e, t_prc *prc);
 int					lfork(t_env *e, t_prc *prc);
 int					aff(t_env *e, t_prc *prc);
+int					mul(t_env *e, t_prc *prc);
+int					death(t_env *e, t_prc *prc);
+int					nand(t_env *e, t_prc *prc);
+int					jump(t_env *e, t_prc *prc);
+int					bomb(t_env *e, t_prc *prc);
+int					copy(t_env *e, t_prc *prc);
 
 /*
 ** OP UTILS
