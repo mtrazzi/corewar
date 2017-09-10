@@ -72,11 +72,11 @@ $(LIBS):
 #clean libs ? necessary only in project Makefile?
 clean:
 	#@$(MAKE) -C ../libs clean
-	rm -rf $(OBJ_PATH)
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	#@$(MAKE) -C ../libs fclean
-	rm -f $(NAME)
+	/bin/rm -f $(NAME)
 
 re: fclean all
 

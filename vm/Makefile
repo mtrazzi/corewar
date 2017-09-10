@@ -19,7 +19,9 @@ SRC = 	ft_error_vm.c		\
 		run_vm.c			\
 		op_utils.c			\
 		op_utils2.c			\
-		check_params.c
+		check_params.c		\
+		parse_arg2.c		\
+		opts.c
 
 SRC +=	live.c				\
 		ld.c				\
@@ -45,7 +47,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 VPATH = src:include:src/op
 IFLAGS = -I include
-HEADERS = vm.h op.h
+HEADERS = vm.h op.h opts.h
 
 DLLST_PATH = ../libs/dllst
 DLLST = $(DLLST_PATH)/dllst.a
@@ -65,7 +67,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Building $(NAME)..."
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[3;94m!$(NAME) built!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
@@ -77,7 +83,7 @@ $(LIBS):
 
 clean:
 	@$(MAKE) -C ../libs clean
-	rm -rf $(OBJ_PATH)
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	@$(MAKE) -C ../libs fclean

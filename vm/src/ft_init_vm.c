@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_vm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:47:07 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 11:48:48 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/09/10 17:05:31 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			ft_init_vm(t_env *e)
 	e->cyc_counter = 0;
 	e->nb_live = 0;
 	e->nb_checks = 0;
+	e->par.opts = 0;
 	e->par.dump = 0;
 	e->par.nb_cyc = 0;
 	e->par.nb_chp = 0;

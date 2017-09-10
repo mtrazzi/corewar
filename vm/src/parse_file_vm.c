@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_vm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:58:08 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 12:21:53 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/09/10 19:06:42 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,11 @@ int				parse_all_files(t_env *e)
 	while (i < e->par.nb_chp)
 	{
 		if (parse_file(e, i) < 0)
-			return (ft_error_vm(STR_ERR_READ_FILE));
+		{
+			ft_fprintf(2, "Error: could not read '%s' file\n",
+						e->par.champions[i].file_name);
+			return (-1);
+		}
 		i++;
 	}
 	return (1);

@@ -17,3 +17,5 @@ re:
 	@$(MAKE) -C libs re
 	@$(MAKE) -C asm re
 	@$(MAKE) -C vm re
+
+.PHONY: all fclean clean re

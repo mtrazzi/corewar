@@ -27,4 +27,7 @@ int 	ft_atoi(const char *nptr);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
+int		ft_isdigit(char c);
+int		ft_isdigits_str(char *str);
+
 #endif
