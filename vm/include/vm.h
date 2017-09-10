@@ -121,7 +121,7 @@ void	clear_screen(void);
 void	print_introduction(t_env *e);
 void	print_conclusion(t_env *e);
 void	print_ADV(t_env *e, int pos, int skip);
-void	dump(t_env *e);
+int		dump(t_env *e);
 
 /*
 ** PREPARATION / CHAMPION PARSING
@@ -208,7 +208,6 @@ void	op_tab_init(void);
 ** TO DO
 */
 
-//dump memory with option -d
 //function to check if all number or players are different
 //change usage
 //uncompability of certain options (-d and -m for example)

@@ -19,13 +19,14 @@ int     lldi(t_env *e, t_prc *prc)
 	offset += sizeof_param(OP_LLDI, (ocp >> 6) % 4);
 	params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
 	offset += sizeof_param(OP_LLDI, (ocp >> 4) % 4);
-	addr = mod_map(prc->pc + (params[1] + params[2]) % IDX_MOD);
-	prc->r[e->map[mod_map(prc->pc + offset)]] = get_value(e, IND_CODE, prc, addr);
+	addr = prc->pc + (params[1] + params[2]);
+	prc->r[e->map[mod_map(prc->pc + offset)]] = lget_value(e, DIR_CODE, prc, addr);
+	prc->carry = (lget_value(e, DIR_CODE, prc, addr) == 0);
 	if (e->par.verb & V_4)
 	{
 		printf("P %4d | lldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);
-		printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
+		printf("       | -> load from %d + %d = %d (with pc %d)\n", \
 		params[1], params[2], params[1] + params[2], addr);
 	}
     return (0);

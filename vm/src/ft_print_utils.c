@@ -131,7 +131,7 @@ void	print_ADV(t_env *e, int pos, int skip)
 	printf("\n");
 }
 
-void    dump(t_env *e)
+int		dump(t_env *e)
 {
     int i;
     int j;
@@ -146,4 +146,5 @@ void    dump(t_env *e)
         printf("\n");
         i += 64;
     }
+	return (0);
 }

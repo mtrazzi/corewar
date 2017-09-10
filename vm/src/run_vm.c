@@ -96,7 +96,7 @@ int     run_vm(t_env *e)
 	// while (e->prc_lst)
 	while (1)
 	{
-		
+
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
 		if ((e->speed == 1) || (e->par.print && (e->cyc_since_beg % e->speed == 1)))
@@ -120,7 +120,7 @@ int     run_vm(t_env *e)
 				return (0);
 		}
 		if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
-			dump(e);
+			return(dump(e));
 	}
 	return (0);
 }

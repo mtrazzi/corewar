@@ -80,7 +80,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) -C ../libs fclean
-	rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: clean all
 

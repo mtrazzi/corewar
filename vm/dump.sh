@@ -14,5 +14,8 @@ echo "doing the normal diff"
 diff -c -s --speed-large-files $MY_FILE $ZAZ_FILE > $DIFF_LOG
 #less $DIFF_LOG
 #echo "doing the column diff"
+echo "\033[0;32m\c"
 #diff -y --speed-large-files $MY_FILE $ZAZ_FILE > $COL_DIFF_LOG
 cat $DIFF_LOG
+echo "\033[0m\c"
+/bin/rm $MY_FILE $ZAZ_FILE $DIFF_LOG
