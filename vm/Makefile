@@ -12,6 +12,7 @@ SRC = 	ft_error_vm.c		\
 		parse_file_vm.c		\
 		vm.c				\
 		str_utils.c			\
+		str_utils2.c		\
 		ft_print_utils.c	\
 		init_process.c		\
 		one_cycle.c			\
@@ -19,7 +20,8 @@ SRC = 	ft_error_vm.c		\
 		run_vm.c			\
 		op_utils.c			\
 		op_utils2.c			\
-		check_params.c
+		check_params.c		\
+		global_utils.c
 
 SRC +=	live.c				\
 		ld.c				\

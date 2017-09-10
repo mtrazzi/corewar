@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:44:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 13:15:50 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/09/10 15:36:56 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static void	check_lives(t_env *e)
 	}
 }
 
-static void del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive, int all)
+static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
+																	int all)
 {
 	t_prc *prc;
 
@@ -95,21 +96,6 @@ static void	del_and_update(t_env *e, t_dll **begin_lst, int all)
 	while (prc_lst)
 	{
 		next = prc_lst->next;
-		//prc = (t_prc *)prc_lst->content;
-		//if (prc->live == 0 || all)
-		//{
-		//	if (e->par.verb & V_8)
-		//		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-		//				prc->id, e->cyc_since_beg - prc->cyc_last_live, e->cyc);
-		//	dll_delone(&prc_lst);
-		//}
-		//else if (!last_alive)
-		//	last_alive = prc_lst;
-		//if (prc_lst)
-		//{
-		//	prc->live = 0;
-		//	prc->live_nb = 0;
-		//}
 		del_and_update_aux(e, &prc_lst, &last_alive, all);
 		prc_lst = next;
 	}
@@ -134,16 +120,13 @@ int			run_vm(t_env *e)
 			clear_screen();
 		if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
 		{
-			if (e->cyc < 0)
-				del_and_update(e, &(e->prc_lst), 1);
-			else
-				del_and_update(e, &(e->prc_lst), 0);
+			del_and_update(e, &(e->prc_lst), e->cyc < 0);
 			check_lives(e);
 			if (e->prc_lst == 0)
 				return (0);
 		}
 		if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
-			return(dump(e));
+			return (dump(e));
 	}
 	return (0);
 }

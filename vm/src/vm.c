@@ -6,7 +6,7 @@
 /*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:22:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 12:36:18 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/09/10 15:12:58 by mtrazzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int	main(int ac, char **av)
 	if (!(e.par.print || (e.par.dump && e.prc_lst)))
 		print_conclusion(&e);
 	ft_free_vm_env(&e);
-	while (1);
 	return (0);
 }

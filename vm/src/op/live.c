@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   live.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/10 14:49:37 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/09/10 15:02:31 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-int		live(t_env *e, t_prc *prc)
+int	live(t_env *e, t_prc *prc)
 {
 	int ret;
 
@@ -14,7 +26,8 @@ int		live(t_env *e, t_prc *prc)
 	{
 		e->last_alive = prc->live_nb;
 		if (e->par.verb & V_1)
-			printf("Player %d (%s) is said to be alive\n", ret, e->par.champions[ret - 1].name);
+			printf("Player %d (%s) is said to be alive\n",
+			ret, e->par.champions[ret - 1].name);
 	}
 	return (0);
 }
