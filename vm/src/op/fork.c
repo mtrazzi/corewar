@@ -20,7 +20,7 @@ static	t_prc	*new_prc_fork(t_env *e, t_prc *prc, int new_pc)
 	if (!(new_prc = (t_prc *)malloc(sizeof(t_prc))))
 		return (NULL);
 	i = 0;
-	while (i++ < 16)
+	while (i++ < REG_NUMBER)
 		new_prc->r[i] = prc->r[i];
 	new_prc->pc = new_pc;
 	new_prc->carry = prc->carry;

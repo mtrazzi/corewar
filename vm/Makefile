@@ -21,7 +21,8 @@ SRC = 	ft_error_vm.c		\
 		op_utils.c			\
 		op_utils2.c			\
 		check_params.c		\
-		global_utils.c
+		global_utils.c		\
+		check_header.c
 
 SRC +=	live.c				\
 		ld.c				\
