@@ -118,3 +118,22 @@ void    clear_screen(void)
 {
     printf("\033[2J");
 }
+
+int		dump(t_env *e)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		printf("0x%04x : ", i);
+		j = -1;
+		while (++j < 64)
+			printf("%02x ", e->map[i + j]);
+		printf("\n");
+		i += 64;
+	}
+	return (0);
+}
+

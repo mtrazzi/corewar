@@ -80,7 +80,7 @@ struct				s_env
 	int				cyc_since_beg;  //nb of cycles since beginning
 	int				last_alive;		//nb of last live done
 	int				last_id;
-	int				speed;
+	int				spd;
 };
 
 /*
@@ -120,7 +120,7 @@ int		print_prc(t_prc *prc);
 void	clear_screen(void);
 void	print_introduction(t_env *e);
 void	print_conclusion(t_env *e);
-void	print_ADV(t_env *e, int pos, int skip);
+void	print_adv(t_env *e, int pos, int skip);
 int		dump(t_env *e);
 
 /*

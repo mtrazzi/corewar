@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_params.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/10 11:44:59 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/09/10 11:46:55 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-# define DEBUG_CHECK_PARAMS 0
+#define DEBUG_CHECK_PARAMS 0
 
-static 	int	is_reg(t_env *e, int pos)
+static	int		is_reg(t_env *e, int pos)
 {
 	int reg_nb;
 
@@ -10,7 +22,8 @@ static 	int	is_reg(t_env *e, int pos)
 	return (reg_nb > 0 && reg_nb <= REG_NUMBER);
 }
 
-static int		are_param_correct(t_env *e, t_prc *prc, u_char ocp, u_int op_code)
+static	int		are_param_correct(t_env *e, t_prc *prc, u_char ocp,
+														u_int op_code)
 {
 	u_int	tmp;
 	u_int	max;
@@ -23,7 +36,8 @@ static int		are_param_correct(t_env *e, t_prc *prc, u_char ocp, u_int op_code)
 	while (++i < max)
 	{
 		tmp = (ocp >> (4 - i) * 2) & LAST_TWO_BITS;
-		if ((g_op_tab[op_code - 1].type_param[i - 1] & (tmp == IND_CODE ? T_IND : tmp)) == 0)
+		if ((g_op_tab[op_code - 1].type_param[i - 1] &
+			(tmp == IND_CODE ? T_IND : tmp)) == 0)
 			return (0);
 		if (tmp == REG_CODE && !is_reg(e, prc->pc + offset))
 			return (0);
@@ -32,7 +46,7 @@ static int		are_param_correct(t_env *e, t_prc *prc, u_char ocp, u_int op_code)
 	return (1);
 }
 
-int		check_params(t_env *e, t_prc *prc, int op_code)
+int				check_params(t_env *e, t_prc *prc, int op_code)
 {
 	u_char	ocp;
 

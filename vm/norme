@@ -512,7 +512,7 @@ Error (line 119): bad indentation
 Error (line 119): must begin only by tabulations
 Error (line 120): bad indentation
 Error (line 120): must begin only by tabulations
-Error (line 123, col 0): print_ADV not unixcase
+Error (line 123, col 0): print_adv not unixcase
 Error (line 127): C++ comment
 Error (line 127): line has 89 characters
 Error (line 134): Space before function name

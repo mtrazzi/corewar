@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_vm.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/10 11:47:07 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/09/10 11:48:48 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-static void init_chp(t_chp *chp)
+static void	init_chp(t_chp *chp)
 {
 	chp->nb = 0;
 	ft_bzero(chp->name, PROG_NAME_LENGTH + 1);
@@ -8,7 +20,7 @@ static void init_chp(t_chp *chp)
 	chp->file_name = NULL;
 }
 
-static void init_champions(t_env *e)
+static void	init_champions(t_env *e)
 {
 	int i;
 
@@ -24,8 +36,8 @@ int			ft_init_vm(t_env *e)
 {
 	ft_bzero(e->map, MEM_SIZE);
 	ft_bzero(e->map_color, MEM_SIZE);
-	color_tab();						//init color tab for printf
-	op_tab_init();						//init the operation table
+	color_tab();
+	op_tab_init();
 	op_fun_tab_init();
 	e->prc_lst = NULL;
 	e->cyc = CYCLE_TO_DIE;
@@ -39,7 +51,7 @@ int			ft_init_vm(t_env *e)
 	e->par.print = 0;
 	e->cyc_since_beg = 0;
 	e->last_alive = 0;
-	e->speed = 5;
+	e->spd = 5;
 	init_champions(e);
 	return (1);
 }

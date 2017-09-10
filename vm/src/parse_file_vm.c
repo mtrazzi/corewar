@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file_vm.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/10 11:58:08 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/09/10 12:21:53 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-# define STR_ERR_READ_FILE "could not read .cor file"
-# define STR_ERR_CLOSE_FILE "could not close .cor file"
-# define STR_ERR_FORMAT_FILE ".cor file not well formated"
-# define STR_ERR_MAGIC "magic number incorrect"
-# define STR_ERR_SIZE_CHP "champion size to big"
-# define STR_ERR_SIZE_CHP2 "could not read size of program defined in header"
-# define STR_ERR_SIZE_CHP3 "champion size inferior to header size"
+#define STR_ERR_READ_FILE "could not read .cor file"
+#define STR_ERR_CLOSE_FILE "could not close .cor file"
+#define STR_ERR_FORMAT_FILE ".cor file not well formated"
+#define STR_ERR_MAGIC "magic number incorrect"
+#define STR_ERR_SIZE_CHP "champion size to big"
+#define STR_ERR_SIZE_CHP2 "could not read size of program defined in header"
+#define STR_ERR_SIZE_CHP3 "champion size inferior to header size"
 
-static int ft_close(int fd)
+static int		ft_close(int fd)
 {
 	if (close(fd) < 0)
 		ft_perror_vm();
@@ -17,9 +29,9 @@ static int ft_close(int fd)
 
 static int		parse_header(t_env *e, int i, int fd)
 {
-	char 	buff[4];
+	char	buff[4];
 	int		padding;
-	t_chp chp;
+	t_chp	chp;
 
 	chp = e->par.champions[i];
 	if (read(fd, (char *)&chp.magic, 4) < 4)
@@ -46,7 +58,7 @@ static int		parse_header(t_env *e, int i, int fd)
 
 static int		write_op_on_map(t_env *e, int i, int fd)
 {
-	t_chp 		chp;
+	t_chp		chp;
 	char		buff[MEM_SIZE];
 	u_int		j;
 
@@ -80,7 +92,7 @@ static int		parse_file(t_env *e, int i)
 	return (0);
 }
 
-int		parse_all_files(t_env *e)
+int				parse_all_files(t_env *e)
 {
 	u_int i;
 

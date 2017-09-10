@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/10 12:22:10 by mtrazzi           #+#    #+#             */
+/*   Updated: 2017/09/10 12:36:18 by mtrazzi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-# define DEBUG_MAIN 0
+#define DEBUG_MAIN 0
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_env	e;
 
@@ -22,5 +34,6 @@ int main(int ac, char **av)
 	if (!(e.par.print || (e.par.dump && e.prc_lst)))
 		print_conclusion(&e);
 	ft_free_vm_env(&e);
+	while (1);
 	return (0);
 }

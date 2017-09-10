@@ -31,7 +31,7 @@ int     ldi(t_env *e, t_prc *prc)
 		//prc->r[e->map[mod_map(prc->pc + offset)]]);
 		//printf("params[1] : %d\nparams[2] : %d\naddr : %#4x\n",
 		//params[1], params[2], addr);
-		//print_ADV(e, addr, 4);
+		//print_adv(e, addr, 4);
 	}
     return (0);
 }

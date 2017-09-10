@@ -24,13 +24,13 @@ int     st(t_env *e, t_prc *prc)
 		//if (e->cyc_since_beg > 8900 && e->cyc_since_beg < 9000)
 		//{
 		//	printf("before");
-		//	print_ADV(e, mod_map(prc->pc + params[2]), nb_bytes_to_skip(OP_ST, prc->pc));
+		//	print_adv(e, mod_map(prc->pc + params[2]), nb_bytes_to_skip(OP_ST, prc->pc));
 		//}
 		//copy_value(params[1], e, mod_map(prc->pc + params[2]));
 		//if (e->cyc_since_beg > 8900 && e->cyc_since_beg < 9000)
 		//{
 		//	printf("after");
-		//	print_ADV(e, mod_map(prc->pc + params[2]), nb_bytes_to_skip(OP_ST, prc->pc));
+		//	print_adv(e, mod_map(prc->pc + params[2]), nb_bytes_to_skip(OP_ST, prc->pc));
 		//}
 		copy_value(params[1], e, mod_map(prc->pc + (params[2] % IDX_MOD)));
     	return (0);
