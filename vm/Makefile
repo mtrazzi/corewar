@@ -48,6 +48,8 @@ SRC +=	mul.c				\
 		bomb.c				\
 		copy.c
 
+SRC +=	ncurses.c
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
@@ -74,7 +76,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Building $(NAME)..."
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS)
 	@echo "\033[3;94m!$(NAME) built!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)

@@ -109,7 +109,10 @@ int			run_vm(t_env *e)
 		e->cyc_counter += 1;
 		e->cyc_since_beg += 1;
 		if ((e->spd == 1) || (e->par.print && (e->cyc_since_beg % e->spd == 1)))
-			print_map(*e);
+		{
+			// print_map(*e);
+			print_ncurses(e);
+		}
 		if (e->par.verb & V_2)
 			printf("It is now cycle %d\n", e->cyc_since_beg);
 		if (do_one_cycle(e) < 0)
