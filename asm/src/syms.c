@@ -33,20 +33,27 @@ t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 	return (NULL);
 }
 
-int		create_add_label(char *str, int len, t_dll **syms, u_int symbol)
+// int		create_add_label(char *str, int len, t_dll **syms, u_int symbol)
+t_dll		*create_add_label(char *str, int len, t_dll **syms, u_int symbol)
 {
 	char	*label;
 	t_sym	*new_sym;
 	t_dll	*new_dll;
 
 	if ((label = ft_strsub(str, 0, len)) == NULL)
-		return (MAL_ERR);
+		return (NULL);
 	if ((new_sym = create_sym(label, symbol)) == NULL)
-		return (MAL_ERR * ft_free((void *)&label));
+	{
+		(void)ft_free((void *)&label);
+		return (NULL);
+	}
 	if ((new_dll = dll_new((void*)new_sym)) == NULL)
-		return (MAL_ERR * ft_free((void *)&label) * ft_free((void *)&new_sym));
+	{
+		(void)(ft_free((void *)&label) * ft_free((void *)&new_sym));
+		return (NULL);
+	}
 	dll_append(syms, new_dll);
-	return (1);
+	return (new_dll);
 }
 
 int		get_sym_by_sym(t_dll *dll, void *data)

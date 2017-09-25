@@ -79,25 +79,6 @@ struct s_sym
 	char	*label;
 };
 
-// struct			s_param
-// {
-// 	t_arg_type	type;
-// 	u_int		n;
-// 	u_int		sym;
-// };
-
-// struct			s_ope
-// {
-// 	u_int		sym;//char *label
-// 	u_int		op_code;
-// 	u_int		nb_par;
-// 	t_param		p1;
-// 	t_param		p2;
-// 	t_param		p3;
-// 	u_int		size;
-// 	//t_op			*op_tab_x;
-// };
-
 struct			s_ope
 {
 	u_int	nb_param;
@@ -110,13 +91,6 @@ struct			s_ope
 	t_op	*op_tab_x;
 	u_int	line_nb;
 };
-
-// struct			s_sym
-// {
-// 	char		*label;
-// 	u_int		sym;
-// 	char		true_sym;
-// };
 
 struct			s_op
 {
@@ -160,7 +134,8 @@ int		init_g_op(void);
 t_ope	*create_ope(void);
 t_sym	*create_sym(char *label, u_int symbol);
 t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms);
-int		create_add_label(char *str, int len, t_dll **syms, u_int symbol);
+// int		create_add_label(char *str, int len, t_dll **syms, u_int symbol);
+t_dll	*create_add_label(char *str, int len, t_dll **syms, u_int symbol);
 t_dll	*create_ope_dll(t_ope *ope, t_op *ref);
 t_op	*does_op_exist_in_op_tab(char *str, int len);
 

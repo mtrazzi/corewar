@@ -26,7 +26,7 @@ int main(int ac, char **av)
 	init_asm(&a);
 	a.fd = open(av[1], O_RDONLY);
 	if (a.fd < 0)
-		return (ft_printf("COULD NOT OPEN %s\n", av[1]));
+		return (ft_printf("Can't read source file %s\n", av[1]));
 	init_g_op();
 	get_labels(&a);
 	ft_printf("DONE\n");

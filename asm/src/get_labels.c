@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_labels.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/24 19:08:27 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/25 14:11:24 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "asm.h"
 
-u_int	get_next_symbol2(t_dll *syms)
+static u_int	get_next_symbol2(t_dll *syms)
 {
 	t_dll *last;
 
@@ -9,7 +20,7 @@ u_int	get_next_symbol2(t_dll *syms)
 	return (last == NULL ? 0 : ((t_sym *)last->content)->sym + 1);
 }
 
-int	parse_label_only2(char *line, t_dll **syms, u_int line_number, t_dll **to_skip)//redo
+static int	parse_label_only(char *line, t_dll **syms, u_int line_number, t_dll **to_skip)//redo
 {
 	char	*tmp;
 	t_sym	*sym_tmp;
@@ -23,17 +34,15 @@ int	parse_label_only2(char *line, t_dll **syms, u_int line_number, t_dll **to_sk
 	sym_tmp = does_label_exist_in_sym_dll(tmp, line - tmp, *syms);
 	if (sym_tmp != NULL)
 	{
-		if (create_add_label(tmp, line - tmp, to_skip, 101010) == MAL_ERR)//could avoid malloc label
+		if ((last = create_add_label(tmp, line - tmp, to_skip, 101010)) == NULL)//could avoid malloc label
 			return (MAL_ERR);
-		last = get_last(*to_skip);//not opti at all
-		((t_sym *)last->content)->line_number_parsing_help = line_number;//no protect needed ?
+		((t_sym *)last->content)->line_number_parsing_help = line_number;
 		((t_sym *)last->content)->corresponding_ope = NULL;
 		return (1);
 	}
-	if (create_add_label(tmp, line - tmp, syms, get_next_symbol2(*syms)) == MAL_ERR)
+	if ((last = create_add_label(tmp, line - tmp, syms, get_next_symbol2(*syms))) == NULL)
 		return (MAL_ERR);
-	last = get_last(*syms);//not opti at all
-	((t_sym *)last->content)->line_number_parsing_help = line_number;//no protect needed ?
+	((t_sym *)last->content)->line_number_parsing_help = line_number;
 	((t_sym *)last->content)->corresponding_ope = NULL;
 	return (1);
 }
@@ -44,13 +53,14 @@ int		get_labels(t_asm *a)
 	char	*line = NULL;
 	char	*rem = NULL;
 	int		ret;
+	char	*tmp;
 
 	while ((ret = get_next_line(a->fd, &line, &rem)) > 0)
 	{
 		ft_printf("line count: %d %s\n", line_count, line);
-		char *tmp = line;
+		tmp = line;
 		skip_whitespaces(&tmp);
-		if (parse_label_only2(tmp, &a->syms, line_count, &a->to_skip_syms) == MAL_ERR)
+		if (parse_label_only(tmp, &a->syms, line_count, &a->to_skip_syms) == MAL_ERR)
 			return (ret * ft_free((void *)&line) * ft_free((void *)&rem));
 		line_count++;
 		ft_free((void *)&line);
