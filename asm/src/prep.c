@@ -24,7 +24,7 @@ int		associate_ope_to_label(t_dll *syms, t_dll *ops)
 			((t_sym *)syms->content)->corresponding_ope = (t_ope *)ope->content;
 		}
 		else
-			((t_sym *)syms->content)->corresponding_ope = NULL;//(t_ope *)ops->content;
+			((t_sym *)syms->content)->corresponding_ope = NULL;
 		syms = syms->next;
 	}
 	return (1);
@@ -32,6 +32,8 @@ int		associate_ope_to_label(t_dll *syms, t_dll *ops)
 
 int		calc_sizes(t_dll *ops)
 {
+	if (!ops)
+		return (1);
 	dll_foreach_content(ops, nb_bytes_op);
 	dll_foreach(ops, calc_add_size);
 	return (1);
@@ -41,7 +43,7 @@ int		rsbv(t_dll *dll, void *data)
 {
 	t_dll	*dlltmp;
 	t_dll	*syms;
-	int	i;
+	int		i;
 	t_ope	*ope;
 
 	dlltmp = NULL;
@@ -70,7 +72,9 @@ int		rsbv(t_dll *dll, void *data)
 
 int		replace_sym_by_value(t_dll *ops, t_dll *syms)
 {
-	dll_iter_int(ops, rsbv, syms);//new foreach taking a void!//protect against !syms
+	if (!syms || !ops)
+		return (1);
+	dll_iter_int(ops, rsbv, syms);//new foreach taking a void!
 	return (1);
 }
 

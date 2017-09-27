@@ -16,16 +16,13 @@ int		init_ope(t_ope *ope)
 int parse_op(char **line, t_dll **ops, int line_count, t_asm *a)
 {
 	t_dll	*new_ope_dll;
-	t_ope	ope;//init?
+	t_ope	ope;
 	t_op	*op;
 	char	*tmp;
 
-	op = NULL;//useless
 	init_ope(&ope);
 	ope.line_nb = line_count;
 	tmp = *line;
-	// *line = get_next_whitespace(*line);
-	// op = does_op_exist_in_op_tab(tmp, *line - tmp);
 	tmp = get_next_whitespace(tmp);
 	op = does_op_exist_in_op_tab(*line, tmp - *line);
 	ft_printf("{green}op %p{eoc} {%s} [%d]\n", op, tmp, tmp - *line);
@@ -40,7 +37,6 @@ int parse_op(char **line, t_dll **ops, int line_count, t_asm *a)
 	dll_append(ops, new_ope_dll);
 	return (1);
 }
-
 
 void		skip_labels(char **line, int line_count, t_dll **sym_curr, 
 						t_dll **to_skip_curr)
@@ -112,13 +108,12 @@ int		parsing(t_asm *a)
 		p.alc = line;
 		ft_printf("{cyan}line:{eoc} %s\n", line);
 		if ((ret = process_line(&p.alc, a, &p)) != 1)
-			return (ret * error_parse(&p));//*ft_free((void *)&line) * ft_free((void *)&rem)
-		p.line_count += 1;
-		//frees
-		//(void)ft_free((void *)&line);
+			return (ret * error_parse(&p) * ft_free((void *)&line)
+						* ft_free((void *)&rem));
+	 	p.line_count += 1;
+		(void)ft_free((void *)&line);
 	}
-	//frees
-	//(void)(ft_free((void *)&line) * ft_free((void *)&rem));
+	(void)(ft_free((void *)&line) * ft_free((void *)&rem));
 	if (ret < 0)
 		return (GNL_ERR);
 	return (1);
