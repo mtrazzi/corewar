@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/09/27 16:11:49 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/27 20:01:13 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef char	t_arg_type;
 **
 */
 
-# define PROG_NAME_LENGTH		(128 + 4) //8 lignes de 16 octets
-# define COMMENT_LENGTH			(2048 + 5)
+# define PROG_NAME_LENGTH		(128) //8 lignes de 16 octets
+# define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
 typedef struct					header_s

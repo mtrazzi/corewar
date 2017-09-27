@@ -59,10 +59,10 @@ int			nb_bytes_op(t_ope *ope)
 int		calc_add_size(t_dll *dll)
 {
 	if (dll->prev == NULL)
-		((t_ope *)dll->content)->address_in_size = 0;
+		((t_ope *)dll->content)->ais = 0;
 	else
-		((t_ope *)dll->content)->address_in_size =
-			 ((t_ope *)dll->prev->content)->address_in_size
+		((t_ope *)dll->content)->ais =
+			 ((t_ope *)dll->prev->content)->ais
 			 	+ ((t_ope *)dll->prev->content)->size;
 	return (1);
 }

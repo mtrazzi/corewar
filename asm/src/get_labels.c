@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 19:08:27 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 12:03:50 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/27 18:07:11 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int		parse_label_only(char *line, t_dll **syms,
 									syms, get_next_symbol2(*syms))) == NULL)
 		return (MAL_ERR);
 	((t_sym *)last->content)->line_number_parsing_help = line_number;
-	((t_sym *)last->content)->corresponding_ope = NULL;
+	((t_sym *)last->content)->c_ope = NULL;
 	return (1);
 }
 

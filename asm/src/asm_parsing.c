@@ -7,7 +7,7 @@ int		init_ope(t_ope *ope)
 	ft_bzero(ope->params, sizeof(u_int) * MAX_ARGS_NUMBER);
 	ope->op_code = MAX_OP;
 	ope->size = 0;
-	ope->address_in_size = 0;
+	ope->ais = 0;
 	ope->op_tab_x = NULL;
 	ope->line_nb = 0;
 	return (1);

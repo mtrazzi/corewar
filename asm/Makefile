@@ -1,7 +1,13 @@
 
 CC = gcc
 
+ifeq ($(DEBUG), yes)
+CFLAGS = -g3 #-fsanitize=address
+else ifeq ($(NOFLAGS), yes)
+CFLAGS =
+else
 CFLAGS = -Wall -Wextra -Werror
+endif
 
 NAME = asm
 
@@ -21,10 +27,11 @@ SRC = asm.c \
 		error_output.c \
 		size.c \
 		pcb.c \
-		update_fd_to_output_file.c \
+		file_handling.c \
 		print_header.c \
 		endian_utils.c \
-		write_cmd.c
+		write_cmd.c \
+		del.c
 
 #op.c
 
@@ -55,15 +62,13 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
-	$(CC) -o $(NAME) $(OBJ) $(LIBS)
+	$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS)
 	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
-#$(CFLAGS)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS)
-#$(CFLAGS)
+	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS)
 
 $(LIBS):
 	@$(MAKE) -C ../libs all

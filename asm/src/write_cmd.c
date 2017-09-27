@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/27 18:27:26 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/27 18:27:33 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-int		write_op(t_dll *dll, void *data)
+static int	write_op(t_dll *dll, void *data)
 {
-	t_ope *ope;
-	int	fd;
-	int	i;
+	t_ope	*ope;
+	int		fd;
+	int		i;
 
 	ope = (t_ope *)dll->content;
 	fd = (int)data;
@@ -24,9 +36,10 @@ int		write_op(t_dll *dll, void *data)
 	return (1);
 }
 
-void	print_cmds(t_asm *a)
+void		print_cmds(t_asm *a)
 {
-	dll_iter_int(a->ops, write_op, (void *)(long)a->fd);
+	if (a->ops)
+		dll_iter_int(a->ops, write_op, (void *)(long)a->fd);
 }
 
 /*

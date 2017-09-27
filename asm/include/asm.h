@@ -75,7 +75,7 @@ struct			s_asm
 struct s_sym
 {
 	u_int	line_number_parsing_help;//0-indexed!
-	t_ope	*corresponding_ope;
+	t_ope	*c_ope;//corresponding_ope
 	u_int	sym;
 	char	*label;
 };
@@ -87,7 +87,7 @@ struct			s_ope
 	u_int	params[MAX_ARGS_NUMBER];
 	u_int	op_code;
 	u_int	size;
-	u_int	address_in_size;//sum of precedent sizes
+	u_int	ais;//address_in_size;//sum of precedent sizes
 	u_char	ocp;
 	t_op	*op_tab_x;
 	u_int	line_nb;
@@ -172,6 +172,9 @@ int		update_fd_asm(t_asm *a, char *file_name);
 void	print_header(t_asm *a);
 void	write_be(int fd, u_int n, u_int size);//CHANGE INT?
 void	print_cmds(t_asm *a);
+
+int		clear_asm(t_asm *a);
+int		open_file(char *file_name, int *fd);
 
 #endif
 

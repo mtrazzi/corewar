@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prep.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/27 18:17:52 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/27 20:32:49 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "asm.h"
+#include "limits.h"
 
-int	cmp_line_nb_label_line(t_dll *e, void *data)
+static int	cmp_line_nb_label_line(t_dll *e, void *data)
 {
 	if (((t_ope *)e->content)->line_nb >= (u_int)*((long *)data))
 		return (0);
 	return (1);
 }
 
-int		associate_ope_to_label(t_dll *syms, t_dll *ops)
+static int	associate_ope_to_label(t_dll *syms, t_dll *ops)
 {
 	long	tmp;
 	t_dll	*ope;
@@ -21,16 +33,16 @@ int		associate_ope_to_label(t_dll *syms, t_dll *ops)
 		ope = dll_iter_dll(ops, cmp_line_nb_label_line, &tmp);
 		if (ope != NULL)
 		{
-			((t_sym *)syms->content)->corresponding_ope = (t_ope *)ope->content;
+			((t_sym *)syms->content)->c_ope = (t_ope *)ope->content;
 		}
 		else
-			((t_sym *)syms->content)->corresponding_ope = NULL;
+			((t_sym *)syms->content)->c_ope = NULL;
 		syms = syms->next;
 	}
 	return (1);
 }
 
-int		calc_sizes(t_dll *ops)
+static int	calc_sizes(t_dll *ops)
 {
 	if (!ops)
 		return (1);
@@ -39,7 +51,7 @@ int		calc_sizes(t_dll *ops)
 	return (1);
 }
 
-int		rsbv(t_dll *dll, void *data)
+static int	rsbv(t_dll *dll, void *data)
 {
 	t_dll	*dlltmp;
 	t_dll	*syms;
@@ -50,27 +62,23 @@ int		rsbv(t_dll *dll, void *data)
 	syms = data;
 	ope = (t_ope *)dll->content;
 	i = -1;
-	// ft_printf("{green}[%u] %u{eoc}\n", ope->op_code, ope->nb_param);
-	while (++i < ope->nb_param)//MAX_ARGS_NUMBER
+	while (++i < ope->nb_param)
 	{
-		if (ope->type_param[i] & T_LAB)
-		{
-			// ft_printf("{red}TEST2 _%d_{eoc}\n", i + 1);
-			dlltmp = dll_iter_dll(syms, get_sym_by_sym, (void *)(long)ope->params[i]);
-			// ft_printf("{red}TEST2.1 %p{eoc}\n", ((t_sym *)dlltmp->content)->corresponding_ope);
-			if (dlltmp != NULL && ((t_sym *)dlltmp->content)->corresponding_ope)//should not append
-				ope->params[i] = ((t_sym *)dlltmp->content)->corresponding_ope->address_in_size - ope->address_in_size;
-			else if (dlltmp != NULL)
-				ope->params[i] = ((t_ope *)get_last(dll)->content)->address_in_size + ((t_ope *)get_last(dll)->content)->size - ope->address_in_size;//not
-			// ft_printf("{red}TEST2.2{eoc}\n");
-			dlltmp = NULL;
-		}
+		if (!(ope->type_param[i] & T_LAB))
+			continue ;
+		dlltmp = dll_iter_dll(syms, get_sym_by_sym,
+								(void *)(long)ope->params[i]);
+		if (dlltmp != NULL && ((t_sym *)dlltmp->content)->c_ope)
+			ope->params[i] = ((t_sym *)dlltmp->content)->c_ope->ais - ope->ais;
+		else if (dlltmp != NULL)
+			ope->params[i] = ((t_ope *)get_last(dll)->content)->ais +
+							((t_ope *)get_last(dll)->content)->size - ope->ais;
+		dlltmp = NULL;
 	}
 	return (1);
 }
 
-
-int		replace_sym_by_value(t_dll *ops, t_dll *syms)
+static int	replace_sym_by_value(t_dll *ops, t_dll *syms)
 {
 	if (!syms || !ops)
 		return (1);
@@ -80,11 +88,16 @@ int		replace_sym_by_value(t_dll *ops, t_dll *syms)
 
 int		prep(t_asm *a)
 {
-	// if (!a->syms || !a->ops)
-	// 	return (-1);
+	u_long size;
+
 	associate_ope_to_label(a->syms, a->ops);
 	calc_sizes(a->ops);
-	replace_sym_by_value(a->ops, a->syms);//replace by iter
-	a->header.prog_size = ((t_ope *)get_last(a->ops)->content)->address_in_size + ((t_ope *)get_last(a->ops)->content)->size;
+	replace_sym_by_value(a->ops, a->syms);
+	size = a->ops ? ((t_ope *)get_last(a->ops)->content)->ais
+							+ ((t_ope *)get_last(a->ops)->content)->size
+					: 0;
+	if (size > UINT_MAX)
+		return (-1 * ft_fprintf(2, "prog_size > UINT_MAX\n"));
+	a->header.prog_size = size;
 	return (1);
 }

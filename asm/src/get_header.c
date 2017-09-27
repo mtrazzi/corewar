@@ -1,5 +1,15 @@
 #include "asm.h"
 
+static int	missing_name_comment(int name, int comment)
+{
+	if (name == 0)
+		ft_fprintf(2, "Error: missing name\n");
+	if (comment == 0)
+		ft_printf("Error: missing comment\n");
+	return (1);
+}
+
+
 int		parse_comment(char **str, t_asm *a, u_int *parsed)
 {
 	char *tmp;
@@ -89,5 +99,7 @@ int		get_header(t_asm *a, char **rem, t_parse *p)
 	(void)ft_free((void *)&line);
 	if (ret < 0)
 		return (GNL_ERR);
+	if (ret == 0)
+		return (-1 * missing_name_comment(parsed[0], parsed[1]));
 	return (1);
 }

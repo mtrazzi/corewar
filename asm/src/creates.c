@@ -33,7 +33,7 @@ t_ope	*create_ope_from_ope_and_ref(t_ope *ope, t_op *ref)
 	ft_memcpy(new->params, ope->params, sizeof(u_int) * MAX_ARGS_NUMBER);//check ca
 	new->op_code = ref->op_code;
 	new->size = 0;
-	new->address_in_size = 0;
+	new->ais = 0;
 	new->op_tab_x = ope->op_tab_x;
 	new->line_nb = ope->line_nb;
 	new->ocp = 0;
