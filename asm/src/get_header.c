@@ -65,12 +65,13 @@ int	 parse_name_or_comment(char **str, t_asm *a, u_int *parsed)
 
 int		get_header(t_asm *a, char **rem, t_parse *p)
 {
-	char	*line = NULL;
+	char	*line;
 	int		ret;
 	u_int	parsed[2];
 
 	parsed[0] = 0;
 	parsed[1] = 0;
+	line = NULL;
 	while ((ret = get_next_line(a->fd, &line, rem)) > 0)
 	{
 		p->add_line_start = line;

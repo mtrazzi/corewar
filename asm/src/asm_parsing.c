@@ -96,33 +96,29 @@ void	init_t_parse(t_parse *p, t_asm *a)
 
 int		parsing(t_asm *a)
 {
-	u_int		line_count;
-	char	*line = NULL;
-	char	*rem = NULL;
+	char	*line;
+	char	*rem;
 	int		ret;
-	t_dll	*sym_current = a->syms;
-	t_dll	*to_skip_curr = a->to_skip_syms;
 	t_parse	p;
 
-	line_count = 0;
+	rem = NULL;
 	init_t_parse(&p, a);
 	if ((ret = get_header(a, &rem, &p)) != 1)
 		return (ret * ft_free((void *)&rem));
-	ft_printf("header name: {%s}\n", a->header.prog_name);
-	ft_printf("header comment: {%s}\n", a->header.comment);
-	p.add_line_start = NULL;
-	p.alc = NULL;
+	line = NULL;
 	while ((ret = get_next_line(a->fd, &line, &rem)) > 0)
 	{
 		p.add_line_start = line;
 		p.alc = line;
 		ft_printf("{cyan}line:{eoc} %s\n", line);
 		if ((ret = process_line(&p.alc, a, &p)) != 1)
-			return (ret * error_parse(&p));
+			return (ret * error_parse(&p));//*ft_free((void *)&line) * ft_free((void *)&rem)
 		p.line_count += 1;
 		//frees
+		//(void)ft_free((void *)&line);
 	}
 	//frees
+	//(void)(ft_free((void *)&line) * ft_free((void *)&rem));
 	if (ret < 0)
 		return (GNL_ERR);
 	return (1);

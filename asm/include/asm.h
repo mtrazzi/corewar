@@ -39,6 +39,7 @@
 # define PAR_SIZE_IND 2
 
 # define MAL_ERR -40
+# define ME (MAL_ERR)
 
 #define GNL_ERR -100
 #define IS_NOT_LABEL -10
