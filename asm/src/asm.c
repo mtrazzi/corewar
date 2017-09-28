@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 20:15:55 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 21:14:33 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/28 15:22:29 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int ac, char **av)
 	t_asm a;
 
 	init_asm(&a);
-	if (ac != 2)//or open last one ?
+	if (ac != 2)
 		return (-1 * ft_fprintf(2, "usage: ./asm champions_file.s\n"));
 	if (open_file(av[1], &a.fd) != 1)
 		return (-1);
