@@ -6,13 +6,13 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:32:42 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 16:32:50 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/28 18:26:50 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-u_int		get_type(char *str)
+static u_int	get_type(char *str)
 {
 	if (*str == '\0')
 		return (NOT_A_PARAM_CODE);
@@ -29,7 +29,7 @@ u_int		get_type(char *str)
 	return (NOT_A_PARAM_CODE);
 }
 
-u_int		check_type(char *str, int param_nb, t_op *ref)
+static u_int	check_type(char *str, int param_nb, t_op *ref)
 {
 	u_int type;
 
@@ -41,53 +41,37 @@ u_int		check_type(char *str, int param_nb, t_op *ref)
 	return (type);
 }
 
-int		check_param(char **str, int param_nb, t_op *ref, t_ope *ope,
-						t_dll *syms)
+static int		check_param(char **str, int param_nb, t_op *ref,
+								void *ptrs[2])
 {
 	u_int ret;
 
-	ft_printf("{blue}check_param: [%s]{eoc}\n", *str);
 	if ((ret = check_type(*str, param_nb, ref)) & (32 | 16))
 		return (ret);
-	ope->type_param[param_nb] = ret;
-	ft_printf("{Iblue}\tret %u{eoc}\n", ret);
-	if (ret == T_REG)
-	{
-		if (get_reg(str, param_nb, ope) != 1)
-			return (-1);
-	}
-	else if (ret == T_IND)
-	{
-		if (get_ind(str, param_nb, ope) != 1)
-			return (-1);
-	}
-	else if (ret & T_LAB)
-	{
-		if (get_lab(str, param_nb, ope, syms) != 1)
-			return (-1);
-	}
-	else if (ret == T_DIR)
-	{
-		if (get_dir(str, param_nb, ope) != 1)
-			return (-1);
-	}
-	ft_printf("{blue}DONE{eoc}\n");
+	((t_ope *)ptrs[0])->type_param[param_nb] = ret;
+	if (ret == T_REG && get_reg(str, param_nb, ptrs[0]) != 1)
+		return (-1);
+	if (ret == T_IND && get_ind(str, param_nb, ptrs[0]) != 1)
+		return (-1);
+	if (ret & T_LAB && get_lab(str, param_nb, ptrs[0], ptrs[1]) != 1)
+		return (-1);
+	if (ret == T_DIR && get_dir(str, param_nb, ptrs[0]) != 1)
+		return (-1);
 	return (1);
 }
 
 //example: st r1, 564545465456456546454564454354354435435435453735425452442725727 is ok! (tested asm 'zaz' and 'jino')
-int	check_params(char **str, t_op *ref, t_ope *ope, t_asm *a)
+int				check_params(char **str, t_op *ref, t_ope *ope, t_asm *a)
 {
 	int		param_nb;
 
 	param_nb = 0;
 	if (ref->nb_param == 0)
 		return (1);
-	ft_printf("{yellow}check_params: [%s]{eoc}\n", *str);
 	while (param_nb < ref->nb_param)
 	{
 		skip_whitespaces(str);
-		if (check_param(str, param_nb, ref, ope, a->syms) != 1)
+		if (check_param(str, param_nb, ref, (void *[2]){ope, a->syms}) != 1)
 			return (-1);
 		skip_whitespaces(str);
 		param_nb++;

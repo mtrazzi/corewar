@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/27 19:17:13 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 18:47:19 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/09/28 18:39:35 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:39:49 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-
-void	del_sym(t_sym **sym)
+int	ft_iswithespace(char c)
 {
-	free((*sym)->label);
-	free(*sym);
-	*sym = NULL;
+	return (c ==  ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r');
 }
 
-int		clear_asm(t_asm *a)
+int	ft_isdigit(char c)
 {
-	dll_del_f(&a->syms, del_sym);
-	dll_del_f(&a->to_skip_syms, del_sym);
-	dll_del(&a->ops);
-	return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

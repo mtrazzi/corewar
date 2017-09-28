@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 19:08:27 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 18:07:11 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/28 15:55:09 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int				get_labels(t_asm *a)
 	rem = NULL;
 	while ((ret = get_next_line(a->fd, &line, &rem)) > 0)
 	{
-		ft_printf("line count: %d %s\n", line_count, line);
 		tmp = line;
 		skip_whitespaces(&tmp);
 		if (parse_label_only(tmp, &a->syms, line_count, &a->to_skip_syms) == ME)

@@ -1,22 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm_parsing_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/28 18:32:15 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:43:53 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-void	skip_whitespaces(char **str)
+void	init_t_parse(t_parse *p, t_asm *a)
 {
-	if (!str || !*str)
-		return ;
-	while (**str && ft_is_withespace(**str))
-		(*str)++;
+	p->sym_curr = a->syms;
+	p->to_skip_curr = a->to_skip_syms;
+	p->line_count = 0;
+	p->add_line_start = NULL;
+	p->alc = NULL;
 }
 
-void	skip_to_whitespaces(char **str)//or end
-{
-	if (!str || !*str)
-		return ;
-	while (**str && !ft_is_withespace(**str))
-		(*str)++;
-}
-
-char	*get_next_separator(char *str)//or end
+char	*get_next_separator(char *str)
 {
 	if (!str)
 		return (NULL);
@@ -25,33 +30,14 @@ char	*get_next_separator(char *str)//or end
 	return (str);
 }
 
-char	*get_next_whitespace(char *str)//or end
+int		is_com(char *str)
 {
-	if (!str)
-		return (NULL);
-	while (*str && !ft_is_withespace(*str))
-		str++;
-	return (str);
+	if (str && (*str == COMMENT_CHAR || *str == COMMENT_CHAR2))
+		return (1);
+	return (0);
 }
 
-void	skip_to(char **str, char c)//or end //return -1 if not encountered before end?
-{
-	if (!str || !*str)
-		return ;
-	while (**str && **str != c)
-		(*str)++;
-}
-
-char	*get_next(char *str, char c)//or end
-{
-	if (!str)
-		return (NULL);
-	while (*str && *str != c)
-		str++;
-	return (str);
-}
-
-int	ft_atoi_mod(const char *str)
+int		ft_atoi_mod(const char *str)//
 {
 	int		i;
 	long	number;
@@ -74,31 +60,10 @@ int	ft_atoi_mod(const char *str)
 	return ((int)number);
 }
 
-int	is_com(char *str)
+int		free_str(char **str)
 {
-	if (str && (*str == COMMENT_CHAR || *str == COMMENT_CHAR2))
-		return (1);
-	return (0);
-}
-
-int		free_lr(char **l, char **r)
-{
-	if (l && *l)
-	{
-		free(*l);
-		*l = NULL;
-	}
-	if (r && *r)
-	{
-		free(*r);
-		*r = NULL;
-	}
+	if (!str && !*str)
+		free(*str);
+	*str = NULL;
 	return (1);
-}
-
-int		ft_isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
 }

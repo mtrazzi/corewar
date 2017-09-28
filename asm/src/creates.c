@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   creates.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/27 18:04:46 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:46:51 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 t_sym	*create_sym(char *label, u_int symbol)
@@ -29,8 +41,9 @@ t_ope	*create_ope_from_ope_and_ref(t_ope *ope, t_op *ref)
 	if ((new = create_ope()) == NULL)
 		return (NULL);
 	new->nb_param = ref->nb_param;
-	ft_memcpy(new->type_param, ope->type_param, sizeof(u_int) * MAX_ARGS_NUMBER);//check ca
-	ft_memcpy(new->params, ope->params, sizeof(u_int) * MAX_ARGS_NUMBER);//check ca
+	ft_memcpy(new->type_param, ope->type_param,
+				sizeof(u_int) * MAX_ARGS_NUMBER);
+	ft_memcpy(new->params, ope->params, sizeof(u_int) * MAX_ARGS_NUMBER);
 	new->op_code = ref->op_code;
 	new->size = 0;
 	new->ais = 0;

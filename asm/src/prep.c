@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:17:52 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 20:32:49 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/28 19:34:51 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,24 @@
 
 static int	cmp_line_nb_label_line(t_dll *e, void *data)
 {
-	if (((t_ope *)e->content)->line_nb >= (u_int)*((long *)data))
+	if (((t_ope *)e->content)->line_nb >= (u_int)(*(long *)data))
 		return (0);
+	return (1);
+}
+
+int		cmp_associate(t_dll *e, void *data)//seems to work
+{
+	long	tmp;
+	t_dll	*ope;
+
+	tmp = ((t_sym *)e->content)->line_number_parsing_help;
+	ope = dll_iter_dll(data, cmp_line_nb_label_line, &tmp);
+	if (ope != NULL)
+	{
+		((t_sym *)e->content)->c_ope = (t_ope *)ope->content;
+	}
+	else
+		((t_sym *)e->content)->c_ope = NULL;	
 	return (1);
 }
 
@@ -27,18 +43,7 @@ static int	associate_ope_to_label(t_dll *syms, t_dll *ops)
 
 	if (!syms || !ops)
 		return (1);
-	while (syms)//iter?
-	{
-		tmp = ((t_sym *)syms->content)->line_number_parsing_help;
-		ope = dll_iter_dll(ops, cmp_line_nb_label_line, &tmp);
-		if (ope != NULL)
-		{
-			((t_sym *)syms->content)->c_ope = (t_ope *)ope->content;
-		}
-		else
-			((t_sym *)syms->content)->c_ope = NULL;
-		syms = syms->next;
-	}
+	dll_iter_dll(syms, cmp_associate, ops);
 	return (1);
 }
 
@@ -86,7 +91,7 @@ static int	replace_sym_by_value(t_dll *ops, t_dll *syms)
 	return (1);
 }
 
-int		prep(t_asm *a)
+int			prep(t_asm *a)
 {
 	u_long size;
 

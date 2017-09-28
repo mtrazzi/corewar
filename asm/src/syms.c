@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syms.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/28 18:51:26 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 19:34:35 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 #define LABEL_DIFFERENT 0
@@ -20,6 +32,30 @@ int		compare_labels(char *str, int len, char *label)
 	return (LABEL_DIFFERENT);
 }
 
+/*
+int		cmp_label(t_dll *s, void *data)
+{
+	if (compare_labels((char *)data, (int)(data + 1), ((t_sym *)(s->content))->label)
+				== LABEL_EQUAL)
+			return (0);
+	return (1);
+}
+
+t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
+{
+	u_long	tab[2];
+	t_dll	*tmp;
+
+	if (!syms)
+		return (NULL);
+	tab[0] = (u_long)str;
+	tab[1] = (u_long)len;
+	tmp = dll_iter_dll(syms, cmp_label, (void *)tab);
+	if (tmp)
+		return (tmp->content);
+	return (NULL);
+}
+*/
 
 t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 {
@@ -33,8 +69,7 @@ t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms)
 	return (NULL);
 }
 
-// int		create_add_label(char *str, int len, t_dll **syms, u_int symbol)
-t_dll		*create_add_label(char *str, int len, t_dll **syms, u_int symbol)
+t_dll	*create_add_label(char *str, int len, t_dll **syms, u_int symbol)
 {
 	char	*label;
 	t_sym	*new_sym;
@@ -58,11 +93,7 @@ t_dll		*create_add_label(char *str, int len, t_dll **syms, u_int symbol)
 
 int		get_sym_by_sym(t_dll *dll, void *data)
 {
-	// ft_printf("TEST3\n");
-	if (((t_sym *)dll->content)->sym == (u_int)data)//verify
-	{
-		// ft_printf("found %u\n", ((t_sym *)dll->content)->sym);
+	if (((t_sym *)dll->content)->sym == (u_int)data)
 		return (0);
-	}
 	return (1);
 }

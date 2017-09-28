@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   size.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/28 18:54:50 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:55:30 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 u_int		convert_op_code(u_int op_code)
@@ -45,16 +57,6 @@ int			nb_bytes_op(t_ope *ope)
 	ope->size = sum + 1;
 	return (1);
 }
-
-// int			give_label(u_int *op_code)
-// {
-// 	u_int	code;
-
-// 	code = convert_op_code(op_code);
-// 	return (((IS_LABEL_2 & code) > 0) * LABEL_2 +\
-// 			((IS_LABEL_4 & code) > 0) * LABEL_4);
-// }
-
 
 int		calc_add_size(t_dll *dll)
 {

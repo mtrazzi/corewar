@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_header.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/28 15:41:52 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 16:08:50 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-static int	missing_name_comment(int name, int comment)
+static int	header_error(t_parse *p, int parsed)
 {
-	if (name == 0)
+	if ((parsed & 1) == 0)
 		ft_fprintf(2, "Error: missing name\n");
-	if (comment == 0)
-		ft_printf("Error: missing comment\n");
+	if ((parsed & 2) == 0)
+		ft_fprintf(2, "Error: missing comment\n");
+	error_parse(p);
 	return (1);
 }
 
-
-int		parse_comment(char **str, t_asm *a, u_int *parsed)
+static int	parse_comment(char **str, t_asm *a, u_int *parsed)
 {
 	char *tmp;
 
-	if (parsed[1] == 1)
+	if (*parsed & 2)
 		return (-1);
 	*str += ft_strlen(COMMENT_CMD_STRING);
 	skip_whitespaces(str);
@@ -23,7 +35,7 @@ int		parse_comment(char **str, t_asm *a, u_int *parsed)
 	tmp = get_next(*str + 1, '"');
 	if (*tmp == '\0')
 		return (-1);
-	else if (tmp - (*str + 1) > COMMENT_LENGTH)//check ca
+	else if (tmp - (*str + 1) > COMMENT_LENGTH)
 		return (-1);
 	else
 		ft_strncpy(a->header.comment, *str + 1, tmp - (*str + 1));
@@ -31,15 +43,15 @@ int		parse_comment(char **str, t_asm *a, u_int *parsed)
 	skip_whitespaces(str);
 	if (**str != '\0' && !is_com(*str))
 		return (-1);
-	parsed[1] = 1;
+	*parsed |= 2;
 	return (1);
 }
 
-int		parse_name(char **str, t_asm *a, u_int *parsed)
+static int	parse_name(char **str, t_asm *a, u_int *parsed)
 {
 	char *tmp;
 
-	if (parsed[0] == 1)
+	if (*parsed & 1)
 		return (-1);
 	*str += ft_strlen(NAME_CMD_STRING);
 	skip_whitespaces(str);
@@ -48,7 +60,7 @@ int		parse_name(char **str, t_asm *a, u_int *parsed)
 	tmp = get_next(*str + 1, '"');
 	if (*tmp == '\0')
 		return (-1);
-	else if (tmp - (*str + 1) > PROG_NAME_LENGTH)//check ca
+	else if (tmp - (*str + 1) > PROG_NAME_LENGTH)
 		return (-1);
 	else
 		ft_strncpy(a->header.prog_name, *str + 1, tmp - (*str + 1));
@@ -56,50 +68,45 @@ int		parse_name(char **str, t_asm *a, u_int *parsed)
 	skip_whitespaces(str);
 	if (**str != '\0' && !is_com(*str))
 		return (-1);
-	parsed[0] = 1;
+	*parsed |= 1;
 	return (1);
 }
 
-int	 parse_name_or_comment(char **str, t_asm *a, u_int *parsed)
+static int	parse_name_or_comment(char **str, t_asm *a, u_int *parsed)
 {
-	int i;
-
 	if (ft_strncmp(*str, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
 		return (parse_name(str, a, parsed));
-	else if (ft_strncmp(*str, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0)
+	else if (ft_strncmp(*str, COMMENT_CMD_STRING,
+							ft_strlen(COMMENT_CMD_STRING)) == 0)
 		return (parse_comment(str, a, parsed));
 	else
 		return (-1);
-	return (1);
 }
 
-int		get_header(t_asm *a, char **rem, t_parse *p)
+int			get_header(t_asm *a, char **rem, t_parse *p)
 {
 	char	*line;
 	int		ret;
-	u_int	parsed[2];
+	u_int	parsed;
 
-	parsed[0] = 0;
-	parsed[1] = 0;
+	parsed = 0;
 	line = NULL;
-	while ((ret = get_next_line(a->fd, &line, rem)) > 0)
+	while (parsed != 3 && (ret = get_next_line(a->fd, &line, rem)) > 0)
 	{
 		p->add_line_start = line;
 		p->alc = line;
 		skip_whitespaces(&p->alc);
 		if (is_com(p->alc) || *p->alc == '\0')
 			;
-		else if (parse_name_or_comment(&p->alc, a, parsed) != 1)
-			return (-1 * ft_free((void *)&line) * error_parse(p));
+		else if (parse_name_or_comment(&p->alc, a, &parsed) != 1)
+			return (-1 * ft_free((void *)&line) * header_error(p, parsed));
 		p->line_count += 1;
-		if (parsed[0] == 1 && parsed[1] == 1)
-			break ;
-		ft_free((void *)&line);
+		(void)ft_free((void *)&line);
 	}
 	(void)ft_free((void *)&line);
 	if (ret < 0)
 		return (GNL_ERR);
-	if (ret == 0)
-		return (-1 * missing_name_comment(parsed[0], parsed[1]));
+	if (ret == 0 && parsed != 3)
+		return (-1 * header_error(p, parsed));
 	return (1);
 }

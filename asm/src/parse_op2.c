@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:27:37 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 16:28:43 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/28 18:49:36 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		get_reg(char **str, int param_nb, t_ope *ope)
 	return (1);
 }
 
-int		get_ind(char **str, int param_nb, t_ope *ope)//MOD_QQCHOSE
+int		get_ind(char **str, int param_nb, t_ope *ope)
 {
 	u_int	res;
 	char	*tmp;
@@ -69,7 +69,7 @@ int		get_lab(char **str, int param_nb, t_ope *ope, t_dll *syms)
 	return (1);
 }
 
-int		get_dir(char **str, int param_nb, t_ope *ope)//IDX_MOD
+int		get_dir(char **str, int param_nb, t_ope *ope)
 {
 	u_int	res;
 	char	*tmp;
@@ -86,30 +86,3 @@ int		get_dir(char **str, int param_nb, t_ope *ope)//IDX_MOD
 	ope->params[param_nb] = res;
 	return (1);
 }
-
-
-// int		get_lab(char **str, int param_nb, t_ope *ope, t_dll *syms)//int type
-// {
-// 	char	*tmp;
-// 	t_sym	*sym_tmp;
-
-// 	// *str += 2;
-// 	//*str += type & T_DIR ? 2: 1;
-// 	if (**str == DIRECT_CHAR)
-// 		(*str)++;
-// 	if (**str == LABEL_CHAR)
-// 		(*str)++;
-// 	tmp = *str;
-// 	while (**str && ft_strchr(LABEL_CHARS, **str))//change to moving tmp ;)
-// 	 	(*str)++;
-// 	// while (*tmp && ft_strchr(LABEL_CHARS, *tmp))
-// 	// 	tmp++;
-// 	if (tmp == *str)
-// 		return (-1);
-// 	sym_tmp = does_label_exist_in_sym_dll(tmp, *str - tmp, syms);
-// 	// sym_tmp = does_label_exist_in_sym_dll(*str, tmp - *str, syms);
-// 	if (sym_tmp == NULL)
-// 		return (-1);
-// 	ope->params[param_nb] = sym_tmp->sym;
-// 	return (1);
-// }

@@ -20,7 +20,6 @@ SRC = asm.c \
 		visu.c \
 		get_header.c \
 		prep.c \
-		ft_iswhitespace.c \
 		op.c \
 		parse_op.c \
 		parse_op2.c \
@@ -31,7 +30,8 @@ SRC = asm.c \
 		print_header.c \
 		endian_utils.c \
 		write_cmd.c \
-		del.c
+		del.c \
+		str_utils.c
 
 #op.c
 

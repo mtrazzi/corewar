@@ -129,9 +129,6 @@ int		ft_atoi_mod(const char *str);
 int		ft_isdigit(char c);
 char	*get_next(char *str, char c);
 
-
-int		init_g_op(void);
-
 t_ope	*create_ope(void);
 t_sym	*create_sym(char *label, u_int symbol);
 t_sym	*does_label_exist_in_sym_dll(char *str, int len, t_dll *syms);
@@ -176,7 +173,13 @@ void	print_cmds(t_asm *a);
 int		clear_asm(t_asm *a);
 int		open_file(char *file_name, int *fd);
 
+void	init_t_parse(t_parse *p, t_asm *a);
+int		free_str(char **str);
+
+int		reopen_error(char *file_name);
+
 #endif
+
 
 
 

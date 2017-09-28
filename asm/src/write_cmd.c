@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:27:26 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 18:27:33 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/28 18:52:29 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	write_op(t_dll *dll, void *data)
 	fd = (int)data;
 	write_be(fd, ope->op_code, 1);
 	if (ope->op_tab_x->ocp > 0)
-		write_be(fd, ope->ocp, 1); 
+		write_be(fd, ope->ocp, 1);
 	i = -1;
 	while (++i < MAX_ARGS_NUMBER)
 	{
@@ -41,27 +41,3 @@ void		print_cmds(t_asm *a)
 	if (a->ops)
 		dll_iter_int(a->ops, write_op, (void *)(long)a->fd);
 }
-
-/*
-void	write_param(int fd, int label, t_param p)
-{
-	if (p.type == DIR_CODE)
-		write_be(fd, p.n, label);
-	else if (p.type == IND_CODE)
-		write_be(fd, p.n, PAR_SIZE_IND);
-	else if (p.type == REG_CODE)
-		write_be(fd, p.n, PAR_SIZE_REG);
-}
-
-void	write_op(int fd, t_ope *ope)
-{
-	int label;
-
-	label = give_label(op.op_code);
-	write_be(fd, op.op_code, 1);
-	write_be(fd, ft_give_pcb(op), 1); 
-	write_param(fd, label, op.p1);
-	write_param(fd, label, op.p2);
-	write_param(fd, label, op.p3);
-}
-*/
