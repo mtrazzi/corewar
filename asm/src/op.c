@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 19:01:08 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 19:09:28 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 15:34:24 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_op	g_op_tab[MAX_OP] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int		compare_op_names(char *str, int len, char *op_name)
+static int	compare_op_names(char *str, int len, char *op_name)
 {
 	if (ft_strlen(op_name) != len)
 		return (NAME_DIFFERENT);
@@ -48,7 +48,7 @@ int		compare_op_names(char *str, int len, char *op_name)
 	return (NAME_DIFFERENT);
 }
 
-t_op	*does_op_exist_in_op_tab(char *str, int len)
+t_op		*does_op_exist_in_op_tab(char *str, int len)
 {
 	int		i;
 

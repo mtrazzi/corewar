@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:17:52 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 19:34:51 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 14:28:48 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	cmp_line_nb_label_line(t_dll *e, void *data)
 	return (1);
 }
 
-int		cmp_associate(t_dll *e, void *data)//seems to work
+static int	cmp_associate(t_dll *e, void *data)
 {
 	long	tmp;
 	t_dll	*ope;
@@ -32,18 +32,7 @@ int		cmp_associate(t_dll *e, void *data)//seems to work
 		((t_sym *)e->content)->c_ope = (t_ope *)ope->content;
 	}
 	else
-		((t_sym *)e->content)->c_ope = NULL;	
-	return (1);
-}
-
-static int	associate_ope_to_label(t_dll *syms, t_dll *ops)
-{
-	long	tmp;
-	t_dll	*ope;
-
-	if (!syms || !ops)
-		return (1);
-	dll_iter_dll(syms, cmp_associate, ops);
+		((t_sym *)e->content)->c_ope = NULL;
 	return (1);
 }
 
@@ -83,21 +72,15 @@ static int	rsbv(t_dll *dll, void *data)
 	return (1);
 }
 
-static int	replace_sym_by_value(t_dll *ops, t_dll *syms)
-{
-	if (!syms || !ops)
-		return (1);
-	dll_iter_int(ops, rsbv, syms);//new foreach taking a void!
-	return (1);
-}
-
 int			prep(t_asm *a)
 {
 	u_long size;
 
-	associate_ope_to_label(a->syms, a->ops);
+	if (a->syms && a->ops)
+		dll_iter_dll(a->syms, cmp_associate, a->ops);
 	calc_sizes(a->ops);
-	replace_sym_by_value(a->ops, a->syms);
+	if (a->syms && a->ops)
+		dll_iter_int(a->ops, rsbv, a->syms);
 	size = a->ops ? ((t_ope *)get_last(a->ops)->content)->ais
 							+ ((t_ope *)get_last(a->ops)->content)->size
 					: 0;

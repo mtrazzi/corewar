@@ -6,13 +6,13 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:04:46 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 18:46:51 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 15:30:14 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_sym	*create_sym(char *label, u_int symbol)
+static t_sym	*create_sym(char *label, u_int symbol)
 {
 	t_sym	*new;
 
@@ -24,7 +24,7 @@ t_sym	*create_sym(char *label, u_int symbol)
 	return (new);
 }
 
-t_ope	*create_ope(void)
+static t_ope	*create_ope(void)
 {
 	t_ope	*new;
 
@@ -34,7 +34,7 @@ t_ope	*create_ope(void)
 	return (new);
 }
 
-t_ope	*create_ope_from_ope_and_ref(t_ope *ope, t_op *ref)
+static t_ope	*create_ope_from_ope_and_ref(t_ope *ope, t_op *ref)
 {
 	t_ope	*new;
 
@@ -65,5 +65,27 @@ t_dll	*create_ope_dll(t_ope *ope, t_op *ref)
 		ft_free((void *)&new_ope);
 		return (NULL);
 	}
+	return (new_dll);
+}
+
+t_dll	*create_add_label(char *str, int len, t_dll **syms, u_int symbol)
+{
+	char	*label;
+	t_sym	*new_sym;
+	t_dll	*new_dll;
+
+	if ((label = ft_strsub(str, 0, len)) == NULL)
+		return (NULL);
+	if ((new_sym = create_sym(label, symbol)) == NULL)
+	{
+		(void)ft_free((void *)&label);
+		return (NULL);
+	}
+	if ((new_dll = dll_new((void*)new_sym)) == NULL)
+	{
+		(void)(ft_free((void *)&label) * ft_free((void *)&new_sym));
+		return (NULL);
+	}
+	dll_append(syms, new_dll);
 	return (new_dll);
 }

@@ -6,13 +6,13 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:48:02 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 18:48:07 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 15:32:03 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-u_int	convert_to_be(u_int n)
+static u_int	convert_to_be(u_int n)
 {
 	u_int tmp;
 
@@ -24,7 +24,7 @@ u_int	convert_to_be(u_int n)
 	return (tmp);
 }
 
-void	ft_print_hexa(u_int n)
+void			ft_print_hexa(u_int n)
 {
 	uint32_t b0;
 	uint32_t b1;
@@ -42,7 +42,7 @@ void	ft_print_hexa(u_int n)
 ** Write in big endian
 */
 
-void	write_be(int fd, u_int n, u_int size)//PASSER EN INT?
+void			write_be(int fd, u_int n, u_int size)//PASSER EN INT?
 {
 	u_int	k;
 	char	*s;

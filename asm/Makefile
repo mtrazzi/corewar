@@ -33,8 +33,6 @@ SRC = asm.c \
 		del.c \
 		str_utils.c
 
-#op.c
-
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
