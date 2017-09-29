@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:48:02 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 17:29:58 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 18:18:07 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void			ft_print_hexa(u_int n)
 ** Write in big endian
 */
 
-void			write_be(int fd, u_int n, u_int size)//PASSER EN INT?
+void			write_be(int fd, u_int n, u_int size)
 {
 	u_int	k;
 	char	*s;
 
 	k = convert_to_be(n);
 	s = (char *)&k;
-	write(fd, s + (4 - size), size); //
+	write(fd, s + (4 - size), size);
 }

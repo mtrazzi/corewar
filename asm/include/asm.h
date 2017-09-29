@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 17:44:51 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 18:17:36 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int				get_header(t_asm *a, char **rem, t_parse *p);
 void			init_t_parse(t_parse *p, t_asm *a);
 char			*get_next_separator(char *str);
 int				is_com(char *str);
-int				ft_atoi_mod(const char *str);//
+int				ft_atoi_mod(const char *str);
 int				free_str(char **str);
 
 /*

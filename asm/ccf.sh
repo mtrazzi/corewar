@@ -19,11 +19,22 @@ xxd $1.cor > cor_$NAME
 xxd	$1.corr > corr_$NAME
 
 /bin/rm -rf diff_$1
-RESULT=$(diff --speed-large-files -s corr_$NAME cor_$NAME)
+if [[ $2 == "-diff" ]]
+then
+	echo ""
+	diff -y --speed-large-files -s corr_$NAME cor_$NAME
+else
+	RESULT=$(diff --speed-large-files -s corr_$NAME cor_$NAME)
+fi
 
 /bin/rm -rf cor_$NAME corr_$NAME
 /bin/rm -rf $1.cor
 /bin/rm -rf $1.corr
+
+if [[ $2 == "-diff" ]]
+then
+	exit
+fi
 
 if [[ $RESULT == *"identical"* ]]
 then
@@ -33,15 +44,24 @@ else
 fi
 }
 
+DIFF=""
+
+if [[ $1 == "-1" ]]
+then
+	FILES=$2
+	DIFF="-diff"
+else
+	FILES=$1/*
+fi
+
 count=0
-FILES=$1/*
 for f in $FILES
 do
 	if [[ $f == *".s" ]]
 	then
 		echo "$f\c"
 		f=${f%.s}
-		_test $f
+		_test $f $DIFF
 		let "count=$count + 1"
 	fi
 done

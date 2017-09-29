@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:24:39 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 17:33:55 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 18:17:28 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	write_op(t_dll *dll, void *data)
 	while (++i < MAX_ARGS_NUMBER)
 	{
 		if (ope->type_param[i] & T_REG)
-			write_be(fd, ope->params[i], PAR_SIZE_REG);//(int)?
+			write_be(fd, ope->params[i], PAR_SIZE_REG);
 		else if (ope->type_param[i] & T_IND)
 			write_be(fd, ope->params[i], PAR_SIZE_IND);
 		else if (ope->type_param[i] & T_DIR)

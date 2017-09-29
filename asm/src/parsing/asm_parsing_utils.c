@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:32:15 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:27:03 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 18:17:31 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		is_com(char *str)
 	return (0);
 }
 
-int		ft_atoi_mod(const char *str)//
+int		ft_atoi_mod(const char *str)
 {
 	int		i;
 	long	number;
