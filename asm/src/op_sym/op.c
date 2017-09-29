@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 19:01:08 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:34:24 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:46:08 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_op	g_op_tab[MAX_OP] =
 
 static int	compare_op_names(char *str, int len, char *op_name)
 {
-	if (ft_strlen(op_name) != len)
+	if (ft_strlen(op_name) != (size_t)len)
 		return (NAME_DIFFERENT);
 	if (ft_strncmp(op_name, str, len) == 0)
 		return (NAME_EQUAL);

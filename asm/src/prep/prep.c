@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:17:52 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 14:28:48 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:44:59 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	rsbv(t_dll *dll, void *data)
 	syms = data;
 	ope = (t_ope *)dll->content;
 	i = -1;
-	while (++i < ope->nb_param)
+	while (++i < (int)ope->nb_param)
 	{
 		if (!(ope->type_param[i] & T_LAB))
 			continue ;

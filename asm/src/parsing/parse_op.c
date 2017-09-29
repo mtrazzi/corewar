@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:32:42 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 18:26:50 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:43:02 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int		check_param(char **str, int param_nb, t_op *ref,
 //example: st r1, 564545465456456546454564454354354435435435453735425452442725727 is ok! (tested asm 'zaz' and 'jino')
 int				check_params(char **str, t_op *ref, t_ope *ope, t_asm *a)
 {
-	int		param_nb;
+	u_int		param_nb;
 
 	param_nb = 0;
 	if (ref->nb_param == 0)

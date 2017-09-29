@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 19:08:27 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/27 20:26:27 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:18:35 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		update_fd_asm(t_asm *a, char *file_name)
 	a->fd = open(new_filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (a->fd < 0)
 		return (-1);
+	ft_printf("Writing output program to %s\n", new_filename);
 	free(new_filename);
 	return (1);
 }

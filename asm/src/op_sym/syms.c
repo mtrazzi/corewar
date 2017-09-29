@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:51:26 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:38:31 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:46:26 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static int	compare_labels(char *str, int len, char *label)
 {
-	if (ft_strlen(label) != len)
+	if (ft_strlen(label) != (size_t)len)
 		return (LABEL_DIFFERENT);
 	if (ft_strncmp(label, str, len) == 0)
 		return (LABEL_EQUAL);

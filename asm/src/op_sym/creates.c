@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:04:46 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:30:14 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:34:35 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_ope	*create_ope_from_ope_and_ref(t_ope *ope, t_op *ref)
 	return (new);
 }
 
-t_dll	*create_ope_dll(t_ope *ope, t_op *ref)
+t_dll			*create_ope_dll(t_ope *ope, t_op *ref)
 {
 	t_ope	*new_ope;
 	t_dll	*new_dll;
@@ -68,7 +68,8 @@ t_dll	*create_ope_dll(t_ope *ope, t_op *ref)
 	return (new_dll);
 }
 
-t_dll	*create_add_label(char *str, int len, t_dll **syms, u_int symbol)
+t_dll			*create_add_label(char *str, int len, t_dll **syms,
+									u_int symbol)
 {
 	char	*label;
 	t_sym	*new_sym;

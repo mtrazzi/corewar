@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 16:13:34 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:44:51 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,21 @@
 # include "op.h"
 # include <sys/types.h>
 
-# if IND_SIZE != 2 ||  REG_SIZE != 4 || DIR_SIZE != REG_SIZE \
-		|| REG_CODE != 1 || DIR_CODE != 2 || IND_CODE != 3 \
-		|| MAX_ARGS_NUMBER != 4 || MAX_PLAYERS != 4 || MEM_SIZE != (4*1024)
+# if IND_SIZE != 2 ||  REG_SIZE != 4 || DIR_SIZE != REG_SIZE
 #  error USER DEFINED ERROR: Bad value in op.h
 # endif
 
+# if REG_CODE != 1 || DIR_CODE != 2 || IND_CODE != 3
+#  error USER DEFINED ERROR: Bad value in op.h
+# endif
 
+/*
+** MAX_ARGS_NUMBER can't be sup signed INT_MAX
+*/
+
+# if MAX_ARGS_NUMBER != 4 || (REG_NUMBER < 1 || REG_NUMBER > 2147483647)
+#  error USER DEFINED ERROR: Bad value in op.h
+# endif
 
 # define LABEL_NO			0
 # define LABEL_2			2
@@ -85,7 +93,7 @@ struct			s_asm
 	t_dll		*to_skip_syms;
 	t_dll		*syms;
 	t_dll		*ops;
-	header_t	header;
+	t_header	header;
 	int			fd;
 };
 
@@ -218,12 +226,6 @@ int				error_parse(t_parse *p);
 
 int				update_fd_asm(t_asm *a, char *file_name);
 int				open_file(char *file_name, int *fd);
-
-/*
-** pcb
-*/
-
-u_char			calculate_pcb(t_ope *ope);
 
 /*
 **	prep

@@ -6,13 +6,13 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 20:15:55 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:54:24 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:17:55 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	init_header(header_t *h)
+static int	init_header(t_header *h)
 {
 	h->magic = COREWAR_EXEC_MAGIC;
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH + 1);

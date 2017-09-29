@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:09:39 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/28 16:34:38 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/09/29 17:42:29 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	parse_op(char **line, t_dll **ops, int line_count, t_asm *a)
 	return (1);
 }
 
-static void	skip_labels(char **line, int line_count, t_dll **sym_curr,
+static void	skip_labels(char **line, u_int line_count, t_dll **sym_curr,
 						t_dll **to_skip_curr)
 {
 	if ((*sym_curr) != NULL && line_count ==
@@ -70,9 +70,6 @@ static void	skip_labels(char **line, int line_count, t_dll **sym_curr,
 
 static int	process_line(char **line, t_asm *a, t_parse *p)
 {
-	int		ret;
-	char	*tmp;
-
 	skip_whitespaces(line);
 	if (is_com(*line) || **line == '\0')
 		return (1);

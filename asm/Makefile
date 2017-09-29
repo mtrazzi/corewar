@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
+#    Updated: 2017/09/29 17:47:13 by pkirsch          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC = gcc
 
@@ -11,33 +22,34 @@ endif
 
 NAME = asm
 
-SRC = asm.c \
-		creates.c \
-		syms.c \
-		asm_parsing.c \
-		asm_parsing_utils.c \
-		get_labels.c \
-		visu.c \
-		get_header.c \
-		prep.c \
-		op.c \
-		parse_op.c \
-		parse_op2.c \
-		error_output.c \
-		size.c \
-		pcb.c \
-		file_handling.c \
-		print_header.c \
-		endian_utils.c \
-		write_cmd.c \
-		del.c \
+SRC = asm.c					\
+		error_output.c		\
+		file_handling.c		\
 		str_utils.c
+
+SRC += endian_utils.c		\
+		output_bytecode.c
+
+SRC += asm_parsing.c 		\
+		asm_parsing_utils.c \
+		get_header.c 		\
+		get_labels.c 		\
+		parse_op.c 			\
+		parse_op_utils.c
+
+SRC += prep.c 		\
+		size.c
+
+SRC += creates.c	\
+		del.c		\
+		op.c		\
+		syms.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
-VPATH = src:include
+VPATH = src:include:src/parsing:src/prep:src/output_bytecode:src/op_sym
 IFLAGS = -I include
 HEADERS = asm.h op.h
 
@@ -58,11 +70,7 @@ LIBS = $(DLLST) $(LIBFT) $(PRINTF)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
-	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
 	$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS)
-	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
-	@echo "\033[0;31mPUT BACK FLAGS!!!!!!!!!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
@@ -71,7 +79,6 @@ $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 $(LIBS):
 	@$(MAKE) -C ../libs all
 
-#ifeq ($TARGET, NAME)
 #clean libs ? necessary only in project Makefile?
 clean:
 	#@$(MAKE) -C ../libs clean
