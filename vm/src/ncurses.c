@@ -23,23 +23,35 @@ WINDOW	*create_winbox(int height, int width, int starty, int startx)
 	return (win);
 }
 
+void	init_color_pairs()
+{
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_BLUE, COLOR_BLACK);
+	init_pair(0, COLOR_WHITE, COLOR_BLACK);
+}
+
+int		get_color_pair(t_env *e, int nb_bytes, int j)
+{
+
+}
+
 void	fill_field(WINDOW *field, t_env *e)
 {
 	int		nb_bytes;
 	int		j;
+	int 	color;
 
 	nb_bytes = 0;
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_BLUE, COLOR_BLACK);
-	init_pair(0, COLOR_WHITE, COLOR_BLACK);
+	init_color_pairs();
 	while (nb_bytes < MEM_SIZE)
 	{
 		j = 0;
 		while (j < BYTES_PER_LINE)
 		{
-			wattron(field, COLOR_PAIR((e->map_color[nb_bytes + j] + 1) / 2));
+			color = get_color_pair(e, nb_bytes, j);
+			wattron(field, COLOR_PAIR(color));
 			mvwprintw(field, 1 + (nb_bytes / BYTES_PER_LINE), 2 + (j * 3), "%02x ", e->map[nb_bytes + j]);
-			wattroff(field, COLOR_PAIR((e->map_color[nb_bytes + j] + 1) / 2));
+			wattroff(field, COLOR_PAIR(color));
 			j++;
 		}
 		nb_bytes += BYTES_PER_LINE;
