@@ -37,6 +37,7 @@
 
 # define STR_ERR_MALLOC_PRC "cannot malloc process"
 # define STR_ERR_MACRO "values in header have changed : undefined behavior"
+# define STR_ERROR_CYCLE "could not complete cycle"
 
 typedef struct s_prc	t_prc;
 typedef struct s_par	t_par;
@@ -72,7 +73,7 @@ struct				s_prc
 
 struct				s_chp
 {
-	int				nb;
+	int				nb; //numero du champion
 	u_int			magic;
 	u_int			prog_size;
 	char			name[PROG_NAME_LENGTH + 1];
@@ -164,6 +165,8 @@ int					are_macro_correct(void);
 int					process_load_op(t_env *e, t_prc *prc);
 int					process_exec_op_update_cyc_left(t_env *e, t_prc *prc);
 int					check_params(t_env *e, t_prc *prc, int op_code);
+void				check_lives(t_env *e);
+void				del_and_update(t_env *e, t_dll **begin_lst, int all);
 
 /*
 ** PARSING FOR OPERATIONS
@@ -212,9 +215,10 @@ int					copy(t_env *e, t_prc *prc);
 */
 
 int					is_real_number(t_env *e, int nb);
-void				copy_value(int value, t_env *e, u_int pos);
+void				copy_value(int value, t_env *e, u_int pos, u_char color);
 t_prc				*new_prc(u_int pc, int nb, int id);
 u_int				mod_map(int nbr);
+int					get_color(t_env *e, int nb);
 
 /*
 ** RESOURCES

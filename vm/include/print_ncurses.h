@@ -17,6 +17,6 @@
 
 # define BYTES_PER_LINE 64
 
-void	print_ncurses(t_env *e);
+int		print_ncurses(t_env *e);
 
 #endif

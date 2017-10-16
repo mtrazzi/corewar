@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "vm.h"
+#include "print_ncurses.h"
 
-#define STR_ERROR_CYCLE "could not complete cycle"
 
 static void	ft_wait(t_env *e)
 {
@@ -34,7 +34,7 @@ static void	ft_wait(t_env *e)
 	}
 }
 
-static void	check_lives(t_env *e)
+void	check_lives(t_env *e)
 {
 	static u_int last_cyc_number = 0;
 
@@ -85,7 +85,7 @@ static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
 	}
 }
 
-static void	del_and_update(t_env *e, t_dll **begin_lst, int all)
+void	del_and_update(t_env *e, t_dll **begin_lst, int all)
 {
 	t_dll *prc_lst;
 	t_dll *next;
@@ -106,30 +106,34 @@ int			run_vm(t_env *e)
 {
 	while (1)
 	{
-		e->cyc_counter += 1;
-		e->cyc_since_beg += 1;
-		if ((e->spd == 1) || (e->par.print && (e->cyc_since_beg % e->spd == 1)))
-		{
-			// print_map(*e);
-			print_ncurses(e);
-		}
-		if (e->par.verb & V_2)
-			printf("It is now cycle %d\n", e->cyc_since_beg);
-		if (do_one_cycle(e) < 0)
-			return (ft_error_vm(STR_ERROR_CYCLE));
-		if ((e->spd == 1) || (e->par.print && (e->cyc_since_beg % e->spd) == 1))
-			ft_wait(e);
 		if (e->par.print)
-			clear_screen();
-		if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
+			return (print_ncurses(e));
+		else
 		{
-			del_and_update(e, &(e->prc_lst), e->cyc < 0);
-			check_lives(e);
-			if (e->prc_lst == 0)
-				return (0);
+			e->cyc_counter += 1;
+			e->cyc_since_beg += 1;	
+			if (e->par.verb & V_2)
+				printf("It is now cycle %d\n", e->cyc_since_beg);
+			if (do_one_cycle(e) < 0)
+				return (ft_error_vm(STR_ERROR_CYCLE));
+			if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
+			{
+				del_and_update(e, &(e->prc_lst), e->cyc < 0);
+				check_lives(e);
+				if (e->prc_lst == 0)
+					return (0);
+			}
+			if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
+				return (dump(e));
 		}
-		if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
-			return (dump(e));
 	}
 	return (0);
 }
+
+
+
+
+
+
+
+
