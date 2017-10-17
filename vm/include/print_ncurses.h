@@ -13,9 +13,10 @@
 #ifndef PRINT_NCURSES_H
 # define PRINT_NCURSES_H
 
-# include "ncurses.h"
+# include <ncurses.h>
 
 # define BYTES_PER_LINE 64
+# define COLOR_ZEROS	240
 
 int		print_ncurses(t_env *e);
 

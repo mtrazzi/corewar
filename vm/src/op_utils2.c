@@ -18,10 +18,10 @@ void	copy_value(int value, t_env *e, u_int pos, u_char color)
 	e->map[mod_map(pos + 1)] = ((value << 8) >> 24);
 	e->map[mod_map(pos + 2)] = ((value << 16) >> 24);
 	e->map[mod_map(pos + 3)] = ((value << 24) >> 24);
-	e->map_color[mod_map(pos + 0)] = color;
-	e->map_color[mod_map(pos + 1)] = color;
-	e->map_color[mod_map(pos + 2)] = color;
-	e->map_color[mod_map(pos + 3)] = color;
+	e->map_color[mod_map(pos + 0)].color = color;
+	e->map_color[mod_map(pos + 1)].color = color;
+	e->map_color[mod_map(pos + 2)].color = color;
+	e->map_color[mod_map(pos + 3)].color = color;
 }
 
 int		is_real_number(t_env *e, int nb)

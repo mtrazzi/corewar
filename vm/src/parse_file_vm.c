@@ -71,7 +71,7 @@ static int		write_op_on_map(t_env *e, int i, int fd)
 	while (j < chp.prog_size)
 	{
 		e->map[(MEM_SIZE / e->par.nb_chp) * i + j] = buff[j];
-		e->map_color[(MEM_SIZE / e->par.nb_chp) * i + j] = 2 * i + 1;
+		e->map_color[(MEM_SIZE / e->par.nb_chp) * i + j].color = i + 1;
 		j++;
 	}
 	return (0);

@@ -41,6 +41,7 @@
 
 typedef struct s_prc	t_prc;
 typedef struct s_par	t_par;
+typedef struct s_color	t_color;
 typedef struct s_env	t_env;
 typedef struct s_chp	t_chp;
 typedef struct s_op	t_op;
@@ -91,10 +92,16 @@ struct				s_par
 	t_chp			champions[MAX_PLAYERS];
 };
 
+struct				s_color
+{
+	int				color;
+	int				highlight_count;
+};
+
 struct				s_env
 {
 	u_char			map[MEM_SIZE];
-	u_char			map_color[MEM_SIZE];
+	t_color			map_color[MEM_SIZE];
 	t_dll			*prc_lst;
 	int				cyc;
 	int				cyc_counter;

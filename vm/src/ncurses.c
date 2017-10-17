@@ -23,7 +23,7 @@ WINDOW	*create_winbox(int height, int width, int starty, int startx)
 	return (win);
 }
 
-int	is_prc(t_env *e, int pos)
+int	is_prc(t_env *e, u_int pos)
 {
 	t_dll *prc_lst;
 	t_prc *prc;
@@ -41,20 +41,25 @@ int	is_prc(t_env *e, int pos)
 
 void	init_color_pairs()
 {
+	init_pair(COLOR_ZEROS, COLOR_ZEROS, COLOR_BLACK);
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_BLUE, COLOR_BLACK);
 	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(0, COLOR_WHITE, COLOR_BLACK);
+	init_pair(10, COLOR_BLACK, COLOR_GREEN);
+	init_pair(20, COLOR_BLACK, COLOR_BLUE);
+	init_pair(30, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(40, COLOR_BLACK, COLOR_YELLOW);
 }
 
-int		get_color_pair(t_env *e, int pos)
+int		get_color_pair(t_env *e, u_int pos)
 {
-	int		map_color;
+	int		color_pair;
 
-	map_color = e->map_color[nb_bytes + j];
-
-
+	color_pair = e->map_color[pos].color;
+	if (is_prc(e, pos))
+		color_pair *= 10;
+	return (color_pair ? color_pair : COLOR_ZEROS);
 }
 
 void	fill_field(WINDOW *field, t_env *e)
@@ -72,7 +77,7 @@ void	fill_field(WINDOW *field, t_env *e)
 		{
 			color = get_color_pair(e, nb_bytes + j);
 			wattron(field, COLOR_PAIR(color));
-			mvwprintw(field, 1 + (nb_bytes / BYTES_PER_LINE), 2 + (j * 3), "%02x ", e->map[nb_bytes + j]);
+			mvwprintw(field, 1 + (nb_bytes / BYTES_PER_LINE), 2 + (j * 3), "%02x", e->map[nb_bytes + j]);
 			wattroff(field, COLOR_PAIR(color));
 			j++;
 		}
@@ -112,10 +117,26 @@ int		forward_one_cycle(t_env *e, WINDOW *field, WINDOW *infos, int loop)
 	return 1;
 }
 
+int		running_loop(t_env *e, WINDOW *field, WINDOW *infos, int speed)
+{
+	int			key;
+	int 		status;
+
+	while ((key = getch()) != ' ' && key != 'q' && status == 1)
+	{
+		usleep(speed);
+		status = forward_one_cycle(e, field, infos, 1);
+	}
+	return status;
+}
+
 int		print_worker(t_env *e, WINDOW *field, WINDOW *infos)
 {
 	int			key;
 	int 		status;
+	int			speed;
+
+	speed = 50;
 	
 	status = 1;
 	while ((key = getch()) != 'q' && status == 1)
@@ -123,8 +144,8 @@ int		print_worker(t_env *e, WINDOW *field, WINDOW *infos)
 		if (key == ' ')
 		{
 			nodelay(stdscr, TRUE);
-			while ((key = getch()) != ' ' && key != 'q')
-				status = forward_one_cycle(e, field, infos, 1);
+			if((status = running_loop(e, field, infos, speed)) != 1)
+				return status;
 			nodelay(stdscr, FALSE);
 		}
 		else if (key == 'n')
@@ -150,11 +171,11 @@ int		print_ncurses(t_env *e)
 	while (status == 1)
 	{
 		initscr();
+		start_color();
 		cbreak();
 		keypad(stdscr, TRUE);
 		noecho();
 		curs_set(0);
-		start_color();
 		refresh();
 		field = create_winbox(66, 195, 1, 3);
 		infos = create_winbox(66, 80, 1, 200);

@@ -25,7 +25,7 @@ static	void	change_color_prc(t_env *e, int incr)
 	while (prc_lst)
 	{
 		prc = (t_prc *)(prc_lst->content);
-		e->map_color[prc->pc] += incr;
+		e->map_color[prc->pc].color += incr;
 		prc_lst = prc_lst->next;
 	}
 }
@@ -46,7 +46,7 @@ void			print_map(t_env e)
 		j = 0;
 		while (j < BYTES_PER_LINE)
 		{
-			color = g_color_tab[e.map_color[nb_bytes + j]];
+			color = g_color_tab[e.map_color[nb_bytes + j].color];
 			printf("%s%02x%s ", color, e.map[nb_bytes + j], END_OF_COLOR);
 			j++;
 		}
