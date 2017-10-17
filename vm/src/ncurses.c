@@ -23,15 +23,37 @@ WINDOW	*create_winbox(int height, int width, int starty, int startx)
 	return (win);
 }
 
+int	is_prc(t_env *e, int pos)
+{
+	t_dll *prc_lst;
+	t_prc *prc;
+
+	prc_lst = e->prc_lst;
+	while (prc_lst)
+	{
+		prc = (t_prc *)(prc_lst->content);
+		if (prc->pc == pos)
+			return (1);
+		prc_lst = prc_lst->next;
+	}
+	return (0);
+}
+
 void	init_color_pairs()
 {
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_BLUE, COLOR_BLACK);
+	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(0, COLOR_WHITE, COLOR_BLACK);
 }
 
-int		get_color_pair(t_env *e, int nb_bytes, int j)
+int		get_color_pair(t_env *e, int pos)
 {
+	int		map_color;
+
+	map_color = e->map_color[nb_bytes + j];
+
 
 }
 
@@ -48,7 +70,7 @@ void	fill_field(WINDOW *field, t_env *e)
 		j = 0;
 		while (j < BYTES_PER_LINE)
 		{
-			color = get_color_pair(e, nb_bytes, j);
+			color = get_color_pair(e, nb_bytes + j);
 			wattron(field, COLOR_PAIR(color));
 			mvwprintw(field, 1 + (nb_bytes / BYTES_PER_LINE), 2 + (j * 3), "%02x ", e->map[nb_bytes + j]);
 			wattroff(field, COLOR_PAIR(color));
