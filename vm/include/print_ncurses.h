@@ -13,11 +13,28 @@
 #ifndef PRINT_NCURSES_H
 # define PRINT_NCURSES_H
 
+# include "vm.h"
 # include <ncurses.h>
+# include <time.h>
 
 # define BYTES_PER_LINE 64
-# define COLOR_ZEROS	240
+# define COLOR_ZEROS 245
+# define COLOR_BLUE3 33
+# define COLOR_GREEN3 10
+# define COLOR_MAGENTA3 163
+# define COLOR_YELLOW3 148
 
-int		print_ncurses(t_env *e);
+typedef struct s_view_env	t_view_env;
+
+struct 						s_view_env
+{
+	int					status;
+	int					speed;
+	unsigned long long	t;
+	WINDOW				*field;
+	WINDOW				*infos;
+};
+
+int							print_ncurses(t_env *e);
 
 #endif

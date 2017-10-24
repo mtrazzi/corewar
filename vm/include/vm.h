@@ -95,7 +95,8 @@ struct				s_par
 struct				s_color
 {
 	int				color;
-	int				highlight_count;
+	int				prc_count;
+	int				live_count;
 };
 
 struct				s_env

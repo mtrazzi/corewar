@@ -22,6 +22,10 @@ void	copy_value(int value, t_env *e, u_int pos, u_char color)
 	e->map_color[mod_map(pos + 1)].color = color;
 	e->map_color[mod_map(pos + 2)].color = color;
 	e->map_color[mod_map(pos + 3)].color = color;
+	e->map_color[mod_map(pos + 0)].prc_count = 50;
+	e->map_color[mod_map(pos + 1)].prc_count = 50;
+	e->map_color[mod_map(pos + 2)].prc_count = 50;
+	e->map_color[mod_map(pos + 3)].prc_count = 50;
 }
 
 int		is_real_number(t_env *e, int nb)
@@ -47,7 +51,7 @@ int		get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 
 int	get_color(t_env *e, int nb)
 {
-	int i;
+	u_int i;
 	t_chp chp;
 
 	i = 0;
@@ -55,7 +59,8 @@ int	get_color(t_env *e, int nb)
 	{
 		chp = e->par.champions[i];
 		if (chp.nb == nb)
-			return (2 * i + 1);
+			return (i + 1);
 		i++;
 	}
+	return (0);
 }
