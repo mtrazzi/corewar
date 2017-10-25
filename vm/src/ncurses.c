@@ -107,21 +107,39 @@ void	fill_field(WINDOW *field, t_env *e)
 	}
 }
 
+t_prc	*get_prc_by_champ(t_env *e, int id)
+{
+	t_dll	*prc;
+
+	prc = e->prc_lst;
+	while (prc)
+	{
+		if (((t_prc*)prc->content)->id == id)
+			return ((t_prc*)prc->content);
+		prc = prc->next;
+	}
+	return (NULL);
+}
+
 u_int	print_players(WINDOW *win, t_env *e, u_int x)
 {
 	u_int		i;
+	t_prc		*champ_prc;
 
 	i = 0;
 	while (i < e->par.nb_chp)
 	{
+		champ_prc = get_prc_by_champ(e, i + 1);
 		mvwprintw(win, x, 2, "Player %d :", e->par.champions[i].nb);
 		wattron(win, COLOR_PAIR(i + 1));
 		mvwprintw(win, x, 15, "%s", e->par.champions[i].name);
 		mvwprintw(win, x + 1, 2, "%.58s", e->par.champions[i].comment);
 		wattroff(win, COLOR_PAIR(i + 1));
 		wattron(win, COLOR_PAIR(COLOR_FWHITE));
-		mvwprintw(win, x + 2, 2, "  Last Live :                        %d", 0);
-		mvwprintw(win, x + 3, 2, "  Lives in current period :          %d", 0);
+		if (champ_prc)
+			mvwprintw(win, x + 2, 2, "  Last Live :                        %d", champ_prc->cyc_last_live);
+		mvwprintw(win, x + 3, 2, "  Lives in current period :          %d", champ_prc->live);
+		wclrtoeol(win);
 		i++;
 		x += 5;
 	}
