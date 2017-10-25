@@ -137,8 +137,10 @@ u_int	print_players(WINDOW *win, t_env *e, u_int x)
 		wattroff(win, COLOR_PAIR(i + 1));
 		wattron(win, COLOR_PAIR(COLOR_FWHITE));
 		if (champ_prc)
+		{
 			mvwprintw(win, x + 2, 2, "  Last Live :                        %d", champ_prc->cyc_last_live);
-		mvwprintw(win, x + 3, 2, "  Lives in current period :          %d", champ_prc->live);
+			mvwprintw(win, x + 3, 2, "  Lives in current period :          %d", champ_prc->live);
+		}
 		wclrtoeol(win);
 		i++;
 		x += 5;
@@ -158,10 +160,10 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	mvwprintw(v_e->infos, 6, 2, "Cycle : %d", e->cyc_since_beg);
 	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
 	x = print_players(v_e->infos, e, 10);
-	mvwprintw(v_e->infos, x + 2, 2, "CYCLE_TO_DIE : %d", e->cyc);
-	mvwprintw(v_e->infos, x + 4, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	mvwprintw(v_e->infos, x + 6, 2, "NBR_LIVE : %d", NBR_LIVE);
-	mvwprintw(v_e->infos, x + 8, 2, "MAX_CHECKS : %d", MAX_CHECKS);
+	mvwprintw(v_e->infos, x + 1, 2, "CYCLE_TO_DIE : %d", e->cyc);
+	mvwprintw(v_e->infos, x + 3, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvwprintw(v_e->infos, x + 5, 2, "NBR_LIVE : %d", NBR_LIVE);
+	mvwprintw(v_e->infos, x + 7, 2, "MAX_CHECKS : %d", MAX_CHECKS);
 	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
 	box(v_e->infos, 0, 0);
 }
