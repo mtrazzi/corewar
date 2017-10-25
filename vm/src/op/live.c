@@ -28,7 +28,8 @@ int	live(t_env *e, t_prc *prc)
 		if (e->par.verb & V_1)
 			printf("Player %d (%s) is said to be alive\n",
 			ret, e->par.champions[ret - 1].name);
+		if (e->par.print)
+			e->map_color[mod_map(prc->pc)].live_count = 49;
 	}
-	e->map_color[mod_map(prc->pc)].live_count = 50;
 	return (0);
 }

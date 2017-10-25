@@ -19,6 +19,7 @@
 
 # define BYTES_PER_LINE 64
 # define COLOR_ZEROS 245
+# define COLOR_FWHITE 15
 # define COLOR_BLUE3 33
 # define COLOR_GREEN3 10
 # define COLOR_MAGENTA3 163
@@ -33,6 +34,7 @@ struct 						s_view_env
 	unsigned long long	t;
 	WINDOW				*field;
 	WINDOW				*infos;
+	WINDOW				*logo;
 };
 
 int							print_ncurses(t_env *e);

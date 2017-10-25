@@ -50,14 +50,19 @@ void	init_color_pairs()
 	init_pair(6, COLOR_BLUE3, COLOR_BLACK);
 	init_pair(7, COLOR_MAGENTA3, COLOR_BLACK);
 	init_pair(8, COLOR_YELLOW3, COLOR_BLACK);
-	init_pair(11, COLOR_WHITE, COLOR_GREEN);
-	init_pair(12, COLOR_WHITE, COLOR_BLUE);
-	init_pair(13, COLOR_WHITE, COLOR_MAGENTA);
-	init_pair(14, COLOR_WHITE, COLOR_YELLOW);
+	init_pair(11, COLOR_FWHITE, COLOR_GREEN);
+	init_pair(12, COLOR_FWHITE, COLOR_BLUE);
+	init_pair(13, COLOR_FWHITE, COLOR_MAGENTA);
+	init_pair(14, COLOR_FWHITE, COLOR_YELLOW);
+	init_pair(COLOR_FWHITE, COLOR_FWHITE, COLOR_BLACK);
 	init_pair(10, COLOR_BLACK, COLOR_GREEN);
 	init_pair(20, COLOR_BLACK, COLOR_BLUE);
 	init_pair(30, COLOR_BLACK, COLOR_MAGENTA);
 	init_pair(40, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(50, COLOR_WHITE, COLOR_GREEN);
+	init_pair(60, COLOR_WHITE, COLOR_BLUE);
+	init_pair(70, COLOR_WHITE, COLOR_MAGENTA);
+	init_pair(80, COLOR_WHITE, COLOR_YELLOW);
 }
 
 int		get_color_pair(t_env *e, u_int pos)
@@ -75,7 +80,7 @@ int		get_color_pair(t_env *e, u_int pos)
 		color_pair += 4;
 		e->map_color[pos].prc_count--;
 	}
-	else if (is_prc(e, pos) && !e->map_color[pos].live_count)
+	if (is_prc(e, pos) && !e->map_color[pos].live_count)
 		color_pair *= 10;
 	return (color_pair ? color_pair : COLOR_ZEROS);
 }
@@ -87,7 +92,6 @@ void	fill_field(WINDOW *field, t_env *e)
 	int 	color;
 
 	nb_bytes = 0;
-	init_color_pairs();
 	while (nb_bytes < MEM_SIZE)
 	{
 		j = 0;
@@ -103,15 +107,48 @@ void	fill_field(WINDOW *field, t_env *e)
 	}
 }
 
-void	fill_infos(t_view_env *v_e, t_env *e, int loop)
+u_int	print_players(WINDOW *win, t_env *e, u_int x)
 {
-	mvwprintw(v_e->infos, 1, 2, "** %s **", loop ? "RUNNING" : "PAUSED");
-	mvwprintw(v_e->infos, 3, 2, "Cycles/second limit : %d", v_e->speed);
-	mvwprintw(v_e->infos, 6, 2, "Cycle : %d", e->cyc_since_beg);
-	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
+	u_int		i;
+
+	i = 0;
+	while (i < e->par.nb_chp)
+	{
+		mvwprintw(win, x, 2, "Player %d :", e->par.champions[i].nb);
+		wattron(win, COLOR_PAIR(i + 1));
+		mvwprintw(win, x, 15, "%s", e->par.champions[i].name);
+		mvwprintw(win, x + 1, 2, "%.58s", e->par.champions[i].comment);
+		wattroff(win, COLOR_PAIR(i + 1));
+		wattron(win, COLOR_PAIR(COLOR_FWHITE));
+		mvwprintw(win, x + 2, 2, "  Last Live :                        %d", 0);
+		mvwprintw(win, x + 3, 2, "  Lives in current period :          %d", 0);
+		i++;
+		x += 5;
+	}
+	return (x);
 }
 
-int		forward_one_cycle(t_env *e, t_view_env *v_e, int loop)
+void	fill_infos(t_view_env *v_e, t_env *e, int running)
+{
+	u_int	x;
+
+	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
+	mvwprintw(v_e->infos, 1, 2, "** %s **", running ? "RUNNING" : "PAUSED");
+	wclrtoeol(v_e->infos);
+	mvwprintw(v_e->infos, 3, 2, "Cycles/second limit : %d", v_e->speed);
+	wclrtoeol(v_e->infos);
+	mvwprintw(v_e->infos, 6, 2, "Cycle : %d", e->cyc_since_beg);
+	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
+	x = print_players(v_e->infos, e, 10);
+	mvwprintw(v_e->infos, x + 2, 2, "CYCLE_TO_DIE : %d", e->cyc);
+	mvwprintw(v_e->infos, x + 4, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvwprintw(v_e->infos, x + 6, 2, "NBR_LIVE : %d", NBR_LIVE);
+	mvwprintw(v_e->infos, x + 8, 2, "MAX_CHECKS : %d", MAX_CHECKS);
+	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
+	box(v_e->infos, 0, 0);
+}
+
+int		forward_one_cycle(t_env *e, t_view_env *v_e)
 {
 	e->cyc_counter += 1;
 	e->cyc_since_beg += 1;	
@@ -128,9 +165,10 @@ int		forward_one_cycle(t_env *e, t_view_env *v_e, int loop)
 		return (dump(e));
 
 	fill_field(v_e->field, e);
-	fill_infos(v_e, e, loop);
-	wrefresh(v_e->field);
-	wrefresh(v_e->infos);
+	fill_infos(v_e, e, 1);
+	wnoutrefresh(v_e->field);
+	wnoutrefresh(v_e->infos);
+	doupdate();
 
 	return 1;
 }
@@ -174,7 +212,7 @@ int		running_loop(t_env *e, t_view_env *v_e)
 	{
 		check_speed_key(key, v_e);
 		// control_speed(v_e);
-		v_e->status = forward_one_cycle(e, v_e, 1);
+		v_e->status = forward_one_cycle(e, v_e);
 	}
 	return v_e->status;
 }
@@ -192,7 +230,7 @@ void	print_worker(t_env *e, t_view_env *v_e)
 			nodelay(stdscr, FALSE);
 		}
 		else if (key == 'n')
-			v_e->status = forward_one_cycle(e, v_e, 1);
+			v_e->status = forward_one_cycle(e, v_e);
 		else if (key == KEY_RESIZE)
 			return ;
 		check_speed_key(key, v_e);
@@ -204,6 +242,17 @@ void	print_worker(t_env *e, t_view_env *v_e)
 	v_e->status = v_e->status > 0 ? 0 : v_e->status;
 }
 
+void	fill_logo(WINDOW *logo)
+{
+	wattron(logo, COLOR_PAIR(COLOR_FWHITE));
+	mvwaddstr(logo, 2, 10, "   ___               __    __           ");
+	mvwaddstr(logo, 3, 10, "  / __\\___  _ __ ___/ / /\\ \\ \\__ _ _ __ ");
+	mvwaddstr(logo, 4, 10, " / /  / _ \\| '__/ _ \\ \\/  \\/ / _` | '__|");
+	mvwaddstr(logo, 5, 10, "/ /__| (_) | | |  __/\\  /\\  / (_| | |   ");
+	mvwaddstr(logo, 6, 10, "\\____/\\___/|_|  \\___| \\/  \\/ \\__,_|_|   ");
+	mvwaddstr(logo, 8, 15, "by mtrazzi, pkirsch and laranda");
+	wattroff(logo, COLOR_PAIR(COLOR_FWHITE));
+}
 
 int		print_ncurses(t_env *e)
 {
@@ -216,17 +265,22 @@ int		print_ncurses(t_env *e)
 	{
 		initscr();
 		start_color();
+		init_color_pairs();
 		cbreak();
 		keypad(stdscr, TRUE);
 		noecho();
 		curs_set(0);
 		refresh();
 		v_e.field = create_winbox(66, 195, 1, 3);
-		v_e.infos = create_winbox(66, 80, 1, 200);
+		v_e.logo = create_winbox(10, 60, 1, 200);
+		v_e.infos = create_winbox(56, 60, 11, 200);
 		fill_field(v_e.field, e);
+		fill_logo(v_e.logo);
 		fill_infos(&v_e, e, 0);
-		wrefresh(v_e.field);
-		wrefresh(v_e.infos);
+		wnoutrefresh(v_e.field);
+		wnoutrefresh(v_e.logo);
+		wnoutrefresh(v_e.infos);
+		doupdate();
 		print_worker(e, &v_e);
 		endwin();
 	}
