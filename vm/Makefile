@@ -48,7 +48,11 @@ SRC +=	mul.c				\
 		bomb.c				\
 		copy.c
 
-SRC +=	ncurses.c
+SRC +=	ncurses.c			\
+		ncurses_controls.c	\
+		ncurses_style.c		\
+		ncurses_infos.c		\
+		ncurses_helpers.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
