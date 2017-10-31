@@ -47,3 +47,23 @@ void	init_color_pairs(void)
 	init_pair(70, COLOR_WHITE, COLOR_MAGENTA);
 	init_pair(80, COLOR_WHITE, COLOR_YELLOW);
 }
+
+int		get_color_pair(t_env *e, u_int pos)
+{
+	int		color_pair;
+
+	color_pair = e->map_color[pos].color;
+	if (e->map_color[pos].live_count)
+	{
+		color_pair += 10;
+		e->map_color[pos].live_count--;
+	}
+	else if (e->map_color[pos].prc_count)
+	{
+		color_pair += 4;
+		e->map_color[pos].prc_count--;
+	}
+	if (e->map_color[pos].is_prc && !e->map_color[pos].live_count)
+		color_pair *= 10;
+	return (color_pair ? color_pair : COLOR_ZEROS);
+}

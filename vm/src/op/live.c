@@ -29,7 +29,11 @@ int	live(t_env *e, t_prc *prc)
 			printf("Player %d (%s) is said to be alive\n",
 			ret, e->par.champions[ret - 1].name);
 		if (e->par.print)
+		{
+			e->par.champions[ret - 1].cyc_last_live = e->cyc_since_beg;
+			e->par.champions[ret - 1].total_lives_since_period_beg += 1;
 			e->map_color[mod_map(prc->pc)].live_count = 49;
+		}
 	}
 	return (0);
 }

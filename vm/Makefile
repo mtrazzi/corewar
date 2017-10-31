@@ -52,6 +52,7 @@ SRC +=	ncurses.c			\
 		ncurses_controls.c	\
 		ncurses_style.c		\
 		ncurses_infos.c		\
+		ncurses_field.c		\
 		ncurses_helpers.c
 
 OBJ_FILES = $(SRC:.c=.o)
@@ -60,7 +61,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 VPATH = src:include:src/op
 IFLAGS = -I include
-HEADERS = vm.h op.h
+HEADERS = vm.h op.h print_ncurses.h
 
 DLLST_PATH = ../libs/dllst
 DLLST = $(DLLST_PATH)/dllst.a

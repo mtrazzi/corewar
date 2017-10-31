@@ -74,6 +74,9 @@ struct				s_prc
 
 struct				s_chp
 {
+	int				cyc_last_live;
+	int				total_lives_since_period_beg;
+
 	int				nb; //numero du champion
 	u_int			magic;
 	u_int			prog_size;
@@ -95,6 +98,7 @@ struct				s_par
 struct				s_color
 {
 	int				color;
+	int				is_prc;
 	int				prc_count;
 	int				live_count;
 };
