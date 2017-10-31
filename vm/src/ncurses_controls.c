@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 22:46:34 by laranda          ###   ########.fr       */
+/*   Updated: 2017/10/31 23:16:04 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,37 +36,24 @@ void	check_step_key(int key, t_view_env *v_e)
 		v_e->step = 1;
 }
 
-void	clear_fields(WINDOW **fields)
-{
-	int		i;
-
-	i = -1;
-	while (++i < TH_NB)
-	{
-		wclear(fields[i]);
-	}
-}
-
 void	check_hide(int key, t_view_env *v_e, t_env *e)
 {
 	if (key == 'h')
 	{
-		clear_fields(v_e->fields);
-		// box(v_e->field, 0, 0);
+		wclear(v_e->field);
+		box(v_e->field, 0, 0);
 		if (v_e->hide)
 		{
 			v_e->hide = 0;
-			launch_mthread_fill_field(v_e, e);
+			fill_field(v_e, e);
 			
 		}
 		else
 		{
 			v_e->hide = 1;
-			mvwprintw(v_e->fields[0], 25, 84, "DUMP HIDDEN (press H to show)");
+			mvwprintw(v_e->field, 25, 84, "DUMP HIDDEN (press H to show)");
 		}
-		// wrefresh(v_e->field);
-		refresh_fields(v_e->fields);
-		doupdate();
+		wrefresh(v_e->field);
 	}
 }
 
@@ -86,10 +73,9 @@ int		forward_one_cycle(t_env *e, t_view_env *v_e)
 	}
 	if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
 		return (dump(e));
-	launch_mthread_fill_field(v_e, e);
+	fill_field(v_e, e);
 	fill_infos(v_e, e, 1);
-	refresh_fields(v_e->fields);
-	// wnoutrefresh(v_e->field);
+	wnoutrefresh(v_e->field);
 	wnoutrefresh(v_e->infos);
 	doupdate();
 	return (1);
