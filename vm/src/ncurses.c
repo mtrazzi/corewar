@@ -6,15 +6,12 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:35:54 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:22:34 by laranda          ###   ########.fr       */
+/*   Updated: 2017/10/31 23:31:51 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
-
-int g_log_fd = -1;
-
 
 void	fill_field(t_view_env *v_e, t_env *e)
 {
@@ -32,8 +29,8 @@ void	fill_field(t_view_env *v_e, t_env *e)
 			{
 				color = get_color_pair(e, nb_bytes + j);
 				wattron(v_e->field, COLOR_PAIR(color));
-				mvwprintw(v_e->field, 1 + (nb_bytes / BYTES_PER_LINE), 2 + (j * 3),
-							"%02x", e->map[nb_bytes + j]);
+				mvwprintw(v_e->field, 1 + (nb_bytes / BYTES_PER_LINE),
+							2 + (j * 3), "%02x", e->map[nb_bytes + j]);
 				wattroff(v_e->field, COLOR_PAIR(color));
 				j++;
 			}

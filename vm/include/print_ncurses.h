@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 14:49:42 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:22:17 by laranda          ###   ########.fr       */
+/*   Updated: 2017/10/31 23:37:42 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define COLOR_BLUE3 33
 # define COLOR_GREEN3 10
 # define COLOR_MAGENTA3 163
-# define COLOR_YELLOW3 148
+# define COLOR_YELLOW3 229
 
 typedef struct s_view_env	t_view_env;
 
@@ -56,5 +56,8 @@ void		control_speed(t_view_env *v_e);
 void		check_speed_key(int key, t_view_env *v_e);
 int			running_loop(t_env *e, t_view_env *v_e);
 void		print_worker(t_env *e, t_view_env *v_e);
+void		update_champ(t_env *e);
+void		check_step_key(int key, t_view_env *v_e);
+void		check_hide(int key, t_view_env *v_e, t_env *e);
 
 #endif

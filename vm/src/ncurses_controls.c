@@ -6,56 +6,12 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:16:04 by laranda          ###   ########.fr       */
+/*   Updated: 2017/10/31 23:37:05 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
-
-void	update_champ(t_env *e)
-{
-	u_int i;
-
-	i = 0;
-	while (i < e->par.nb_chp)
-		e->par.champions[i++].total_lives_since_period_beg = 0;
-}
-
-void	check_step_key(int key, t_view_env *v_e)
-{
-	if (key == 't')
-		v_e->step += 1;
-	else if (key == 'y')
-		v_e->step += 10;
-	else if (key == 'r')
-		v_e->step -= 1;
-	else if (key == 'e')
-		v_e->step -= 10;
-	if (v_e->step <= 0)
-		v_e->step = 1;
-}
-
-void	check_hide(int key, t_view_env *v_e, t_env *e)
-{
-	if (key == 'h')
-	{
-		wclear(v_e->field);
-		box(v_e->field, 0, 0);
-		if (v_e->hide)
-		{
-			v_e->hide = 0;
-			fill_field(v_e, e);
-			
-		}
-		else
-		{
-			v_e->hide = 1;
-			mvwprintw(v_e->field, 25, 84, "DUMP HIDDEN (press H to show)");
-		}
-		wrefresh(v_e->field);
-	}
-}
 
 int		forward_one_cycle(t_env *e, t_view_env *v_e)
 {
@@ -85,6 +41,7 @@ int		running_loop(t_env *e, t_view_env *v_e)
 {
 	int		key;
 
+	nodelay(stdscr, TRUE);
 	while ((key = getch()) != ' ' && key != 'q' && v_e->status == 1)
 	{
 		check_step_key(key, v_e);
@@ -93,6 +50,7 @@ int		running_loop(t_env *e, t_view_env *v_e)
 	}
 	if (key == 'q')
 		v_e->status = 0;
+	nodelay(stdscr, FALSE);
 	return (v_e->status);
 }
 
@@ -100,6 +58,7 @@ int		goto_loop(t_env *e, t_view_env *v_e, int cycle)
 {
 	int		key;
 
+	nodelay(stdscr, TRUE);
 	while ((key = getch()) != ' ' && key != 'q' && v_e->status == 1
 				&& e->cyc_since_beg < cycle)
 	{
@@ -113,12 +72,13 @@ int		goto_loop(t_env *e, t_view_env *v_e, int cycle)
 	wclrtoeol(v_e->infos);
 	if (key == 'q')
 		v_e->status = 0;
+	nodelay(stdscr, FALSE);
 	return (v_e->status);
 }
 
 int		do_goto(t_env *e, t_view_env *v_e)
 {
-	int 	cycle;
+	int		cycle;
 
 	cycle = 0;
 	wattron(v_e->infos, COLOR_PAIR(1));
@@ -136,11 +96,7 @@ int		do_goto(t_env *e, t_view_env *v_e)
 	wmove(v_e->infos, 4, 1);
 	wclrtoeol(v_e->infos);
 	if (cycle > e->cyc_since_beg)
-	{
-		nodelay(stdscr, TRUE);
 		v_e->status = goto_loop(e, v_e, cycle);
-		nodelay(stdscr, FALSE);
-	}
 	return (v_e->status);
 }
 
@@ -151,19 +107,11 @@ void	print_worker(t_env *e, t_view_env *v_e)
 	while (v_e->status == 1 && (key = getch()) != 'q')
 	{
 		if (key == ' ')
-		{
-			nodelay(stdscr, TRUE);
 			v_e->status = running_loop(e, v_e);
-			nodelay(stdscr, FALSE);
-		}
 		else if (key == 'n')
 			v_e->status = forward_one_cycle(e, v_e);
 		else if (key == 's')
-		{
-			nodelay(stdscr, TRUE);
 			v_e->status = goto_loop(e, v_e, e->cyc_since_beg + v_e->step);
-			nodelay(stdscr, FALSE);
-		}
 		else if (key == 'g')
 			v_e->status = do_goto(e, v_e);
 		else if (key == KEY_RESIZE)

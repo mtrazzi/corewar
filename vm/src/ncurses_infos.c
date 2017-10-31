@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ncurses_infos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laranda <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/30 14:52:29 by laranda          ###   ########.fr       */
+/*   Updated: 2017/10/31 23:34:06 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ u_int	print_players(WINDOW *win, t_env *e, u_int x)
 		wattroff(win, COLOR_PAIR(i + 1));
 		wattron(win, COLOR_PAIR(COLOR_FWHITE));
 		mvwprintw(win, x + 2, 2,
-	 					"  Last Live : %29d", e->par.champions[i].cyc_last_live);
+				"  Last Live : %29d", e->par.champions[i].cyc_last_live);
 		mvwprintw(win, x + 3, 2, "  Lives in current period : %15d",
 						e->par.champions[i].total_lives_since_period_beg);
 		wclrtoeol(win);

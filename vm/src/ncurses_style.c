@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ncurses_style.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laranda <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:50:32 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/30 11:50:37 by laranda          ###   ########.fr       */
+/*   Updated: 2017/10/31 23:28:02 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	init_color_pairs(void)
 	init_pair(20, COLOR_BLACK, COLOR_BLUE);
 	init_pair(30, COLOR_BLACK, COLOR_MAGENTA);
 	init_pair(40, COLOR_BLACK, COLOR_YELLOW);
-	init_pair(50, COLOR_WHITE, COLOR_GREEN);
-	init_pair(60, COLOR_WHITE, COLOR_BLUE);
-	init_pair(70, COLOR_WHITE, COLOR_MAGENTA);
-	init_pair(80, COLOR_WHITE, COLOR_YELLOW);
+	init_pair(50, COLOR_ZEROS, COLOR_GREEN);
+	init_pair(60, COLOR_ZEROS, COLOR_BLUE);
+	init_pair(70, COLOR_ZEROS, COLOR_MAGENTA);
+	init_pair(80, COLOR_ZEROS, COLOR_YELLOW);
 }
 
 int		get_color_pair(t_env *e, u_int pos)
