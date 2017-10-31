@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:37:05 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/01 00:25:45 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int		forward_one_cycle(t_env *e, t_view_env *v_e)
 		if (e->prc_lst == 0)
 			return (0);
 	}
-	if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
-		return (dump(e));
 	fill_field(v_e, e);
 	fill_infos(v_e, e, 1);
 	wnoutrefresh(v_e->field);
@@ -123,5 +121,7 @@ void	print_worker(t_env *e, t_view_env *v_e)
 		if (key == 'q')
 			v_e->status = 0;
 	}
+	if (v_e->status == 0)
+		print_winner(e, v_e);
 	v_e->status = v_e->status > 0 ? 0 : v_e->status;
 }

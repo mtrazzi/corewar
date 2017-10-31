@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:34:06 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/01 00:27:56 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	fill_help(WINDOW *help)
 	wattron(help, COLOR_PAIR(COLOR_FWHITE));
 	mvwaddstr(help, 1, 26, "COMMANDS");
 	mvwaddstr(help, 3, 2, "Next Cycle :        N");
-	mvwaddstr(help, 4, 2, "Step :              S");
+	mvwaddstr(help, 4, 2, "Step n cycles :     S");
 	mvwaddstr(help, 5, 2, "Run / Pause :   Space");
 	mvwaddstr(help, 6, 2, "GoTo :              G");
 	mvwaddstr(help, 7, 2, "         then cycle # and Enter");
@@ -84,4 +84,32 @@ void	fill_help(WINDOW *help)
 	mvwaddstr(help, 5, 35, " E     R    T     Y");
 	mvwaddstr(help, 11, 2, "Quit :              Q");
 	wattroff(help, COLOR_PAIR(COLOR_FWHITE));
+}
+
+void	print_winner(t_env *e, t_view_env *v_e)
+{
+	u_int	i;
+	t_chp	chp;
+	int		key;
+
+	i = 0;
+	refill_field(v_e, e);
+	while (i < e->par.nb_chp)
+	{
+		chp = e->par.champions[i];
+		if (chp.nb == e->last_alive)
+		{
+			wattron(v_e->infos, COLOR_PAIR(i + 1));
+			mvwprintw(v_e->infos, 1, 2, "PLAYER %d, %s, HAS WON !",
+						i + 1, chp.name);
+			wattroff(v_e->infos, COLOR_PAIR(i + 1));
+			mvwprintw(v_e->infos, 2, 2, "(press Q to quit)");
+		}
+		i++;
+	}
+	wnoutrefresh(v_e->field);
+	wnoutrefresh(v_e->infos);
+	doupdate();
+	while ((key = getch()) != 'q')
+		;
 }

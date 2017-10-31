@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:46:58 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:37:45 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/01 00:27:43 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,16 @@ void	check_hide(int key, t_view_env *v_e, t_env *e)
 			mvwprintw(v_e->field, 25, 84, "DUMP HIDDEN (press H to show)");
 		}
 		wrefresh(v_e->field);
+	}
+}
+
+void	refill_field(t_view_env *v_e, t_env *e)
+{
+	if (v_e->hide)
+	{
+		wclear(v_e->field);
+		box(v_e->field, 0, 0);
+		v_e->hide = 0;
+		fill_field(v_e, e);
 	}
 }
