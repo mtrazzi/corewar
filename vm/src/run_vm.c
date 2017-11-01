@@ -13,27 +13,6 @@
 #include "vm.h"
 #include "print_ncurses.h"
 
-
-static void	ft_wait(t_env *e)
-{
-	char *line;
-	char *rem;
-
-	line = NULL;
-	rem = NULL;
-	while (!line || ft_strcmp(line, "s"))
-	{
-		get_next_line(0, &line, &rem);
-		if (!ft_strcmp(line, "r"))
-			e->spd += 5;
-		else if (!ft_strcmp(line, "l"))
-			e->spd -= 5;
-		else if (ft_is_int(line))
-			e->spd = ft_atoi(line);
-		print_map(*e);
-	}
-}
-
 void	check_lives(t_env *e)
 {
 	static u_int last_cyc_number = 0;
