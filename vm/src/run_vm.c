@@ -74,6 +74,8 @@ static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
 		if (e->par.verb & V_8)
 			printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 					prc->id, e->cyc_since_beg - prc->cyc_last_live, e->cyc);
+		if (e->par.print)
+			e->map_color[mod_map(prc->pc)].is_prc = 0;
 		dll_delone(prc_lst);
 	}
 	else if (!(*last_alive))

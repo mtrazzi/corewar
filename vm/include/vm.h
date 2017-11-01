@@ -100,6 +100,7 @@ struct				s_color
 	int				color;
 	int				is_prc;
 	int				prc_count;
+	int				color_live;
 	int				live_count;
 };
 

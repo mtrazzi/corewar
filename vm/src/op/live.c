@@ -32,6 +32,7 @@ int	live(t_env *e, t_prc *prc)
 		{
 			e->par.champions[ret - 1].cyc_last_live = e->cyc_since_beg;
 			e->par.champions[ret - 1].total_lives_since_period_beg += 1;
+			e->map_color[mod_map(prc->pc)].color_live = ret;
 			e->map_color[mod_map(prc->pc)].live_count = 49;
 		}
 	}

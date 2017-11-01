@@ -55,7 +55,7 @@ int		get_color_pair(t_env *e, u_int pos)
 	color_pair = e->map_color[pos].color;
 	if (e->map_color[pos].live_count)
 	{
-		color_pair += 10;
+		color_pair = e->map_color[pos].color_live + 10;
 		e->map_color[pos].live_count--;
 	}
 	else if (e->map_color[pos].prc_count)

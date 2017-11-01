@@ -48,9 +48,11 @@ int			init_all_processes(t_env *e)
 	i = 0;
 	while (i < e->par.nb_chp)
 	{
-		if (!(prc = new_prc((MEM_SIZE / e->par.nb_chp) * i, \
-						e->par.champions[i].nb, i + 1)))
+		if (!(prc = new_prc((MEM_SIZE / e->par.nb_chp) * i,
+								e->par.champions[i].nb, i + 1)))
 			return (ft_error_vm(STR_ERR_MALLOC_PRC));
+		if (e->par.print)
+			e->map_color[mod_map((MEM_SIZE / e->par.nb_chp) * i)].is_prc = 1;
 		dll_push_front(&e->prc_lst, dll_new(prc));
 		i++;
 	}

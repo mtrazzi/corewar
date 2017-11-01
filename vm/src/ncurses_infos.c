@@ -36,6 +36,7 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	wclrtoeol(v_e->infos);
 	mvwprintw(v_e->infos, 6, 2, "Cycle : %d", e->cyc_since_beg);
 	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
+	wclrtoeol(v_e->infos);
 	x = print_players(v_e->infos, e, 10);
 	mvwprintw(v_e->infos, x + 1, 2, "CYCLE_TO_DIE : %d", e->cyc);
 	mvwprintw(v_e->infos, x + 3, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
