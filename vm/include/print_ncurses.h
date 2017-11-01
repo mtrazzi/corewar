@@ -61,5 +61,6 @@ void		check_step_key(int key, t_view_env *v_e);
 void		check_hide(int key, t_view_env *v_e, t_env *e);
 void		print_winner(t_env *e, t_view_env *v_e);
 void		refill_field(t_view_env *v_e, t_env *e);
+void		decrement_color_mods(t_env *e);
 
 #endif

@@ -39,6 +39,7 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	wclrtoeol(v_e->infos);
 	x = print_players(v_e->infos, e, 10);
 	mvwprintw(v_e->infos, x + 1, 2, "CYCLE_TO_DIE : %d", e->cyc);
+	wclrtoeol(v_e->infos);
 	mvwprintw(v_e->infos, x + 3, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvwprintw(v_e->infos, x + 5, 2, "NBR_LIVE : %d", NBR_LIVE);
 	mvwprintw(v_e->infos, x + 7, 2, "MAX_CHECKS : %d", MAX_CHECKS);
@@ -73,7 +74,7 @@ u_int	print_players(WINDOW *win, t_env *e, u_int x)
 void	fill_help(WINDOW *help)
 {
 	wattron(help, COLOR_PAIR(COLOR_FWHITE));
-	mvwaddstr(help, 1, 26, "COMMANDS");
+	mvwaddstr(help, 1, 26, "CONTROLS");
 	mvwaddstr(help, 3, 2, "Next Cycle :        N");
 	mvwaddstr(help, 4, 2, "Step n cycles :     S");
 	mvwaddstr(help, 5, 2, "Run / Pause :   Space");

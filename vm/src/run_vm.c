@@ -113,7 +113,7 @@ int			run_vm(t_env *e)
 		else
 		{
 			e->cyc_counter += 1;
-			e->cyc_since_beg += 1;	
+			e->cyc_since_beg += 1;
 			if (e->par.verb & V_2)
 				printf("It is now cycle %d\n", e->cyc_since_beg);
 			if (do_one_cycle(e) < 0)

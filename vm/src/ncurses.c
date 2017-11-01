@@ -37,10 +37,13 @@ void	fill_field(t_view_env *v_e, t_env *e)
 			nb_bytes += BYTES_PER_LINE;
 		}
 	}
+	else
+		decrement_color_mods(e);
 }
 
 void	init_ncurses(void)
 {
+	initscr();
 	start_color();
 	init_color_pairs();
 	cbreak();
@@ -57,7 +60,7 @@ int		print_ncurses(t_env *e)
 	v_e.status = 1;
 	v_e.step = 50;
 	v_e.hide = 0;
-	while (v_e.status == 1 && initscr())
+	while (v_e.status == 1)
 	{
 		init_ncurses();
 		v_e.field = create_winbox(66, 195, 1, 3);

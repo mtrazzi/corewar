@@ -53,17 +53,35 @@ int		get_color_pair(t_env *e, u_int pos)
 	int		color_pair;
 
 	color_pair = e->map_color[pos].color;
-	if (e->map_color[pos].live_count)
+	if (e->map_color[pos].live_count > 0)
 	{
-		color_pair = e->map_color[pos].color_live + 10;
+		color_pair = e->map_color[pos].color_live;
+		color_pair += 10;
 		e->map_color[pos].live_count--;
 	}
-	else if (e->map_color[pos].prc_count)
+	else if (e->map_color[pos].prc_count > 0)
 	{
 		color_pair += 4;
 		e->map_color[pos].prc_count--;
 	}
 	if (e->map_color[pos].is_prc && !e->map_color[pos].live_count)
+	{
 		color_pair *= 10;
+	}
 	return (color_pair ? color_pair : COLOR_ZEROS);
+}
+
+void	decrement_color_mods(t_env *e)
+{
+	int		pos;
+
+	pos = 0;
+	while (pos < MEM_SIZE)
+	{
+		if (e->map_color[pos].live_count > 0)
+			e->map_color[pos].live_count--;
+		if (e->map_color[pos].prc_count > 0)
+			e->map_color[pos].prc_count--;
+		pos++;
+	}
 }
