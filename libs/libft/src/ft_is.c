@@ -14,10 +14,3 @@ int	ft_iswithespace(char c)
 {
 	return (c ==  ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r');
 }
-
-int	ft_isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
