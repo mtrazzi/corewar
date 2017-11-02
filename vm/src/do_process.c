@@ -49,7 +49,11 @@ int		process_load_op(t_env *e, t_prc *prc)
 
 int		do_process(t_env *e, t_prc *prc)
 {
+	if (e->par.print)
+		e->map_color[mod_map(prc->pc)].is_prc = 0;
 	process_load_op(e, prc);
 	process_exec_op_update_cyc_left(e, prc);
+	if (e->par.print)
+		e->map_color[mod_map(prc->pc)].is_prc = 1;
 	return (1);
 }

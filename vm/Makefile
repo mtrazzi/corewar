@@ -21,6 +21,8 @@ SRC = 	ft_error_vm.c		\
 		op_utils.c			\
 		op_utils2.c			\
 		check_params.c		\
+		parse_arg2.c		\
+		opts.c				\
 		global_utils.c		\
 		check_header.c
 
@@ -48,13 +50,19 @@ SRC +=	mul.c				\
 		bomb.c				\
 		copy.c
 
+SRC +=	ncurses.c			\
+		ncurses_controls.c	\
+		ncurses_style.c		\
+		ncurses_infos.c		\
+		ncurses_helpers.c
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 VPATH = src:include:src/op
 IFLAGS = -I include
-HEADERS = vm.h op.h
+HEADERS = vm.h op.h print_ncurses.h
 
 DLLST_PATH = ../libs/dllst
 DLLST = $(DLLST_PATH)/dllst.a
@@ -74,7 +82,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Building $(NAME)..."
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS)
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[3;94m!$(NAME) built!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
@@ -86,7 +98,7 @@ $(LIBS):
 
 clean:
 	@$(MAKE) -C ../libs clean
-	rm -rf $(OBJ_PATH)
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	@$(MAKE) -C ../libs fclean

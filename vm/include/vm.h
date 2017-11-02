@@ -23,6 +23,8 @@
 # include <limits.h>
 # include <fcntl.h>
 
+#include "opts.h"
+
 # define MAX_COLOR 4
 # define NB_OP	   16
 
@@ -33,13 +35,27 @@
 # define V_8 8
 # define V_16 16
 
+# define OPT_V		0x00000001
+# define OPT_V1		0x00000001
+# define OPT_V2		0x00000002
+# define OPT_V4		0x00000004
+# define OPT_V8		0x00000008
+# define OPT_V16	0x00000010
+
+# define OPT_M		0x00000020
+# define OPT_N		0x00000040
+# define OPT_A		0x00000080
+# define OPT_D		0x00000100
+
 # define LAST_TWO_BITS 0b00000011
 
 # define STR_ERR_MALLOC_PRC "cannot malloc process"
 # define STR_ERR_MACRO "values in header have changed : undefined behavior"
+# define STR_ERROR_CYCLE "could not complete cycle"
 
 typedef struct s_prc	t_prc;
 typedef struct s_par	t_par;
+typedef struct s_color	t_color;
 typedef struct s_env	t_env;
 typedef struct s_chp	t_chp;
 typedef struct s_op	t_op;
@@ -72,7 +88,10 @@ struct				s_prc
 
 struct				s_chp
 {
-	int				nb;
+	int				cyc_last_live;
+	int				total_lives_since_period_beg;
+
+	int				nb; //numero du champion
 	u_int			magic;
 	u_int			prog_size;
 	char			name[PROG_NAME_LENGTH + 1];
@@ -82,18 +101,28 @@ struct				s_chp
 
 struct				s_par
 {
-	int				verb;
-	int				print;
-	int				dump;
-	int				nb_cyc;
-	u_int			nb_chp;
+	u_int			opts;
+	int				verb;			//verbose option : show operations
+	int				print;			//print the map every 5 cycles
+	int				dump;			//is there a dump ? || DELETE
+	int				nb_cyc;			//nb_cyc befor dump || RENAME TO DUMP
+	u_int			nb_chp;			//how many .cor files
 	t_chp			champions[MAX_PLAYERS];
+};
+
+struct				s_color
+{
+	int				color;
+	int				is_prc;
+	int				prc_count;
+	int				color_live;
+	int				live_count;
 };
 
 struct				s_env
 {
 	u_char			map[MEM_SIZE];
-	u_char			map_color[MEM_SIZE];
+	t_color			map_color[MEM_SIZE];
 	t_dll			*prc_lst;
 	int				cyc;
 	int				cyc_counter;
@@ -110,16 +139,21 @@ struct				s_env
 ** ENV UTILS
 */
 
-int					ft_init_vm(t_env *e);
-int					ft_free_vm_env(t_env *e);
-int					ft_error_vm(char *err_msg);
-int					ft_perror_vm(void);
+int		ft_init_vm(t_env *e);
+int		ft_free_vm_env(t_env *e);
+int		ft_error_vm(char *err_msg);
+int		ft_perror_vm(void);
+int		ft_error(char *msg);
+int		error_usage(char *msg);
+int		usage(void);
 
 /*
 ** PARSING OF THE ARGUMENTS
 */
 
-int					parse_arg_vm(int ac, char **av, t_env *e);
+int		parse_arg_vm(int ac, char **av, t_env *e);
+int		is_valid_ext(char *file_name);
+int		ft_parse_chp(t_env *e, char *file_name, int chp_nb);
 
 /*
 ** STRING UTILS
@@ -164,6 +198,8 @@ int					are_macro_correct(void);
 int					process_load_op(t_env *e, t_prc *prc);
 int					process_exec_op_update_cyc_left(t_env *e, t_prc *prc);
 int					check_params(t_env *e, t_prc *prc, int op_code);
+void				check_lives(t_env *e);
+void				del_and_update(t_env *e, t_dll **begin_lst, int all);
 
 /*
 ** PARSING FOR OPERATIONS
@@ -212,9 +248,10 @@ int					copy(t_env *e, t_prc *prc);
 */
 
 int					is_real_number(t_env *e, int nb);
-void				copy_value(int value, t_env *e, u_int pos);
+void				copy_value(int value, t_env *e, u_int pos, u_char color);
 t_prc				*new_prc(u_int pc, int nb, int id);
 u_int				mod_map(int nbr);
+int					get_color(t_env *e, int nb);
 
 /*
 ** RESOURCES

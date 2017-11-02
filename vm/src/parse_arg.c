@@ -3,88 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:55:15 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 13:10:32 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/09/10 18:04:33 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-#define STR_ERR_NB_CHP "too many champions"
+# define STR_ERR_NB_CHP "too many champions"
+# define BAD_FILE_EXT "champions filename must end with '.cor'"
 
-static char		*usage(void)
+int		is_valid_ext(char *file_name)
 {
-	return ("usage: corewar [-v N | -m][-dump nbr_cycles] \
-			[[-n number] champion1.cor] ...");
+	if (ft_strcmp(file_name + (ft_strlen(file_name) - 4), ".cor") == 0)
+		return (1);
+	return (0 * ft_error(BAD_FILE_EXT));
 }
 
-static int		is_valid_ext(char *file_name)
+int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
 {
-	return (!ft_strcmp(file_name + (ft_strlen(file_name) - 4), ".cor"));
-}
+	t_chp	new_chp;
+	u_int	i;
 
-static int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
-{
-	t_chp new_chp;
-
+	i = 0;
+	while (i < e->par.nb_chp)
+		if (chp_nb == e->par.champions[i++].nb)
+			return (-1);
 	if (++(e->par.nb_chp) > MAX_PLAYERS)
-		return (ft_error_vm(STR_ERR_NB_CHP));
+		return (ft_error(STR_ERR_NB_CHP));
 	new_chp.nb = chp_nb;
 	new_chp.file_name = file_name;
 	e->par.champions[e->par.nb_chp - 1] = new_chp;
-	return (0);
-}
-
-int				ft_check_option(t_env *e, int i, int ac, char **av)
-{
-	if ((ft_strcmp(av[i] + 1, "dump") && ft_strcmp(av[i] + 1, "n") &&
-		ft_strcmp(av[i] + 1, "m") && ft_strcmp(av[i] + 1, "v")) || i + 1 >= ac)
-		return (-1);
-	if (!ft_strcmp(av[i] + 1, "dump"))
-	{
-		e->par.dump += 1;
-		if (!ft_is_int(av[i + 1]) || e->par.dump > 1)
-			return (-1);
-		e->par.nb_cyc = ft_atoi(av[i + 1]);
-		return (1);
-	}
-	else if (!ft_strcmp(av[i] + 1, "m"))
-		e->par.print = 1;
-	else if (!ft_strcmp(av[i] + 1, "v"))
-	{
-		e->par.verb = ft_atoi(av[i + 1]);
-		return (1);
-	}
-	else if (!ft_strcmp(av[i] + 1, "n"))
-		return ((!ft_is_int(av[i + 1]) || i + 2 >= ac ||
-		!is_valid_ext(av[i + 2]) || (ft_parse_chp(e, av[i + 2],
-		ft_atoi(av[i + 1])) < 0)) ? -1 : 2);
-	return (0);
-}
-
-int				parse_arg_vm(int ac, char **av, t_env *e)
-{
-	int			i;
-	int			ret;
-	static	int	chp_nb = 0;
-
-	if (ac < 2)
-		return (ft_error_vm(usage()));
-	i = 1;
-	while (i < ac)
-	{
-		if (av[i][0] == '-')
-		{
-			if ((ret = ft_check_option(e, i, ac, av)) < 0)
-				return (ft_error_vm(usage()));
-			i += ret;
-		}
-		else if (!is_valid_ext(av[i]) || ft_parse_chp(e, av[i], --chp_nb) < 0)
-			return (ft_error_vm(usage()));
-		i++;
-	}
-	e->last_alive = e->par.champions[e->par.nb_chp - 1].nb;
-	return (0);
+	return (1);
 }

@@ -1,7 +1,7 @@
 all:
 	@$(MAKE) -C libs
-	@$(MAKE) -C asm
-	@$(MAKE) -C vm
+	@$(MAKE) -C asm asm
+	@$(MAKE) -C vm corewar
 
 clean:
 	@$(MAKE) -C libs clean
@@ -17,3 +17,5 @@ re:
 	@$(MAKE) -C libs re
 	@$(MAKE) -C asm re
 	@$(MAKE) -C vm re
+
+.PHONY: all fclean clean re

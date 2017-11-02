@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/28 18:36:30 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:39:51 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -9,6 +21,9 @@ int		ft_free(void **to_free);
 void	ft_bzero(void *s, size_t n);
 
 size_t	ft_strlen(const char *s);
+
+int		ft_iswithespace(char c);
+int		ft_isdigit(char c);
 
 char	*ft_strnew(size_t size);
 char	*ft_strcpy(char *dst, const char *src);
@@ -26,5 +41,8 @@ long	ft_atol(const char *nptr);
 int 	ft_atoi(const char *nptr);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+
+int		ft_isdigit(char c);
+int		ft_isdigits_str(char *str);
 
 #endif
