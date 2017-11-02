@@ -35,7 +35,7 @@ static void	init_champions(t_env *e)
 int			ft_init_vm(t_env *e)
 {
 	ft_bzero(e->map, MEM_SIZE);
-	ft_bzero(e->map_color, MEM_SIZE);
+	ft_bzero(e->map_color, MEM_SIZE * sizeof(t_color));
 	color_tab();
 	op_tab_init();
 	op_fun_tab_init();

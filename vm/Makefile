@@ -48,13 +48,19 @@ SRC +=	mul.c				\
 		bomb.c				\
 		copy.c
 
+SRC +=	ncurses.c			\
+		ncurses_controls.c	\
+		ncurses_style.c		\
+		ncurses_infos.c		\
+		ncurses_helpers.c
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 VPATH = src:include:src/op
 IFLAGS = -I include
-HEADERS = vm.h op.h
+HEADERS = vm.h op.h print_ncurses.h
 
 DLLST_PATH = ../libs/dllst
 DLLST = $(DLLST_PATH)/dllst.a
@@ -74,7 +80,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Building $(NAME)..."
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS)
 	@echo "\033[3;94m!$(NAME) built!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)

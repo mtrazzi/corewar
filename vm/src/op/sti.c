@@ -40,6 +40,6 @@ int	sti(t_env *e, t_prc *prc)
 		printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
 		params[2], params[3], params[2] + params[3], addr);
 	}
-	copy_value(params[1], e, mod_map(addr));
+	copy_value(params[1], e, mod_map(addr), get_color(e, prc->r[1]));
 	return (0);
 }
