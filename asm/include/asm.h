@@ -81,6 +81,8 @@
 
 # define MAX_OP				17
 
+# define PADDING_VALUE		0
+
 typedef struct s_op		t_op;
 typedef struct s_asm	t_asm;
 typedef struct s_param	t_param;
