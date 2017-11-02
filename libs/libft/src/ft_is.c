@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_output.c                                     :+:      :+:    :+:   */
+/*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 19:08:27 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:30:46 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/09/28 18:39:35 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:39:49 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-
-int		error_parse(t_parse *p)
+int	ft_iswithespace(char c)
 {
-	ft_fprintf(2, "Error at [line, char][%d, %d]: {%s}\n",
-				p->line_count + 1, p->alc - p->add_line_start + 1, p->alc);
-	return (1);
+	return (c ==  ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r');
 }
 
-int		reopen_error(char *file_name)
+int	ft_isdigit(char c)
 {
-	ft_fprintf(2, "Can't reopen source file '%s'\n", file_name);
-	return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_output.c                                     :+:      :+:    :+:   */
+/*   del.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 19:08:27 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 15:30:46 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/09/27 19:17:13 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/09/28 18:47:19 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		error_parse(t_parse *p)
+void	del_sym(t_sym **sym)
 {
-	ft_fprintf(2, "Error at [line, char][%d, %d]: {%s}\n",
-				p->line_count + 1, p->alc - p->add_line_start + 1, p->alc);
-	return (1);
+	free((*sym)->label);
+	free(*sym);
+	*sym = NULL;
 }
 
-int		reopen_error(char *file_name)
+int		clear_asm(t_asm *a)
 {
-	ft_fprintf(2, "Can't reopen source file '%s'\n", file_name);
+	dll_del_f(&a->syms, del_sym);
+	dll_del_f(&a->to_skip_syms, del_sym);
+	dll_del(&a->ops);
 	return (1);
 }

@@ -23,6 +23,7 @@ SRC = ft_bzero.c \
 		ft_memcpy.c \
 		ft_strnew.c \
 		ft_isdigit.c
+		ft_is.c
 
 SRC += get_next_line.c
 

@@ -33,7 +33,7 @@ void	sym_str_(t_sym *sym)
 {
 	if (sym)
 		ft_printf("sym {%s} {%u} {%u} {%p}\n",
-				sym->label, sym->sym, sym->line_number_parsing_help, sym->corresponding_ope);
+				sym->label, sym->sym, sym->line_number_parsing_help, sym->c_ope);
 	else
 		ft_printf("null\n");
 }
@@ -91,7 +91,7 @@ void	ope_str_(t_ope *ope)
 	{
 		ft_printf("{red}");
 		ft_printf("nb_param:%u op_code[%u] size{%u} add{%u} _%p_ line:%u ocp[%#hhx %hhb]\n", ope->nb_param, ope->op_code,
-					ope->size, ope->address_in_size, ope->op_tab_x, ope->line_nb, ope->ocp, ope->ocp);
+					ope->size, ope->ais, ope->op_tab_x, ope->line_nb, ope->ocp, ope->ocp);
 		ope_tabs_str_(ope);
 		ft_printf("{eoc}");
 		op_str_(ope->op_tab_x);

@@ -1,7 +1,7 @@
 all:
 	@$(MAKE) -C libs
-	@$(MAKE) -C asm
-	@$(MAKE) -C vm
+	@$(MAKE) -C asm asm
+	@$(MAKE) -C vm corewar
 
 clean:
 	@$(MAKE) -C libs clean
