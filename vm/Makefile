@@ -22,7 +22,7 @@ SRC = 	ft_error_vm.c		\
 		op_utils2.c			\
 		check_params.c		\
 		parse_arg2.c		\
-		opts.c
+		opts.c				\
 		global_utils.c		\
 		check_header.c
 

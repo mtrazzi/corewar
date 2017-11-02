@@ -26,7 +26,7 @@ t_opts g_opts[] =
 	{'n', NULL, 2, {{0, NULL}, {0, NULL}}, OPT_N, 0},
 	{'v', NULL, 1, {{0, NULL}}, OPT_V, OPT_D | OPT_A | OPT_M},
 	{'m', NULL, 0, {}, OPT_M, OPT_D | OPT_V | OPT_A},
-	{'a', NULL, 0, {}, OPT_A, OPT_D | OPT_V | OPT_M},
+	{'a', NULL, 0, {}, OPT_A, OPT_D | OPT_V | OPT_M},//to activate
 	{0, 0, 0, {}, 0, 0}
 };
 
@@ -69,6 +69,8 @@ int		check_opt(t_env *e)
 		else if ((g_opts[k].on & e->par.opts) && g_opts[k].id == 'n'
 					&& check_n(&g_opts[k], e) < 0)
 			return (-1);
+		else if ((g_opts[k].on & e->par.opts) && g_opts[k].id == 'm')
+			e->par.print = 1;
 	return (1);
 }
 
