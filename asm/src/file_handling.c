@@ -22,11 +22,11 @@ int		update_fd_asm(t_asm *a, char *file_name)
 	char	*new_filename;
 
 	size_name = ft_strlen(file_name) - 2;
-	new_filename = ft_strnew(size_name + 5);//change
+	new_filename = ft_strnew(size_name + ft_strlen(EXTENSION_OUT));
 	if (!new_filename)
 		return (-1);
 	ft_strncpy(new_filename, file_name, size_name);
-	ft_strcpy(new_filename + size_name, ".corr");//CHANGE
+	ft_strcpy(new_filename + size_name, EXTENSION_OUT);
 	a->fd = open(new_filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (a->fd < 0)
 		return (-1);

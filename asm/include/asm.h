@@ -85,6 +85,8 @@
 
 # define PADDING_VALUE		0
 
+# define EXTENSION_OUT		(".corr")//change
+
 typedef struct s_op		t_op;
 typedef struct s_asm	t_asm;
 typedef struct s_param	t_param;
