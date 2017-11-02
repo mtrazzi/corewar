@@ -12,8 +12,8 @@
 
 #include "vm.h"
 
-# define USAGE_1 "Usage: corewar [-v N | -m][-dump nbr_cycles]"
-# define USAGE_2 " [[-n number] champion1.cor] ..."
+#define USAGE_1 ("Usage: corewar [-v N | -m][-dump nbr_cycles]")
+#define USAGE_2 (" [[-n number] champion1.cor] ...")
 
 int		usage(void)
 {
@@ -30,7 +30,7 @@ int		error_usage(char *msg)
 
 int		ft_error(char *msg)
 {
-	ft_fprintf(2, "Error: %s\n", msg);	
+	ft_fprintf(2, "Error: %s\n", msg);
 	return (-1);
 }
 

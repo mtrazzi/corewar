@@ -6,14 +6,14 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:55:15 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 18:04:33 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/02 19:34:15 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-# define STR_ERR_NB_CHP "too many champions"
-# define BAD_FILE_EXT "champions filename must end with '.cor'"
+#define STR_ERR_NB_CHP	("too many champions")
+#define BAD_FILE_EXT	("champions filename must end with '.cor'")
 
 int		is_valid_ext(char *file_name)
 {

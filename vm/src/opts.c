@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   opts.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/02 19:34:48 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/11/02 19:36:40 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "opts.h"
 
 /*
@@ -35,10 +47,10 @@ static int	ft_getparams(int ac, char **av, int ac_index, int *used_args,
 	i = -1;
 	while (++i < opt->nb_param && ac - (ac_index + *used_args + 1) > 0)
 	{
-			if (av[ac_index + *used_args + 1][0] == '-')
-				break ;
-			opt->params[i].arg = av[ac_index + *used_args + 1];
-			*used_args += 1;
+		if (av[ac_index + *used_args + 1][0] == '-')
+			break ;
+		opt->params[i].arg = av[ac_index + *used_args + 1];
+		*used_args += 1;
 	}
 	if (opt->nb_param && opt->params[opt->nb_param - 1].arg == NULL)
 		return (ft_error(OPT_NOT_ENOUGH_PARAM));
@@ -73,7 +85,6 @@ static int	update_g_opts(u_int *opts, char **av, int *ac_index, int *i)
 		return (ft_error(OPT_NOT));
 	return (j);
 }
-
 
 static int	ft_getopts(int ac, char **av, int *ac_index, u_int *opts)
 {
