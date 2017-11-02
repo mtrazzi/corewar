@@ -21,6 +21,8 @@ SRC = 	ft_error_vm.c		\
 		op_utils.c			\
 		op_utils2.c			\
 		check_params.c		\
+		parse_arg2.c		\
+		opts.c
 		global_utils.c		\
 		check_header.c
 
@@ -80,7 +82,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Building $(NAME)..."
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS)
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
+	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[3;94m!$(NAME) built!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
@@ -92,7 +98,7 @@ $(LIBS):
 
 clean:
 	@$(MAKE) -C ../libs clean
-	rm -rf $(OBJ_PATH)
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	@$(MAKE) -C ../libs fclean

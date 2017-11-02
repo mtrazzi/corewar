@@ -16,7 +16,7 @@ clean:
 fclean:
 	@$(MAKE) -C libft fclean
 	@$(MAKE) -C dllst fclean
-	@$(MAKE) -C ft_printf fclean	
+	@$(MAKE) -C ft_printf fclean
 
 re: fclean all
 
