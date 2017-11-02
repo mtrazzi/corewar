@@ -13,7 +13,7 @@
 #include "vm.h"
 #include "print_ncurses.h"
 
-void	check_lives(t_env *e)
+void		check_lives(t_env *e)
 {
 	static u_int last_cyc_number = 0;
 
@@ -66,7 +66,7 @@ static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
 	}
 }
 
-void	del_and_update(t_env *e, t_dll **begin_lst, int all)
+void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 {
 	t_dll *prc_lst;
 	t_dll *next;
@@ -110,11 +110,3 @@ int			run_vm(t_env *e)
 	}
 	return (0);
 }
-
-
-
-
-
-
-
-
