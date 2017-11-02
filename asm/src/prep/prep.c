@@ -85,7 +85,7 @@ int			prep(t_asm *a)
 							+ ((t_ope *)get_last(a->ops)->content)->size
 					: 0;
 	if (size > UINT_MAX)
-		return (-1 * ft_fprintf(2, "prog_size > UINT_MAX\n"));
+		return (-1 * ft_fprintf(ERR_OUT, "prog_size > UINT_MAX\n"));
 	a->header.prog_size = size;
 	return (1);
 }

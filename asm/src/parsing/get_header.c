@@ -15,9 +15,9 @@
 static int	header_error(t_parse *p, int parsed)
 {
 	if ((parsed & 1) == 0)
-		ft_fprintf(2, "Error: missing name\n");
+		ft_fprintf(ERR_OUT, "Error: missing name\n");
 	if ((parsed & 2) == 0)
-		ft_fprintf(2, "Error: missing comment\n");
+		ft_fprintf(ERR_OUT, "Error: missing comment\n");
 	error_parse(p);
 	return (1);
 }

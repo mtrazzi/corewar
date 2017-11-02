@@ -65,6 +65,8 @@
 # define PAR_SIZE_REG		1
 # define PAR_SIZE_IND		2
 
+# define ERR_OUT			2
+
 # define MAL_ERR			-40
 # define ME					(MAL_ERR)
 

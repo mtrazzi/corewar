@@ -14,6 +14,7 @@
 
 #define W2 ("(Should end with '.s')")
 #define W1 ("Wrong file extension for")
+#define W3 ("Can't read source file")
 
 int		update_fd_asm(t_asm *a, char *file_name)
 {
@@ -40,9 +41,9 @@ int		open_file(char *file_name, int *fd)
 
 	tmp = file_name + ft_strlen(file_name) - 2;
 	if (ft_strcmp(tmp, ".s") != 0)
-		return (-1 * ft_fprintf(2, "%s '%s' %s\n", W1, file_name, W2));
+		return (-1 * ft_fprintf(ERR_OUT, "%s '%s' %s\n", W1, file_name, W2));
 	*fd = open(file_name, O_RDONLY);
 	if (*fd < 0)
-		return (-1 * ft_fprintf(2, "Can't read source file '%s'\n", file_name));
+		return (-1 * ft_fprintf(ERR_OUT, "%s '%s'\n", W3, file_name));
 	return (1);
 }

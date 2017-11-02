@@ -37,7 +37,7 @@ int			main(int ac, char **av)
 
 	init_asm(&a);
 	if (ac != 2)
-		return (-1 * ft_fprintf(2, "usage: ./asm champions_file.s\n"));
+		return (-1 * ft_fprintf(ERR_OUT, "usage: ./asm champions_file.s\n"));
 	if (open_file(av[1], &a.fd) != 1)
 		return (-1);
 	if (get_labels(&a) != 1)

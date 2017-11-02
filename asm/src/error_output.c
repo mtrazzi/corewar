@@ -14,13 +14,13 @@
 
 int		error_parse(t_parse *p)
 {
-	ft_fprintf(2, "Error at [line, char][%d, %d]: {%s}\n",
+	ft_fprintf(ERR_OUT, "Error at [line, char][%d, %d]: {%s}\n",
 				p->line_count + 1, p->alc - p->add_line_start + 1, p->alc);
 	return (1);
 }
 
 int		reopen_error(char *file_name)
 {
-	ft_fprintf(2, "Can't reopen source file '%s'\n", file_name);
+	ft_fprintf(ERR_OUT, "Can't reopen source file '%s'\n", file_name);
 	return (1);
 }
