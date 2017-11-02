@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:07:17 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 19:07:30 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:25:36 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	copy(t_env *e, t_prc *prc)
 	prc->r[nb_3] = prc->r[nb_1];
 	prc->r[nb_2] = prc->r[nb_1];
 	prc->carry = (prc->r[nb_1] == 0);
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 		printf("P %4d | copy r%d in r%d and r%d\n", prc->id, nb_1, nb_2, nb_3);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sti.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:58:56 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 15:05:50 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:27:24 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	sti(t_env *e, t_prc *prc)
 	offset += sizeof_param(OP_STI, (ocp >> 4) % 4);
 	params[3] = get_index(e, (ocp >> 2) % 4, prc, prc->pc + offset);
 	addr = prc->pc + (params[2] + params[3]) % IDX_MOD;
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 	{
 		printf("P %4d | sti r%d %d %d\n", prc->id, e->map[mod_map(prc->pc + 2)],
 		params[2], params[3]);

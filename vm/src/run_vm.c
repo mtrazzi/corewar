@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_vm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:44:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 15:36:56 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:45:42 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		check_lives(t_env *e)
 		e->nb_live = 0;
 		e->nb_checks = 0;
 		e->cyc -= CYCLE_DELTA;
-		if (e->par.verb & V_2)
+		if (e->par.opts & OPT_V2)
 			printf("Cycle to die is now %d\n", e->cyc);
 	}
 	else if (e->nb_checks == MAX_CHECKS - 1)
@@ -32,7 +32,7 @@ void		check_lives(t_env *e)
 		e->nb_checks = 0;
 		e->nb_live = 0;
 		e->cyc -= CYCLE_DELTA;
-		if (e->par.verb & V_2)
+		if (e->par.opts & OPT_V2)
 			printf("Cycle to die is now %d\n", e->cyc);
 	}
 	else
@@ -50,10 +50,10 @@ static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
 	prc = (t_prc *)((*prc_lst)->content);
 	if (prc->live == 0 || all)
 	{
-		if (e->par.verb & V_8)
+		if (e->par.opts & OPT_V8)
 			printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 					prc->id, e->cyc_since_beg - prc->cyc_last_live, e->cyc);
-		if (e->par.print)
+		if (e->par.opts & OPT_M)
 			e->map_color[mod_map(prc->pc)].is_prc = 0;
 		dll_delone(prc_lst);
 	}
@@ -87,13 +87,13 @@ int			run_vm(t_env *e)
 {
 	while (1)
 	{
-		if (e->par.print)
+		if (e->par.opts & OPT_M)
 			return (print_ncurses(e));
 		else
 		{
 			e->cyc_counter += 1;
 			e->cyc_since_beg += 1;
-			if (e->par.verb & V_2)
+			if (e->par.opts & OPT_V2)
 				printf("It is now cycle %d\n", e->cyc_since_beg);
 			if (do_one_cycle(e) < 0)
 				return (ft_error_vm(STR_ERROR_CYCLE));
@@ -104,7 +104,7 @@ int			run_vm(t_env *e)
 				if (e->prc_lst == 0)
 					return (0);
 			}
-			if (e->par.dump && e->cyc_since_beg == e->par.nb_cyc)
+			if ((e->par.opts & OPT_D) && e->cyc_since_beg == e->par.dump_cycle)
 				return (dump(e));
 		}
 	}

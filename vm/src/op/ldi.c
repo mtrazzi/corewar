@@ -33,7 +33,7 @@ int	ldi(t_env *e, t_prc *prc)
 	addr = prc->pc + (params[1] + params[2]) % IDX_MOD;
 	prc->r[e->map[mod_map(prc->pc + offset)]] = get_value(e, DIR_CODE, prc,
 																		addr);
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 	{
 		printf("P %4d | ldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);

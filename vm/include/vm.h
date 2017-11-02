@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 16:31:28 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 22:02:17 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "dll.h"
 # include "op.h"
 # include <sys/types.h>
-# include <stdio.h>
+# include <stdio.h>//
 # include <limits.h>
 # include <fcntl.h>
 
@@ -28,14 +28,7 @@
 # define MAX_COLOR 4
 # define NB_OP	   16
 
-# define V_0 0
-# define V_1 1
-# define V_2 2
-# define V_4 4
-# define V_8 8
-# define V_16 16
-
-# define OPT_V		0x00000001
+# define OPT_V		0x00000200
 # define OPT_V1		0x00000001
 # define OPT_V2		0x00000002
 # define OPT_V4		0x00000004
@@ -102,10 +95,7 @@ struct				s_chp
 struct				s_par
 {
 	u_int			opts;
-	int				verb;			//verbose option : show operations
-	int				print;			//print the map every 5 cycles
-	int				dump;			//is there a dump ? || DELETE
-	int				nb_cyc;			//nb_cyc befor dump || RENAME TO DUMP
+	int				dump_cycle;		//nb_cyc befor dump || RENAME TO DUMP
 	u_int			nb_chp;			//how many .cor files
 	t_chp			champions[MAX_PLAYERS];
 };

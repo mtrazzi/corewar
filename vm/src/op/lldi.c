@@ -33,7 +33,7 @@ int	lldi(t_env *e, t_prc *prc)
 	prc->r[e->map[mod_map(prc->pc + offset)]] = lget_value(e, DIR_CODE, prc,
 																		addr);
 	prc->carry = (lget_value(e, DIR_CODE, prc, addr) == 0);
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 	{
 		printf("P %4d | lldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);

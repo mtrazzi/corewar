@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   and.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:24 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 15:01:24 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:25:27 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	and(t_env *e, t_prc *prc)
 	reg_nb = e->map[mod_map(prc->pc + offset)];
 	prc->r[reg_nb] = params[1] & params[2];
 	prc->carry = prc->r[reg_nb] == 0;
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 		printf("P %4d | and %d %d r%d\n", prc->id, params[1], params[2],
 				reg_nb);
 	return (0);

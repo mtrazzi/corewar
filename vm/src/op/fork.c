@@ -44,7 +44,7 @@ int				ft_fork(t_env *e, t_prc *prc)
 	if (!(new_prc = new_prc_fork(e, prc, mod_map(addr_after_mod))))
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 		printf("P %4d | fork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);
 	return (0);
 }

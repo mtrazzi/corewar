@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:23:01 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 12:26:40 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:44:55 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	copy_value(int value, t_env *e, u_int pos, u_char color)
 	e->map[mod_map(pos + 1)] = ((value << 8) >> 24);
 	e->map[mod_map(pos + 2)] = ((value << 16) >> 24);
 	e->map[mod_map(pos + 3)] = ((value << 24) >> 24);
-	if (e->par.print)
+	if (e->par.opts & OPT_M)
 	{
 		e->map_color[mod_map(pos + 0)].color = color;
 		e->map_color[mod_map(pos + 1)].color = color;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_process.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:50:00 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 13:17:00 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:45:33 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 			g_op_fun_tab[prc->op_code - 1](e, prc);
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
-			if (e->par.verb & V_16)
+			if (e->par.opts & OPT_V16)
 				print_adv(e, prc->pc, skip);
 			prc->pc = mod_map(prc->pc + skip);
 		}
@@ -49,11 +49,11 @@ int		process_load_op(t_env *e, t_prc *prc)
 
 int		do_process(t_env *e, t_prc *prc)
 {
-	if (e->par.print)
+	if (e->par.opts & OPT_M)
 		e->map_color[mod_map(prc->pc)].is_prc = 0;
 	process_load_op(e, prc);
 	process_exec_op_update_cyc_left(e, prc);
-	if (e->par.print)
+	if (e->par.opts & OPT_M)
 		e->map_color[mod_map(prc->pc)].is_prc = 1;
 	return (1);
 }

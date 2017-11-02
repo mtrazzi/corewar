@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ld.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:30 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 14:49:32 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/02 20:27:37 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ld(t_env *e, t_prc *prc)
 	reg_nb = e->map[mod_map(prc->pc + offset)];
 	prc->r[reg_nb] = params[1];
 	prc->carry = prc->r[reg_nb] == 0;
-	if (e->par.verb & V_4)
+	if (e->par.opts & OPT_V4)
 		printf("P %4d | ld %d r%d\n", prc->id, params[1], reg_nb);
 	return (0);
 }

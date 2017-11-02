@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 18:05:03 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/02 20:04:07 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/02 22:02:34 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,9 @@ int		check_dump_v(t_opts *opts, t_env *e)
 		return (opts->id == 'd' ? ft_error(BAD_D) : ft_error(BAD_V));
 	opts->params[0].value = ft_atoi(opts->params[0].arg);
 	if (opts->id == 'd')
-	{
-		e->par.dump = 1;//REMOVE
-		e->par.nb_cyc = opts->params[0].value;//REANAME TO DUMP
-	}
+		e->par.dump_cycle = opts->params[0].value;
 	else
-		e->par.verb = opts->params[0].value;//CHANGE
+		e->par.opts |= (opts->params[0].value & (OPT_V1 | OPT_V2 | OPT_V4 | OPT_V8 | OPT_V16));
 	return (1);
 }
 
@@ -72,7 +69,7 @@ int		check_opt(t_env *e)
 					&& check_n(&g_opts[k], e) < 0)
 			return (-1);
 		else if ((g_opts[k].on & e->par.opts) && g_opts[k].id == 'm')
-			e->par.print = 1;
+			e->par.opts |= OPT_M;
 	return (1);
 }
 
