@@ -85,3 +85,15 @@ void	decrement_color_mods(t_env *e)
 		pos++;
 	}
 }
+
+void	fill_logo(WINDOW *logo)
+{
+	wattron(logo, COLOR_PAIR(COLOR_FWHITE));
+	mvwaddstr(logo, 2, 10, "   ___               __    __           ");
+	mvwaddstr(logo, 3, 10, "  / __\\___  _ __ ___/ / /\\ \\ \\__ _ _ __ ");
+	mvwaddstr(logo, 4, 10, " / /  / _ \\| '__/ _ \\ \\/  \\/ / _` | '__|");
+	mvwaddstr(logo, 5, 10, "/ /__| (_) | | |  __/\\  /\\  / (_| | |   ");
+	mvwaddstr(logo, 6, 10, "\\____/\\___/|_|  \\___| \\/  \\/ \\__,_|_|   ");
+	mvwaddstr(logo, 8, 15, "by mtrazzi, pkirsch and laranda");
+	wattroff(logo, COLOR_PAIR(COLOR_FWHITE));
+}

@@ -50,6 +50,7 @@ WINDOW		*create_winbox(int height, int width,
 void		fill_field(t_view_env *v_e, t_env *e);
 void		fill_infos(t_view_env *v_e, t_env *e,
 						int running);
+u_int		print_breakdown(WINDOW *win, t_env *e, u_int x);
 u_int		print_players(WINDOW *win, t_env *e, u_int x);
 int			forward_one_cycle(t_env *e, t_view_env *v_e);
 void		control_speed(t_view_env *v_e);
