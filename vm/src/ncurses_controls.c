@@ -47,7 +47,7 @@ int		running_loop(t_env *e, t_view_env *v_e)
 		v_e->status = forward_one_cycle(e, v_e);
 	}
 	if (key == 'q')
-		v_e->status = 0;
+		v_e->status = -1;
 	nodelay(stdscr, FALSE);
 	return (v_e->status);
 }
@@ -69,7 +69,7 @@ int		goto_loop(t_env *e, t_view_env *v_e, int cycle)
 	wmove(v_e->infos, 5, 1);
 	wclrtoeol(v_e->infos);
 	if (key == 'q')
-		v_e->status = 0;
+		v_e->status = -1;
 	nodelay(stdscr, FALSE);
 	return (v_e->status);
 }
@@ -119,7 +119,7 @@ void	print_worker(t_env *e, t_view_env *v_e)
 		fill_infos(v_e, e, 0);
 		wrefresh(v_e->infos);
 		if (key == 'q')
-			v_e->status = 0;
+			v_e->status = -1;
 	}
 	if (v_e->status == 0)
 		print_winner(e, v_e);
