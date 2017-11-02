@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 19:34:48 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/02 19:36:40 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/02 22:45:06 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int			parse_params(int ac, char **av, u_int *opts)
 	while (++i < ac)
 		if (av[i][0] == '-')
 		{
-			if (found_non_opt != 0)
+			if (found_non_opt != 0 && !(av[i][1] && av[i][1] == 'n'))
 				return (ft_error(OPT_AFTER_ARG));
 			if (!av[i][1])
 				break ;
