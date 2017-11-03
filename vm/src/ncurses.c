@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:35:54 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 20:56:18 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 21:52:48 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int		print_ncurses(t_env *e)
 	{
 		init_ncurses();
 		v_e.field = create_winbox(66, 195, 1, 3);
-		v_e.logo = create_winbox(10, 60, 1, 200);
-		v_e.infos = create_winbox(42, 60, 11, 200);
-		v_e.help = create_winbox(14, 60, 53, 200);
+		v_e.logo = create_winbox(9, 60, 1, 200);
+		v_e.infos = create_winbox(50, 60, 10, 200);
+		v_e.help = create_winbox(7, 60, 60, 200);
 		fill_field(&v_e, e);
 		fill_logo(v_e.logo);
-		print_breakdown(v_e.infos, e, 16, MSG_LAST_PERIOD);
+		print_breakdown(v_e.infos, e, BKDN_LINE + 3, MSG_LAST_PERIOD);
 		fill_infos(&v_e, e, 0);
 		fill_help(v_e.help);
 		wnoutrefresh(v_e.field);

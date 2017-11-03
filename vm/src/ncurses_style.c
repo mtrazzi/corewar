@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:50:32 by laranda           #+#    #+#             */
-/*   Updated: 2017/10/31 23:28:02 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 21:14:02 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ void	decrement_color_mods(t_env *e)
 void	fill_logo(WINDOW *logo)
 {
 	wattron(logo, COLOR_PAIR(COLOR_FWHITE));
-	mvwaddstr(logo, 2, 10, "   ___               __    __           ");
-	mvwaddstr(logo, 3, 10, "  / __\\___  _ __ ___/ / /\\ \\ \\__ _ _ __ ");
-	mvwaddstr(logo, 4, 10, " / /  / _ \\| '__/ _ \\ \\/  \\/ / _` | '__|");
-	mvwaddstr(logo, 5, 10, "/ /__| (_) | | |  __/\\  /\\  / (_| | |   ");
-	mvwaddstr(logo, 6, 10, "\\____/\\___/|_|  \\___| \\/  \\/ \\__,_|_|   ");
-	mvwaddstr(logo, 8, 15, "by mtrazzi, pkirsch and laranda");
+	mvwaddstr(logo, 1, 10, "   ___               __    __           ");
+	mvwaddstr(logo, 2, 10, "  / __\\___  _ __ ___/ / /\\ \\ \\__ _ _ __ ");
+	mvwaddstr(logo, 3, 10, " / /  / _ \\| '__/ _ \\ \\/  \\/ / _` | '__|");
+	mvwaddstr(logo, 4, 10, "/ /__| (_) | | |  __/\\  /\\  / (_| | |   ");
+	mvwaddstr(logo, 5, 10, "\\____/\\___/|_|  \\___| \\/  \\/ \\__,_|_|   ");
+	mvwaddstr(logo, 7, 15, "by mtrazzi, pkirsch and laranda");
 	wattroff(logo, COLOR_PAIR(COLOR_FWHITE));
 }

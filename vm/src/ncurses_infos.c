@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 20:57:43 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 21:57:28 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 {
 	u_int	x;
 
+	x = 4;
 	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	mvwprintw(v_e->infos, 1, 2, "** %s **", running ? "RUNNING" : "PAUSED");
+	mvwprintw(v_e->infos, 2, 24, "** %s **", running ? "RUNNING" : "PAUSED");
 	wclrtoeol(v_e->infos);
-	mvwprintw(v_e->infos, 3, 2, "Step by : %d cycles", v_e->step);
+	mvwprintw(v_e->infos, x, 25, "[VM STATS]");
+	mvwprintw(v_e->infos, x + 2, 2, "Cycle : %d", e->cyc_since_beg);
+	mvwprintw(v_e->infos, x + 2, 35, "Step by : %d cycles", v_e->step);
 	wclrtoeol(v_e->infos);
-	mvwprintw(v_e->infos, 6, 2, "Cycle : %d", e->cyc_since_beg);
-	mvwprintw(v_e->infos, 7, 2, "Cycle to die : %d", e->cyc);
+	mvwprintw(v_e->infos, x + 4, 2, "Cycle to die : %d", e->cyc);
 	wclrtoeol(v_e->infos);
-	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
+	mvwprintw(v_e->infos, x + 6, 2, "Processes : %d", dll_size(e->prc_lst));
 	wclrtoeol(v_e->infos);
-	print_progress_bar(v_e->infos, e, 10, MSG_PROGRESS_BAR);
-	print_breakdown(v_e->infos, e, 13, MSG_CURRENT_PERIOD);
+	mvwprintw(v_e->infos, x + 4, 35, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvwprintw(v_e->infos, x + 5, 35, "NBR_LIVE : %d", NBR_LIVE);
+	mvwprintw(v_e->infos, x + 6, 35, "MAX_CHECKS : %d", MAX_CHECKS);
+	print_progress_bar(v_e->infos, e, x + 9, MSG_PROGRESS_BAR);
+	mvwprintw(v_e->infos, BKDN_LINE - 2, 22, "[CHAMPIONS STATS]");
+	print_breakdown(v_e->infos, e, BKDN_LINE, MSG_CURRENT_PERIOD);
 	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	x = print_players(v_e->infos, e, 19);
-	mvwprintw(v_e->infos, x, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	mvwprintw(v_e->infos, x + 1, 2, "NBR_LIVE : %d", NBR_LIVE);
-	mvwprintw(v_e->infos, x + 2, 2, "MAX_CHECKS : %d", MAX_CHECKS);
+	x = print_players(v_e->infos, e, BKDN_LINE + 7);
 	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
 	box(v_e->infos, 0, 0);
 }
@@ -66,17 +69,16 @@ u_int	print_players(WINDOW *win, t_env *e, u_int x)
 void	fill_help(WINDOW *help)
 {
 	wattron(help, COLOR_PAIR(COLOR_FWHITE));
-	mvwaddstr(help, 1, 26, "CONTROLS");
-	mvwaddstr(help, 3, 2, "Next Cycle :        N");
-	mvwaddstr(help, 4, 2, "Step n cycles :     S");
-	mvwaddstr(help, 5, 2, "Run / Pause :   Space");
-	mvwaddstr(help, 6, 2, "GoTo :              G");
-	mvwaddstr(help, 7, 2, "         then cycle # and Enter");
-	mvwaddstr(help, 9, 2, "Hide Dump :         H");
-	mvwaddstr(help, 3, 38, "Step size :");
-	mvwaddstr(help, 4, 35, "-10   -1   +1   +10");
-	mvwaddstr(help, 5, 35, " E     R    T     Y");
-	mvwaddstr(help, 11, 2, "Quit :              Q");
+	mvwaddstr(help, 0, 25, " CONTROLS ");
+	mvwaddstr(help, 1, 4, "Next Cycle :        N");
+	mvwaddstr(help, 2, 4, "Step n cycles :     S");
+	mvwaddstr(help, 3, 4, "Run / Pause :   Space");
+	mvwaddstr(help, 4, 4, "GoTo :              G");
+	mvwaddstr(help, 5, 4, "Hide Dump :         H");
+	mvwaddstr(help, 1, 38, "Step size :");
+	mvwaddstr(help, 2, 35, "-10   -1   +1   +10");
+	mvwaddstr(help, 3, 35, " E     R    T     Y");
+	mvwaddstr(help, 5, 35, "Quit :            Q");
 	wattroff(help, COLOR_PAIR(COLOR_FWHITE));
 }
 
