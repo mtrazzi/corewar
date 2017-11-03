@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/01 00:25:45 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 21:31:32 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int		forward_one_cycle(t_env *e, t_view_env *v_e)
 {
+	if (e->cyc - e->cyc_counter == 1)
+		print_breakdown(v_e->infos, e, BKDN_LINE + 3, MSG_LAST_PERIOD);
 	e->cyc_counter += 1;
 	e->cyc_since_beg += 1;
 	if (do_one_cycle(e) < 0)
@@ -61,12 +63,12 @@ int		goto_loop(t_env *e, t_view_env *v_e, int cycle)
 				&& e->cyc_since_beg < cycle)
 	{
 		wattron(v_e->infos, COLOR_PAIR(1));
-		mvwprintw(v_e->infos, 5, 2, "Going to cycle %d", cycle);
+		mvwprintw(v_e->infos, GOTO_LINE, 2, "Going to cycle %d", cycle);
 		wattroff(v_e->infos, COLOR_PAIR(1));
 		check_hide(key, v_e, e);
 		v_e->status = forward_one_cycle(e, v_e);
 	}
-	wmove(v_e->infos, 5, 1);
+	wmove(v_e->infos, GOTO_LINE, 1);
 	wclrtoeol(v_e->infos);
 	if (key == 'q')
 		v_e->status = -1;
@@ -80,18 +82,18 @@ int		do_goto(t_env *e, t_view_env *v_e)
 
 	cycle = 0;
 	wattron(v_e->infos, COLOR_PAIR(1));
-	mvwprintw(v_e->infos, 4, 2, "Go to cycle ?");
-	wmove(v_e->infos, 4, 17);
+	mvwprintw(v_e->infos, GOTO_LINE, 2, "Go to cycle ?");
+	wmove(v_e->infos, GOTO_LINE, 17);
 	curs_set(2);
 	echo();
 	noraw();
 	wrefresh(v_e->infos);
-	mvwscanw(v_e->infos, 4, 17, "%d", &cycle);
+	mvwscanw(v_e->infos, GOTO_LINE, 17, "%d", &cycle);
 	wattroff(v_e->infos, COLOR_PAIR(1));
 	noecho();
 	raw();
 	curs_set(0);
-	wmove(v_e->infos, 4, 1);
+	wmove(v_e->infos, GOTO_LINE, 1);
 	wclrtoeol(v_e->infos);
 	if (cycle > e->cyc_since_beg)
 		v_e->status = goto_loop(e, v_e, cycle);

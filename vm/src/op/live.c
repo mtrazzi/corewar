@@ -19,11 +19,12 @@ int	live(t_env *e, t_prc *prc)
 	prc->live += 1;
 	prc->live_nb = get_value(e, DIR_CODE, prc, prc->pc + 1);
 	prc->cyc_last_live = e->cyc_since_beg;
-	e->nb_live += 1;
+	// e->nb_live += 1; // A VERIFIER !!!
 	if (e->par.opts & OPT_V4)
 		printf("P %4d | live %d\n", prc->id, prc->live_nb);//
 	if ((ret = is_real_number(e, prc->live_nb)) > 0)
 	{
+		e->nb_live += 1; // SWAP A VERIFIER !!!
 		e->last_alive = prc->live_nb;
 		if (e->par.opts & OPT_V1)
 			printf("Player %d (%s) is said to be alive\n",
