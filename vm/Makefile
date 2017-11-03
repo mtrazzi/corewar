@@ -54,6 +54,7 @@ SRC +=	ncurses.c			\
 		ncurses_controls.c	\
 		ncurses_style.c		\
 		ncurses_infos.c		\
+		ncurses_stats.c		\
 		ncurses_helpers.c
 
 OBJ_FILES = $(SRC:.c=.o)

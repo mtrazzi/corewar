@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 14:49:42 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/01 00:28:04 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 18:32:05 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define COLOR_GREEN3 10
 # define COLOR_MAGENTA3 177
 # define COLOR_YELLOW3 229
+
+# define MSG_CURRENT_PERIOD ("Live breakdown for current period :")
+# define MSG_LAST_PERIOD ("Live breakdown for last period :")
+# define BKDN ("[------------------------------------------------------]")
 
 typedef struct s_view_env	t_view_env;
 
@@ -50,7 +54,7 @@ WINDOW		*create_winbox(int height, int width,
 void		fill_field(t_view_env *v_e, t_env *e);
 void		fill_infos(t_view_env *v_e, t_env *e,
 						int running);
-u_int		print_breakdown(WINDOW *win, t_env *e, u_int x);
+void		print_breakdown(WINDOW *win, t_env *e, u_int x, char *msg);
 u_int		print_players(WINDOW *win, t_env *e, u_int x);
 int			forward_one_cycle(t_env *e, t_view_env *v_e);
 void		control_speed(t_view_env *v_e);

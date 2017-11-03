@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/01 00:27:56 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 18:50:29 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,64 +27,18 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	wclrtoeol(v_e->infos);
 	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
 	wclrtoeol(v_e->infos);
-	x = print_breakdown(v_e->infos, e, 10);
+	print_breakdown(v_e->infos, e, 10, MSG_CURRENT_PERIOD);
 	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	x = print_players(v_e->infos, e, x);
+	x = print_players(v_e->infos, e, 16);
 	mvwprintw(v_e->infos, x + 1, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvwprintw(v_e->infos, x + 3, 2, "NBR_LIVE : %d", NBR_LIVE);
 	mvwprintw(v_e->infos, x + 5, 2, "MAX_CHECKS : %d", MAX_CHECKS);
+	// DEBUG
+		mvwprintw(v_e->infos, x + 1, 30, "cyc - cyc_counter : %d", e->cyc - e->cyc_counter);
+		mvwprintw(v_e->infos, x + 3, 40, "cyc_counter : %d", e->cyc_counter);
+	// DEBUG
 	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
 	box(v_e->infos, 0, 0);
-}
-
-u_int	print_breakdown(WINDOW *win, t_env *e, u_int x)
-{
-	u_int		i;
-	u_int		pos;
-	float		percentage;
-	float		limit;
-	u_int		offset;
-
-	float		total_percentage; // DEBUG
-
-	total_percentage = 0;
-
-	i = 0;
-	pos = 0;
-	percentage = 0.0;
-	limit = 0;
-	offset = 0;
-	mvwprintw(win, x, 2, "Live breakdown for current period :");
-	wattron(win, COLOR_PAIR(COLOR_ZEROS));
-	mvwprintw(win, x + 1, 2, "[------------------------------------------------------]");
-	wattroff(win, COLOR_PAIR(COLOR_ZEROS));
-	wmove(win, x + 2, 2); // DEBUG
-	wclrtoeol(win); // DEBUG
-	while (i < e->par.nb_chp)
-	{
-		wattron(win, COLOR_PAIR(i + 1));
-		if (e->nb_live)
-		{
-			percentage = ((float)e->par.champions[i].total_lives_since_period_beg
-						* 100.0) / (float)e->nb_live;
-			// if (percentage - (int)percentage > 0.5)
-			// 	percentage++;
-		}
-		total_percentage += percentage; // DEBUG
-		limit = (percentage * 54.0) / 100.0;
-		mvwprintw(win, x + 2, 3 + (i * 8), "%.2f", percentage); //DEBUG
-		mvwprintw(win, x + 2, 50, "%d", e->nb_live); //DEBUG
-		while (pos < 54 && pos < limit + offset)
-		{
-			mvwprintw(win, x + 1, 3 + pos, "-");
-			pos++;
-		}
-		offset = pos;
-		wattroff(win, COLOR_PAIR(i + 1));
-		i++;
-	}
-	mvwprintw(win, x + 2, 40, "%.2f", total_percentage); //DEBUG
-	return (x + 3);
 }
 
 u_int	print_players(WINDOW *win, t_env *e, u_int x)

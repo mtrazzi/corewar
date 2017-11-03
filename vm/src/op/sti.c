@@ -24,7 +24,7 @@ int	sti(t_env *e, t_prc *prc)
 
 	ocp = e->map[mod_map(prc->pc + 1)];
 	offset = 2;
-	params[1] = prc->r[e->map[mod_map(prc->pc + offset)]];
+	params[1] = prc->r[e->map[mod_map(prc->pc + offset)]]; // SANITIZE
 	offset += 1;
 	if (((ocp >> 4) % 4) == DIR_CODE)
 		params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
