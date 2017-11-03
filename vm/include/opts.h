@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   opts.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/03 21:38:49 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/11/03 21:39:02 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OPTS_H
 # define OPTS_H
 
 # include <stdlib.h>
 # include <sys/types.h>
+# include "libft.h"
 
 # define MAX_PARAMS 4
 
@@ -38,6 +51,9 @@ size_t	ft_strlen(const char *s);
 
 int		ft_error(char *msg);
 
+int		is_empty_op(t_opts *opt);
+
 int		parse_params(int ac, char **av, u_int *opts);
+
 
 #endif
