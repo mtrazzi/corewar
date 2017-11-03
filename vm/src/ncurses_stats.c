@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 18:22:33 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 19:25:34 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 20:11:42 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	print_breakdown(WINDOW *win, t_env *e, u_int x, char *msg)
 						* 54.0) / (float)e->nb_live;
 		}
 		while (pos < 54 && pos < limit + offset)
-			mvwprintw(win, x + 1, 3 + pos++, "-");
+		{
+			mvwaddch(win, x + 1, 3 + pos++, ACS_CKBOARD);
+			// mvwprintw(win, x + 1, 3 + pos++, "-");
+		}
 		offset = pos;
 		wattroff(win, COLOR_PAIR(++i));
 	}
