@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 18:50:29 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 20:57:43 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,13 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	wclrtoeol(v_e->infos);
 	mvwprintw(v_e->infos, 8, 2, "Processes : %d", dll_size(e->prc_lst));
 	wclrtoeol(v_e->infos);
-	print_breakdown(v_e->infos, e, 10, MSG_CURRENT_PERIOD);
+	print_progress_bar(v_e->infos, e, 10, MSG_PROGRESS_BAR);
+	print_breakdown(v_e->infos, e, 13, MSG_CURRENT_PERIOD);
 	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	x = print_players(v_e->infos, e, 16);
-	mvwprintw(v_e->infos, x + 1, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	mvwprintw(v_e->infos, x + 3, 2, "NBR_LIVE : %d", NBR_LIVE);
-	mvwprintw(v_e->infos, x + 5, 2, "MAX_CHECKS : %d", MAX_CHECKS);
-	// DEBUG
-		mvwprintw(v_e->infos, x + 1, 30, "cyc - cyc_counter : %d", e->cyc - e->cyc_counter);
-		mvwprintw(v_e->infos, x + 3, 40, "cyc_counter : %d", e->cyc_counter);
-	// DEBUG
+	x = print_players(v_e->infos, e, 19);
+	mvwprintw(v_e->infos, x, 2, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvwprintw(v_e->infos, x + 1, 2, "NBR_LIVE : %d", NBR_LIVE);
+	mvwprintw(v_e->infos, x + 2, 2, "MAX_CHECKS : %d", MAX_CHECKS);
 	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
 	box(v_e->infos, 0, 0);
 }

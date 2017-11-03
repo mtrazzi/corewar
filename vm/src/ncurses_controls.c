@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 18:56:10 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/03 20:56:13 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		forward_one_cycle(t_env *e, t_view_env *v_e)
 {
 	if (e->cyc - e->cyc_counter == 1)
-		print_breakdown(v_e->infos, e, 13, MSG_LAST_PERIOD);
+		print_breakdown(v_e->infos, e, 16, MSG_LAST_PERIOD);
 	e->cyc_counter += 1;
 	e->cyc_since_beg += 1;
 	if (do_one_cycle(e) < 0)
