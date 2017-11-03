@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   opts.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/03 21:38:49 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/11/03 21:39:02 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OPTS_H
 # define OPTS_H
 
@@ -32,35 +44,16 @@ struct s_opts
 	u_int			off;
 };
 
-#define FORMAT_LEN		10
-#define	REST_NONE		0x00
-#define REST_CONTAINS	0x01
-#define REST_EQUAL		0x02
-#define REST_END		0x04
-typedef struct s_prog_param	t_prog_param;
-struct s_prog_param
-{
-	char	*format;//format[FORMAT_LEN];
-	u_int	mode;
-	int		associated_opts_id;
-	int		param_index;
-};
-/*
-**	to implement:
-**	
-*/
-//what if input == '.cor' should ne valid
-
 extern t_opts g_opts[];
-extern t_prog_param g_prog_param[];
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 
 int		ft_error(char *msg);
 
+int		is_empty_op(t_opts *opt);
+
 int		parse_params(int ac, char **av, u_int *opts);
 
-int			is_empty_op(t_opts *opt);//
 
 #endif

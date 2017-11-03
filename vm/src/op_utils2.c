@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:23:01 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 20:44:55 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/03 21:50:53 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		get_index(t_env *e, u_char type_of_param, t_prc *prc, u_int pos)
 	return (convert_2_bytes(e->map[mod_map(pos)], e->map[mod_map(pos + 1)]));
 }
 
-int	get_color(t_env *e, int nb)
+int		get_color(t_env *e, int nb)
 {
 	u_int i;
 	t_chp chp;

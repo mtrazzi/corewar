@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:47:07 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/03 20:28:31 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/03 20:37:46 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	init_chp(t_chp *chp)
 	ft_bzero(chp->name, PROG_NAME_LENGTH + 1);
 	ft_bzero(chp->comment, COMMENT_LENGTH + 1);
 	chp->file_name = NULL;
-	chp->cyc_last_live = 0;//
-	chp->total_lives_since_period_beg = 0;//
+	chp->cyc_last_live = 0;
+	chp->total_lives_since_period_beg = 0;
 }
 
 static void	init_champions(t_env *e)

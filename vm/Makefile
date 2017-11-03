@@ -24,7 +24,9 @@ SRC = 	ft_error_vm.c		\
 		parse_arg2.c		\
 		opts.c				\
 		global_utils.c		\
-		check_header.c
+		check_header.c		\
+		parse_champions.c	\
+		opts_utils.c
 
 SRC +=	live.c				\
 		ld.c				\
