@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:55:15 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 19:34:15 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/03 20:28:21 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		is_valid_ext(char *file_name)
 
 int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
 {
-	t_chp	new_chp;
 	u_int	i;
 
 	i = 0;
@@ -33,8 +32,7 @@ int		ft_parse_chp(t_env *e, char *file_name, int chp_nb)
 			return (-1);
 	if (++(e->par.nb_chp) > MAX_PLAYERS)
 		return (ft_error(STR_ERR_NB_CHP));
-	new_chp.nb = chp_nb;
-	new_chp.file_name = file_name;
-	e->par.champions[e->par.nb_chp - 1] = new_chp;
+	e->par.champions[e->par.nb_chp - 1].nb = chp_nb;
+	e->par.champions[e->par.nb_chp - 1].file_name = file_name;
 	return (1);
 }

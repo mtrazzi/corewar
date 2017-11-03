@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 19:34:48 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/02 22:45:06 by pkirsch          ###   ########.fr       */
+/*   Created: 2017/11/03 18:21:56 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/11/03 19:07:30 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@
 **	TODO: stop if already parsed opt? (needed for corewar -n option)?
 */
 
+int			is_empty_op(t_opts *opt)
+{
+	int	i;
+
+	i = -1;
+	while (++i < opt->nb_param)
+	{
+		if (opt->params[i].arg != NULL)
+			return (0);
+	}
+	return (1);
+}
+
 static int	same_empty_opt(int j, int id)
 {
 	int tmp;
@@ -25,10 +38,13 @@ static int	same_empty_opt(int j, int id)
 	tmp = j;
 	if (g_opts[j].nb_param == 0)
 		return (j);
-	if (g_opts[j].params[0].arg == NULL)
+	// if (g_opts[j].params[0].arg == NULL)//bad
+	// 	return (j);
+	if (is_empty_op(&g_opts[j]))
 		return (j);
 	while (g_opts[++j].id)
-		if (g_opts[j].id == id && g_opts[j].params[0].arg == NULL)
+		// if (g_opts[j].id == id && g_opts[j].params[0].arg == NULL)
+		if (g_opts[j].id == id && is_empty_op(&g_opts[j]))
 		{
 			if (g_opts[tmp].str != NULL &&
 				ft_strncmp(g_opts[tmp].str, g_opts[j].str,
@@ -105,17 +121,63 @@ static int	ft_getopts(int ac, char **av, int *ac_index, u_int *opts)
 	return (1);
 }
 
+int		compare_param_core(char *ref, u_int mode, char *av)
+{
+	if (mode == REST_NONE)
+		return (1);
+	else if (mode == REST_END)
+	{
+		if (ft_strlen(av) < ft_strlen(ref)
+				|| ft_strcmp(ref, av + ft_strlen(av) - ft_strlen(ref)) != 0)//'.cor' valid => '<'
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
+#include <stdio.h>
+int			is_special_prog_param(char *av, u_int *opts)//, int *ac_index)
+{
+	int i;
+
+	i = -1;
+	while (g_prog_param[++i].associated_opts_id)
+	{
+		if (compare_param_core(g_prog_param[i].format, g_prog_param[i].mode, av) == 1)
+			break ;
+	}
+	if (!g_prog_param[i].associated_opts_id)
+		return (0);
+	int j = -1;
+	while (g_opts[++j].id)
+	{
+		if (g_opts[j].id == g_prog_param[i].associated_opts_id
+			&& is_empty_op(&g_opts[j]))
+		{
+			if (*opts & g_opts[j].off)
+				return (ft_error(OPT_COLLISION));
+			*opts |= g_opts[j].on;
+			g_opts[j].params[g_prog_param[i].param_index].arg = av;
+			// printf("HERE\n");
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int			parse_params(int ac, char **av, u_int *opts)
 {
 	int found_non_opt;
 	int	i;
 
 	found_non_opt = 0;
+	int found_non_opt_non_param = 0;
+	int ret;
 	i = 0;
 	while (++i < ac)
 		if (av[i][0] == '-')
 		{
-			if (found_non_opt != 0 && !(av[i][1] && av[i][1] == 'n'))
+			if (found_non_opt != 0)// && !(av[i][1] && av[i][1] == 'n'))
 				return (ft_error(OPT_AFTER_ARG));
 			if (!av[i][1])
 				break ;
@@ -123,7 +185,19 @@ int			parse_params(int ac, char **av, u_int *opts)
 				return (-1);
 		}
 		else
-			found_non_opt += 1;
-	i = i - found_non_opt;
+		{
+			ret = is_special_prog_param(av[i], opts);
+			if (ret == 1)
+			{
+				// i += 1;
+				found_non_opt_non_param += 1;
+			}
+			else if (ret == -1)
+				return (-1);
+			else
+				found_non_opt += 1;
+		}
+printf("i: %d found_non_opt: %d found_non_opt_non_param: %d\n", i, found_non_opt, found_non_opt_non_param);
+	i = i - found_non_opt + found_non_opt_non_param;
 	return (i);
 }
