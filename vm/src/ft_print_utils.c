@@ -82,9 +82,13 @@ void			print_conclusion(t_env *e)
 	{
 		chp = e->par.champions[i];
 		if (chp.nb == e->last_alive)
+		{
 			printf("Contestant %d, \"%s\", has won !\n", i + 1, chp.name);
+			return ;
+		}
 		i++;
 	}
+	printf("Contestant %d, \"%s\", has won !\n", i, chp.name);
 }
 
 void			print_adv(t_env *e, int pos, int skip)
