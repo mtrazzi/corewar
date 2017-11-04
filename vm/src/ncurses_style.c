@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:50:32 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 21:14:02 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:23:52 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_color_pairs(void)
 	init_pair(60, COLOR_ZEROS, COLOR_BLUE);
 	init_pair(70, COLOR_ZEROS, COLOR_MAGENTA);
 	init_pair(80, COLOR_ZEROS, COLOR_YELLOW);
+	init_pair(100, COLOR_BLACK, COLOR_ZEROS);
 }
 
 int		get_color_pair(t_env *e, u_int pos)
@@ -66,6 +67,9 @@ int		get_color_pair(t_env *e, u_int pos)
 	}
 	if (e->map_color[pos].is_prc && !e->map_color[pos].live_count)
 	{
+		if (!color_pair)
+			color_pair = 100;
+		else
 		color_pair *= 10;
 	}
 	return (color_pair ? color_pair : COLOR_ZEROS);

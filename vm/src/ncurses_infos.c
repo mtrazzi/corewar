@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 21:57:28 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:45:40 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 void	fill_infos(t_view_env *v_e, t_env *e, int running)
 {
 	u_int	x;
+	int		nb_prc;
 
 	x = 4;
+	nb_prc = dll_size(e->prc_lst);
+	e->max_prc = nb_prc > e->max_prc ? nb_prc : e->max_prc;
 	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
 	mvwprintw(v_e->infos, 2, 24, "** %s **", running ? "RUNNING" : "PAUSED");
 	wclrtoeol(v_e->infos);
@@ -25,10 +28,12 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	mvwprintw(v_e->infos, x + 2, 2, "Cycle : %d", e->cyc_since_beg);
 	mvwprintw(v_e->infos, x + 2, 35, "Step by : %d cycles", v_e->step);
 	wclrtoeol(v_e->infos);
-	mvwprintw(v_e->infos, x + 4, 2, "Cycle to die : %d", e->cyc);
+	mvwprintw(v_e->infos, x + 3, 2, "Cycle to die : %d", e->cyc);
 	wclrtoeol(v_e->infos);
-	mvwprintw(v_e->infos, x + 6, 2, "Processes : %d", dll_size(e->prc_lst));
+	mvwprintw(v_e->infos, x + 4, 2, "Processes : %d", nb_prc);
 	wclrtoeol(v_e->infos);
+	mvwprintw(v_e->infos, x + 5, 2, "Total Processes : %d", e->total_prc);
+	mvwprintw(v_e->infos, x + 6, 2, "Max Processes : %d", e->max_prc);
 	mvwprintw(v_e->infos, x + 4, 35, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvwprintw(v_e->infos, x + 5, 35, "NBR_LIVE : %d", NBR_LIVE);
 	mvwprintw(v_e->infos, x + 6, 35, "MAX_CHECKS : %d", MAX_CHECKS);
@@ -93,13 +98,16 @@ void	print_winner(t_env *e, t_view_env *v_e)
 	while (i < e->par.nb_chp)
 	{
 		chp = e->par.champions[i];
-		if (chp.nb == e->last_alive)
+		if (chp.nb == e->last_alive || i == e->par.nb_chp - 1)
 		{
 			wattron(v_e->infos, COLOR_PAIR(i + 1));
 			mvwprintw(v_e->infos, 1, 2, "PLAYER %d, %s, HAS WON !",
 						i + 1, chp.name);
+			wmove(v_e->infos, 2, 1);
+			wclrtoeol(v_e->infos);
 			wattroff(v_e->infos, COLOR_PAIR(i + 1));
-			mvwprintw(v_e->infos, 2, 2, "(press Q to quit)");
+			mvwprintw(v_e->infos, 3, 2, "(press Q to quit)");
+			box(v_e->infos, 0, 0);
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:35 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 16:57:33 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:40:59 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int				lfork(t_env *e, t_prc *prc)
 	if (e->par.opts & OPT_V4)
 		printf("P %4d | lfork %d (%d)\n", prc->id,
 		addr_to_fork, prc->pc + addr_to_fork);
+	e->total_prc++;
 	return (0);
 }

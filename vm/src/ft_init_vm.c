@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_vm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:47:07 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/03 20:37:46 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:37:48 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int			ft_init_vm(t_env *e)
 	e->cyc_since_beg = 0;
 	e->last_alive = 0;
 	e->spd = 5;
+	e->total_prc = 0;
+	e->max_prc = 0;
 	init_champions(e);
 	return (1);
 }

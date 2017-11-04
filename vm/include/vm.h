@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 16:56:22 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:34:59 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ struct				s_env
 	int				last_alive;
 	int				last_id;
 	int				spd;
+	int				total_prc;
+	int				max_prc;
 };
 
 /*

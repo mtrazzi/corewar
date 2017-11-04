@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:27 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 16:57:17 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:40:55 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int				ft_fork(t_env *e, t_prc *prc)
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
 	if (e->par.opts & OPT_V4)
 		printf("P %4d | fork %d (%d)\n", prc->id, addr_to_fork, addr_after_mod);
+	e->total_prc++;
 	return (0);
 }

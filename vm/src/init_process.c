@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:49:01 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 16:58:56 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:38:29 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ int			init_all_processes(t_env *e)
 								e->par.champions[i].nb, i + 1)))
 			return (ft_error_vm(STR_ERR_MALLOC_PRC));
 		if (e->par.opts & OPT_M)
+		{
 			e->map_color[mod_map((MEM_SIZE / e->par.nb_chp) * i)].is_prc = 1;
+			e->total_prc++;
+			e->max_prc++;
+		}
 		dll_push_front(&e->prc_lst, dll_new(prc));
 		i++;
 	}
