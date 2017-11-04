@@ -2,7 +2,7 @@
 while read line
 do
 	echo "$line"
-	if [[ $line == *"It is now cycle 5600"* ]]
+	if [[ $line == *"It is now cycle 6830"* ]]
 	then
 		exit
 	fi

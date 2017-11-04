@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:35 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 15:05:01 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/04 16:57:33 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static	t_prc	*new_prc_lfork(t_env *e, t_prc *prc, int new_pc)
 	while (i++ < REG_NUMBER)
 		new_prc->r[i] = prc->r[i];
 	new_prc->pc = new_pc;
+	new_prc->chp_nb = prc->chp_nb;
 	new_prc->carry = prc->carry;
 	new_prc->live = prc->live;
 	new_prc->live_nb = prc->live_nb;

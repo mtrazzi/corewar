@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/03 21:49:27 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 16:56:22 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ struct				s_op
 
 struct				s_prc
 {
+	int				chp_nb;
 	u_int			pc;
 	int				r[REG_NUMBER + 1];
 	int				carry;

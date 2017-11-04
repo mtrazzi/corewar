@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:49:01 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 20:45:04 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/04 16:58:56 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_prc		*new_prc(u_int pc, int nb, int id)
 		return (NULL);
 	init_reg(prc);
 	prc->r[1] = nb;
+	prc->chp_nb = nb;
 	prc->pc = pc;
 	prc->carry = 0;
 	prc->live = 0;
