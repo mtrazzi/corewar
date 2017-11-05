@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 17:36:10 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:44:23 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,14 +197,13 @@ int					init_all_processes(t_env *e);
 */
 
 int					run_vm(t_env *e);
+int					forward_one_cycle(t_env *e);
 int					do_one_cycle(t_env *e);
 int					do_process(t_env *e, t_prc *prc);
 int					are_macro_correct(void);
 int					process_load_op(t_env *e, t_prc *prc);
 int					process_exec_op_update_cyc_left(t_env *e, t_prc *prc);
 int					check_params(t_env *e, t_prc *prc, int op_code);
-void				check_lives(t_env *e);
-void				del_and_update(t_env *e, t_dll **begin_lst, int all);
 
 /*
 ** PARSING FOR OPERATIONS

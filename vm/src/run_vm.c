@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   run_vm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:44:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 18:38:02 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:44:31 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
 
-void		check_lives(t_env *e)
+static void		check_lives(t_env *e)
 {
 	static u_int last_cyc_number = 0;
 
@@ -66,7 +66,7 @@ static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
 	}
 }
 
-void		del_and_update(t_env *e, t_dll **begin_lst, int all)
+static void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 {
 	t_dll *prc_lst;
 	t_dll *next;

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ncurses_stats.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 18:22:33 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/04 16:23:41 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:48:01 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
 
-void 	init_status_bar(WINDOW *win, u_int x, char *msg)
+void	init_status_bar(WINDOW *win, u_int x, char *msg)
 {
 	wattron(win, COLOR_PAIR(COLOR_FWHITE));
 	mvwprintw(win, x, 2, "%s", msg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   st.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:58:53 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 17:11:07 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:46:24 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	st(t_env *e, t_prc *prc)
 		params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
 		if (e->par.opts & OPT_V4)
 			printf("P %4d | st r%d %d\n", prc->id,
-					e->map[mod_map(prc->pc + 2)], params[2]);//
-		copy_value(params[1], e, mod_map(prc->pc + (params[2] % IDX_MOD)), 
+					e->map[mod_map(prc->pc + 2)], params[2]);
+		copy_value(params[1], e, mod_map(prc->pc + (params[2] % IDX_MOD)),
 					get_color(e, prc->chp_nb));
 		return (0);
 	}

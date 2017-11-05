@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   live.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:37 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 14:56:24 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:46:54 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	live(t_env *e, t_prc *prc)
 	prc->live += 1;
 	prc->live_nb = get_value(e, DIR_CODE, prc, prc->pc + 1);
 	prc->cyc_last_live = e->cyc_since_beg;
-	e->nb_live += 1; // A VERIFIER !!!
+	e->nb_live += 1;
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | live %d\n", prc->id, prc->live_nb);//
+		printf("P %4d | live %d\n", prc->id, prc->live_nb);
 	if ((ret = is_real_number(e, prc->live_nb)) > 0)
 	{
 		e->last_alive = prc->live_nb;

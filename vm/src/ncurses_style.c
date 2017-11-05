@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:50:32 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/04 17:23:52 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:47:23 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		get_color_pair(t_env *e, u_int pos)
 		if (!color_pair)
 			color_pair = 100;
 		else
-		color_pair *= 10;
+			color_pair *= 10;
 	}
 	return (color_pair ? color_pair : COLOR_ZEROS);
 }
