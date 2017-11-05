@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:44:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 18:32:06 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:38:02 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,23 +107,13 @@ int			forward_one_cycle(t_env *e)
 
 int			run_vm(t_env *e)
 {
+	int		ret;
+
 	while (1)
 	{
-		e->cyc_counter += 1;
-		e->cyc_since_beg += 1;
-		if (e->par.opts & OPT_V2)
-			printf("It is now cycle %d\n", e->cyc_since_beg);
-		if (do_one_cycle(e) < 0)
-			return (ft_error_vm(STR_ERROR_CYCLE));
-		if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
-		{
-			del_and_update(e, &(e->prc_lst), e->cyc < 0);
-			check_lives(e);
-			if (e->prc_lst == 0)
-				return (0);
-		}
-		if ((e->par.opts & OPT_D) && e->cyc_since_beg == e->par.dump_cycle)
-			return (dump(e));
+		ret = forward_one_cycle(e);
+		if (ret < 0 || ret == 0)
+			return (ret);
 	}
 	return (0);
 }
