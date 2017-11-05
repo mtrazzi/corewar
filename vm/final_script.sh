@@ -1,3 +1,6 @@
+
+mkdir -p log
+
 while read line
 do
 	sh mtr.sh $line

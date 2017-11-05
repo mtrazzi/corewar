@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 17:33:22 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 17:36:10 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@
 
 # define LAST_TWO_BITS 0b00000011
 
-# define STR_ERR_MALLOC_PRC ("cannot malloc process")
+# define STR_ERR_MALLOC_PRC ("Cannot malloc process")//number ?
 # define STR_ERR_MACRO ("values in header have changed : undefined behavior")
-# define STR_ERROR_CYCLE ("could not complete cycle")
+# define STR_ERROR_CYCLE ("Could not complete cycle")//number ?
 
 # define BAD_N ("bad usage of option 'n'")
 # define BAD_V ("bad usage of option 'v'")
 # define BAD_D ("bad usage of option 'dump'")
 # define NO_CHAMPION ("no champion found")
-# define TOO_MANY_CHAMP ("to many champions")
+# define TOO_MANY_CHAMP ("too many champions")
 
 #define	malloc(x) malloc_wrapper(x)//
 

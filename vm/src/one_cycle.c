@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   one_cycle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:51:55 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 11:54:55 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/05 17:35:57 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-#define STR_ERROR_PROCESS "error in handling a process"
+#define STR_ERROR_PROCESS ("Error while handling a process")
 
 int	do_one_cycle(t_env *e)
 {

@@ -6,13 +6,15 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:50:00 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 20:45:33 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 17:41:28 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 #define OP_ZJMP 0x09
+
+#define STR_OP_ERROR ("Fatal operation error")
 
 int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 {
@@ -23,7 +25,8 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 	{
 		skip = nb_bytes_to_skip(prc->op_code, e->map[mod_map(prc->pc + 1)]);
 		if (check_params(e, prc, prc->op_code))
-			g_op_fun_tab[prc->op_code - 1](e, prc);
+			if (g_op_fun_tab[prc->op_code - 1](e, prc) < 0)
+				return (ft_error_vm(STR_OP_ERROR));
 		if (prc->op_code != OP_ZJMP || !(prc->carry))
 		{
 			if (e->par.opts & OPT_V16)
@@ -52,7 +55,8 @@ int		do_process(t_env *e, t_prc *prc)
 	if (e->par.opts & OPT_M)
 		e->map_color[mod_map(prc->pc)].is_prc = 0;
 	process_load_op(e, prc);
-	process_exec_op_update_cyc_left(e, prc);
+	if (process_exec_op_update_cyc_left(e, prc) < 0)
+		return (-1);
 	if (e->par.opts & OPT_M)
 		e->map_color[mod_map(prc->pc)].is_prc = 1;
 	return (1);
