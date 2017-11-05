@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 14:49:42 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 21:47:31 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:10:35 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define COLOR_MAGENTA3 177
 # define COLOR_YELLOW3 229
 
-# define GOTO_LINE 9
+# define GOTO_LINE 5
 # define BKDN_LINE 19
 # define MSG_CURRENT_PERIOD ("Live breakdown for current period :")
 # define MSG_LAST_PERIOD ("Live breakdown for last period :")
