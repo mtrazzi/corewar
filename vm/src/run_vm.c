@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_vm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:44:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 18:44:31 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:16:32 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void		check_lives(t_env *e)
 	}
 }
 
-static void	del_and_update_aux(t_env *e, t_dll **prc_lst, t_dll **last_alive,
-																	int all)
+static void		del_and_update_aux(t_env *e, t_dll **prc_lst,
+										t_dll **last_alive, int all)
 {
 	t_prc *prc;
 
@@ -83,7 +83,7 @@ static void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 	*begin_lst = last_alive;
 }
 
-int			forward_one_cycle(t_env *e)
+int				forward_one_cycle(t_env *e)
 {
 	e->cyc_counter += 1;
 	e->cyc_since_beg += 1;
@@ -105,7 +105,7 @@ int			forward_one_cycle(t_env *e)
 	return (1);
 }
 
-int			run_vm(t_env *e)
+int				run_vm(t_env *e)
 {
 	int		ret;
 

@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 18:05:03 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/04 14:45:01 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:15:21 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_opts g_opts[] =
 	{'n', NULL, 2, {{0, NULL}, {0, NULL}}, OPT_N, 0},
 	{'v', NULL, 1, {{0, NULL}}, OPT_V, OPT_D | OPT_A | OPT_M},
 	{'m', NULL, 0, {{0, NULL}}, OPT_M, OPT_D | OPT_V | OPT_A},
-	{'a', NULL, 0, {{0, NULL}}, OPT_A, OPT_D | OPT_V | OPT_M},//to activate
+	{'a', NULL, 0, {{0, NULL}}, OPT_A, OPT_D | OPT_V | OPT_M},
 	{0, 0, 0, {{0, NULL}}, 0, 0}
 };
 
