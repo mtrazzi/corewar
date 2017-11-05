@@ -6,14 +6,14 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 19:24:37 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:59:39 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
 
-int		do_forward_one_cycle(t_env *e, t_view_env *v_e)
+static void	do_forward_one_cycle(t_env *e, t_view_env *v_e)
 {
 	if (e->cyc - e->cyc_counter == 1)
 		print_breakdown(v_e->infos, e, BKDN_LINE + 3, MSG_LAST_PERIOD);
@@ -23,10 +23,9 @@ int		do_forward_one_cycle(t_env *e, t_view_env *v_e)
 	wnoutrefresh(v_e->field);
 	wnoutrefresh(v_e->infos);
 	doupdate();
-	return (v_e->status);
 }
 
-int		running_loop(t_env *e, t_view_env *v_e)
+static void	running_loop(t_env *e, t_view_env *v_e)
 {
 	int		key;
 
@@ -35,15 +34,14 @@ int		running_loop(t_env *e, t_view_env *v_e)
 	{
 		check_step_key(key, v_e);
 		check_hide(key, v_e, e);
-		v_e->status = do_forward_one_cycle(e, v_e);
+		do_forward_one_cycle(e, v_e);
 	}
 	if (key == 'q')
 		v_e->status = VE_USER_QUIT;
 	nodelay(stdscr, FALSE);
-	return (v_e->status);
 }
 
-int		goto_loop(t_env *e, t_view_env *v_e, int cycle)
+static void	goto_loop(t_env *e, t_view_env *v_e, int cycle)
 {
 	int		key;
 
@@ -55,17 +53,16 @@ int		goto_loop(t_env *e, t_view_env *v_e, int cycle)
 		mvwprintw(v_e->infos, GOTO_LINE, 2, "Going to cycle %d", cycle);
 		wattroff(v_e->infos, COLOR_PAIR(1));
 		check_hide(key, v_e, e);
-		v_e->status = do_forward_one_cycle(e, v_e);
+		do_forward_one_cycle(e, v_e);
 	}
 	wmove(v_e->infos, GOTO_LINE, 1);
 	wclrtoeol(v_e->infos);
 	if (key == 'q')
 		v_e->status = VE_USER_QUIT;
 	nodelay(stdscr, FALSE);
-	return (v_e->status);
 }
 
-int		do_goto(t_env *e, t_view_env *v_e)
+static void	do_goto(t_env *e, t_view_env *v_e)
 {
 	int		cycle;
 
@@ -85,8 +82,7 @@ int		do_goto(t_env *e, t_view_env *v_e)
 	wmove(v_e->infos, GOTO_LINE, 1);
 	wclrtoeol(v_e->infos);
 	if (cycle > e->cyc_since_beg)
-		v_e->status = goto_loop(e, v_e, cycle);
-	return (v_e->status);
+		goto_loop(e, v_e, cycle);
 }
 
 void	print_worker(t_env *e, t_view_env *v_e)
@@ -96,23 +92,22 @@ void	print_worker(t_env *e, t_view_env *v_e)
 	while (v_e->status == 1 && (key = getch()) != 'q')
 	{
 		if (key == ' ')
-			v_e->status = running_loop(e, v_e);
+			running_loop(e, v_e);
 		else if (key == 'n')
-			v_e->status = do_forward_one_cycle(e, v_e);
+			do_forward_one_cycle(e, v_e);
 		else if (key == 's')
-			v_e->status = goto_loop(e, v_e, e->cyc_since_beg + v_e->step);
+			goto_loop(e, v_e, e->cyc_since_beg + v_e->step);
 		else if (key == 'g')
-			v_e->status = do_goto(e, v_e);
+			do_goto(e, v_e);
 		else if (key == KEY_RESIZE)
 			return ;
 		check_step_key(key, v_e);
 		check_hide(key, v_e, e);
 		fill_infos(v_e, e, 0);
 		wrefresh(v_e->infos);
-		if (key == 'q')
-			v_e->status = VE_USER_QUIT;
 	}
+	if (key == 'q')
+		v_e->status = VE_USER_QUIT;
 	if (v_e->status == 0)
 		print_winner(e, v_e);
-	v_e->status = v_e->status > 0 ? 0 : v_e->status;
 }

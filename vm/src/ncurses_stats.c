@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 18:22:33 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 18:48:01 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 20:06:43 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ void	print_breakdown(WINDOW *win, t_env *e, u_int x, char *msg)
 	{
 		wattron(win, COLOR_PAIR(i + 1));
 		if (e->nb_live)
-		{
 			limit = ((float)e->par.champions[i].total_lives_since_period_beg
 						* 54.0) / (float)e->nb_live;
-		}
 		while (pos < 54 && pos < limit + offset)
 			mvwaddch(win, x + 1, 3 + pos++, ACS_CKBOARD);
 		offset = pos;
 		wattroff(win, COLOR_PAIR(++i));
 	}
+	wattron(win, COLOR_PAIR(COLOR_ZEROS));
+	while (pos && pos < 54)
+		mvwaddch(win, x + 1, 3 + pos++, ACS_CKBOARD);
 }

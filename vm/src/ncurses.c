@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:35:54 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 19:18:43 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 20:08:30 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void		fill_field(t_view_env *v_e, t_env *e)
 	int		color;
 
 	nb_bytes = 0;
-	if (!v_e->hide)
+	if (v_e->hide)
+		decrement_color_mods(e);
+	else
 	{
 		while (nb_bytes < MEM_SIZE)
 		{
@@ -37,8 +39,6 @@ void		fill_field(t_view_env *v_e, t_env *e)
 			nb_bytes += BYTES_PER_LINE;
 		}
 	}
-	else
-		decrement_color_mods(e);
 }
 
 static void	init_ncurses_env(void)

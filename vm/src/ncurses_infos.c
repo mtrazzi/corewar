@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 19:28:16 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:59:58 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		fill_infos(t_view_env *v_e, t_env *e, int running)
 	mvwprintw(v_e->infos, 2, 24, "** %s **", running ? "RUNNING" : "PAUSED");
 	wclrtoeol(v_e->infos);
 	print_vm_stats(v_e, e);
+	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
 	mvwprintw(v_e->infos, BKDN_LINE - 2, 22, "[CHAMPIONS STATS]");
 	print_breakdown(v_e->infos, e, BKDN_LINE, MSG_CURRENT_PERIOD);
 	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));

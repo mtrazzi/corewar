@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 14:49:42 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 19:01:15 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:55:12 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ void		fill_field(t_view_env *v_e, t_env *e);
 ** CONTROLS
 */
 
-int			do_forward_one_cycle(t_env *e, t_view_env *v_e);
 void		print_worker(t_env *e, t_view_env *v_e);
-int			running_loop(t_env *e, t_view_env *v_e);
 
 /*
 ** HELPERS
