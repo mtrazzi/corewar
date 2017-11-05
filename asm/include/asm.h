@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 18:17:36 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 23:32:38 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,11 @@
 # define NAME_DIFFERENT		0
 # define NAME_EQUAL			1
 
+#ifndef OPTIONS_OP
 # define MAX_OP				17
+#else
+# define MAX_OP				24//
+#endif
 
 # define PADDING_VALUE		0
 
@@ -158,7 +162,7 @@ struct			s_parse
 	char		*alc;
 };
 
-t_op			g_op_tab[MAX_OP];
+t_op			g_op_tab[MAX_OP];//extern?
 
 /*
 **	asm_parsing

@@ -28,6 +28,15 @@ SRC = 	ft_error_vm.c		\
 		parse_champions.c	\
 		opts_utils.c
 
+ifeq ($(OPTIONS_OP), yes)
+SRC += g_op_tab_more.c
+DFLAG = -D OPTIONS_OP
+else
+SRC +=g_op_tab.c
+DFLAG =
+endif
+
+
 SRC += malloc_wrapper.c
 
 SRC +=	live.c				\
@@ -52,7 +61,8 @@ SRC +=	mul.c				\
 		nand.c				\
 		jump.c				\
 		bomb.c				\
-		copy.c
+		copy.c				\
+		kamikaze.c
 
 SRC +=	ncurses.c			\
 		ncurses_controls.c	\
@@ -89,14 +99,14 @@ $(NAME): $(OBJ)
 	@echo "Building $(NAME)..."
 	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
 	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
 	@echo "\033[3;94m!$(NAME) built!\033[0m"
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS)
+	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
 
 $(LIBS):
 	@$(MAKE) -C ../libs all

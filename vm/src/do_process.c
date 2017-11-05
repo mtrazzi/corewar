@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:50:00 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 17:41:28 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 22:22:57 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		process_load_op(t_env *e, t_prc *prc)
 	if (prc->cyc_left != 0)
 		return (0);
 	prc->op_code = e->map[mod_map(prc->pc)];
-	if (prc->op_code == 0 || prc->op_code > 16)
+	if (prc->op_code == 0 || prc->op_code > NB_OP)
 		prc->op_code = NB_OP + 1;
 	prc->cyc_left = g_op_tab[prc->op_code - 1].nb_cycles;
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 18:44:23 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 22:10:04 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@
 
 
 # define MAX_COLOR 4
-# define NB_OP	   16
+
+#ifndef OPTIONS_OP
+# define NB_OP				16
+#else
+# define NB_OP				23//
+#endif
 
 # define OPT_V		0x00000200
 # define OPT_V1		0x00000001
@@ -241,11 +246,12 @@ int					lldi(t_env *e, t_prc *prc);
 int					lfork(t_env *e, t_prc *prc);
 int					aff(t_env *e, t_prc *prc);
 int					mul(t_env *e, t_prc *prc);
-int					death(t_env *e, t_prc *prc);
+int					injury(t_env *e, t_prc *prc);
 int					nand(t_env *e, t_prc *prc);
-int					jump(t_env *e, t_prc *prc);
+int					jmp(t_env *e, t_prc *prc);
 int					bomb(t_env *e, t_prc *prc);
 int					copy(t_env *e, t_prc *prc);
+int					kamikaze(t_env *e, t_prc *prc);
 
 /*
 ** OP UTILS
