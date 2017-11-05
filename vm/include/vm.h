@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/04 17:34:59 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/04 17:33:22 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 
 #include "opts.h"
+
 
 # define MAX_COLOR 4
 # define NB_OP	   16
@@ -51,6 +52,8 @@
 # define BAD_D ("bad usage of option 'dump'")
 # define NO_CHAMPION ("no champion found")
 # define TOO_MANY_CHAMP ("to many champions")
+
+#define	malloc(x) malloc_wrapper(x)//
 
 typedef struct s_prc	t_prc;
 typedef struct s_par	t_par;
@@ -133,6 +136,8 @@ struct				s_env
 	int				total_prc;
 	int				max_prc;
 };
+
+void	*malloc_wrapper(size_t size);//
 
 /*
 ** ENV UTILS

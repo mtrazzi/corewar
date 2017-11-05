@@ -28,6 +28,8 @@ SRC = 	ft_error_vm.c		\
 		parse_champions.c	\
 		opts_utils.c
 
+SRC += malloc_wrapper.c
+
 SRC +=	live.c				\
 		ld.c				\
 		st.c				\
