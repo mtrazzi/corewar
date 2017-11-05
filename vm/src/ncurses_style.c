@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:50:32 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 18:47:23 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:55:14 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,6 @@ int		get_color_pair(t_env *e, u_int pos)
 	return (color_pair ? color_pair : COLOR_ZEROS);
 }
 
-void	decrement_color_mods(t_env *e)
-{
-	int		pos;
-
-	pos = 0;
-	while (pos < MEM_SIZE)
-	{
-		if (e->map_color[pos].live_count > 0)
-			e->map_color[pos].live_count--;
-		if (e->map_color[pos].prc_count > 0)
-			e->map_color[pos].prc_count--;
-		pos++;
-	}
-}
-
 void	fill_logo(WINDOW *logo)
 {
 	wattron(logo, COLOR_PAIR(COLOR_FWHITE));
@@ -100,4 +85,20 @@ void	fill_logo(WINDOW *logo)
 	mvwaddstr(logo, 5, 10, "\\____/\\___/|_|  \\___| \\/  \\/ \\__,_|_|   ");
 	mvwaddstr(logo, 7, 15, "by mtrazzi, pkirsch and laranda");
 	wattroff(logo, COLOR_PAIR(COLOR_FWHITE));
+}
+
+void	fill_help(WINDOW *help)
+{
+	wattron(help, COLOR_PAIR(COLOR_FWHITE));
+	mvwaddstr(help, 0, 25, " CONTROLS ");
+	mvwaddstr(help, 1, 4, "Next Cycle :        N");
+	mvwaddstr(help, 2, 4, "Step n cycles :     S");
+	mvwaddstr(help, 3, 4, "Run / Pause :   Space");
+	mvwaddstr(help, 4, 4, "GoTo :              G");
+	mvwaddstr(help, 5, 4, "Hide Dump :         H");
+	mvwaddstr(help, 1, 38, "Step size :");
+	mvwaddstr(help, 2, 35, "-10   -1   +1   +10");
+	mvwaddstr(help, 3, 35, " E     R    T     Y");
+	mvwaddstr(help, 5, 35, "Quit :            Q");
+	wattroff(help, COLOR_PAIR(COLOR_FWHITE));
 }

@@ -6,14 +6,14 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:35:54 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 21:52:48 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:18:43 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
 
-void	fill_field(t_view_env *v_e, t_env *e)
+void		fill_field(t_view_env *v_e, t_env *e)
 {
 	int		nb_bytes;
 	int		j;
@@ -41,7 +41,7 @@ void	fill_field(t_view_env *v_e, t_env *e)
 		decrement_color_mods(e);
 }
 
-void	init_ncurses(void)
+static void	init_ncurses_env(void)
 {
 	initscr();
 	start_color();
@@ -53,16 +53,21 @@ void	init_ncurses(void)
 	refresh();
 }
 
-int		print_ncurses(t_env *e)
+static void	init_view_env(t_view_env *v_e)
+{
+	v_e->status = 1;
+	v_e->step = 50;
+	v_e->hide = 0;
+}
+
+int			print_ncurses(t_env *e)
 {
 	t_view_env	v_e;
 
-	v_e.status = 1;
-	v_e.step = 50;
-	v_e.hide = 0;
+	init_view_env(&v_e);
 	while (v_e.status == 1)
 	{
-		init_ncurses();
+		init_ncurses_env();
 		v_e.field = create_winbox(66, 195, 1, 3);
 		v_e.logo = create_winbox(9, 60, 1, 200);
 		v_e.infos = create_winbox(50, 60, 10, 200);

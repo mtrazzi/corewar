@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:53:50 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 18:36:04 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:24:37 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int		do_forward_one_cycle(t_env *e, t_view_env *v_e)
 {
 	if (e->cyc - e->cyc_counter == 1)
 		print_breakdown(v_e->infos, e, BKDN_LINE + 3, MSG_LAST_PERIOD);
-	forward_one_cycle(e);
+	v_e->status = forward_one_cycle(e);
 	fill_field(v_e, e);
 	fill_infos(v_e, e, 1);
 	wnoutrefresh(v_e->field);
 	wnoutrefresh(v_e->infos);
 	doupdate();
-	return (1);
+	return (v_e->status);
 }
 
 int		running_loop(t_env *e, t_view_env *v_e)

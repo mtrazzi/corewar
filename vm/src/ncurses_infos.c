@@ -6,24 +6,21 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/04 17:45:40 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:28:16 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "print_ncurses.h"
 
-void	fill_infos(t_view_env *v_e, t_env *e, int running)
+static void	print_vm_stats(t_view_env *v_e, t_env *e)
 {
 	u_int	x;
 	int		nb_prc;
 
-	x = 4;
+	x = BKDN_LINE - 15;
 	nb_prc = dll_size(e->prc_lst);
 	e->max_prc = nb_prc > e->max_prc ? nb_prc : e->max_prc;
-	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	mvwprintw(v_e->infos, 2, 24, "** %s **", running ? "RUNNING" : "PAUSED");
-	wclrtoeol(v_e->infos);
 	mvwprintw(v_e->infos, x, 25, "[VM STATS]");
 	mvwprintw(v_e->infos, x + 2, 2, "Cycle : %d", e->cyc_since_beg);
 	mvwprintw(v_e->infos, x + 2, 35, "Step by : %d cycles", v_e->step);
@@ -38,15 +35,9 @@ void	fill_infos(t_view_env *v_e, t_env *e, int running)
 	mvwprintw(v_e->infos, x + 5, 35, "NBR_LIVE : %d", NBR_LIVE);
 	mvwprintw(v_e->infos, x + 6, 35, "MAX_CHECKS : %d", MAX_CHECKS);
 	print_progress_bar(v_e->infos, e, x + 9, MSG_PROGRESS_BAR);
-	mvwprintw(v_e->infos, BKDN_LINE - 2, 22, "[CHAMPIONS STATS]");
-	print_breakdown(v_e->infos, e, BKDN_LINE, MSG_CURRENT_PERIOD);
-	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	x = print_players(v_e->infos, e, BKDN_LINE + 7);
-	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
-	box(v_e->infos, 0, 0);
 }
 
-u_int	print_players(WINDOW *win, t_env *e, u_int x)
+static void	print_players(WINDOW *win, t_env *e, u_int x)
 {
 	u_int		i;
 	u_int		pos;
@@ -68,26 +59,23 @@ u_int	print_players(WINDOW *win, t_env *e, u_int x)
 		i++;
 		x += 5;
 	}
-	return (x);
 }
 
-void	fill_help(WINDOW *help)
+void		fill_infos(t_view_env *v_e, t_env *e, int running)
 {
-	wattron(help, COLOR_PAIR(COLOR_FWHITE));
-	mvwaddstr(help, 0, 25, " CONTROLS ");
-	mvwaddstr(help, 1, 4, "Next Cycle :        N");
-	mvwaddstr(help, 2, 4, "Step n cycles :     S");
-	mvwaddstr(help, 3, 4, "Run / Pause :   Space");
-	mvwaddstr(help, 4, 4, "GoTo :              G");
-	mvwaddstr(help, 5, 4, "Hide Dump :         H");
-	mvwaddstr(help, 1, 38, "Step size :");
-	mvwaddstr(help, 2, 35, "-10   -1   +1   +10");
-	mvwaddstr(help, 3, 35, " E     R    T     Y");
-	mvwaddstr(help, 5, 35, "Quit :            Q");
-	wattroff(help, COLOR_PAIR(COLOR_FWHITE));
+	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
+	mvwprintw(v_e->infos, 2, 24, "** %s **", running ? "RUNNING" : "PAUSED");
+	wclrtoeol(v_e->infos);
+	print_vm_stats(v_e, e);
+	mvwprintw(v_e->infos, BKDN_LINE - 2, 22, "[CHAMPIONS STATS]");
+	print_breakdown(v_e->infos, e, BKDN_LINE, MSG_CURRENT_PERIOD);
+	wattron(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
+	print_players(v_e->infos, e, BKDN_LINE + 7);
+	wattroff(v_e->infos, COLOR_PAIR(COLOR_FWHITE));
+	box(v_e->infos, 0, 0);
 }
 
-void	print_winner(t_env *e, t_view_env *v_e)
+void		print_winner(t_env *e, t_view_env *v_e)
 {
 	u_int	i;
 	t_chp	chp;
@@ -95,25 +83,22 @@ void	print_winner(t_env *e, t_view_env *v_e)
 
 	i = 0;
 	refill_field(v_e, e);
-	while (i < e->par.nb_chp)
+	while (i++ < e->par.nb_chp)
 	{
-		chp = e->par.champions[i];
-		if (chp.nb == e->last_alive || i == e->par.nb_chp - 1)
+		chp = e->par.champions[i - 1];
+		if (chp.nb == e->last_alive || i == e->par.nb_chp)
 		{
-			wattron(v_e->infos, COLOR_PAIR(i + 1));
+			wattron(v_e->infos, COLOR_PAIR(i));
 			mvwprintw(v_e->infos, 1, 2, "PLAYER %d, %s, HAS WON !",
-						i + 1, chp.name);
+						i, chp.name);
 			wmove(v_e->infos, 2, 1);
 			wclrtoeol(v_e->infos);
-			wattroff(v_e->infos, COLOR_PAIR(i + 1));
+			wattroff(v_e->infos, COLOR_PAIR(i));
 			mvwprintw(v_e->infos, 3, 2, "(press Q to quit)");
 			box(v_e->infos, 0, 0);
 		}
-		i++;
 	}
-	wnoutrefresh(v_e->field);
-	wnoutrefresh(v_e->infos);
-	doupdate();
+	wrefresh(v_e->infos);
 	while ((key = getch()) != 'q')
 		;
 }

@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:46:58 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/03 20:48:44 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 19:07:32 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,21 @@ void	refill_field(t_view_env *v_e, t_env *e)
 		box(v_e->field, 0, 0);
 		v_e->hide = 0;
 		fill_field(v_e, e);
+		wrefresh(v_e->field);
+	}
+}
+
+void	decrement_color_mods(t_env *e)
+{
+	int		pos;
+
+	pos = 0;
+	while (pos < MEM_SIZE)
+	{
+		if (e->map_color[pos].live_count > 0)
+			e->map_color[pos].live_count--;
+		if (e->map_color[pos].prc_count > 0)
+			e->map_color[pos].prc_count--;
+		pos++;
 	}
 }
