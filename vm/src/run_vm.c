@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:44:40 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 20:45:42 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:32:06 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,30 +83,47 @@ void		del_and_update(t_env *e, t_dll **begin_lst, int all)
 	*begin_lst = last_alive;
 }
 
+int			forward_one_cycle(t_env *e)
+{
+	e->cyc_counter += 1;
+	e->cyc_since_beg += 1;
+	if (e->par.opts & OPT_V2)
+		printf("It is now cycle %d\n", e->cyc_since_beg);
+	if (do_one_cycle(e) < 0)
+		return (ft_error_vm(STR_ERROR_CYCLE));
+	if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
+	{
+		if (e->par.opts & OPT_M)
+			update_champ(e);
+		del_and_update(e, &(e->prc_lst), e->cyc < 0);
+		check_lives(e);
+		if (e->prc_lst == 0)
+			return (0);
+	}
+	if ((e->par.opts & OPT_D) && e->cyc_since_beg == e->par.dump_cycle)
+		return (dump(e));
+	return (1);
+}
+
 int			run_vm(t_env *e)
 {
 	while (1)
 	{
-		if (e->par.opts & OPT_M)
-			return (print_ncurses(e));
-		else
+		e->cyc_counter += 1;
+		e->cyc_since_beg += 1;
+		if (e->par.opts & OPT_V2)
+			printf("It is now cycle %d\n", e->cyc_since_beg);
+		if (do_one_cycle(e) < 0)
+			return (ft_error_vm(STR_ERROR_CYCLE));
+		if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
 		{
-			e->cyc_counter += 1;
-			e->cyc_since_beg += 1;
-			if (e->par.opts & OPT_V2)
-				printf("It is now cycle %d\n", e->cyc_since_beg);
-			if (do_one_cycle(e) < 0)
-				return (ft_error_vm(STR_ERROR_CYCLE));
-			if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
-			{
-				del_and_update(e, &(e->prc_lst), e->cyc < 0);
-				check_lives(e);
-				if (e->prc_lst == 0)
-					return (0);
-			}
-			if ((e->par.opts & OPT_D) && e->cyc_since_beg == e->par.dump_cycle)
-				return (dump(e));
+			del_and_update(e, &(e->prc_lst), e->cyc < 0);
+			check_lives(e);
+			if (e->prc_lst == 0)
+				return (0);
 		}
+		if ((e->par.opts & OPT_D) && e->cyc_since_beg == e->par.dump_cycle)
+			return (dump(e));
 	}
 	return (0);
 }

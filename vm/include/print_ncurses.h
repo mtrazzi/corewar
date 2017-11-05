@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ncurses.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 14:49:42 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 18:10:35 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:17:23 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define COLOR_GREEN3 10
 # define COLOR_MAGENTA3 177
 # define COLOR_YELLOW3 229
+
+# define VE_USER_QUIT 2
 
 # define GOTO_LINE 5
 # define BKDN_LINE 19

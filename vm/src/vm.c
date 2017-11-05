@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:22:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 17:35:35 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 18:31:52 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ int	main(int ac, char **av)
 		print_introduction(&e);
 	if (init_all_processes(&e) < 0)
 		return (ft_free_vm_env(&e));
-	if (run_vm(&e) < 0)
+	if (e->par.opts & OPT_M)
+	{
+		if (print_ncurses(&e) < 0)
+			return (ft_free_vm_env(&e) * ft_error_vm(STR_ERR_QUIT));
+	}
+	else if (run_vm(&e) < 0)
 		return (ft_free_vm_env(&e) * ft_error_vm(STR_ERR_QUIT));
 	if (!((e.par.opts & OPT_M) || ((e.par.opts & OPT_D) && e.prc_lst)))
 		print_conclusion(&e);
