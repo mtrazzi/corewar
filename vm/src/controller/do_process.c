@@ -6,14 +6,14 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:50:00 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 14:04:35 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:49:41 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 #define OP_ZJMP 0x09
-#define OP_BOMB 0x17
+#define OP_BOMB 0x16
 
 #define STR_OP_ERROR ("Fatal operation error")
 

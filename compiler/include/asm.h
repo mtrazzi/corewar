@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/06 14:07:15 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 21:14:04 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,19 @@
 # define NAME_DIFFERENT		0
 # define NAME_EQUAL			1
 
-#ifdef OPTIONS_OP
-# define MAX_OP				23
-#else
-# define MAX_OP				17//
-#endif
+# ifdef OPTIONS_OP
+#  define MAX_OP				23
+# else
+#  define MAX_OP				17
+# endif
 
 # define PADDING_VALUE		0
 
-#ifdef COMPARE
-# define EXTENSION_OUT		(".corr")
-#else
-# define EXTENSION_OUT		(".cor")
-#endif
+# ifdef COMPARE
+#  define EXTENSION_OUT		(".corr")
+# else
+#  define EXTENSION_OUT		(".cor")
+# endif
 
 typedef struct s_op		t_op;
 typedef struct s_asm	t_asm;
@@ -166,7 +166,7 @@ struct			s_parse
 	char		*alc;
 };
 
-t_op			g_op_tab[MAX_OP];//extern?
+t_op			g_op_tab[MAX_OP];
 
 /*
 **	asm_parsing

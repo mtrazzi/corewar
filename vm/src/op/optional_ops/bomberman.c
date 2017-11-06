@@ -6,13 +6,12 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 14:05:48 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/06 14:53:04 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:56:36 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-#define BYTES_PER_LINE 64//move
 #define BPL BYTES_PER_LINE
 #define RADIUS 6
 
@@ -68,7 +67,8 @@ int		bomberman(t_env *e, t_prc *prc)
 		y += BPL;
 	}
 	if (e->par.opts & OPT_V4)
-		ft_printf("P %4d | Bomb has been planted, escaping the site +%d\n", prc->id, RADIUS + 1);
+		ft_printf("P %4d | Bomb has been planted, escaping the site +%d\n",
+					prc->id, RADIUS + 1);
 	prc->pc = mod_map(prc->pc + RADIUS + 1);
 	return (1);
 }

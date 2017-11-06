@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:49:43 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 20:27:27 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:53:00 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	or(t_env *e, t_prc *prc)
 	prc->r[reg_nb] = params[1] | params[2];
 	prc->carry = prc->r[reg_nb] == 0;
 	if (e->par.opts & OPT_V4)
-		ft_printf("P %4d | or %d %d r%d\n", prc->id, params[1], params[2], reg_nb);
+		ft_printf("P %4d | or %d %d r%d\n",
+					prc->id, params[1], params[2], reg_nb);
 	return (0);
 }

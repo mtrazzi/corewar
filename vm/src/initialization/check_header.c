@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 19:32:04 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/05 22:24:31 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:58:28 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int		are_macro_correct(void)
 	MAX_CHECKS >= 10 && MAX_CHECKS <= 100 &&
 	T_REG == 1 && T_DIR == 2 && T_IND == 4 && T_LAB == 8 &&
 	PROG_NAME_LENGTH == 128 && COMMENT_LENGTH == 2048 && NB_OP >= 16 &&
-	NB_OP <= 24);//
+	NB_OP <= 22);
 }
