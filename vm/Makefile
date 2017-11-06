@@ -1,7 +1,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = corewar
 
@@ -95,21 +95,25 @@ EXISTS := $(shell sh anti_collisions.sh op=$(OPTIONS_OP) name=$(NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
+	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
+	@(echo "\033[32m virtual machine :[ \033[31m\t\c")
+	@(echo "$@ \033[32m]\033[0m \033[0K")
+	@($(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG))
+	@(echo "\033[2F")
+
 
 $(LIBS):
 	$(MAKE) -C ../libs all
 
 clean:
-	/bin/rm -rf .flags
-	/bin/rm -rf $(OBJ_PATH)
+	@/bin/rm -rf .flags
+	@/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	/bin/rm -rf $(NAME)
+	@/bin/rm -rf $(NAME)
 
 re: clean all
 
