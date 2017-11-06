@@ -8,8 +8,8 @@ endif
 
 all:
 	@$(MAKE) -C libs
-	@$(MAKE) -C asm asm && /bin/cp ./asm/asm .
-	@$(MAKE) -C vm corewar && /bin/cp ./vm/corewar .
+	@$(MAKE) -C asm asm
+	@$(MAKE) -C vm corewar
 
 clean:
 	@$(MAKE) -C libs clean
