@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bomberman.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/06 14:05:48 by pkirsch           #+#    #+#             */
+/*   Updated: 2017/11/06 14:06:44 by pkirsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 
@@ -34,7 +45,7 @@ void	reset_color(t_env *e, u_int pos, t_prc *prc)
 	kill_zone(e, pos, prc);
 }
 
-int		kamikaze(t_env *e, t_prc *prc)
+int		bomberman(t_env *e, t_prc *prc)
 {
 	int	r;
 	int pos;

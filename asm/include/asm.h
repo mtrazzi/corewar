@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/06 12:43:30 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 14:07:15 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@
 # define NAME_EQUAL			1
 
 #ifdef OPTIONS_OP
-# define MAX_OP				24
+# define MAX_OP				23
 #else
 # define MAX_OP				17//
 #endif

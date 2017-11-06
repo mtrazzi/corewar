@@ -55,14 +55,13 @@ SRC +=	live.c				\
 		lldi.c				\
 		lfork.c				\
 		aff.c
-
+##condition! put in folder
 SRC +=	mul.c				\
 		death.c				\
 		nand.c				\
 		jump.c				\
-		bomb.c				\
 		copy.c				\
-		kamikaze.c
+		bomberman.c
 
 SRC +=	ncurses.c			\
 		ncurses_controls.c	\

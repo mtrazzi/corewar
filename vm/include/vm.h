@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 12:46:44 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 14:07:09 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define MAX_COLOR 4
 
 #ifdef OPTIONS_OP
-# define NB_OP				23
+# define NB_OP				22
 #else
 # define NB_OP				16//
 #endif
@@ -249,9 +249,8 @@ int					mul(t_env *e, t_prc *prc);
 int					injury(t_env *e, t_prc *prc);
 int					nand(t_env *e, t_prc *prc);
 int					jmp(t_env *e, t_prc *prc);
-int					bomb(t_env *e, t_prc *prc);
 int					copy(t_env *e, t_prc *prc);
-int					kamikaze(t_env *e, t_prc *prc);
+int					bomberman(t_env *e, t_prc *prc);
 
 /*
 ** OP UTILS
