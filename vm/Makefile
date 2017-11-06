@@ -96,24 +96,21 @@ LIBS = $(DLLST) $(LIBFT) $(FT_PRINTF)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Building $(NAME)..."
-	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
-	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
-	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
-	@echo "\033[0;31mPUT BACK \033[0;32mALL\033[0;31m FLAGS!!!!!!!!!\033[0m"
-	@echo "\033[3;94m!$(NAME) built!\033[0m"
+	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
+	@(echo "\033[32m virtual machine :[ \033[31m\t\c")
+	@(echo "$@ \033[32m]\033[0m \033[0K")
+	@($(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG))
+	@(echo "\033[2F")
 
 $(LIBS):
 	@$(MAKE) -C ../libs all
 
 clean:
 	@$(MAKE) -C ../libs clean
-	/bin/rm -rf $(OBJ_PATH)
+	@/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	@$(MAKE) -C ../libs fclean
