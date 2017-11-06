@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 14:49:42 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 19:55:12 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:56:56 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "vm.h"
 # include <ncurses.h>
 
-# define BYTES_PER_LINE 64
 # define COLOR_ZEROS 245
 # define COLOR_FWHITE 15
 # define COLOR_BLUE3 33
