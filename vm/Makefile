@@ -23,7 +23,6 @@ SRC = 	ft_error_vm.c		\
 		check_params.c		\
 		parse_arg2.c		\
 		opts.c				\
-		global_utils.c		\
 		check_header.c		\
 		parse_champions.c	\
 		opts_utils.c
@@ -73,7 +72,7 @@ OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
-VPATH = src:include:src/op:src/op/optional_ops
+VPATH = src:include:src/op:src/op/optional_ops:src/controller:src/initialization:src/utils:src/ncurses:src/op:src/parsing
 IFLAGS = -I include
 HEADERS = vm.h op.h print_ncurses.h
 
@@ -107,11 +106,9 @@ $(LIBS):
 
 clean:
 	/bin/rm -rf .flags.txt
-	# $(MAKE) -C ../libs clean
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	# $(MAKE) -C ../libs fclean
 	/bin/rm -rf $(NAME)
 
 re: clean all

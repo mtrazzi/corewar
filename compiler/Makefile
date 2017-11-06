@@ -6,7 +6,7 @@
 #    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/11/06 18:46:22 by pkirsch          ###   ########.fr        #
+#    Updated: 2017/11/06 19:08:04 by pkirsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,14 +94,11 @@ $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 $(LIBS):
 	$(MAKE) -C ../libs all
 
-#clean libs ? necessary only in project Makefile?
 clean:
 	/bin/rm -rf .flags.txt
-	#@$(MAKE) -C ../libs clean
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	#@$(MAKE) -C ../libs fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all

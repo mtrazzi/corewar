@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:47:07 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 22:10:51 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 19:06:29 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int			ft_init_vm(t_env *e)
 {
 	ft_bzero(e->map, MEM_SIZE);
 	ft_bzero(e->map_color, MEM_SIZE * sizeof(t_color));
-	color_tab();
-	// op_tab_init();
-	// op_fun_tab_init();
 	e->prc_lst = NULL;
 	e->cyc = CYCLE_TO_DIE;
 	e->cyc_counter = 0;
