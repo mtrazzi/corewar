@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/05 19:59:58 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/06 17:01:01 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,16 @@ void		print_winner(t_env *e, t_view_env *v_e)
 
 	i = 0;
 	refill_field(v_e, e);
-	while (i++ < e->par.nb_chp)
-	{
-		chp = e->par.champions[i - 1];
-		if (chp.nb == e->last_alive || i == e->par.nb_chp)
-		{
-			wattron(v_e->infos, COLOR_PAIR(i));
-			mvwprintw(v_e->infos, 1, 2, "PLAYER %d, %s, HAS WON !",
-						i, chp.name);
-			wmove(v_e->infos, 2, 1);
-			wclrtoeol(v_e->infos);
-			wattroff(v_e->infos, COLOR_PAIR(i));
-			mvwprintw(v_e->infos, 3, 2, "(press Q to quit)");
-			box(v_e->infos, 0, 0);
-		}
-	}
+	chp = e->par.champions[i];
+	while (++i < e->par.nb_chp && chp.nb != e->last_alive)
+		chp = e->par.champions[i];
+	wattron(v_e->infos, COLOR_PAIR(i));
+	mvwprintw(v_e->infos, 1, 2, "PLAYER %d, %s, HAS WON !", i, chp.name);
+	wmove(v_e->infos, 2, 1);
+	wclrtoeol(v_e->infos);
+	wattroff(v_e->infos, COLOR_PAIR(i));
+	mvwprintw(v_e->infos, 3, 2, "(press Q to quit)");
+	box(v_e->infos, 0, 0);
 	wrefresh(v_e->infos);
 	while ((key = getch()) != 'q')
 		;
