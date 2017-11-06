@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/06 11:00:00 by Philippe         ###   ########.fr       */
+/*   Updated: 2017/11/06 12:43:30 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@
 # define NAME_DIFFERENT		0
 # define NAME_EQUAL			1
 
-#ifndef OPTIONS_OP
-# define MAX_OP				17
+#ifdef OPTIONS_OP
+# define MAX_OP				24
 #else
-# define MAX_OP				24//
+# define MAX_OP				17//
 #endif
 
 # define PADDING_VALUE		0

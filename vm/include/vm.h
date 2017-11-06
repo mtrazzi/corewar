@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/05 22:10:04 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 12:46:44 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 
 # define MAX_COLOR 4
 
-#ifndef OPTIONS_OP
-# define NB_OP				16
+#ifdef OPTIONS_OP
+# define NB_OP				23
 #else
-# define NB_OP				23//
+# define NB_OP				16//
 #endif
 
 # define OPT_V		0x00000200
