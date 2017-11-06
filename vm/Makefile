@@ -1,7 +1,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = corewar
 
@@ -27,12 +27,6 @@ SRC = 	ft_error_vm.c		\
 		check_header.c		\
 		parse_champions.c	\
 		opts_utils.c
-
-# ifeq ($(wildcard ./obj/g_op_tab_more.o),"")
-# export OPTIONS_OP="yes"
-# else
-# export OPTIONS_OP="null"
-# endif
 
 ifeq ($(OPTIONS_OP), yes)
 SRC += g_op_tab_more.c
@@ -97,7 +91,7 @@ IFLAGS += -I $(FT_PRINTF_PATH)/include
 
 LIBS = $(DLLST) $(LIBFT) $(FT_PRINTF)
 
-EXISTS := $(shell sh anti_collisions.sh ${OPTIONS_OP})
+EXISTS := $(shell sh anti_collisions.sh op=$(OPTIONS_OP) name=$(NAME))
 
 all: $(NAME)
 
@@ -112,12 +106,13 @@ $(LIBS):
 	$(MAKE) -C ../libs all
 
 clean:
+	/bin/rm -rf .flags.txt
 	# $(MAKE) -C ../libs clean
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	$(MAKE) -C ../libs fclean
-	/bin/rm -f $(NAME)
+	# $(MAKE) -C ../libs fclean
+	/bin/rm -rf $(NAME)
 
 re: clean all
 

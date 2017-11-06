@@ -6,7 +6,7 @@
 #    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/11/06 14:39:49 by pkirsch          ###   ########.fr        #
+#    Updated: 2017/11/06 18:46:22 by pkirsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,8 @@ IFLAGS += -I $(PRINTF_PATH)/include
 
 LIBS = $(DLLST) $(LIBFT) $(PRINTF)
 
+EXISTS := $(shell sh anti_collisions.sh op=$(OPTIONS_OP) name=$(NAME) cmp=$(COMPARE))
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -94,6 +96,7 @@ $(LIBS):
 
 #clean libs ? necessary only in project Makefile?
 clean:
+	/bin/rm -rf .flags.txt
 	#@$(MAKE) -C ../libs clean
 	/bin/rm -rf $(OBJ_PATH)
 
