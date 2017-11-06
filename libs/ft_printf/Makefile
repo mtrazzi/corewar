@@ -63,18 +63,22 @@ HEADERS = cvt.h ft_color.h ft_printf.h ft_put.h primary.h util.h
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(AR) $(NAME) $(OBJ)
-	$(RAN) $(NAME)
+	@$(AR) $(NAME) $(OBJ)
+	@$(RAN) $(NAME)
+	@(echo "\033[0K\033[32mLibrary ft_printf: \033[36mDone \033[0m")
 
 $(OBJ_PATH)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS)
+	@(echo "\033[32mLibrary ft_printf: [ \033[31m\t\c")
+	@(echo "$@ \033[32m]\033[0m \033[0K\c")
+	@($(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS))
+	@(echo "\033[1F")
 
 clean :
-	/bin/rm -rf $(OBJ_PATH)
+	@/bin/rm -rf $(OBJ_PATH)
 
 fclean : clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re : fclean all
 

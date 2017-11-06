@@ -10,8 +10,17 @@ all:
 	@$(MAKE) -C libs
 	@$(MAKE) -C compiler asm
 	@$(MAKE) -C vm corewar
-	/bin/cp compiler/asm .
-	/bin/cp vm/corewar .
+	@/bin/cp compiler/asm .
+	@/bin/cp vm/corewar .
+	#   ▄████▄  ▒█████  ██▀███ ▓█████ █     █░▄▄▄      ██▀███
+	#  ▒██▀ ▀█ ▒██▒  ██▓██ ▒ ██▓█   ▀▓█░ █ ░█▒████▄   ▓██ ▒ ██▒
+	#  ▒▓█    ▄▒██░  ██▓██ ░▄█ ▒███  ▒█░ █ ░█▒██  ▀█▄ ▓██ ░▄█ ▒
+	#  ▒▓▓▄ ▄██▒██   ██▒██▀▀█▄ ▒▓█  ▄░█░ █ ░█░██▄▄▄▄██▒██▀▀█▄
+	#  ▒ ▓███▀ ░ ████▓▒░██▓ ▒██░▒████░░██▒██▓ ▓█   ▓██░██▓ ▒██▒
+	#  ░ ░▒ ▒  ░ ▒░▒░▒░░ ▒▓ ░▒▓░░ ▒░ ░ ▓░▒ ▒  ▒▒   ▓▒█░ ▒▓ ░▒▓░
+	#    ░  ▒    ░ ▒ ▒░  ░▒ ░ ▒░░ ░  ░ ▒ ░ ░   ▒   ▒▒ ░ ░▒ ░ ▒░
+	#  ░       ░ ░ ░ ▒   ░░   ░   ░    ░   ░   ░   ▒    ░░   ░
+	#  ░ ░         ░ ░    ░       ░  ░   ░         ░  ░  ░
 
 clean:
 	@$(MAKE) -C libs clean
@@ -31,7 +40,7 @@ re:
 	@$(MAKE) -C libs re
 	@$(MAKE) -C compiler re
 	@$(MAKE) -C vm re
-	/bin/cp compiler/asm .
-	/bin/cp vm/corewar .
+	@/bin/cp compiler/asm .
+	@/bin/cp vm/corewar .
 
 .PHONY: all fclean clean re

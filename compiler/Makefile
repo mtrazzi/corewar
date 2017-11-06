@@ -6,7 +6,7 @@
 #    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/11/06 21:13:56 by pkirsch          ###   ########.fr        #
+#    Updated: 2017/11/06 21:47:18 by pkirsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,21 +85,24 @@ EXISTS := $(shell sh anti_collisions.sh op=$(OPTIONS_OP) name=$(NAME) cmp=$(COMP
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS) $(DFLAG)
+	@$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS) $(DFLAG)
+	@(echo "\033[0K\033[32mAssembly: \033[36mDone \033[0m")
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
+	@(echo "\033[32mAssembly: [ \033[31m\t\c")
+	@(echo "$@ \033[32m]\033[0m \033[0K\c")
+	@$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
+	@(echo "\033[1F")
 
 $(LIBS):
-	$(MAKE) -C ../libs all
+	@$(MAKE) -C ../libs all
 
 clean:
-	/bin/rm -rf .flags
-	/bin/rm -rf $(OBJ_PATH)
+	@/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
 

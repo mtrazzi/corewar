@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 21:09:06 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 21:19:25 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@
 # include "opts.h"
 
 # define MAX_COLOR 4
+# define BYTES_PER_LINE 64
 
-#ifdef OPTIONS_OP
-# define NB_OP				22
-#else
-# define NB_OP				16//
-#endif
+# ifdef OPTIONS_OP
+#  define NB_OP				22
+# else
+#  define NB_OP				16
+# endif
 
 # define OPT_V		0x00000200
 # define OPT_V1		0x00000001
@@ -47,17 +48,15 @@
 
 # define LAST_TWO_BITS 0b00000011
 
-# define STR_ERR_MALLOC_PRC ("Cannot malloc process")//number ?
+# define STR_ERR_MALLOC_PRC ("Cannot malloc process")
 # define STR_ERR_MACRO ("values in header have changed : undefined behavior")
-# define STR_ERROR_CYCLE ("Could not complete cycle")//number ?
+# define STR_ERROR_CYCLE ("Could not complete cycle")
 
 # define BAD_N ("bad usage of option 'n'")
 # define BAD_V ("bad usage of option 'v'")
 # define BAD_D ("bad usage of option 'dump'")
 # define NO_CHAMPION ("no champion found")
 # define TOO_MANY_CHAMP ("too many champions")
-
-#define	malloc(x) malloc_wrapper(x)//
 
 typedef struct s_prc	t_prc;
 typedef struct s_par	t_par;
@@ -97,8 +96,7 @@ struct				s_chp
 {
 	int				cyc_last_live;
 	int				total_lives_since_period_beg;
-
-	int				nb; //numero du champion
+	int				nb;
 	u_int			magic;
 	u_int			prog_size;
 	char			name[PROG_NAME_LENGTH + 1];
@@ -109,10 +107,22 @@ struct				s_chp
 struct				s_par
 {
 	u_int			opts;
-	int				dump_cycle;		//nb_cyc befor dump || RENAME TO DUMP
-	u_int			nb_chp;			//how many .cor files
+	int				dump_cycle;
+	u_int			nb_chp;
 	t_chp			champions[MAX_PLAYERS];
 };
+
+/*
+** COLOR
+**
+** int	color; Index of color pair
+** int	is_prc; Is process
+** int	prc_count; Counter of highlight when new memory is copied
+**					(st / sti)
+** int	color_live;	Color of the live (the one of the champ #)
+** int	live_count; Counter of highlight when live is done
+**
+*/
 
 struct				s_color
 {
@@ -122,6 +132,26 @@ struct				s_color
 	int				color_live;
 	int				live_count;
 };
+
+/*
+** ENV
+**
+** u_char	map[MEM_SIZE]; VM memory where processes live
+** t_color	map_color[MEM_SIZE]; Color struc used by ncurses
+** t_dll	*prc_lst; List of process alive
+** int		cyc; Cycle to die
+** int		cyc_counter; Current period cycle
+** int		nb_checks;
+** int		nb_live; Total number of lives during current period
+** t_par	par;
+** int		cyc_since_beg; Cycles since beginning
+** int		last_alive; 'Nb' of last champ alive
+** int		last_id;
+** int		spd;
+** int		total_prc; Total number of processes created
+** int		max_prc; Max # of proceses alive at the same time
+**
+*/
 
 struct				s_env
 {
@@ -141,28 +171,29 @@ struct				s_env
 	int				max_prc;
 };
 
-void	*malloc_wrapper(size_t size);//
+void				*malloc_wrapper(size_t size);//
 
 /*
 ** ENV UTILS
 */
 
-int		ft_init_vm(t_env *e);
-int		ft_free_vm_env(t_env *e);
-int		ft_error_vm(char *err_msg);
-int		ft_perror_vm(void);
-int		ft_error(char *msg);
-int		error_usage(char *msg);
-int		usage(void);
+int					ft_init_vm(t_env *e);
+int					ft_free_vm_env(t_env *e);
+int					ft_error_vm(char *err_msg);
+int					ft_perror_vm(void);
+int					ft_error(char *msg);
+int					error_usage(char *msg);
+int					usage(void);
 
 /*
 ** PARSING OF THE ARGUMENTS
 */
 
-int		parse_arg_vm(int ac, char **av, t_env *e);
-int		is_valid_ext(char *file_name);
-int		ft_parse_chp(t_env *e, char *file_name, int chp_nb);
-int		parse_champions_file_names(int ac, int *ac_index, char **av, u_int *opts);
+int					parse_arg_vm(int ac, char **av, t_env *e);
+int					is_valid_ext(char *file_name);
+int					ft_parse_chp(t_env *e, char *file_name, int chp_nb);
+int					parse_champions_file_names(int ac, int *ac_index,
+												char **av, u_int *opts);
 
 /*
 ** STRING UTILS
@@ -216,11 +247,11 @@ int					check_params(t_env *e, t_prc *prc, int op_code);
 int					nb_bytes_to_skip(u_char op_code, u_char ocp);
 int					sizeof_param(u_char op_code, u_char type_of_param);
 int					get_value(t_env *e, u_char type_of_param, t_prc *prc,
-					u_int pos);
+u_int pos);
 int					lget_value(t_env *e, u_char type_of_param, t_prc *prc,
-					u_int pos);
+u_int pos);
 int					get_index(t_env *e, u_char type_of_param, t_prc *prc,
-					u_int pos);
+u_int pos);
 
 /*
 ** IMPLEMENTATION OF OPERATIONS
