@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:47:53 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/05 23:32:38 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 11:00:00 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,11 @@
 
 # define PADDING_VALUE		0
 
-# define EXTENSION_OUT		(".corr")//change
+#ifdef COMPARE
+# define EXTENSION_OUT		(".corr")
+#else
+# define EXTENSION_OUT		(".cor")
+#endif
 
 typedef struct s_op		t_op;
 typedef struct s_asm	t_asm;

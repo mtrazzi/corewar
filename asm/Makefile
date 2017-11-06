@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
+#    By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/11/05 21:41:12 by pkirsch          ###   ########.fr        #
+#    Updated: 2017/11/06 11:02:47 by Philippe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,17 @@ SRC += creates.c	\
 		op.c		\
 		syms.c
 
+DFLAG =
+
 ifeq ($(OPTIONS_OP), yes)
 SRC += g_op_tab_more.c
-DFLAG = -D OPTIONS_OP
+DFLAG += -D OPTIONS_OP
 else
 SRC += g_op_tab.c
-DFLAG =
+endif
+
+ifeq ($(COMPARE), yes)
+DFLAG += -D COMPARE
 endif
 
 OBJ_FILES = $(SRC:.c=.o)
