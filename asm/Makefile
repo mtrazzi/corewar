@@ -6,7 +6,7 @@
 #    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/09/29 17:47:13 by pkirsch          ###   ########.fr        #
+#    Updated: 2017/11/06 14:39:49 by pkirsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,19 @@ SRC += creates.c	\
 		op.c		\
 		syms.c
 
+DFLAG =
+
+ifeq ($(OPTIONS_OP), yes)
+SRC += g_op_tab_more.c
+DFLAG += -D OPTIONS_OP
+else
+SRC += g_op_tab.c
+endif
+
+ifeq ($(COMPARE), yes)
+DFLAG += -D COMPARE
+endif
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
@@ -70,14 +83,14 @@ LIBS = $(DLLST) $(LIBFT) $(PRINTF)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS) $(DFLAG)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS)
+	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
 
 $(LIBS):
-	@$(MAKE) -C ../libs all
+	$(MAKE) -C ../libs all
 
 #clean libs ? necessary only in project Makefile?
 clean:

@@ -5,5 +5,5 @@
 sti r98, %:live, %1
 and r1, %0, r1
 
-live:	live %18
+live:	live %18z
 		zjmp %:live

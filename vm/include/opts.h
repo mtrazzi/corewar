@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 21:38:49 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/03 21:39:02 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/05 20:03:14 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ int		ft_error(char *msg);
 int		is_empty_op(t_opts *opt);
 
 int		parse_params(int ac, char **av, u_int *opts);
-
 
 #endif
