@@ -35,9 +35,9 @@ int	lldi(t_env *e, t_prc *prc)
 	prc->carry = (lget_value(e, DIR_CODE, prc, addr) == 0);
 	if (e->par.opts & OPT_V4)
 	{
-		printf("P %4d | lldi %d %d r%d\n", prc->id, params[1], params[2],
+		ft_printf("P %4d | lldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);
-		printf("       | -> load from %d + %d = %d (with pc %d)\n", \
+		ft_printf("       | -> load from %d + %d = %d (with pc %d)\n", \
 		params[1], params[2], params[1] + params[2], addr);
 	}
 	return (0);

@@ -18,6 +18,6 @@ int	aff(t_env *e, t_prc *prc)
 
 	c = (unsigned char)get_value(e, REG_CODE, prc, prc->pc + 2);
 	if (e->par.opts & OPT_A)
-		printf("Aff: %c\n", c);
+		ft_printf("Aff: %c\n", c);
 	return (0);
 }

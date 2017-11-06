@@ -6,7 +6,7 @@
 #    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/11/06 19:08:04 by pkirsch          ###   ########.fr        #
+#    Updated: 2017/11/06 19:17:22 by pkirsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ $(LIBS):
 	$(MAKE) -C ../libs all
 
 clean:
-	/bin/rm -rf .flags.txt
+	/bin/rm -rf .flags
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean

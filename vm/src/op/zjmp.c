@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 14:59:04 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/02 20:27:18 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:11:47 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	zjmp(t_env *e, t_prc *prc)
 
 	index = (short)get_index(e, T_IND, prc, mod_map(prc->pc + 1));
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | zjmp %d ", prc->id, index);
+		ft_printf("P %4d | zjmp %d ", prc->id, index);
 	if (prc->carry)
 	{
 		prc->pc = mod_map(prc->pc + (index % IDX_MOD));
 		if (e->par.opts & OPT_V4)
-			printf("OK\n");
+			ft_printf("OK\n");
 	}
 	else if (e->par.opts & OPT_V4)
-		printf("FAILED\n");
+		ft_printf("FAILED\n");
 	return (0);
 }

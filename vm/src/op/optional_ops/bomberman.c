@@ -68,7 +68,7 @@ int		bomberman(t_env *e, t_prc *prc)
 		y += BPL;
 	}
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | Bomb has been planted, escaping the site +%d\n", prc->id, RADIUS + 1);
+		ft_printf("P %4d | Bomb has been planted, escaping the site +%d\n", prc->id, RADIUS + 1);
 	prc->pc = mod_map(prc->pc + RADIUS + 1);
 	return (1);
 }

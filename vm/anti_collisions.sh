@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FLAGS=".flags.txt"
+FLAGS=".flags"
 CONTENT=`[[ -f $FLAGS ]] && cat $FLAGS || echo ""`
 
 OP=`echo $CONTENT | awk '{print $1}'`

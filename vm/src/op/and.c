@@ -32,7 +32,7 @@ int	and(t_env *e, t_prc *prc)
 	prc->r[reg_nb] = params[1] & params[2];
 	prc->carry = prc->r[reg_nb] == 0;
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | and %d %d r%d\n", prc->id, params[1], params[2],
+		ft_printf("P %4d | and %d %d r%d\n", prc->id, params[1], params[2],
 				reg_nb);
 	return (0);
 }

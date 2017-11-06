@@ -25,7 +25,7 @@ static void		check_lives(t_env *e)
 		e->nb_checks = 0;
 		e->cyc -= CYCLE_DELTA;
 		if (e->par.opts & OPT_V2)
-			printf("Cycle to die is now %d\n", e->cyc);
+			ft_printf("Cycle to die is now %d\n", e->cyc);
 	}
 	else if (e->nb_checks == MAX_CHECKS - 1)
 	{
@@ -33,7 +33,7 @@ static void		check_lives(t_env *e)
 		e->nb_live = 0;
 		e->cyc -= CYCLE_DELTA;
 		if (e->par.opts & OPT_V2)
-			printf("Cycle to die is now %d\n", e->cyc);
+			ft_printf("Cycle to die is now %d\n", e->cyc);
 	}
 	else
 	{
@@ -51,7 +51,7 @@ static void		del_and_update_aux(t_env *e, t_dll **prc_lst,
 	if (prc->live == 0 || all)
 	{
 		if (e->par.opts & OPT_V8)
-			printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+			ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 					prc->id, e->cyc_since_beg - prc->cyc_last_live, e->cyc);
 		if (e->par.opts & OPT_M)
 			e->map_color[mod_map(prc->pc)].is_prc = 0;
@@ -88,7 +88,7 @@ int				forward_one_cycle(t_env *e)
 	e->cyc_counter += 1;
 	e->cyc_since_beg += 1;
 	if (e->par.opts & OPT_V2)
-		printf("It is now cycle %d\n", e->cyc_since_beg);
+		ft_printf("It is now cycle %d\n", e->cyc_since_beg);
 	if (do_one_cycle(e) < 0)
 		return (ft_error_vm(STR_ERROR_CYCLE));
 	if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))

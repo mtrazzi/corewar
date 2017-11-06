@@ -35,9 +35,9 @@ int	sti(t_env *e, t_prc *prc)
 	addr = prc->pc + (params[2] + params[3]) % IDX_MOD;
 	if (e->par.opts & OPT_V4)
 	{
-		printf("P %4d | sti r%d %d %d\n", prc->id,
+		ft_printf("P %4d | sti r%d %d %d\n", prc->id,
 					e->map[mod_map(prc->pc + 2)], params[2], params[3]);
-		printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
+		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
 					params[2], params[3], params[2] + params[3], addr);
 	}
 	copy_value(params[1], e, mod_map(addr), get_color(e, prc->chp_nb));

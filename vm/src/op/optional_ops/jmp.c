@@ -18,7 +18,7 @@ int	jmp(t_env *e, t_prc *prc)
 
 	index = (short)get_index(e, T_IND, prc, mod_map(prc->pc + 1));
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | jmp %d\n", prc->id, index);
+		ft_printf("P %4d | jmp %d\n", prc->id, index);
 	prc->pc = mod_map(prc->pc + (index % IDX_MOD));
 	return (0);
 }

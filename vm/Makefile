@@ -1,7 +1,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra #-Werror
 
 NAME = corewar
 
@@ -105,7 +105,7 @@ $(LIBS):
 	$(MAKE) -C ../libs all
 
 clean:
-	/bin/rm -rf .flags.txt
+	/bin/rm -rf .flags
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean

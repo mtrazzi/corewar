@@ -35,9 +35,9 @@ int	ldi(t_env *e, t_prc *prc)
 																		addr);
 	if (e->par.opts & OPT_V4)
 	{
-		printf("P %4d | ldi %d %d r%d\n", prc->id, params[1], params[2],
+		ft_printf("P %4d | ldi %d %d r%d\n", prc->id, params[1], params[2],
 		e->map[mod_map(prc->pc + offset)]);
-		printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
+		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 		params[1], params[2], params[1] + params[2], addr);
 	}
 	return (0);

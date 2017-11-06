@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtrazzi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 15:28:50 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/09/10 15:38:01 by mtrazzi          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:11:43 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ short	convert_2_bytes(u_char b0, u_char b1)
 
 void	clear_screen(void)
 {
-	printf("\033[2J");
+	ft_printf("\033[2J");
 }
 
 int		dump(t_env *e)
@@ -47,11 +47,11 @@ int		dump(t_env *e)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		printf("0x%04x : ", i);
+		ft_printf("0x%04x : ", i);
 		j = -1;
 		while (++j < 64)
-			printf("%02x ", e->map[i + j]);
-		printf("\n");
+			ft_printf("%02x ", e->map[i + j]);
+		ft_printf("\n");
 		i += 64;
 	}
 	return (0);

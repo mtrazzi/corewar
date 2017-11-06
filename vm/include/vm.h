@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 14:07:09 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 20:15:43 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@
 # include "get_next_line.h"
 # include "dll.h"
 # include "op.h"
+# include <stdio.h>
 # include <sys/types.h>
-# include <stdio.h>//
 # include <limits.h>
 # include <fcntl.h>
 
-#include "opts.h"
-
+# include "opts.h"
 
 # define MAX_COLOR 4
 

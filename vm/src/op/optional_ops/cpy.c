@@ -25,6 +25,6 @@ int	copy(t_env *e, t_prc *prc)
 	prc->r[nb_2] = prc->r[nb_1];
 	prc->carry = (prc->r[nb_1] == 0);
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | copy r%d in r%d and r%d\n", prc->id, nb_1, nb_2, nb_3);
+		ft_printf("P %4d | copy r%d in r%d and r%d\n", prc->id, nb_1, nb_2, nb_3);
 	return (0);
 }

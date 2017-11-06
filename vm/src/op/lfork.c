@@ -46,7 +46,7 @@ int				lfork(t_env *e, t_prc *prc)
 		return (ft_error_vm(STR_ERR_MALLOC_PRC));
 	dll_push_front(&e->prc_lst, dll_new(new_prc));
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | lfork %d (%d)\n", prc->id,
+		ft_printf("P %4d | lfork %d (%d)\n", prc->id,
 		addr_to_fork, prc->pc + addr_to_fork);
 	e->total_prc++;
 	return (0);

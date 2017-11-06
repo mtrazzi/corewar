@@ -27,7 +27,7 @@ int	st(t_env *e, t_prc *prc)
 	{
 		params[2] = get_index(e, (ocp >> 4) % 4, prc, prc->pc + offset);
 		if (e->par.opts & OPT_V4)
-			printf("P %4d | st r%d %d\n", prc->id,
+			ft_printf("P %4d | st r%d %d\n", prc->id,
 					e->map[mod_map(prc->pc + 2)], params[2]);
 		copy_value(params[1], e, mod_map(prc->pc + (params[2] % IDX_MOD)),
 					get_color(e, prc->chp_nb));
@@ -37,7 +37,7 @@ int	st(t_env *e, t_prc *prc)
 		prc->r[e->map[mod_map(prc->pc + offset)]] = params[1];
 	if (e->par.opts & OPT_V4)
 	{
-		printf("P %4d | st r%d %d\n", prc->id, e->map[mod_map(prc->pc + 2)],
+		ft_printf("P %4d | st r%d %d\n", prc->id, e->map[mod_map(prc->pc + 2)],
 				e->map[mod_map(prc->pc + offset)]);
 	}
 	return (0);

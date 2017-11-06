@@ -5,7 +5,7 @@ CC	= gcc
 AR	= ar rc
 RAN	= ranlib
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -O2 -Wall -Wextra -Werror
 
 SRC += 	cvt_d.c \
 		cvt_o.c \

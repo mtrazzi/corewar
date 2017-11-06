@@ -30,6 +30,6 @@ int	lld(t_env *e, t_prc *prc)
 	prc->r[reg_nb] = params[1];
 	prc->carry = prc->r[reg_nb] == 0;
 	if (e->par.opts & OPT_V4)
-		printf("P %4d | lld %d r%d\n", prc->id, params[1], reg_nb);
+		ft_printf("P %4d | lld %d r%d\n", prc->id, params[1], reg_nb);
 	return (0);
 }
