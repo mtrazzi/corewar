@@ -1,7 +1,15 @@
+
+ifeq ($(OPTIONS_OP), yes)
+export OPTIONS_OP="yes"
+endif
+ifeq ($(COMPARE), yes)
+export COMPARE="yes"
+endif
+
 all:
 	@$(MAKE) -C libs
-	@$(MAKE) -C asm asm
-	@$(MAKE) -C vm corewar
+	@$(MAKE) -C asm asm && /bin/cp ./asm/asm .
+	@$(MAKE) -C vm corewar && /bin/cp ./vm/corewar .
 
 clean:
 	@$(MAKE) -C libs clean

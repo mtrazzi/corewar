@@ -6,7 +6,7 @@
 /*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 14:05:48 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/06 14:06:44 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/06 14:53:04 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define BYTES_PER_LINE 64//move
 #define BPL BYTES_PER_LINE
-#define RADIUS 30
+#define RADIUS 6
 
 void	kill_zone(t_env *e, u_int pos, t_prc *prc)
 {

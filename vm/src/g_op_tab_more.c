@@ -22,9 +22,9 @@ t_op	g_op_tab[NB_OP + 1] =
 {"injury", 1, {T_DIR}, 18, 10, "injury", 0, 0},
 {"nand", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 19, 6, "nand r1, r2, r3   not(r1&r2) -> r3", 1, 0},
 {"jmp", 1, {T_DIR}, 20, 100, "jump anyway", 0, 1},
-{"copy", 3, {T_REG, T_REG, T_REG}, 22, 100, "r1 -> r2 and r1 -> r3", 1, 0},
-{"bomberman", 1, {T_DIR}, 23, 100, "kamikazeeee", 0, 1},
-	{0, 0, {0}, 24, 1, 0, 0, 0}
+{"copy", 3, {T_REG, T_REG, T_REG}, 21, 100, "r1 -> r2 and r1 -> r3", 1, 0},
+{"bomberman", 1, {T_DIR}, 22, 400, "rush B!", 0, 1},
+	{0, 0, {0}, 23, 1, 0, 0, 0}
 };
 
 t_do_op		*g_op_fun_tab[NB_OP + 1] =

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+         #
+#    By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/29 17:38:30 by pkirsch           #+#    #+#              #
-#    Updated: 2017/11/06 11:02:47 by Philippe         ###   ########.fr        #
+#    Updated: 2017/11/06 14:39:49 by pkirsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,26 +83,23 @@ LIBS = $(DLLST) $(LIBFT) $(PRINTF)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS) $(DFLAG)
+	$(CC) -o $(NAME) $(OBJ) $(LIBS) $(CFLAGS) $(DFLAG)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	@(echo "\033[32m assembly :[ \033[31m\t\c")
-	@(echo "$@ \033[32m]\033[0m \033[0K")
-	@$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
-	@(echo "\033[2F")
+	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
 
 $(LIBS):
-	@$(MAKE) -C ../libs all
+	$(MAKE) -C ../libs all
 
 #clean libs ? necessary only in project Makefile?
 clean:
 	#@$(MAKE) -C ../libs clean
-	@/bin/rm -rf $(OBJ_PATH)
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	#@$(MAKE) -C ../libs fclean
-	@/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME)
 
 re: fclean all
 

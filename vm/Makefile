@@ -28,14 +28,25 @@ SRC = 	ft_error_vm.c		\
 		parse_champions.c	\
 		opts_utils.c
 
+# ifeq ($(wildcard ./obj/g_op_tab_more.o),"")
+# export OPTIONS_OP="yes"
+# else
+# export OPTIONS_OP="null"
+# endif
+
 ifeq ($(OPTIONS_OP), yes)
 SRC += g_op_tab_more.c
+SRC +=	mul.c				\
+		injury.c			\
+		nand.c				\
+		jmp.c				\
+		cpy.c				\
+		bomberman.c
 DFLAG = -D OPTIONS_OP
 else
-SRC +=g_op_tab.c
+SRC += g_op_tab.c
 DFLAG =
 endif
-
 
 SRC += malloc_wrapper.c
 
@@ -55,13 +66,6 @@ SRC +=	live.c				\
 		lldi.c				\
 		lfork.c				\
 		aff.c
-##condition! put in folder
-SRC +=	mul.c				\
-		death.c				\
-		nand.c				\
-		jump.c				\
-		copy.c				\
-		bomberman.c
 
 SRC +=	ncurses.c			\
 		ncurses_controls.c	\
@@ -70,11 +74,12 @@ SRC +=	ncurses.c			\
 		ncurses_stats.c		\
 		ncurses_helpers.c
 
+
 OBJ_FILES = $(SRC:.c=.o)
 OBJ_PATH = ./obj/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
-VPATH = src:include:src/op
+VPATH = src:include:src/op:src/op/optional_ops
 IFLAGS = -I include
 HEADERS = vm.h op.h print_ncurses.h
 
@@ -92,28 +97,27 @@ IFLAGS += -I $(FT_PRINTF_PATH)/include
 
 LIBS = $(DLLST) $(LIBFT) $(FT_PRINTF)
 
+EXISTS := $(shell sh anti_collisions.sh ${OPTIONS_OP})
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -lncurses $(LIBS) $(DFLAG)
 
 $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
-	@(echo "\033[32m virtual machine :[ \033[31m\t\c")
-	@(echo "$@ \033[32m]\033[0m \033[0K")
-	@($(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG))
-	@(echo "\033[2F")
+	$(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG)
 
 $(LIBS):
-	@$(MAKE) -C ../libs all
+	$(MAKE) -C ../libs all
 
 clean:
-	@$(MAKE) -C ../libs clean
-	@/bin/rm -rf $(OBJ_PATH)
+	# $(MAKE) -C ../libs clean
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	@$(MAKE) -C ../libs fclean
-	@/bin/rm -f $(NAME)
+	$(MAKE) -C ../libs fclean
+	/bin/rm -f $(NAME)
 
 re: clean all
 
