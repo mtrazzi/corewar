@@ -15,10 +15,10 @@
 #define HA ("(Default is to hide it)")
 #define HSEP ("###############################")
 #define HV ("together to enable several")
+#define HMC ("(controls available on screen)")
 
 int		help(void)
 {
-
 	ft_printf("   -a		  : Prints output from \"aff\" %s\n", HA);
 	ft_printf("   -n N		: define champion number\n");
 	ft_printf("#### TEXT OUTPUT MODE ###########################%s\n", HSEP);
@@ -31,7 +31,7 @@ int		help(void)
 	ft_printf(" 		- 8 : Show deaths\n");
 	ft_printf(" 		- 16 : Show PC movements (Except for jumps)\n");
 	ft_printf("#### NCURSES OUTPUT MODE %s########################\n", HSEP);
-	ft_printf("   -m		: Ncurses output mode (controls available on screen)\n");
+	ft_printf("   -m		: Ncurses output mode %s\n", HMC);
 	ft_printf("%s#################################################\n", HSEP);
 	return (1);
 }

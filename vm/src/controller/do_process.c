@@ -14,6 +14,7 @@
 
 #define OP_ZJMP 0x09
 #define OP_BOMB 0x16
+#define OP_JMP 0x14
 
 #define STR_OP_ERROR ("Fatal operation error")
 
@@ -29,7 +30,7 @@ int		process_exec_op_update_cyc_left(t_env *e, t_prc *prc)
 			if (g_op_fun_tab[prc->op_code - 1](e, prc) < 0)
 				return (ft_error_vm(STR_OP_ERROR));
 		if ((prc->op_code != OP_ZJMP || !(prc->carry))
-				&& prc->op_code != OP_BOMB)
+				&& prc->op_code != OP_BOMB && prc->op_code != OP_JMP)
 		{
 			if (e->par.opts & OPT_V16)
 				print_adv(e, prc->pc, skip);
