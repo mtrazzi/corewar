@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 12:05:12 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 20:11:45 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/07 16:21:07 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+#define HA ("(Default is to hide it)")
+#define HSEP ("###############################")
+#define HV ("together to enable several")
+
+int		help(void)
+{
+
+	ft_printf("   -a		  : Prints output from \"aff\" %s\n", HA);
+	ft_printf("   -n N		: define champion number\n");
+	ft_printf("#### TEXT OUTPUT MODE ###########################%s\n", HSEP);
+	ft_printf("   -dump N	: Dumps memory after N cycles then exits\n");
+	ft_printf("   -v N		: Verbosity levels, can be added %s\n", HV);
+	ft_printf(" 		- 0 : Show only essentials\n");
+	ft_printf(" 		- 1 : Show lives\n");
+	ft_printf(" 		- 2 : Show cycles\n");
+	ft_printf(" 		- 4 : Show operations (Params are NOT litteral ...)\n");
+	ft_printf(" 		- 8 : Show deaths\n");
+	ft_printf(" 		- 16 : Show PC movements (Except for jumps)\n");
+	ft_printf("#### NCURSES OUTPUT MODE %s########################\n", HSEP);
+	ft_printf("   -m		: Ncurses output mode (controls available on screen)\n");
+	ft_printf("%s#################################################\n", HSEP);
+	return (1);
+}
 
 void	print_introduction(t_env *e)
 {

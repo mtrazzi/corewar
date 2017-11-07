@@ -64,7 +64,7 @@ int			bomberman(t_env *e, t_prc *prc)
 		while (++(x_y[0]) < r)
 		{
 			if (pos + x_y[1] + x_y[0] <= MEM_SIZE
-			 		&& (pos + x_y[1]) / BPL == (pos + x_y[1] + x_y[0]) / BPL)
+					&& (pos + x_y[1]) / BPL == (pos + x_y[1] + x_y[0]) / BPL)
 				reset_color(e, mod_map(pos + x_y[1] + x_y[0]), prc);
 			if (pos - x_y[1] + x_y[0] >= 0
 					&& (pos - x_y[1]) / BPL == (pos - x_y[1] + x_y[0]) / BPL)

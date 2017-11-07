@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_vm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:43:59 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 20:14:13 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/07 16:01:36 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-#define USAGE_1 ("Usage: corewar [-v N | -m][-dump nbr_cycles]")
-#define USAGE_2 (" [[-n number] champion1.cor] ...")
+#define USAGE_1 ("Usage: corewar [-help] [-v N | -dump N | -m | -a]")
+#define USAGE_2 (" [[-n N] champion1.cor] ...")
 
 int		usage(void)
 {

@@ -6,7 +6,7 @@
 /*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/07 15:38:17 by Philippe         ###   ########.fr       */
+/*   Updated: 2017/11/07 15:46:26 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,6 @@ struct				s_env
 	int				max_prc;
 };
 
-void				*malloc_wrapper(size_t size);//
-
 /*
 ** ENV UTILS
 */
@@ -185,6 +183,7 @@ int					ft_perror_vm(void);
 int					ft_error(char *msg);
 int					error_usage(char *msg);
 int					usage(void);
+int					help(void);
 
 /*
 ** PARSING OF THE ARGUMENTS

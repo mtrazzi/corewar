@@ -24,7 +24,7 @@ all:
 	@/bin/cp compiler/asm .
 	@/bin/cp vm/corewar .
 	@echo $(LINE)
-	
+
 clean:
 	@$(MAKE) -C libs clean
 	@$(MAKE) -C compiler clean
@@ -47,10 +47,4 @@ re:
 	@/bin/cp vm/corewar .
 	@echo $(LINE)
 
-norme:
-	norminette vm
-	norminette libs
-	norminette compiler
-
 .PHONY: all fclean clean re
-
