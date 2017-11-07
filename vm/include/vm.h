@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/07 15:46:26 by Philippe         ###   ########.fr       */
+/*   Updated: 2017/11/07 19:05:08 by pkirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ typedef struct s_par	t_par;
 typedef struct s_color	t_color;
 typedef struct s_env	t_env;
 typedef struct s_chp	t_chp;
-typedef struct s_op	t_op;
-typedef	int			t_do_op(t_env *e, t_prc *prc);
+typedef struct s_op		t_op;
+
+typedef int			t_do_op(t_env *e, t_prc *prc);
 
 struct				s_op
 {
