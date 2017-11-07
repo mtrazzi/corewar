@@ -3,9 +3,12 @@
 
 		sti r1, %:train_army, %1
 		ld %1, r2
+		ld %22, r16
 defense:
-		st  r2, -220
-		st	r1, -221
+		st  r16, -220
+		st	r16, -210
+		st  r16, -200
+		st	r16, -190
 		ld %57672192, r3
 		ld %3691212801, r4
 		ld %14353264, r5
