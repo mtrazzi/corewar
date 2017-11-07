@@ -247,11 +247,11 @@ int					check_params(t_env *e, t_prc *prc, int op_code);
 int					nb_bytes_to_skip(u_char op_code, u_char ocp);
 int					sizeof_param(u_char op_code, u_char type_of_param);
 int					get_value(t_env *e, u_char type_of_param, t_prc *prc,
-u_int pos);
+								u_int pos);
 int					lget_value(t_env *e, u_char type_of_param, t_prc *prc,
-u_int pos);
+								u_int pos);
 int					get_index(t_env *e, u_char type_of_param, t_prc *prc,
-u_int pos);
+								u_int pos);
 
 /*
 ** IMPLEMENTATION OF OPERATIONS
