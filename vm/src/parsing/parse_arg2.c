@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arg2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 18:05:03 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/11/05 19:15:21 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/07 15:41:45 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_opts g_opts[] =
 	{'v', NULL, 1, {{0, NULL}}, OPT_V, OPT_D | OPT_A | OPT_M},
 	{'m', NULL, 0, {{0, NULL}}, OPT_M, OPT_D | OPT_V | OPT_A},
 	{'a', NULL, 0, {{0, NULL}}, OPT_A, OPT_D | OPT_V | OPT_M},
+	{'h', "help", 0, {{0, NULL}}, OPT_H, 0},
 	{0, 0, 0, {{0, NULL}}, 0, 0}
 };
 
@@ -77,6 +78,8 @@ int		parse_arg_vm(int ac, char **av, t_env *e)
 	if (ac < 2)
 		return (usage());
 	i = parse_params(ac, av, &e->par.opts);
+	if (e->par.opts & OPT_H)
+		return (-1 * help());
 	if (i < 0)
 		return (usage());
 	if (parse_champions_file_names(ac, &i, av, &e->par.opts) < 0)

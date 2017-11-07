@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:31:10 by mtrazzi           #+#    #+#             */
-/*   Updated: 2017/11/06 21:19:25 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/07 15:38:17 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define OPT_N		0x00000040
 # define OPT_A		0x00000080
 # define OPT_D		0x00000100
+# define OPT_H		0x00000400
 
 # define LAST_TWO_BITS 0b00000011
 
