@@ -1,7 +1,11 @@
 
 CC = gcc
 
+ifeq ($(DEBUG), yes)
+CFLAGS = -g3 #-fsanitize=address
+else
 CFLAGS = -Wall -Wextra -Werror
+endif
 
 NAME = corewar
 
@@ -100,7 +104,7 @@ $(OBJ_PATH)%.o: %.c $(HEADERS) $(LIBS)
 	@mkdir -p $(OBJ_PATH)
 	@(echo "\033[32mVirtual machine: [ \033[31m\t\c")
 	@(echo "$@ \033[32m]\033[0m \033[0K\c")
-	@($(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG))
+	($(CC) -c $< -o $@ $(IFLAGS) $(CFLAGS) $(DFLAG))
 	@(echo "\033[1F")
 
 $(LIBS):
