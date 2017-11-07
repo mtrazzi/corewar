@@ -6,7 +6,7 @@
 /*   By: laranda <laranda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 14:52:28 by laranda           #+#    #+#             */
-/*   Updated: 2017/11/07 15:06:22 by laranda          ###   ########.fr       */
+/*   Updated: 2017/11/07 16:33:35 by laranda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	print_players(WINDOW *win, t_env *e, u_int x)
 	{
 		mvwprintw(win, x, 2, "Player %d : %n", e->par.champions[i].nb, &pos);
 		wattron(win, COLOR_PAIR(i + 1));
-		mvwprintw(win, x, 2 + pos, "%s", e->par.champions[i].name);
+		mvwprintw(win, x, 2 + pos, "%.*s", 44 - pos, e->par.champions[i].name);
 		mvwprintw(win, x + 1, 2, "%.44s", e->par.champions[i].comment);
 		wattroff(win, COLOR_PAIR(i + 1));
 		wattron(win, COLOR_PAIR(COLOR_FWHITE));
