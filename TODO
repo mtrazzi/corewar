@@ -1,9 +1,0 @@
--> change op bomb: find 1st non affected cell (RADIUS == 1), what if no cell dispo
--> bomb test with only 1 and 2 processes (2 == SEGV -> OK(fixed))
--> error msgs asm
--> scripts
--> rm jino
--> rm correction
--> check logic: ./corewar -m ../resources/champions_staff/bomb.cor ../resources/champions_staff/fill.cor ../resources/champions_staff/fill.cor ../resources/champions_staff/fill.cor
-	RADIUS 50
-	Player -2 as won. Should be player -4 ?

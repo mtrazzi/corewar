@@ -171,8 +171,6 @@ struct				s_env
 	int				max_prc;
 };
 
-void				*malloc_wrapper(size_t size);//
-
 /*
 ** ENV UTILS
 */
