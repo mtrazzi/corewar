@@ -47,4 +47,8 @@ re:
 	@/bin/cp vm/corewar .
 	@echo $(LINE)
 
+compile:
+	@/bin/cp resources/scripts/compile.sh .
+	@sh compile.sh
+
 .PHONY: all fclean clean re
