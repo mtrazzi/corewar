@@ -91,11 +91,11 @@ int				forward_one_cycle(t_env *e)
 		ft_printf("It is now cycle %d\n", e->cyc_since_beg);
 	if (do_one_cycle(e) < 0)
 		return (ft_error_vm(STR_ERROR_CYCLE));
-	if (e->cyc < 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
+	if (e->cyc <= 0 || e->cyc_counter == (e->cyc < 0 ? -e->cyc : e->cyc))
 	{
 		if (e->par.opts & OPT_M)
 			update_champ(e);
-		del_and_update(e, &(e->prc_lst), e->cyc < 0);
+		del_and_update(e, &(e->prc_lst), e->cyc <= 0);
 		check_lives(e);
 		if (e->prc_lst == 0)
 			return (0);
