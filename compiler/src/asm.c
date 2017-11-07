@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pkirsch <pkirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Philippe <Philippe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 20:15:55 by pkirsch           #+#    #+#             */
-/*   Updated: 2017/09/29 17:17:55 by pkirsch          ###   ########.fr       */
+/*   Updated: 2017/11/07 15:16:21 by Philippe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ static int	init_asm(t_asm *a)
 	return (1);
 }
 
+static int	ft_close(int fd)
+{
+	close(fd);
+	return (-1);
+}
+
 int			main(int ac, char **av)
 {
 	t_asm a;
@@ -41,12 +47,12 @@ int			main(int ac, char **av)
 	if (open_file(av[1], &a.fd) != 1)
 		return (-1);
 	if (get_labels(&a) != 1)
-		return (-1 * clear_asm(&a));
+		return (-1 * clear_asm(&a) * ft_close(a.fd));
 	close(a.fd);
 	if ((a.fd = open(av[1], O_RDONLY)) < 0)
 		return (-1 * clear_asm(&a) * reopen_error(av[1]));
 	if (parsing(&a) != 1)
-		return (-1 * clear_asm(&a));
+		return (-1 * clear_asm(&a) * ft_close(a.fd));
 	close(a.fd);
 	if (prep(&a) != 1)
 		return (-1 * clear_asm(&a));
