@@ -47,6 +47,10 @@ re:
 	@/bin/cp vm/corewar .
 	@echo $(LINE)
 
-
+norme:
+	norminette vm
+	norminette libs
+	norminette compiler
 
 .PHONY: all fclean clean re
+

@@ -21,8 +21,8 @@
 
 # define MAL_ERR_GNL -1221
 
-#include <fcntl.h>
-#include "libft.h"
+# include <fcntl.h>
+# include "libft.h"
 
 typedef struct s_gnl	t_gnl;
 

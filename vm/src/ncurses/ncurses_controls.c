@@ -85,7 +85,7 @@ static void	do_goto(t_env *e, t_view_env *v_e)
 		goto_loop(e, v_e, cycle);
 }
 
-void	print_worker(t_env *e, t_view_env *v_e)
+void		print_worker(t_env *e, t_view_env *v_e)
 {
 	int			key;
 
